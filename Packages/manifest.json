@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "com.codewriter.triinspector": "https://github.com/codewriter-packages/Tri-Inspector.git",
+    "jillejr.newtonsoft.json-for-unity": "https://github.com/jilleJr/Newtonsoft.Json-for-Unity.git#upm",
     "com.unity.2d.pixel-perfect": "5.0.1",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.2d.spriteshape": "7.0.3",
