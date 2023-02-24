@@ -47,6 +47,7 @@ namespace Core.Defenders {
             if ( focusedenemy == null ) return;
             timeSinceLastAttack = Time.time;
             StartCoroutine( Attack( () => {
+                if ( focusedenemy == null ) return;
                 var damage = createNewDamage();
                 focusedenemy.TakeDamage( damage );
                 Debug.Log( $"{name} Attacked {focusedenemy.name}: \n{JsonConvert.SerializeObject( damage )}" );

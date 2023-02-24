@@ -12,6 +12,9 @@ namespace Core.Enemies {
 
         public CoreGameEvents coreGameEvents;
 
+        public event Action<Damage> onTakeDamage;
+        public event Action<float> onLifeChanged;
+
         [ShowInInspector, ReadOnly] RoadPiece currentRoadPiece;
 
         void Start() {
@@ -26,6 +29,8 @@ namespace Core.Enemies {
         public virtual void TakeDamage(Damage damage) {
             life -= damage.amount;
             if ( life < 0 ) life = 0;
+            onTakeDamage?.Invoke( damage );
+            onLifeChanged?.Invoke( life );
             if ( life == 0 ) destroy();
         }
 

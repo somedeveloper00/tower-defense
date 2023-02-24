@@ -10,9 +10,11 @@ namespace Core.Defenders.Monkey {
         [SerializeField] Animator animator;
         
         [GroupNext("anim")]
-        [SerializeField] string animAttack;
         [SerializeField] string animIdle;
-        [SerializeField] float idleAttackTime;
+        [SerializeField] string animAttack;
+        [SerializeField] float animAttackDamageTime;
+        [SerializeField] string animAttackSpeedName;
+        [SerializeField] float animAttackSpeedValue;
         
         
         void Update() {
@@ -29,8 +31,9 @@ namespace Core.Defenders.Monkey {
         }
 
         protected override IEnumerator Attack(Action applyAttack) {
+            animator.SetFloat( animAttackSpeedName, animAttackSpeedValue );
             animator.Play( animAttack );
-            yield return new WaitForSeconds( idleAttackTime );
+            yield return new WaitForSeconds( animAttackDamageTime );
             applyAttack();
         }
     }
