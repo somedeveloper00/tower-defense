@@ -46,7 +46,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 6170fd175e658f94d96e2c9686c9abb6, type: 2}
+  m_Motion: {fileID: -9210350420188386504, guid: 1606585d1a7e8cc42931df739cbcdbd2, type: 3}
   m_Tag: 
   m_SpeedParameter: atck-spd
   m_MirrorParameter: 
@@ -72,7 +72,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 9322df68fecb9ed4b9d9f42f97542627, type: 2}
+  m_Motion: {fileID: -2370431930073418201, guid: 1606585d1a7e8cc42931df739cbcdbd2, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -92,7 +92,7 @@ AnimatorController:
     m_DefaultFloat: 1
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer

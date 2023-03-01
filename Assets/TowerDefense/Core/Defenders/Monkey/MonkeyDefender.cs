@@ -8,8 +8,9 @@ namespace Core.Defenders.Monkey {
     [DeclareFoldoutGroup("anim", Title = "Animations")]
     public class MonkeyDefender : Defender {
         [SerializeField] Animator animator;
-        
-        [GroupNext("anim")]
+
+        [GroupNext( "anim" )] 
+        [SerializeField, Range(0, 1)] float animCrossfade = 0.1f;
         [SerializeField] string animIdle;
         [SerializeField] string animAttack;
         [SerializeField] float animAttackDamageTime;
@@ -32,7 +33,7 @@ namespace Core.Defenders.Monkey {
 
         protected override IEnumerator Attack(Action applyAttack) {
             animator.SetFloat( animAttackSpeedName, animAttackSpeedValue );
-            animator.Play( animAttack );
+            animator.CrossFade( animAttack, animCrossfade );
             yield return new WaitForSeconds( animAttackDamageTime );
             applyAttack();
         }
