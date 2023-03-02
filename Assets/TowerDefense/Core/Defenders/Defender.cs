@@ -15,7 +15,7 @@ namespace Core.Defenders {
         protected Enemy focusedenemy;
         protected float timeSinceLastAttack;
 
-        protected virtual void OnDrawGizmos() {
+        protected virtual void OnDrawGizmosSelected() {
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere( transform.position, attackRange );
         }
