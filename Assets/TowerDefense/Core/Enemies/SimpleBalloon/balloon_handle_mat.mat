@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: balloon_handle_mat
-  m_Shader: {fileID: 4800000, guid: 81e7d720cd816754c89a05faa2963175, type: 3}
+  m_Shader: {fileID: 4800000, guid: faf4768de3134b04a0286efd6f329720, type: 3}
   m_ShaderKeywords: _ALPHAPREMULTIPLY_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
@@ -74,6 +74,6 @@ Material:
     - _UVSec: 0
     - _ZWrite: 0
     m_Colors:
-    - _Color: {r: 0, g: 0, b: 0, a: 1}
+    - _Color: {r: 0.5283019, g: 0.4012104, b: 0.4012104, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []

@@ -3,6 +3,7 @@ using System.Collections;
 using Core.Enemies;
 using JetBrains.Annotations;
 using Newtonsoft.Json;
+using UnityEditor;
 using UnityEngine;
 
 namespace Core.Defenders {
@@ -18,6 +19,8 @@ namespace Core.Defenders {
         protected virtual void OnDrawGizmosSelected() {
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere( transform.position, attackRange );
+            Handles.color = new (Color.red.r, Color.red.g, Color.red.b, 0.25f);
+            Handles.DrawSolidDisc( transform.position, Vector3.down, attackRange );
         }
 
         protected float getTimeToNextAttack() {

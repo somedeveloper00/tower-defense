@@ -45,6 +45,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: monkey_mat
+    second: {fileID: 2100000, guid: de2c47c85c54d0b419e4798cddedf7a9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: staff_mat
     second: {fileID: 2100000, guid: 26f0d7b84f377484894d9a2f833dcca9, type: 2}
   materials:

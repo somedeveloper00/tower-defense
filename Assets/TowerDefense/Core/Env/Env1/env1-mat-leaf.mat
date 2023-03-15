@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: env1-mat-leaf
-  m_Shader: {fileID: 4800000, guid: 81e7d720cd816754c89a05faa2963175, type: 3}
+  m_Shader: {fileID: 4800000, guid: faf4768de3134b04a0286efd6f329720, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
@@ -74,6 +74,6 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0, g: 0.3018868, b: 0.025544293, a: 0.70980394}
+    - _Color: {r: 0, g: 0.5566038, b: 0.050600298, a: 0.70980394}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
