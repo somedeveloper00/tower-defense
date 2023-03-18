@@ -3,8 +3,7 @@ using System.Collections;
 using TriInspector;
 using UnityEngine;
 
-namespace Core.Defenders.Shooter
-{
+namespace TowerDefense.Core.Defenders {
     [DeclareFoldoutGroup("anim", Title = "Anim Params")]
     public class ShooterDefender : Defender
     {

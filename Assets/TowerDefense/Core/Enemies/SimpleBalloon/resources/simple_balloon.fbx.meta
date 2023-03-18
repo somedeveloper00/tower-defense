@@ -3,17 +3,7 @@ guid: 407fd99b6525da14391c1e7ff76cfca9
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: balloon_handle_mat
-    second: {fileID: 2100000, guid: e2b13b86ee31a574d921d0b161e6f87d, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: balloon_mat
-    second: {fileID: 2100000, guid: 72cdb1339ce8cba439e7ae50fe4e18e0, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0

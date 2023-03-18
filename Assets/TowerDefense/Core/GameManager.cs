@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core.Defenders;
-using Core.Enemies;
+using TowerDefense.Core.Enemies;
+using TowerDefense.Core.Defenders;
+using TowerDefense.Core.Road;
 using TriInspector;
 using UnityEngine;
 
-namespace Core {
+namespace TowerDefense.Core {
     public class GameManager : MonoBehaviour {
         public RoadManager roadManager;
         public CoreGameEvents coreGameEvents;

@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: monkey_mat
-  m_Shader: {fileID: 4800000, guid: 81e7d720cd816754c89a05faa2963175, type: 3}
+  m_Shader: {fileID: 4800000, guid: 01e135c0b29743d581a2e69fcb38eb1f, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
@@ -62,7 +62,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _Emission: 1
+    - _Emission: 0.5
     - _Gloss: 0
     - _GlossMapScale: 1
     - _Glossiness: 0
@@ -79,5 +79,13 @@ Material:
     m_Colors:
     - _Add: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _ColorFrom1: {r: 0.6509434, g: 0.41326493, b: 0.35924706, a: 1}
+    - _ColorFrom2: {r: 0.26415092, g: 0.1749639, b: 0.15824135, a: 1}
+    - _ColorFrom3: {r: 1, g: 1, b: 1, a: 1}
+    - _ColorFrom4: {r: 0, g: 0, b: 0, a: 1}
+    - _ColorTo1: {r: 0.525, g: 0.355, b: 0.37, a: 1}
+    - _ColorTo2: {r: 0.348, g: 0.20354716, b: 0.21667923, a: 1}
+    - _ColorTo3: {r: 1, g: 1, b: 1, a: 1}
+    - _ColorTo4: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []

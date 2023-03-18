@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Core.Road
+namespace TowerDefense.Core.Road
 {
     public class RoadPiece : MonoBehaviour
     {

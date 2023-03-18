@@ -2,9 +2,8 @@
 using System.Collections;
 using TriInspector;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace Core.Defenders.Monkey {
+namespace TowerDefense.Core.Defenders {
     [DeclareFoldoutGroup("anim", Title = "Animations")]
     public class MonkeyDefender : Defender {
         [SerializeField] Animator animator;

@@ -1,9 +1,7 @@
-﻿using System;
-using Core.Enemies;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Core.Defenders.Monkey {
+namespace TowerDefense.Core.Enemies {
     public class EnemyLifeIndicator : MonoBehaviour {
         public Enemy enemy;
         [SerializeField] Image image;
@@ -14,9 +12,9 @@ namespace Core.Defenders.Monkey {
 
         void updateImage() {
             var t = enemy.life / enemy.startingLife;
-            var anchor = image.rectTransform.anchorMin;
-            anchor.x = 1 - t;
-            image.rectTransform.anchorMin = anchor;
+            var anchor = image.rectTransform.anchorMax;
+            anchor.x = t;
+            image.rectTransform.anchorMax = anchor;
         }
     }
 }

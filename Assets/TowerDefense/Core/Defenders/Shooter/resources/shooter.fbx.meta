@@ -9,12 +9,7 @@ ModelImporter:
   - first:
       74: -4107477069063224369
     second: shooter_attack
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: shooter_mat
-    second: {fileID: 2100000, guid: 0b85b4d6cdc6815499bffe8f9e68e999, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Core.Enemies.SimpleBalloon {
+﻿namespace TowerDefense.Core.Enemies.SimpleBalloon {
     public class SimpleBalloonEnemy : Enemy {
         
     }

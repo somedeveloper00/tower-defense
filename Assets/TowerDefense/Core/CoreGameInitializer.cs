@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Core {
+namespace TowerDefense.Core {
     [CreateAssetMenu( fileName = "CoreGameInitializer", menuName = "Core/Game Initializer", order = 0 )]
     public class CoreGameInitializer : ScriptableObject {
 

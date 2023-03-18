@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Linq;
 using System.Collections;
-using Core.Enemies;
 using JetBrains.Annotations;
 using Newtonsoft.Json;
+using TowerDefense.Core.Enemies;
 using UnityEditor;
 using UnityEngine;
 
-namespace Core.Defenders {
+namespace TowerDefense.Core.Defenders {
     public abstract class Defender : MonoBehaviour {
         public GameManager gameManager;
         public float attackRange;
@@ -35,9 +36,19 @@ namespace Core.Defenders {
                 Vector3.Distance( focusedenemy.transform.position, transform.position ) > attackRange;
             
             if ( shouldFindNewEnemy ) {
-                var enemy = gameManager.enemies.Find( e =>
+                var enemiesInRange = gameManager.enemies.Where( e =>
                     Vector3.Distance( e.transform.position, transform.position ) < attackRange );
-                focusedenemy = enemy;
+                // get one that's closer to escaping
+                Enemy enem = null;
+                float t_best = float.MinValue;
+                foreach (var enemy in enemiesInRange) {
+                    var t = enemy.GetRoadCompletion();
+                    if ( t > t_best ) {
+                        enem = enemy;
+                        t_best = t;
+                    }
+                }
+                focusedenemy = enem;
             }
         }
         

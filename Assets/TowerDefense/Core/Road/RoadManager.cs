@@ -1,14 +1,13 @@
-﻿using System;
-using Core.Road;
+﻿using System.Collections.Generic;
+using System.Linq;
 using TriInspector;
 using UnityEngine;
 
-namespace Core
-{
+namespace TowerDefense.Core.Road {
     [ExecuteAlways]
     public class RoadManager : MonoBehaviour
     {
-        public RoadPiece[] roadPieces;
+        public List<RoadPiece> roadPieces;
 #if UNITY_EDITOR
         [Title("Editor only")]
         [SerializeField] bool autoGetChildPieces;
@@ -19,18 +18,20 @@ namespace Core
 #if UNITY_EDITOR
             if ( !Application.isPlaying ) {
                 if ( autoGetChildPieces ) {
-                    roadPieces = GetComponentsInChildren<RoadPiece>();
+                    roadPieces = GetComponentsInChildren<RoadPiece>().ToList();
                 }
                 if ( autoConnectPieces ) {
-                    for (int i = 0; i < roadPieces.Length; i++) {
+                    for (int i = 0; i < roadPieces.Count; i++) {
                         roadPieces[i].previous = i > 0 ? roadPieces[i - 1] : null;
-                        roadPieces[i].next = i < roadPieces.Length - 1 ? roadPieces[i + 1] : null;
+                        roadPieces[i].next = i < roadPieces.Count - 1 ? roadPieces[i + 1] : null;
                     }
                 }
             }
 #endif
         }
 
+        public int IndexOfRoad(RoadPiece roadPiece) => roadPieces.IndexOf( roadPiece );
+        
         public RoadPiece GetNearestRoadPiece(Vector3 position) {
             var leastDist = float.MaxValue;
             RoadPiece r = null;

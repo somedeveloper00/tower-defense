@@ -880,7 +880,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
-  attackRange: 2.25
+  attackRange: 1.3
   attackPower: 10
   attackReloadTime: 0.7
   animator: {fileID: 5942010116766356857}
@@ -1043,7 +1043,7 @@ Transform:
   m_GameObject: {fileID: 6824971494329673773}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1412535872760238531}
@@ -1599,7 +1599,12 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: de2c47c85c54d0b419e4798cddedf7a9, type: 2}
+  - {fileID: 2100000, guid: 1a8ffec192e6d3740a6b13276448fca5, type: 2}
+  - {fileID: 2100000, guid: 1a8ffec192e6d3740a6b13276448fca5, type: 2}
+  - {fileID: 2100000, guid: 40c70a24f83be9843b561148d22e10a0, type: 2}
+  - {fileID: 2100000, guid: fec0a573cd224a148858795b08a58030, type: 2}
+  - {fileID: 2100000, guid: fec0a573cd224a148858795b08a58030, type: 2}
+  - {fileID: 2100000, guid: fc10751ee012c314eb3e74eae16f3cad, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

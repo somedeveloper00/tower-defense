@@ -1,9 +1,9 @@
 ﻿using System;
-using Core.Defenders;
-using Core.Enemies;
+using TowerDefense.Core.Enemies;
+using TowerDefense.Core.Defenders;
 using UnityEngine;
 
-namespace Core {
+namespace TowerDefense.Core {
     [CreateAssetMenu( fileName = "CoreGameEvents", menuName = "Core/Game Events", order = 0 )]
     public class CoreGameEvents : ScriptableObject {
         public Action<GameManager> OnGameStart;
