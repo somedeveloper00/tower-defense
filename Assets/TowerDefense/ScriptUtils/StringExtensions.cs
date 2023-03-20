@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace TowerDefense.ScriptUtils
+namespace TowerDefense
 {
     public static class StringExtensions
     {

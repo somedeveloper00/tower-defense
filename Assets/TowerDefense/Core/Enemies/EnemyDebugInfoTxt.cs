@@ -1,6 +1,5 @@
 ﻿using System;
 using TMPro;
-using TowerDefense.ScriptUtils;
 using UnityEngine;
 
 namespace TowerDefense.Core.Enemies

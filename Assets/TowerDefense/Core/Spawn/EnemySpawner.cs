@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using TowerDefense.Core.Enemies;
-using TowerDefense.ScriptUtils;
 using TriInspector;
 using UnityEngine;
 
@@ -44,6 +43,7 @@ namespace TowerDefense.Core.Spawn {
             public List<OnTimeSpawn> onTime = new();
             
             public delegate void SpawnIn(float time, string name, EnemyArgManip[] argv);
+            [JsonIgnore]
             public SpawnIn OnSpawnIn;
             
             float _t = 0;
@@ -64,11 +64,11 @@ namespace TowerDefense.Core.Spawn {
                     [Group( "h" ), LabelWidth( 40 ), Min( 0 )]
                     public int count;
 
-                    [Group( "h" ), LabelWidth( 100 ), DisableIf( nameof(count), 0 )]
+                    [Group( "h" ), LabelWidth( 90 ), DisableIf( nameof(count), 0 )]
                     public float timeIntervals;
 
-                    [SerializeReference, JsonConverter( typeof(SubTypeJsonConverter<EnemyArgManip>) )]
-                    public EnemyArgManip[] argv;
+                    [SerializeReference]
+                    public EnemyArgManip[] argv = Array.Empty<EnemyArgManip>();
                 }
             }
 

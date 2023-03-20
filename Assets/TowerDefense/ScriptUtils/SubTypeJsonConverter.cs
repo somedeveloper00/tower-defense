@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 
-namespace TowerDefense.ScriptUtils
+namespace TowerDefense
 {
 	public class SubTypeJsonConverter<T> : JsonConverter
 	{
@@ -53,7 +53,7 @@ namespace TowerDefense.ScriptUtils
 					break;
 				}
 			}
-
+			
 			_jsonSerializer.Serialize( writer, value );
 		}
 

@@ -1,6 +1,8 @@
-﻿using TowerDefense.Core.Enemies;
+﻿using System.ComponentModel;
+using TowerDefense.Core.Enemies;
 
 namespace TowerDefense.Core.Spawn {
+    [DisplayName("basic")]
     public class BasicManip : EnemyArgManip {
         public float speedMultip = 1;
         public float lifeMultip = 1;
