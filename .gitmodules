@@ -1,0 +1,7 @@
+[submodule "Assets/Plugins/AnimFlex"]
+	path = Assets/Plugins/AnimFlex
+	url = https://github.com/somedeveloper00/AnimFlex
+[submodule "Assets/Plugins/DialogueSystem"]
+	path = Assets/Plugins/DialogueSystem
+	url = https://github.com/somedeveloper00/UnityDialogueSystem
+
