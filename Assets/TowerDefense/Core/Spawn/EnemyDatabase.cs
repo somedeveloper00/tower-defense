@@ -8,8 +8,8 @@ namespace TowerDefense.Core.Spawn {
     [CreateAssetMenu( fileName = "EnemySpawnerDatabasse", menuName = "Core/Enemy Spawner Database", order = 0 )]
     public class EnemyDatabase : ScriptableObject {
 
-        public static EnemyDatabase Instance;
-        void OnEnable() => Instance = this;
+        public static EnemyDatabase Current;
+        void OnEnable() => Current = this;
 
         [SerializeField] List<EnemyType> enemySpawnTypes;
 

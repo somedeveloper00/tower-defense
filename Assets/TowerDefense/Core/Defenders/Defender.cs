@@ -6,10 +6,11 @@ using Newtonsoft.Json;
 using TowerDefense.Core.Enemies;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace TowerDefense.Core.Defenders {
     public abstract class Defender : MonoBehaviour {
-        public GameManager gameManager;
+        [FormerlySerializedAs( "gameManager" )] public CoreGameManager coreGameManager;
         public float attackRange;
         public float attackPower;
         public float attackReloadTime;
@@ -36,7 +37,7 @@ namespace TowerDefense.Core.Defenders {
                 Vector3.Distance( focusedenemy.transform.position, transform.position ) > attackRange;
             
             if ( shouldFindNewEnemy ) {
-                var enemiesInRange = gameManager.enemies.Where( e =>
+                var enemiesInRange = coreGameManager.enemies.Where( e =>
                     Vector3.Distance( e.transform.position, transform.position ) < attackRange );
                 // get one that's closer to escaping
                 Enemy enem = null;
@@ -64,7 +65,6 @@ namespace TowerDefense.Core.Defenders {
                 if ( focusedenemy == null ) return;
                 var damage = createNewDamage();
                 focusedenemy.TakeDamage( damage );
-                Debug.Log( $"{name} Attacked {focusedenemy.name}: \n{JsonConvert.SerializeObject( damage )}" );
             } ) );
         }
 

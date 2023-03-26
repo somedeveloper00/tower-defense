@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 using TowerDefense.Core.Enemies;
 using TriInspector;
@@ -12,13 +13,14 @@ namespace TowerDefense.Core.Spawn {
         public Transform instantiateParent;
         public SpawningMethod spawningMethod;
 
-        void OnEnable() {
+        void Start() {
             spawningMethod.OnSpawnIn += (t, name, argvs) => {
                 StartCoroutine( spawnAfter( name, t, (enemy) => {
                     foreach (var argv in argvs)
                         argv.TryApplyToEnemy( enemy );
                 } ) );
             };
+            spawningMethod.ResetTime();
         }
 
         void Update() {
@@ -31,10 +33,19 @@ namespace TowerDefense.Core.Spawn {
             afterSpawn?.Invoke( enem );
         }
 
+        public bool IsDone() {
+            foreach (var t in spawningMethod.onTime) {
+                foreach (var s in t.spawns) {
+                    if (spawningMethod.t < (s.count - 1) * s.timeIntervals) return false;
+                }
+            }
+
+            return true;
+        }
+
         public Enemy Spawn(string name) {
             var prefab = esd.GetEnemyPrefab( name );
             var enem = Instantiate( prefab, instantiateParent );
-            Debug.Log( $"\"{name}\" spawned {enem.name}" );
             return enem;
         }
 
@@ -42,11 +53,13 @@ namespace TowerDefense.Core.Spawn {
         public class SpawningMethod {
             public List<OnTimeSpawn> onTime = new();
             
-            public delegate void SpawnIn(float time, string name, EnemyArgManip[] argv);
+            public delegate void SpawnIn(float afterSeconds, string name, EnemyArgManip[] argv);
             [JsonIgnore]
             public SpawnIn OnSpawnIn;
             
-            float _t = 0;
+            public float t = 0;
+
+            public void ResetTime() => t = 0;
 
             [Serializable]
             public class OnTimeSpawn {
@@ -59,7 +72,7 @@ namespace TowerDefense.Core.Spawn {
                     [Dropdown(nameof(nameOptions))]
                     public string name;
 
-                    string[] nameOptions => EnemyDatabase.Instance.GetAllNames();
+                    string[] nameOptions => EnemyDatabase.Current.GetAllNames();
 
                     [Group( "h" ), LabelWidth( 40 ), Min( 0 )]
                     public int count;
@@ -73,9 +86,9 @@ namespace TowerDefense.Core.Spawn {
             }
 
             public void Tick(float deltaTime) {
-                float newT = _t + deltaTime;
+                float newT = t + deltaTime;
                 foreach (var item in onTime) {
-                    if ( newT > item.time && _t <= item.time ) {
+                    if ( newT > item.time && t <= item.time ) {
                         foreach (var spawn in item.spawns) {
                             for (int i = 0; i < spawn.count; i++) {
                                 OnSpawnIn?.Invoke( spawn.timeIntervals * i, spawn.name, spawn.argv );
@@ -84,7 +97,7 @@ namespace TowerDefense.Core.Spawn {
                     }
                 }
 
-                _t = newT;
+                t = newT;
             }
         }
     }

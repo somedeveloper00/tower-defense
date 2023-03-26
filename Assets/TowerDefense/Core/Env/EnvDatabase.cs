@@ -14,10 +14,9 @@ namespace TowerDefense.Core.Env {
 
         [SerializeField, TableList] List<Environment> environments;
 
-        public Scene GetScene(string envName) =>
-            SceneManager.GetSceneByPath( environments.Find( s => s.name == envName ).scenePath );
+        public string GetScenePath(string envName) => environments.Find( s => s.name == envName ).scenePath;
 
-        public List<string> GetAllNames() => environments.Select( e => e.name ).ToList();
+        public string[] GetAllNames() => environments.Select( e => e.name ).ToArray();
 
         [Serializable]
         public class Environment {

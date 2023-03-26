@@ -5439,6 +5439,10 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 766429655}
+    - target: {fileID: 5942010116493321449, guid: 0d813d59bd5ff0f458e23debf753ef16, type: 3}
+      propertyPath: coreGameManager
+      value: 
+      objectReference: {fileID: 766429655}
     - target: {fileID: 5942010116493321450, guid: 0d813d59bd5ff0f458e23debf753ef16, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -11720,6 +11724,10 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 766429655}
+    - target: {fileID: 5942010116493321449, guid: 0d813d59bd5ff0f458e23debf753ef16, type: 3}
+      propertyPath: coreGameManager
+      value: 
+      objectReference: {fileID: 766429655}
     - target: {fileID: 5942010116493321450, guid: 0d813d59bd5ff0f458e23debf753ef16, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -15845,10 +15853,11 @@ MonoBehaviour:
     - time: 5
       spawns:
       - name: balloon-fast
-        count: 3
-        timeIntervals: 0.4
+        count: 40
+        timeIntervals: 0.2
         argv:
         - rid: 1868936038358450177
+    t: 0
   references:
     version: 2
     RefIds:
@@ -15856,8 +15865,8 @@ MonoBehaviour:
       type: {class: BasicManip, ns: TowerDefense.Core.Spawn, asm: Assembly-CSharp}
       data:
         type: 
-        speedMultip: 1
-        lifeMultip: 1
+        speedMultip: 3
+        lifeMultip: 5
     - rid: 1868936038358450202
       type: {class: BasicManip, ns: TowerDefense.Core.Spawn, asm: Assembly-CSharp}
       data:
@@ -19202,6 +19211,10 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 766429655}
+    - target: {fileID: 5942010116493321449, guid: 0d813d59bd5ff0f458e23debf753ef16, type: 3}
+      propertyPath: coreGameManager
+      value: 
+      objectReference: {fileID: 766429655}
     - target: {fileID: 5942010116493321450, guid: 0d813d59bd5ff0f458e23debf753ef16, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -19430,6 +19443,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5942010116493321449, guid: 0d813d59bd5ff0f458e23debf753ef16, type: 3}
       propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 766429655}
+    - target: {fileID: 5942010116493321449, guid: 0d813d59bd5ff0f458e23debf753ef16, type: 3}
+      propertyPath: coreGameManager
       value: 
       objectReference: {fileID: 766429655}
     - target: {fileID: 5942010116493321450, guid: 0d813d59bd5ff0f458e23debf753ef16, type: 3}
@@ -21614,6 +21631,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1481124291, guid: 778106f86dfd2ae4b93251c032be4e7b, type: 3}
       propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 766429655}
+    - target: {fileID: 1481124291, guid: 778106f86dfd2ae4b93251c032be4e7b, type: 3}
+      propertyPath: coreGameManager
       value: 
       objectReference: {fileID: 766429655}
     - target: {fileID: 4569676113313174836, guid: 778106f86dfd2ae4b93251c032be4e7b, type: 3}

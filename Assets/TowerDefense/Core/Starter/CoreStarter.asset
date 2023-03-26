@@ -19,14 +19,14 @@ MonoBehaviour:
       - time: 1
         spawns:
         - name: balloon-fast
-          count: 10
+          count: 13
           timeIntervals: 0.2
           argv:
-          - rid: 1868936039887011905
+          - rid: 1868936039887011948
   references:
     version: 2
     RefIds:
-    - rid: 1868936039887011905
+    - rid: 1868936039887011948
       type: {class: BasicManip, ns: TowerDefense.Core.Spawn, asm: Assembly-CSharp}
       data:
         type: basic
