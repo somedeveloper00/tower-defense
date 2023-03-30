@@ -12,8 +12,6 @@ namespace TowerDefense.Core.Enemies {
         public float speed;
         public float rotationSpeed = 1;
 
-        public CoreGameEvents coreGameEvents;
-
         public event Action<Damage> onTakeDamage;
         public event Action<float> onLifeChanged;
 
@@ -22,7 +20,7 @@ namespace TowerDefense.Core.Enemies {
         void Start() {
             if ( roadManager == null ) roadManager = FindObjectOfType<RoadManager>();
             life = startingLife;
-            coreGameEvents.OnEnemySpawn?.Invoke( this );
+            CoreGameEvents.Current.OnEnemySpawn?.Invoke( this );
         }
 
         void Update() {
@@ -38,7 +36,7 @@ namespace TowerDefense.Core.Enemies {
         }
 
         protected virtual void destroy() {
-            coreGameEvents.OnEnemyDestroy?.Invoke( this );
+            CoreGameEvents.Current.OnEnemyDestroy?.Invoke( this );
             Destroy( gameObject );
         }
 
@@ -70,7 +68,7 @@ namespace TowerDefense.Core.Enemies {
                     value -= vec.magnitude;
                     currentRoadPiece = currentRoadPiece.next;
                     if ( currentRoadPiece.next == null ) {
-                        coreGameEvents.OnEnemyReachEnd?.Invoke( this );
+                        CoreGameEvents.Current.OnEnemyReachEnd?.Invoke( this );
                         return;
                     }
                 }

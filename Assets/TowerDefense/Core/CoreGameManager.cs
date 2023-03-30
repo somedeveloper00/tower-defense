@@ -2,15 +2,14 @@
 using System.Linq;
 using TowerDefense.Core.Enemies;
 using TowerDefense.Core.Defenders;
+using TowerDefense.Core.EnemySpawn;
 using TowerDefense.Core.Road;
-using TowerDefense.Core.Spawn;
 using TriInspector;
 using UnityEngine;
 
 namespace TowerDefense.Core {
     public class CoreGameManager : MonoBehaviour {
         public RoadManager roadManager;
-        public CoreGameEvents coreGameEvents;
         
         public float life = 20;
         
@@ -18,13 +17,13 @@ namespace TowerDefense.Core {
         [ShowInInspector, ReadOnly] public readonly List<Defender> defenders = new (8);
         [ShowInInspector, ReadOnly] public readonly List<EnemySpawner> spawners = new(4);
 
-        void Awake() {
-            coreGameEvents.OnEnemySpawn += OnEnemySpawn;
-            coreGameEvents.OnEnemyReachEnd += OnEnemyReachEnd;
-            coreGameEvents.OnEnemyDestroy += OnEnemyDestroy;
-            coreGameEvents.OnDefenderDestroy += OnDefenderDestroy;
-            coreGameEvents.OnDefenderSpawn += OnDefenderSpawn;
-            coreGameEvents.OnSpawnerInitialize += OnSpawnerInitialize;
+        void Start() {
+            CoreGameEvents.Current.OnEnemySpawn += OnEnemySpawn;
+            CoreGameEvents.Current.OnEnemyReachEnd += OnEnemyReachEnd;
+            CoreGameEvents.Current.OnEnemyDestroy += OnEnemyDestroy;
+            CoreGameEvents.Current.OnDefenderDestroy += OnDefenderDestroy;
+            CoreGameEvents.Current.OnDefenderSpawn += OnDefenderSpawn;
+            CoreGameEvents.Current.OnSpawnerInitialize += OnSpawnerInitialize;
         }
 
         void OnSpawnerInitialize(EnemySpawner spawner) {
@@ -32,8 +31,10 @@ namespace TowerDefense.Core {
         }
 
         void OnDefenderSpawn(Defender defender) {
+            defender.coreGameManager = this;
             defenders.Add( defender );
         }
+
         void OnDefenderDestroy(Defender defender) {
             Destroy( defender.gameObject );
         }
@@ -48,7 +49,7 @@ namespace TowerDefense.Core {
             // check if any spawners has any enemy to spawn
             if (enemies.Count == 0 && spawners.All( s => s.IsDone() )) {
                 Debug.Log( $"Won Game!" );
-                coreGameEvents.onWin?.Invoke();
+                CoreGameEvents.Current.onWin?.Invoke();
             }
         }
 
@@ -58,7 +59,7 @@ namespace TowerDefense.Core {
             life -= 1;
             if (life <= 0) {
                 Debug.Log( $"Lost Game!" );
-                coreGameEvents.onLose?.Invoke();
+                CoreGameEvents.Current.onLose?.Invoke();
             }
         }
     }

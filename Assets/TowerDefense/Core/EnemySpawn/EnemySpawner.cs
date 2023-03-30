@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Newtonsoft.Json;
 using TowerDefense.Core.Enemies;
 using TriInspector;
 using UnityEngine;
 
-namespace TowerDefense.Core.Spawn {
+namespace TowerDefense.Core.EnemySpawn {
     public class EnemySpawner : MonoBehaviour {
         public EnemyDatabase esd;
         public Transform instantiateParent;

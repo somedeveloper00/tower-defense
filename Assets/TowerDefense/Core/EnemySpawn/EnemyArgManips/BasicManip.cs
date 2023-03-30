@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using TowerDefense.Core.Enemies;
 
-namespace TowerDefense.Core.Spawn {
+namespace TowerDefense.Core.EnemySpawn {
     [DisplayName("basic")]
     public class BasicManip : EnemyArgManip {
         public float speedMultip = 1;

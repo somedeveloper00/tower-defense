@@ -389,7 +389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eac43ad0b41540b38257f3c058217f64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
+  coreGameManager: {fileID: 0}
   attackRange: 8.12
   attackPower: 8
   attackReloadTime: 1
@@ -764,7 +764,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7512068843125246756}
   - component: {fileID: 8686682425467118195}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: polySurface9
   m_TagString: Untagged
   m_Icon: {fileID: 0}

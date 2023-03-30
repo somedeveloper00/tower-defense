@@ -2,15 +2,14 @@
 using System.Linq;
 using System.Collections;
 using JetBrains.Annotations;
-using Newtonsoft.Json;
 using TowerDefense.Core.Enemies;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace TowerDefense.Core.Defenders {
-    public abstract class Defender : MonoBehaviour {
-        [FormerlySerializedAs( "gameManager" )] public CoreGameManager coreGameManager;
+    public abstract class Defender : MonoBehaviour { 
+        public CoreGameManager coreGameManager;
         public float attackRange;
         public float attackPower;
         public float attackReloadTime;

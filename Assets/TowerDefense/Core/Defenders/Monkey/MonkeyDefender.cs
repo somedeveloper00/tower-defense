@@ -15,8 +15,7 @@ namespace TowerDefense.Core.Defenders {
         [SerializeField] float animAttackDamageTime;
         [SerializeField] string animAttackSpeedName;
         [SerializeField] float animAttackSpeedValue;
-        
-        
+
         void Update() {
             updateFocusedEnemy();
             updateRotation();

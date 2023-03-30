@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc88668173b24881b5af7b880f2dd08e, type: 3}
+  m_Name: DefenderDatabase
+  m_EditorClassIdentifier: 
+  defenderItems:
+  - name: monkey
+    mainPrefab: {fileID: 5942010116493321449, guid: 0d813d59bd5ff0f458e23debf753ef16, type: 3}
+    placeholderPrefab: {fileID: 3450021843338259581, guid: 374831fdb7c6cd54893bfd2170999c7c, type: 3}
+  - name: shooter
+    mainPrefab: {fileID: 1481124291, guid: 778106f86dfd2ae4b93251c032be4e7b, type: 3}
+    placeholderPrefab: {fileID: 3364010333416982397, guid: 3180a87fd8bc2304c8d06fe5cf0790aa, type: 3}

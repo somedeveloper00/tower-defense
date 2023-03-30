@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 using TowerDefense.Core.Enemies;
 using UnityEngine;
 
-namespace TowerDefense.Core.Spawn {
+namespace TowerDefense.Core.EnemySpawn {
     [DisplayName("col")]
     public class ColorManip : EnemyArgManip {
         [JsonIgnore] public List<Color> colors;

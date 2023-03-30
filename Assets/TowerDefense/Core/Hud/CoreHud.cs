@@ -1,12 +1,10 @@
-﻿using DialogueSystem;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace TowerDefense.Core.Hud {
-    public class CoreHudDialogue : Dialogue {
-        public static CoreHudDialogue Instance;
+    public class CoreHud : MonoBehaviour {
+        public static CoreHud Instance;
 
-        protected override void OnEnable() {
-            base.OnEnable();
+        protected void OnEnable() {
             if ( Instance != null ) {
                 Debug.LogError( $"Already another instance. Destroying new one." );
                 Destroy( Instance.gameObject );

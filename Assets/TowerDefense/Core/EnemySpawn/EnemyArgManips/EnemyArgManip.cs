@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 using TowerDefense.Core.Enemies;
 using UnityEngine;
 
-namespace TowerDefense.Core.Spawn {
+namespace TowerDefense.Core.EnemySpawn {
     /// <summary>
     /// applies to enemies for manipulating their values
     /// </summary>
