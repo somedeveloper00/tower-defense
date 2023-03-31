@@ -31,6 +31,10 @@ namespace TowerDefense.Core.DefenderSpawn {
             }
         }
 
+        public void SpawnManyUsingSelector(string name, int count) {
+            
+        }
+
         public void SpawnDefender(Defender prefab, Vector3 position) {
             var defender = Instantiate( prefab, position, Quaternion.identity, transform );
             CoreGameEvents.Current.OnDefenderSpawn?.Invoke( defender );

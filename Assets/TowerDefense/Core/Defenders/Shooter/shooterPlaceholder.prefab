@@ -372,7 +372,7 @@ MonoBehaviour:
     - name: rot cent
       delay: 0
       clip:
-        rid: 5878960634005815330
+        rid: 5878960743082623068
   references:
     version: 2
     RefIds:
@@ -466,7 +466,7 @@ MonoBehaviour:
               m_Calls: []
           fromObject: {fileID: 8260526366908924037}
           target: 0.6
-    - rid: 5878960634005815330
+    - rid: 5878960743082623068
       type: {class: CTweenerLocalRotation, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
       data:
         playNextOnStart: 0

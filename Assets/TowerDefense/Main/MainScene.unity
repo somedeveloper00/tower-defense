@@ -215,5 +215,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useJson: 1
-  coreStarter: {fileID: 11400000, guid: 9625eea73f721244dbeb01932e68de27, type: 2}
-  json: '{"env":"env1","spawnings":[{"onTime":[{"time":0.0,"spawns":[{"name":"balloon-simple","count":10,"timeIntervals":1.0,"argv":[]}]},{"time":20.0,"spawns":[{"name":"balloon-fast","count":2,"timeIntervals":0.4,"argv":[]}]}]}]} '
+  coreStarter: {fileID: 1072944039}
+  json: '{"env":"env1","spawnings":[{"onTime":[{"time":0.0,"spawns":[{"name":"balloon-fast","count":1,"timeIntervals":0.4,"argv":[]}]}],"t":0.0}]}'
+--- !u!114 &1072944039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91b9bad79ede404b92d88cc8af708d16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+    env: env1
+    spawnings:
+    - onTime:
+      - time: 0
+        spawns:
+        - name: balloon-simple
+          count: 3
+          timeIntervals: 1
+          argv: []
+      - time: 0
+        spawns:
+        - name: balloon-fast
+          count: 1
+          timeIntervals: 0.4
+          argv: []
+      t: 0
+  references:
+    version: 2
+    RefIds: []

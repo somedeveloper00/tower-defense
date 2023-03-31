@@ -7745,6 +7745,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roadManager: {fileID: 0}
   life: 100
+  winDialogueDelay: 1
 --- !u!114 &766429656
 MonoBehaviour:
   m_ObjectHideFlags: 0

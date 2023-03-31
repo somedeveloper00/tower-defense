@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using AnimFlex;
+using AnimFlex.Essentials;
 using TriInspector;
 using UnityEngine;
 

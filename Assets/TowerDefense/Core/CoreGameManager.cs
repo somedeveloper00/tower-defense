@@ -1,17 +1,21 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using DialogueSystem;
 using TowerDefense.Core.Enemies;
 using TowerDefense.Core.Defenders;
 using TowerDefense.Core.EnemySpawn;
 using TowerDefense.Core.Road;
+using TowerDefense.Core.UI;
+using TowerDefense.Core.UI.Win;
 using TriInspector;
 using UnityEngine;
 
 namespace TowerDefense.Core {
     public class CoreGameManager : MonoBehaviour {
         public RoadManager roadManager;
-        
         public float life = 20;
+        [SerializeField] float winDialogueDelay = 1;
         
         [ShowInInspector, ReadOnly] public readonly List<Enemy> enemies = new (16);
         [ShowInInspector, ReadOnly] public readonly List<Defender> defenders = new (8);
@@ -24,6 +28,7 @@ namespace TowerDefense.Core {
             CoreGameEvents.Current.OnDefenderDestroy += OnDefenderDestroy;
             CoreGameEvents.Current.OnDefenderSpawn += OnDefenderSpawn;
             CoreGameEvents.Current.OnSpawnerInitialize += OnSpawnerInitialize;
+            CoreGameEvents.Current.onWin += OnWin;
         }
 
         void OnSpawnerInitialize(EnemySpawner spawner) {
@@ -61,6 +66,13 @@ namespace TowerDefense.Core {
                 Debug.Log( $"Lost Game!" );
                 CoreGameEvents.Current.onLose?.Invoke();
             }
+        }
+
+        async void OnWin() {
+            await Task.Delay( (int)(winDialogueDelay * 1000) );
+            var dialogue =
+                DialogueManager.Current.GetOrCreate<WinDialogue>( parentTransform: CoreUI.Current.transform );
+            dialogue.stars = 3;
         }
     }
 }
