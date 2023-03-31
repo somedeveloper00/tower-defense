@@ -216,7 +216,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useJson: 1
   coreStarter: {fileID: 1072944039}
-  json: '{"env":"env1","spawnings":[{"onTime":[{"time":0.0,"spawns":[{"name":"balloon-fast","count":1,"timeIntervals":0.4,"argv":[]}]}],"t":0.0}]}'
+  json: '{"env":"env1","spawnings":[{"onTime":[{"time":0.0,"spawns":[{"name":"balloon-simple","count":15,"timeIntervals":1.0,"argv":[]}]},{"time":1.0,"spawns":[{"name":"balloon-fast","count":5,"timeIntervals":0.4,"argv":[]}]}],"t":0.0}]}'
 --- !u!114 &1072944039
 MonoBehaviour:
   m_ObjectHideFlags: 0
