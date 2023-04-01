@@ -580,7 +580,7 @@ MonoBehaviour:
       delay: 0
       clip:
         rid: 5878960743082623017
-    - name: ok btn
+    - name: return btn
       delay: 0
       clip:
         rid: 5878960743082623018
@@ -954,7 +954,7 @@ MonoBehaviour:
           from: 1
           ease: 2
           duration: 0.5
-          delay: 3
+          delay: 4
           pingPong: 0
           loops: 0
           loopDelay: 0
@@ -1394,7 +1394,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uFE91\uFE8E\uFEB7\uFEEA"
+  m_text: "\uFEA7\uFE8E\uFEE7\uFEEA"
   m_isRightToLeft: 1
   m_fontAsset: {fileID: 11400000, guid: 8a0a2bd9a1f7f1f45b68f15d9a81eb28, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 3ce4d54ea2ca33f4ca0306007303c543, type: 2}
@@ -1403,8 +1403,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4279485721
-  m_fontColor: {r: 0.09700396, g: 0.773, b: 0.07578431, a: 1}
+    rgba: 4292849313
+  m_fontColor: {r: 0.6313726, g: 0.68235296, b: 0.8745098, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1465,7 +1465,7 @@ MonoBehaviour:
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
   preserveNumbers: 0
   farsi: 1
-  originalText: "\u0628\u0627\u0634\u0647"
+  originalText: "\u062E\u0627\u0646\u0647"
   fixTags: 1
   forceFix: 0
 --- !u!1 &5641910109787283993
@@ -1595,7 +1595,7 @@ MonoBehaviour:
   - {fileID: 5641910109364730475}
   - {fileID: 5641910110565560463}
   - {fileID: 5641910110242250077}
-  okButton: {fileID: 5641910110189285406}
+  returnButton: {fileID: 5641910110189285406}
 --- !u!1 &5641910110040047461
 GameObject:
   m_ObjectHideFlags: 0
@@ -1686,7 +1686,7 @@ GameObject:
   - component: {fileID: 5641910110189285406}
   - component: {fileID: 1316243833}
   m_Layer: 5
-  m_Name: okBtn
+  m_Name: returnBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

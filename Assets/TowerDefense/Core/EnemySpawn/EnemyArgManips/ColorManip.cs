@@ -8,11 +8,11 @@ using UnityEngine;
 namespace TowerDefense.Core.EnemySpawn {
     [DisplayName("col")]
     public class ColorManip : EnemyArgManip {
-        [JsonIgnore] public List<Color> colors;
+        [JsonIgnore] public List<Color> colors = new();
 
         [JsonProperty]
         List<string> cols {
-            get => colors.Select( c => ColorUtility.ToHtmlStringRGB( c ) ).ToList();
+            get => colors.Select( ColorUtility.ToHtmlStringRGB ).ToList();
             set => colors = value.Select( v => {
                 if ( ColorUtility.TryParseHtmlString( v, out var col ) ) return col;
                 return Color.white;

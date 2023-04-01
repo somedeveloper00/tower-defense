@@ -7,6 +7,7 @@ using TowerDefense.Core.Defenders;
 using TowerDefense.Core.EnemySpawn;
 using TowerDefense.Core.Road;
 using TowerDefense.Core.UI;
+using TowerDefense.Core.UI.Lose;
 using TowerDefense.Core.UI.Win;
 using TriInspector;
 using UnityEngine;
@@ -16,9 +17,10 @@ namespace TowerDefense.Core {
         public RoadManager roadManager;
         public float life = 20;
         [SerializeField] float winDialogueDelay = 1;
-        
-        [ShowInInspector, ReadOnly] public readonly List<Enemy> enemies = new (16);
-        [ShowInInspector, ReadOnly] public readonly List<Defender> defenders = new (8);
+        [SerializeField] float loseDialogueDelay = 1;
+
+        [ShowInInspector, ReadOnly] public readonly List<Enemy> enemies = new(16);
+        [ShowInInspector, ReadOnly] public readonly List<Defender> defenders = new(8);
         [ShowInInspector, ReadOnly] public readonly List<EnemySpawner> spawners = new(4);
 
         void Start() {
@@ -29,6 +31,7 @@ namespace TowerDefense.Core {
             CoreGameEvents.Current.OnDefenderSpawn += OnDefenderSpawn;
             CoreGameEvents.Current.OnSpawnerInitialize += OnSpawnerInitialize;
             CoreGameEvents.Current.onWin += OnWin;
+            CoreGameEvents.Current.onLose += OnLose;
         }
 
         void OnSpawnerInitialize(EnemySpawner spawner) {
@@ -43,7 +46,7 @@ namespace TowerDefense.Core {
         void OnDefenderDestroy(Defender defender) {
             Destroy( defender.gameObject );
         }
-            
+
         void OnEnemySpawn(Enemy enemy) {
             enemies.Add( enemy );
         }
@@ -73,6 +76,12 @@ namespace TowerDefense.Core {
             var dialogue =
                 DialogueManager.Current.GetOrCreate<WinDialogue>( parentTransform: CoreUI.Current.transform );
             dialogue.stars = 3;
+        }
+
+        async void OnLose() {
+            await Task.Delay( (int)(loseDialogueDelay * 1000) );
+            var dialogue =
+                DialogueManager.Current.GetOrCreate<LoseDialogue>( parentTransform: CoreUI.Current.transform );
         }
     }
 }

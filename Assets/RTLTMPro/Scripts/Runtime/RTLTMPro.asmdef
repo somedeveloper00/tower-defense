@@ -1,5 +1,6 @@
 {
     "name": "RTLTMPro",
+    "rootNamespace": "",
     "references": [
         "Unity.TextMeshPro"
     ],

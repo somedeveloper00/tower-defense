@@ -1,32 +1,31 @@
-﻿using System;
-using AnimFlex.Sequencer.UserEnd;
+﻿using AnimFlex.Sequencer.UserEnd;
 using DialogueSystem;
 using TriInspector;
 using UnityEngine;
 using UnityEngine.UI;
-using Sequence = AnimFlex.Sequencer.Sequence;
 
 namespace TowerDefense.Core.UI.Win {
-    [DeclareFoldoutGroup("ref", Title = "References")]
+    [DeclareFoldoutGroup("ref", Title = "References", Expanded = true)]
     public class WinDialogue : Dialogue {
         public int stars = 0;
 
         [GroupNext( "ref" )]
         [SerializeField] SequenceAnim inSequence, outSequence;
         [SerializeField] GameObject[] starObjects;
-        [SerializeField] Button okButton;
+        [SerializeField] Button returnButton;
+
 
         protected override void OnEnable() {
             base.OnEnable();
+            canvasGroup.alpha = 0;
         }
-
 
         protected override void Start() {
             base.Start();
             for (int i = 0; i < starObjects.Length; i++) {
                 starObjects[i].SetActive( i < stars );
             }
-            okButton.onClick.AddListener( onOkButtonClick );
+            returnButton.onClick.AddListener( onOkButtonClick );
             inSequence.PlaySequence();
         }
 

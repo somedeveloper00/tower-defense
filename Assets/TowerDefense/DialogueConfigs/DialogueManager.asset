@@ -18,3 +18,6 @@ MonoBehaviour:
   - prefab: {fileID: 5641910109787284005, guid: d91fb887af67ee14fbb88310a3d706d2, type: 3}
     maxInstances: 1
     maximumReachedBehaviour: 0
+  - prefab: {fileID: 8279316130912892596, guid: 1d729690ab594fc45b95882c61052750, type: 3}
+    maxInstances: 1
+    maximumReachedBehaviour: 0
