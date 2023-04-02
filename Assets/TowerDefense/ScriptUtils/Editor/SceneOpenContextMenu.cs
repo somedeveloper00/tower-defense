@@ -13,5 +13,10 @@ namespace TowerDefense.Editor {
         private static void OpenEvn1() {
             EditorSceneManager.OpenScene( "Assets/TowerDefense/Core/Env/Env1/Env1.unity" );
         }
+
+        [MenuItem("Scenes/background scene")]
+        private static void OpenBackgroundScene() {
+            EditorSceneManager.OpenScene( "Assets/TowerDefense/Background/backgroundScene.unity" );
+        }
     }
 }

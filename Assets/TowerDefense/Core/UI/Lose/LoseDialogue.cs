@@ -2,7 +2,6 @@
 using AnimFlex.Sequencer.UserEnd;
 using DialogueSystem;
 using TriInspector;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,8 +9,8 @@ namespace TowerDefense.Core.UI.Lose {
     [DeclareFoldoutGroup("ref", Title = "References", Expanded = true)]
     public class LoseDialogue : Dialogue {
 
-        public Action onRetry;
-        public Action onRetrunHome;
+        public Action onRetryClick;
+        public Action onLobbyClick;
         
         [GroupNext("ref")]
         [SerializeField] SequenceAnim inSequence, outSequence;
@@ -39,11 +38,11 @@ namespace TowerDefense.Core.UI.Lose {
         }
         
         void onRetryBtnClick() {
-            onRetry?.Invoke();
+            onRetryClick?.Invoke();
         }
         
         void onReturnBtnClick() {
-            onRetrunHome?.Invoke();
+            onLobbyClick?.Invoke();
             outSequence.PlaySequence();
         }
     }

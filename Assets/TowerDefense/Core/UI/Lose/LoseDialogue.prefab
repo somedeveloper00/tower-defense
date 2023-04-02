@@ -189,6 +189,10 @@ MonoBehaviour:
   resetOnPlay: 1
   sequence:
     nodes:
+    - name: disable
+      delay: 0
+      clip:
+        rid: 1861648060339716334
     - name: main scale
       delay: 0
       clip:
@@ -241,10 +245,10 @@ MonoBehaviour:
       delay: 0
       clip:
         rid: 1861648038051971424
-    - name: 
-      delay: 10
+    - name: enable
+      delay: 4.5
       clip:
-        rid: 5878960743082623007
+        rid: 1861648060339716335
   references:
     version: 2
     RefIds:
@@ -536,6 +540,42 @@ MonoBehaviour:
               m_Calls: []
           fromObject: {fileID: 8873351576290639540}
           target: {x: 1.5, y: 1.5, z: 1}
+    - rid: 1861648060339716334
+      type: {class: CEvent, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
+      data:
+        Event:
+          m_PersistentCalls:
+            m_Calls:
+            - m_Target: {fileID: 8279316130912892555}
+              m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+              m_MethodName: set_enabled
+              m_Mode: 6
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 0
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
+    - rid: 1861648060339716335
+      type: {class: CEvent, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
+      data:
+        Event:
+          m_PersistentCalls:
+            m_Calls:
+            - m_Target: {fileID: 8279316130912892555}
+              m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+              m_MethodName: set_enabled
+              m_Mode: 6
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 0
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 1
+              m_CallState: 2
     - rid: 5878960743082623000
       type: {class: CTweenerScale, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
       data:
@@ -644,8 +684,6 @@ MonoBehaviour:
               m_Calls: []
           fromObject: {fileID: 8279316130912892599}
           target: {x: 0, y: 100, z: 0}
-    - rid: 5878960743082623007
-      type: {class: CEnd, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
     - rid: 5878960743082623008
       type: {class: CEmpty, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
     - rid: 5878960743082623018
@@ -744,7 +782,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -825,7 +863,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8279316130912892598}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -1638,7 +1676,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_RaycastPadding: {x: 180, y: 180, z: 180, w: 180}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1827,7 +1865,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:

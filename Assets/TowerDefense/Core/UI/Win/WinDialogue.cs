@@ -8,12 +8,12 @@ namespace TowerDefense.Core.UI.Win {
     [DeclareFoldoutGroup("ref", Title = "References", Expanded = true)]
     public class WinDialogue : Dialogue {
         public int stars = 0;
+        public CoreGameManager coreGameManager;
 
         [GroupNext( "ref" )]
         [SerializeField] SequenceAnim inSequence, outSequence;
         [SerializeField] GameObject[] starObjects;
         [SerializeField] Button returnButton;
-
 
         protected override void OnEnable() {
             base.OnEnable();
@@ -25,12 +25,13 @@ namespace TowerDefense.Core.UI.Win {
             for (int i = 0; i < starObjects.Length; i++) {
                 starObjects[i].SetActive( i < stars );
             }
-            returnButton.onClick.AddListener( onOkButtonClick );
+            returnButton.onClick.AddListener( onLobbyBtnClick );
             inSequence.PlaySequence();
         }
 
-        void onOkButtonClick() {
+        void onLobbyBtnClick() {
             CloseWithAnim();
+            onClose += coreGameManager.BackToLobby;
         }
 
         public void CloseWithAnim() {

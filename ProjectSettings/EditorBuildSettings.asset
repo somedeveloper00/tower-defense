@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/TowerDefense/Background/backgroundScene.unity
+    guid: 48d69f5cdb33c014982b1b96e063f657
+  - enabled: 1
     path: Assets/TowerDefense/Lobby/Lobby.unity
     guid: 8ed82d9d74cf0b447b4afaefe585e846
   - enabled: 1

@@ -25,22 +25,19 @@ namespace TowerDefense.Core.Starter {
 
         public Data data;
 
-        [Button]
         public IEnumerator StartGame(Action onComplete = null) {
             var path = SceneDatabase.Instance.GetScenePath( data.env );
-            var loadSceneAsync = SceneManager.LoadSceneAsync( path, LoadSceneMode.Additive );
-            yield return loadSceneAsync;
+            yield return null;
+            yield return SceneManager.LoadSceneAsync( path, LoadSceneMode.Additive );
             SceneManager.SetActiveScene( SceneManager.GetSceneByPath( path ) );
             var spawners = FindObjectsOfType<EnemySpawner>();
             for (int i = 0; i < spawners.Length; i++) {
                 spawners[i].spawningMethod = data.spawnings[i];
-                Debug.Log( $"spawner {spawners[i]} set up" );
+                CoreGameEvents.Current.OnEnemySpawnerInitialize?.Invoke( spawners[i] );
             }
             onComplete?.Invoke();
+            CoreGameEvents.Current.OnCoreStarterFinished?.Invoke( this );
         }
-
-        [Button]
-        void _logJson() => Debug.Log( ToJson() );
 
         public string ToJson() => JsonConvert.SerializeObject( data );
         public void FromJson(string json) => data = JsonConvert.DeserializeObject<Data>( json );

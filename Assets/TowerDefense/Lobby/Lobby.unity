@@ -246,7 +246,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useJson: 1
   coreStarter: {fileID: 1072944039}
-  json: '{"env":"env1","spawnings":[{"onTime":[{"time":0.0,"spawns":[{"name":"balloon-simple","count":20,"timeIntervals":1.0,"argv":[{"type":"basic","speedMultip":2.0,"lifeMultip":5.0},{"type":"col","cols":["FEAE62"]}]},{"name":"balloon-fast","count":30,"timeIntervals":0.4,"argv":[{"type":"basic","speedMultip":10.0,"lifeMultip":1.0}]}]}],"t":0.0}]}'
+  json: '{"env":"env1","spawnings":[{"onTime":[{"time":0.0,"spawns":[{"name":"balloon-simple","count":2,"timeIntervals":1.0,"argv":[{"type":"basic","speedMultip":2.0,"lifeMultip":1.0},{"type":"col","cols":["F762FEFF"]}]}]}],"t":0.0}]}'
+  inSequence: {fileID: 130184984}
   playBtn: {fileID: 1372271026}
   exitBtn: {fileID: 1572722278}
   shopBtn: {fileID: 319976852}
@@ -349,12 +350,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047e8afad3c64e64b1323784efd490e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playOnEnable: 1
+  playOnEnable: 0
   resetOnPlay: 1
   sequence:
     nodes:
     - name: bck-right
-      delay: 0
+      delay: 0.4
       clip:
         rid: 1861648045514162176
     - name: bck-left
@@ -498,11 +499,12 @@ MonoBehaviour:
           onKill:
             m_PersistentCalls:
               m_Calls: []
+          multiDelay: 0.1
+          reverseOrder: 0
           selections:
           - transform: {fileID: 1297441135}
             type: 1
           target: {x: -200, y: 0, z: 0}
-          multiDelay: 0.1
     - rid: 1861648045514162181
       type: {class: CTweenerLocalPosition, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
       data:

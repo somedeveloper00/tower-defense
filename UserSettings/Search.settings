@@ -10,7 +10,7 @@ scopes = {
 	"last_search.83F126EB" = "t:animator"
 	"OpenInspectorPreview.83F126EB" = "0"
 	"currentGroup.83F126EB" = "asset"
-	"last_search.785D90A9" = "lose"
+	"last_search.785D90A9" = "shooter"
 	"OpenInspectorPreview.785D90A9" = "0"
 	"currentGroup.785D90A9" = "asset"
 }
@@ -62,6 +62,7 @@ providers = {
 	}
 }
 recentSearches = [
+	"sho"
 ]
 searchItemFavorites = [
 ]

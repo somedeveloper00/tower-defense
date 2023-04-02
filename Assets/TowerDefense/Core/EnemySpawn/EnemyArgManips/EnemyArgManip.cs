@@ -18,7 +18,7 @@ namespace TowerDefense.Core.EnemySpawn {
 
         protected abstract void Apply(Enemy enemy);
         
-        bool CanApplyToEnemy(Enemy enemy) => appliableTypes().Contains( enemy.GetType() );
+        bool CanApplyToEnemy(Enemy enemy) => appliableTypes().Any( type => type.IsInstanceOfType( enemy ) );
 
         public bool TryApplyToEnemy(Enemy enemy) {
             if ( CanApplyToEnemy( enemy ) ) {

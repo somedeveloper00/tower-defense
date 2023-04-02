@@ -1,16 +1,24 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AnimFlex.Tweening;
 using DialogueSystem;
+using TowerDefense.Background;
+using TowerDefense.Background.Loading;
 using TowerDefense.Core.Enemies;
 using TowerDefense.Core.Defenders;
 using TowerDefense.Core.EnemySpawn;
+using TowerDefense.Core.Env;
 using TowerDefense.Core.Road;
+using TowerDefense.Core.Starter;
 using TowerDefense.Core.UI;
 using TowerDefense.Core.UI.Lose;
 using TowerDefense.Core.UI.Win;
 using TriInspector;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace TowerDefense.Core {
     public class CoreGameManager : MonoBehaviour {
@@ -23,15 +31,63 @@ namespace TowerDefense.Core {
         [ShowInInspector, ReadOnly] public readonly List<Defender> defenders = new(8);
         [ShowInInspector, ReadOnly] public readonly List<EnemySpawner> spawners = new(4);
 
+        CoreStarter _starter;
+        bool _lost = false;
+        
+        void OnEnable() {
+            CoreGameEvents.Current.OnCoreStarterFinished += OnCoreStarterFinished;
+        }
+
+
         void Start() {
+            CoreGameEvents.Current.OnGameStart?.Invoke( this );
             CoreGameEvents.Current.OnEnemySpawn += OnEnemySpawn;
             CoreGameEvents.Current.OnEnemyReachEnd += OnEnemyReachEnd;
             CoreGameEvents.Current.OnEnemyDestroy += OnEnemyDestroy;
             CoreGameEvents.Current.OnDefenderDestroy += OnDefenderDestroy;
             CoreGameEvents.Current.OnDefenderSpawn += OnDefenderSpawn;
-            CoreGameEvents.Current.OnSpawnerInitialize += OnSpawnerInitialize;
+            CoreGameEvents.Current.OnEnemySpawnerInitialize += OnSpawnerInitialize;
             CoreGameEvents.Current.onWin += OnWin;
             CoreGameEvents.Current.onLose += OnLose;
+        }
+
+        void OnDestroy() {
+            CoreGameEvents.Current.OnCoreStarterFinished -= OnCoreStarterFinished;
+            CoreGameEvents.Current.OnEnemySpawn -= OnEnemySpawn;
+            CoreGameEvents.Current.OnEnemyReachEnd -= OnEnemyReachEnd;
+            CoreGameEvents.Current.OnEnemyDestroy -= OnEnemyDestroy;
+            CoreGameEvents.Current.OnDefenderDestroy -= OnDefenderDestroy;
+            CoreGameEvents.Current.OnDefenderSpawn -= OnDefenderSpawn;
+            CoreGameEvents.Current.OnEnemySpawnerInitialize -= OnSpawnerInitialize;
+            CoreGameEvents.Current.onWin -= OnWin;
+            CoreGameEvents.Current.onLose -= OnLose;
+        }
+
+        public void RestartGame() {
+            StartCoroutine( _starter.StartGame( removeScene ) );
+
+            void removeScene() {
+                StartCoroutine( enumerator() );
+                IEnumerator enumerator() {
+                    yield return SceneManager.UnloadSceneAsync( gameObject.scene );
+                }
+            }
+        }
+
+        public void BackToLobby() {
+            BackgroundRunner.Current.StartCoroutine( enumerator() );
+
+            IEnumerator enumerator() {
+                LoadingScreenManager.Current.StartLoadingScreen();
+                yield return SceneManager.LoadSceneAsync( SceneDatabase.Instance.GetScenePath( "lobby" ), LoadSceneMode.Additive );
+                yield return SceneManager.UnloadSceneAsync( gameObject.scene );
+                LoadingScreenManager.Current.EndLoadingScreen();
+            }
+        }
+        
+        
+        void OnCoreStarterFinished(CoreStarter coreStarter) {
+            _starter = Instantiate( coreStarter );
         }
 
         void OnSpawnerInitialize(EnemySpawner spawner) {
@@ -65,7 +121,8 @@ namespace TowerDefense.Core {
             Destroy( enemy.gameObject );
             enemies.Remove( enemy );
             life -= 1;
-            if (life <= 0) {
+            if (life <= 0 && !_lost) {
+                _lost = true;
                 Debug.Log( $"Lost Game!" );
                 CoreGameEvents.Current.onLose?.Invoke();
             }
@@ -76,12 +133,21 @@ namespace TowerDefense.Core {
             var dialogue =
                 DialogueManager.Current.GetOrCreate<WinDialogue>( parentTransform: CoreUI.Current.transform );
             dialogue.stars = 3;
+            dialogue.coreGameManager = this;
+
+            // Tweener.Generate( () => Time.timeScale, v => Time.timeScale = v, 0, Ease.OutCubic, 1 );
+            // dialogue.onClose += () => Time.timeScale = 1;
         }
 
         async void OnLose() {
             await Task.Delay( (int)(loseDialogueDelay * 1000) );
             var dialogue =
                 DialogueManager.Current.GetOrCreate<LoseDialogue>( parentTransform: CoreUI.Current.transform );
+            dialogue.onRetryClick += RestartGame;
+            dialogue.onLobbyClick += BackToLobby;
+            
+            // Tweener.Generate( () => Time.timeScale, v => Time.timeScale = v, 0, Ease.OutCubic, 1 );
+            // dialogue.onClose += () => Time.timeScale = 1;
         }
     }
 }
