@@ -3,10 +3,10 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 
 namespace TowerDefense.Editor {
-    public class SceneOpenContextMenu {
-        [MenuItem("Scenes/Main")]
-        private static void OpenMainScene() {
-            EditorSceneManager.OpenScene( "Assets/TowerDefense/Main/MainScene.unity" );
+    public static class SceneOpenContextMenu {
+        [MenuItem("Scenes/Lobby")]
+        private static void OpenLobbyScene() {
+            EditorSceneManager.OpenScene( "Assets/TowerDefense/Lobby/Lobby.unity" );
         }
 
         [MenuItem("Scenes/Env1")]

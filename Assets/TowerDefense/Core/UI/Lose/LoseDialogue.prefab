@@ -1364,9 +1364,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4371338814325743062}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
+        m_TargetAssemblyTypeName: AnimFlex.Tweening.TweenerComponent`1[[AnimFlex.Tweening.TweenerGeneratorScale,
+          AnimFlex
+        m_MethodName: PlayOrRestart
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1382,7 +1383,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8279316131583583411}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4697f85f9394b14bbb12a192e296fb2, type: 3}
   m_Name: 
@@ -1419,7 +1420,7 @@ MonoBehaviour:
         m_Calls: []
     fromObject: {fileID: 8279316131583583408}
     target: {x: 1.1, y: 1.1, z: 0}
-  playOnStart: 1
+  playOnStart: 0
 --- !u!225 &4371338814325743061
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1697,9 +1698,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8873351576290639539}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
+        m_TargetAssemblyTypeName: AnimFlex.Tweening.TweenerComponent`1[[AnimFlex.Tweening.TweenerGeneratorScale,
+          AnimFlex
+        m_MethodName: PlayOrRestart
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1715,7 +1717,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8873351576290639541}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4697f85f9394b14bbb12a192e296fb2, type: 3}
   m_Name: 
@@ -1752,7 +1754,7 @@ MonoBehaviour:
         m_Calls: []
     fromObject: {fileID: 8873351576290639540}
     target: {x: 1.1, y: 1.1, z: 0}
-  playOnStart: 1
+  playOnStart: 0
 --- !u!225 &8873351576290639535
 CanvasGroup:
   m_ObjectHideFlags: 0

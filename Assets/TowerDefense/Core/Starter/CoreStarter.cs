@@ -18,7 +18,7 @@ namespace TowerDefense.Core.Starter {
             [Dropdown(nameof(_all_envs))]
             public string env;
 
-            string[] _all_envs => EnvDatabase.Instance.GetAllNames();
+            string[] _all_envs => SceneDatabase.Instance.GetAllNames();
 
             public EnemySpawner.SpawningMethod[] spawnings;
         }
@@ -26,8 +26,8 @@ namespace TowerDefense.Core.Starter {
         public Data data;
 
         [Button]
-        public IEnumerator StartGame() {
-            var path = EnvDatabase.Instance.GetScenePath( data.env );
+        public IEnumerator StartGame(Action onComplete = null) {
+            var path = SceneDatabase.Instance.GetScenePath( data.env );
             var loadSceneAsync = SceneManager.LoadSceneAsync( path, LoadSceneMode.Additive );
             yield return loadSceneAsync;
             SceneManager.SetActiveScene( SceneManager.GetSceneByPath( path ) );
@@ -36,6 +36,7 @@ namespace TowerDefense.Core.Starter {
                 spawners[i].spawningMethod = data.spawnings[i];
                 Debug.Log( $"spawner {spawners[i]} set up" );
             }
+            onComplete?.Invoke();
         }
 
         [Button]
