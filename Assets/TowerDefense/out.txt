@@ -1,0 +1,620 @@
+Folder PATH listing
+Volume serial number is F800-8576
+C:.
+¦   Background.meta
+¦   Common.meta
+¦   CommonMaterials.meta
+¦   Core.meta
+¦   GeneralSOs.meta
+¦   Input.meta
+¦   Lobby.meta
+¦   out.txt
+¦   presets.meta
+¦   ScriptUtils.meta
+¦   Shaders.meta
+¦   Text.meta
+¦   
++---Background
+¦   ¦   BackgroundRunner.cs
+¦   ¦   BackgroundRunner.cs.meta
+¦   ¦   backgroundScene.unity
+¦   ¦   backgroundScene.unity.meta
+¦   ¦   JsonConvertWarmup.cs
+¦   ¦   JsonConvertWarmup.cs.meta
+¦   ¦   Loading.meta
+¦   ¦   LoadLobbyOnStart.cs
+¦   ¦   LoadLobbyOnStart.cs.meta
+¦   ¦   
+¦   +---Loading
+¦       ¦   LoadingSceneUI.cs
+¦       ¦   LoadingSceneUI.cs.meta
+¦       ¦   LoadingScreenManager.cs
+¦       ¦   LoadingScreenManager.cs.meta
+¦       ¦   LoadingUI.prefab
+¦       ¦   LoadingUI.prefab.meta
+¦       ¦   resources.meta
+¦       ¦   
+¦       +---resources
+¦               bck-left.png
+¦               bck-left.png.meta
+¦               bck-right.png
+¦               bck-right.png.meta
+¦               loading-piece.png
+¦               loading-piece.png.meta
+¦               
++---Common
+¦   ¦   Batcher.meta
+¦   ¦   LookAtMainCam.cs
+¦   ¦   LookAtMainCam.cs.meta
+¦   ¦   ObjectReferenceHolder.cs
+¦   ¦   ObjectReferenceHolder.cs.meta
+¦   ¦   
+¦   +---Batcher
+¦           MeshCombiner.cs
+¦           MeshCombiner.cs.meta
+¦           
++---CommonMaterials
+¦       cool_pallete_1.mat
+¦       cool_pallete_1.mat.meta
+¦       cool_pallete_10.mat
+¦       cool_pallete_10.mat.meta
+¦       cool_pallete_11.mat
+¦       cool_pallete_11.mat.meta
+¦       cool_pallete_12.mat
+¦       cool_pallete_12.mat.meta
+¦       cool_pallete_2.mat
+¦       cool_pallete_2.mat.meta
+¦       cool_pallete_3.mat
+¦       cool_pallete_3.mat.meta
+¦       cool_pallete_4.mat
+¦       cool_pallete_4.mat.meta
+¦       cool_pallete_5.mat
+¦       cool_pallete_5.mat.meta
+¦       cool_pallete_6.mat
+¦       cool_pallete_6.mat.meta
+¦       cool_pallete_7.mat
+¦       cool_pallete_7.mat.meta
+¦       cool_pallete_8.mat
+¦       cool_pallete_8.mat.meta
+¦       cool_pallete_9.mat
+¦       cool_pallete_9.mat.meta
+¦       
++---Core
+¦   ¦   CommonMats.meta
+¦   ¦   CoreGameEvents.asset
+¦   ¦   CoreGameEvents.asset.meta
+¦   ¦   CoreGameEvents.cs
+¦   ¦   CoreGameEvents.cs.meta
+¦   ¦   CoreGameManager.cs
+¦   ¦   CoreGameManager.cs.meta
+¦   ¦   Damage.cs
+¦   ¦   Damage.cs.meta
+¦   ¦   debug-playground.unity
+¦   ¦   debug-playground.unity.meta
+¦   ¦   Defenders.meta
+¦   ¦   DefenderSpawn.meta
+¦   ¦   Enemies.meta
+¦   ¦   EnemySpawn.meta
+¦   ¦   Env.meta
+¦   ¦   Hud.meta
+¦   ¦   Road.meta
+¦   ¦   Starter.meta
+¦   ¦   UI.meta
+¦   ¦   
+¦   +---CommonMats
+¦   ¦   ¦   spawn.meta
+¦   ¦   ¦   
+¦   ¦   +---spawn
+¦   ¦       ¦   fx.meta
+¦   ¦       ¦   SpawnTrans.mat
+¦   ¦       ¦   SpawnTrans.mat.meta
+¦   ¦       ¦   
+¦   ¦       +---fx
+¦   ¦               Projector Light.shader
+¦   ¦               Projector Light.shader.meta
+¦   ¦               spawnProjector1.mat
+¦   ¦               spawnProjector1.mat.meta
+¦   ¦               spawnProjector2.mat
+¦   ¦               spawnProjector2.mat.meta
+¦   ¦               spawnProjector3.mat
+¦   ¦               spawnProjector3.mat.meta
+¦   ¦               
+¦   +---Defenders
+¦   ¦   ¦   Defender.cs
+¦   ¦   ¦   Defender.cs.meta
+¦   ¦   ¦   DefenderDatabase.asset
+¦   ¦   ¦   DefenderDatabase.asset.meta
+¦   ¦   ¦   DefenderDatabase.cs
+¦   ¦   ¦   DefenderDatabase.cs.meta
+¦   ¦   ¦   Monkey.meta
+¦   ¦   ¦   Shooter.meta
+¦   ¦   ¦   
+¦   ¦   +---Monkey
+¦   ¦   ¦   ¦   Monkey.prefab
+¦   ¦   ¦   ¦   Monkey.prefab.meta
+¦   ¦   ¦   ¦   monkeyDefender.controller
+¦   ¦   ¦   ¦   monkeyDefender.controller.meta
+¦   ¦   ¦   ¦   MonkeyDefender.cs
+¦   ¦   ¦   ¦   MonkeyDefender.cs.meta
+¦   ¦   ¦   ¦   MonkeyPlaceholder.prefab
+¦   ¦   ¦   ¦   MonkeyPlaceholder.prefab.meta
+¦   ¦   ¦   ¦   resource.meta
+¦   ¦   ¦   ¦   
+¦   ¦   ¦   +---resource
+¦   ¦   ¦           monkey.fbx
+¦   ¦   ¦           monkey.fbx.meta
+¦   ¦   ¦           monkey_mat.mat
+¦   ¦   ¦           monkey_mat.mat.meta
+¦   ¦   ¦           
+¦   ¦   +---Shooter
+¦   ¦       ¦   fire_fx.prefab
+¦   ¦       ¦   fire_fx.prefab.meta
+¦   ¦       ¦   fx_mat_fire.mat
+¦   ¦       ¦   fx_mat_fire.mat.meta
+¦   ¦       ¦   fx_mat_smoke.mat
+¦   ¦       ¦   fx_mat_smoke.mat.meta
+¦   ¦       ¦   particlePack_1.1.meta
+¦   ¦       ¦   resources.meta
+¦   ¦       ¦   shooter.prefab
+¦   ¦       ¦   shooter.prefab.meta
+¦   ¦       ¦   shooterDefender.controller
+¦   ¦       ¦   shooterDefender.controller.meta
+¦   ¦       ¦   ShooterDefender.cs
+¦   ¦       ¦   ShooterDefender.cs.meta
+¦   ¦       ¦   shooterPlaceholder.prefab
+¦   ¦       ¦   shooterPlaceholder.prefab.meta
+¦   ¦       ¦   
+¦   ¦       +---particlePack_1.1
+¦   ¦       ¦   ¦   PNG (Transparent).meta
+¦   ¦       ¦   ¦   
+¦   ¦       ¦   +---PNG (Transparent)
+¦   ¦       ¦       ¦   circle_01.png
+¦   ¦       ¦       ¦   circle_01.png.meta
+¦   ¦       ¦       ¦   circle_02.png
+¦   ¦       ¦       ¦   circle_02.png.meta
+¦   ¦       ¦       ¦   circle_03.png
+¦   ¦       ¦       ¦   circle_03.png.meta
+¦   ¦       ¦       ¦   circle_04.png
+¦   ¦       ¦       ¦   circle_04.png.meta
+¦   ¦       ¦       ¦   circle_05.png
+¦   ¦       ¦       ¦   circle_05.png.meta
+¦   ¦       ¦       ¦   dirt_01.png
+¦   ¦       ¦       ¦   dirt_01.png.meta
+¦   ¦       ¦       ¦   dirt_02.png
+¦   ¦       ¦       ¦   dirt_02.png.meta
+¦   ¦       ¦       ¦   dirt_03.png
+¦   ¦       ¦       ¦   dirt_03.png.meta
+¦   ¦       ¦       ¦   fire_01.png
+¦   ¦       ¦       ¦   fire_01.png.meta
+¦   ¦       ¦       ¦   fire_02.png
+¦   ¦       ¦       ¦   fire_02.png.meta
+¦   ¦       ¦       ¦   flame_01.png
+¦   ¦       ¦       ¦   flame_01.png.meta
+¦   ¦       ¦       ¦   flame_02.png
+¦   ¦       ¦       ¦   flame_02.png.meta
+¦   ¦       ¦       ¦   flame_03.png
+¦   ¦       ¦       ¦   flame_03.png.meta
+¦   ¦       ¦       ¦   flame_04.png
+¦   ¦       ¦       ¦   flame_04.png.meta
+¦   ¦       ¦       ¦   flame_05.png
+¦   ¦       ¦       ¦   flame_05.png.meta
+¦   ¦       ¦       ¦   flame_06.png
+¦   ¦       ¦       ¦   flame_06.png.meta
+¦   ¦       ¦       ¦   flare_01.png
+¦   ¦       ¦       ¦   flare_01.png.meta
+¦   ¦       ¦       ¦   light_01.png
+¦   ¦       ¦       ¦   light_01.png.meta
+¦   ¦       ¦       ¦   light_02.png
+¦   ¦       ¦       ¦   light_02.png.meta
+¦   ¦       ¦       ¦   light_03.png
+¦   ¦       ¦       ¦   light_03.png.meta
+¦   ¦       ¦       ¦   magic_01.png
+¦   ¦       ¦       ¦   magic_01.png.meta
+¦   ¦       ¦       ¦   magic_02.png
+¦   ¦       ¦       ¦   magic_02.png.meta
+¦   ¦       ¦       ¦   magic_03.png
+¦   ¦       ¦       ¦   magic_03.png.meta
+¦   ¦       ¦       ¦   magic_04.png
+¦   ¦       ¦       ¦   magic_04.png.meta
+¦   ¦       ¦       ¦   magic_05.png
+¦   ¦       ¦       ¦   magic_05.png.meta
+¦   ¦       ¦       ¦   muzzle_01.png
+¦   ¦       ¦       ¦   muzzle_01.png.meta
+¦   ¦       ¦       ¦   muzzle_02.png
+¦   ¦       ¦       ¦   muzzle_02.png.meta
+¦   ¦       ¦       ¦   muzzle_03.png
+¦   ¦       ¦       ¦   muzzle_03.png.meta
+¦   ¦       ¦       ¦   muzzle_04.png
+¦   ¦       ¦       ¦   muzzle_04.png.meta
+¦   ¦       ¦       ¦   muzzle_05.png
+¦   ¦       ¦       ¦   muzzle_05.png.meta
+¦   ¦       ¦       ¦   Rotated.meta
+¦   ¦       ¦       ¦   scorch_01.png
+¦   ¦       ¦       ¦   scorch_01.png.meta
+¦   ¦       ¦       ¦   scorch_02.png
+¦   ¦       ¦       ¦   scorch_02.png.meta
+¦   ¦       ¦       ¦   scorch_03.png
+¦   ¦       ¦       ¦   scorch_03.png.meta
+¦   ¦       ¦       ¦   scratch_01.png
+¦   ¦       ¦       ¦   scratch_01.png.meta
+¦   ¦       ¦       ¦   slash_01.png
+¦   ¦       ¦       ¦   slash_01.png.meta
+¦   ¦       ¦       ¦   slash_02.png
+¦   ¦       ¦       ¦   slash_02.png.meta
+¦   ¦       ¦       ¦   slash_03.png
+¦   ¦       ¦       ¦   slash_03.png.meta
+¦   ¦       ¦       ¦   slash_04.png
+¦   ¦       ¦       ¦   slash_04.png.meta
+¦   ¦       ¦       ¦   smoke_01.png
+¦   ¦       ¦       ¦   smoke_01.png.meta
+¦   ¦       ¦       ¦   smoke_02.png
+¦   ¦       ¦       ¦   smoke_02.png.meta
+¦   ¦       ¦       ¦   smoke_03.png
+¦   ¦       ¦       ¦   smoke_03.png.meta
+¦   ¦       ¦       ¦   smoke_04.png
+¦   ¦       ¦       ¦   smoke_04.png.meta
+¦   ¦       ¦       ¦   smoke_05.png
+¦   ¦       ¦       ¦   smoke_05.png.meta
+¦   ¦       ¦       ¦   smoke_06.png
+¦   ¦       ¦       ¦   smoke_06.png.meta
+¦   ¦       ¦       ¦   smoke_07.png
+¦   ¦       ¦       ¦   smoke_07.png.meta
+¦   ¦       ¦       ¦   smoke_08.png
+¦   ¦       ¦       ¦   smoke_08.png.meta
+¦   ¦       ¦       ¦   smoke_09.png
+¦   ¦       ¦       ¦   smoke_09.png.meta
+¦   ¦       ¦       ¦   smoke_10.png
+¦   ¦       ¦       ¦   smoke_10.png.meta
+¦   ¦       ¦       ¦   spark_01.png
+¦   ¦       ¦       ¦   spark_01.png.meta
+¦   ¦       ¦       ¦   spark_02.png
+¦   ¦       ¦       ¦   spark_02.png.meta
+¦   ¦       ¦       ¦   spark_03.png
+¦   ¦       ¦       ¦   spark_03.png.meta
+¦   ¦       ¦       ¦   spark_04.png
+¦   ¦       ¦       ¦   spark_04.png.meta
+¦   ¦       ¦       ¦   spark_05.png
+¦   ¦       ¦       ¦   spark_05.png.meta
+¦   ¦       ¦       ¦   spark_06.png
+¦   ¦       ¦       ¦   spark_06.png.meta
+¦   ¦       ¦       ¦   spark_07.png
+¦   ¦       ¦       ¦   spark_07.png.meta
+¦   ¦       ¦       ¦   star_01.png
+¦   ¦       ¦       ¦   star_01.png.meta
+¦   ¦       ¦       ¦   star_02.png
+¦   ¦       ¦       ¦   star_02.png.meta
+¦   ¦       ¦       ¦   star_03.png
+¦   ¦       ¦       ¦   star_03.png.meta
+¦   ¦       ¦       ¦   star_04.png
+¦   ¦       ¦       ¦   star_04.png.meta
+¦   ¦       ¦       ¦   star_05.png
+¦   ¦       ¦       ¦   star_05.png.meta
+¦   ¦       ¦       ¦   star_06.png
+¦   ¦       ¦       ¦   star_06.png.meta
+¦   ¦       ¦       ¦   star_07.png
+¦   ¦       ¦       ¦   star_07.png.meta
+¦   ¦       ¦       ¦   star_08.png
+¦   ¦       ¦       ¦   star_08.png.meta
+¦   ¦       ¦       ¦   star_09.png
+¦   ¦       ¦       ¦   star_09.png.meta
+¦   ¦       ¦       ¦   symbol_01.png
+¦   ¦       ¦       ¦   symbol_01.png.meta
+¦   ¦       ¦       ¦   symbol_02.png
+¦   ¦       ¦       ¦   symbol_02.png.meta
+¦   ¦       ¦       ¦   trace_01.png
+¦   ¦       ¦       ¦   trace_01.png.meta
+¦   ¦       ¦       ¦   trace_02.png
+¦   ¦       ¦       ¦   trace_02.png.meta
+¦   ¦       ¦       ¦   trace_03.png
+¦   ¦       ¦       ¦   trace_03.png.meta
+¦   ¦       ¦       ¦   trace_04.png
+¦   ¦       ¦       ¦   trace_04.png.meta
+¦   ¦       ¦       ¦   trace_05.png
+¦   ¦       ¦       ¦   trace_05.png.meta
+¦   ¦       ¦       ¦   trace_06.png
+¦   ¦       ¦       ¦   trace_06.png.meta
+¦   ¦       ¦       ¦   trace_07.png
+¦   ¦       ¦       ¦   trace_07.png.meta
+¦   ¦       ¦       ¦   twirl_01.png
+¦   ¦       ¦       ¦   twirl_01.png.meta
+¦   ¦       ¦       ¦   twirl_02.png
+¦   ¦       ¦       ¦   twirl_02.png.meta
+¦   ¦       ¦       ¦   twirl_03.png
+¦   ¦       ¦       ¦   twirl_03.png.meta
+¦   ¦       ¦       ¦   window_01.png
+¦   ¦       ¦       ¦   window_01.png.meta
+¦   ¦       ¦       ¦   window_02.png
+¦   ¦       ¦       ¦   window_02.png.meta
+¦   ¦       ¦       ¦   window_03.png
+¦   ¦       ¦       ¦   window_03.png.meta
+¦   ¦       ¦       ¦   window_04.png
+¦   ¦       ¦       ¦   window_04.png.meta
+¦   ¦       ¦       ¦   
+¦   ¦       ¦       +---Rotated
+¦   ¦       ¦               flame_05_rotated.png
+¦   ¦       ¦               flame_05_rotated.png.meta
+¦   ¦       ¦               flame_06_rotated.png
+¦   ¦       ¦               flame_06_rotated.png.meta
+¦   ¦       ¦               muzzle_01_rotated.png
+¦   ¦       ¦               muzzle_01_rotated.png.meta
+¦   ¦       ¦               muzzle_02_rotated.png
+¦   ¦       ¦               muzzle_02_rotated.png.meta
+¦   ¦       ¦               muzzle_03_rotated.png
+¦   ¦       ¦               muzzle_03_rotated.png.meta
+¦   ¦       ¦               muzzle_04_rotated.png
+¦   ¦       ¦               muzzle_04_rotated.png.meta
+¦   ¦       ¦               muzzle_05_rotated.png
+¦   ¦       ¦               muzzle_05_rotated.png.meta
+¦   ¦       ¦               spark_05_rotated.png
+¦   ¦       ¦               spark_05_rotated.png.meta
+¦   ¦       ¦               spark_06_rotated.png
+¦   ¦       ¦               spark_06_rotated.png.meta
+¦   ¦       ¦               trace_01_rotated.png
+¦   ¦       ¦               trace_01_rotated.png.meta
+¦   ¦       ¦               trace_02_rotated.png
+¦   ¦       ¦               trace_02_rotated.png.meta
+¦   ¦       ¦               trace_03_rotated.png
+¦   ¦       ¦               trace_03_rotated.png.meta
+¦   ¦       ¦               trace_04_rotated.png
+¦   ¦       ¦               trace_04_rotated.png.meta
+¦   ¦       ¦               trace_05_rotated.png
+¦   ¦       ¦               trace_05_rotated.png.meta
+¦   ¦       ¦               trace_06_rotated.png
+¦   ¦       ¦               trace_06_rotated.png.meta
+¦   ¦       ¦               trace_07_rotated.png
+¦   ¦       ¦               trace_07_rotated.png.meta
+¦   ¦       ¦               
+¦   ¦       +---resources
+¦   ¦               shooter.fbx
+¦   ¦               shooter.fbx.meta
+¦   ¦               
+¦   +---DefenderSpawn
+¦   ¦       DefenderSpawner.cs
+¦   ¦       DefenderSpawner.cs.meta
+¦   ¦       MaterialModify.cs
+¦   ¦       MaterialModify.cs.meta
+¦   ¦       SpawnPositionSelector.cs
+¦   ¦       SpawnPositionSelector.cs.meta
+¦   ¦       
+¦   +---Enemies
+¦   ¦   ¦   Common.meta
+¦   ¦   ¦   Enemy.cs
+¦   ¦   ¦   Enemy.cs.meta
+¦   ¦   ¦   EnemyDebugInfoTxt.cs
+¦   ¦   ¦   EnemyDebugInfoTxt.cs.meta
+¦   ¦   ¦   EnemyLifeIndicator.cs
+¦   ¦   ¦   EnemyLifeIndicator.cs.meta
+¦   ¦   ¦   SimpleBalloon.meta
+¦   ¦   ¦   
+¦   ¦   +---Common
+¦   ¦   +---SimpleBalloon
+¦   ¦       ¦   balloonEnemyFast.prefab
+¦   ¦       ¦   balloonEnemyFast.prefab.meta
+¦   ¦       ¦   balloonEnemyNormal.prefab
+¦   ¦       ¦   balloonEnemyNormal.prefab.meta
+¦   ¦       ¦   enemHud.prefab
+¦   ¦       ¦   enemHud.prefab.meta
+¦   ¦       ¦   resources.meta
+¦   ¦       ¦   SimpleBalloonEnemy.cs
+¦   ¦       ¦   SimpleBalloonEnemy.cs.meta
+¦   ¦       ¦   
+¦   ¦       +---resources
+¦   ¦               simple_balloon.fbx
+¦   ¦               simple_balloon.fbx.meta
+¦   ¦               
+¦   +---EnemySpawn
+¦   ¦   ¦   EnemyArgManips.meta
+¦   ¦   ¦   EnemyDatabase.cs
+¦   ¦   ¦   EnemyDatabase.cs.meta
+¦   ¦   ¦   EnemySpawner.cs
+¦   ¦   ¦   EnemySpawner.cs.meta
+¦   ¦   ¦   EnemySpawnerDatabase.asset
+¦   ¦   ¦   EnemySpawnerDatabase.asset.meta
+¦   ¦   ¦   
+¦   ¦   +---EnemyArgManips
+¦   ¦           BasicManip.cs
+¦   ¦           BasicManip.cs.meta
+¦   ¦           ColorManip.cs
+¦   ¦           ColorManip.cs.meta
+¦   ¦           EnemyArgManip.cs
+¦   ¦           EnemyArgManip.cs.meta
+¦   ¦           
+¦   +---Env
+¦   ¦   ¦   Env1.meta
+¦   ¦   ¦   SceneDatabase.cs
+¦   ¦   ¦   SceneDatabase.cs.meta
+¦   ¦   ¦   
+¦   ¦   +---Env1
+¦   ¦           block_1.prefab
+¦   ¦           block_1.prefab.meta
+¦   ¦           block_2.prefab
+¦   ¦           block_2.prefab.meta
+¦   ¦           env-1.fbx
+¦   ¦           env-1.fbx.meta
+¦   ¦           env1-ground1.prefab
+¦   ¦           env1-ground1.prefab.meta
+¦   ¦           env1-ground2.prefab
+¦   ¦           env1-ground2.prefab.meta
+¦   ¦           env1-leaf1.prefab
+¦   ¦           env1-leaf1.prefab.meta
+¦   ¦           env1-leaf2.prefab
+¦   ¦           env1-leaf2.prefab.meta
+¦   ¦           env1-leaf3.prefab
+¦   ¦           env1-leaf3.prefab.meta
+¦   ¦           env1-leaves.prefab
+¦   ¦           env1-leaves.prefab.meta
+¦   ¦           env1-mat-block1.mat
+¦   ¦           env1-mat-block1.mat.meta
+¦   ¦           env1-mat-block2.mat
+¦   ¦           env1-mat-block2.mat.meta
+¦   ¦           env1-mat-ground1.mat
+¦   ¦           env1-mat-ground1.mat.meta
+¦   ¦           env1-mat-leaf.mat
+¦   ¦           env1-mat-leaf.mat.meta
+¦   ¦           env1-mat-rock.mat
+¦   ¦           env1-mat-rock.mat.meta
+¦   ¦           Env1.unity
+¦   ¦           Env1.unity.meta
+¦   ¦           
+¦   +---Hud
+¦   ¦       CoreHud.cs
+¦   ¦       CoreHud.cs.meta
+¦   ¦       Hud3DToViewport.cs
+¦   ¦       Hud3DToViewport.cs.meta
+¦   ¦       
+¦   +---Road
+¦   ¦       RoadManager.cs
+¦   ¦       RoadManager.cs.meta
+¦   ¦       RoadPiece.cs
+¦   ¦       RoadPiece.cs.meta
+¦   ¦       
+¦   +---Starter
+¦   ¦       CoreStarter.asset
+¦   ¦       CoreStarter.asset.meta
+¦   ¦       CoreStarter.cs
+¦   ¦       CoreStarter.cs.meta
+¦   ¦       
+¦   +---UI
+¦       ¦   CoreUI.cs
+¦       ¦   CoreUI.cs.meta
+¦       ¦   Lose.meta
+¦       ¦   Win.meta
+¦       ¦   
+¦       +---Lose
+¦       ¦   ¦   LoseDialogue.cs
+¦       ¦   ¦   LoseDialogue.cs.meta
+¦       ¦   ¦   LoseDialogue.prefab
+¦       ¦   ¦   LoseDialogue.prefab.meta
+¦       ¦   ¦   resources.meta
+¦       ¦   ¦   
+¦       ¦   +---resources
+¦       ¦           home.png
+¦       ¦           home.png.meta
+¦       ¦           loseAtlas.spriteatlas
+¦       ¦           loseAtlas.spriteatlas.meta
+¦       ¦           panel.png
+¦       ¦           panel.png.meta
+¦       ¦           red-col.png
+¦       ¦           red-col.png.meta
+¦       ¦           retry.png
+¦       ¦           retry.png.meta
+¦       ¦           
+¦       +---Win
+¦           ¦   resources.meta
+¦           ¦   WinDialogue.cs
+¦           ¦   WinDialogue.cs.meta
+¦           ¦   WinDialogue.prefab
+¦           ¦   WinDialogue.prefab.meta
+¦           ¦   
+¦           +---resources
+¦                   button.png
+¦                   button.png.meta
+¦                   panel.png
+¦                   panel.png.meta
+¦                   ribbon.png
+¦                   ribbon.png.meta
+¦                   star.png
+¦                   star.png.meta
+¦                   
++---GeneralSOs
+¦       DialogueFocusManager.asset
+¦       DialogueFocusManager.asset.meta
+¦       DialogueManager.asset
+¦       DialogueManager.asset.meta
+¦       SceneDatabase.asset
+¦       SceneDatabase.asset.meta
+¦       
++---Input
+¦       MobilePointerDevice.cs
+¦       MobilePointerDevice.cs.meta
+¦       PcPointerDevice.cs
+¦       PcPointerDevice.cs.meta
+¦       PointerDevice.cs
+¦       PointerDevice.cs.meta
+¦       
++---Lobby
+¦   ¦   Lobby.unity
+¦   ¦   Lobby.unity.meta
+¦   ¦   LobbyManager.cs
+¦   ¦   LobbyManager.cs.meta
+¦   ¦   MainMenu.meta
+¦   ¦   
+¦   +---MainMenu
+¦       ¦   resources.meta
+¦       ¦   
+¦       +---resources
+¦               bck-1.png
+¦               bck-1.png.meta
+¦               bck-2.png
+¦               bck-2.png.meta
+¦               exit.png
+¦               exit.png.meta
+¦               leaves.png
+¦               leaves.png.meta
+¦               settings.png
+¦               settings.png.meta
+¦               shop.png
+¦               shop.png.meta
+¦               
++---presets
+¦       color-swatch.png
+¦       color-swatch.png.meta
+¦       
++---ScriptUtils
+¦   ¦   ColorConverter.cs
+¦   ¦   ColorConverter.cs.meta
+¦   ¦   Editor.meta
+¦   ¦   StringExtensions.cs
+¦   ¦   StringExtensions.cs.meta
+¦   ¦   SubTypeJsonConverter.cs
+¦   ¦   SubTypeJsonConverter.cs.meta
+¦   ¦   Transport.meta
+¦   ¦   
+¦   +---Editor
+¦   ¦       ObjExporter.cs
+¦   ¦       ObjExporter.cs.meta
+¦   ¦       SceneOpenContextMenu.cs
+¦   ¦       SceneOpenContextMenu.cs.meta
+¦   ¦       
+¦   +---Transport
+¦       ¦   Editor.meta
+¦       ¦   TransportModules.cs
+¦       ¦   TransportModules.cs.meta
+¦       ¦   
+¦       +---Editor
+¦           ¦   TransportableConvertObjectHolder.cs
+¦           ¦   TransportableConvertObjectHolder.cs.meta
+¦           ¦   TransportablesConvert.cs
+¦           ¦   TransportablesConvert.cs.meta
+¦           ¦   UnityEditorSplitter.meta
+¦           ¦   
+¦           +---UnityEditorSplitter
+¦                   SplitterGUILayout.cs
+¦                   SplitterGUILayout.cs.meta
+¦                   
++---Shaders
+¦       aa.shader
+¦       aa.shader.meta
+¦       DiffuseColor.shader
+¦       DiffuseColor.shader.meta
+¦       DiffuseColorShadow.shader
+¦       DiffuseColorShadow.shader.meta
+¦       DiffuseColorTransparent.shader
+¦       DiffuseColorTransparent.shader.meta
+¦       DiffuseColorVert2.shader
+¦       DiffuseColorVert2.shader.meta
+¦       DiffuseColorVert3.shader
+¦       DiffuseColorVert3.shader.meta
+¦       DiffuseColorVert4.shader
+¦       DiffuseColorVert4.shader.meta
+¦       DiffuseColorVert5.shader
+¦       DiffuseColorVert5.shader.meta
+¦       out.png
+¦       out.png.meta
+¦       tooninc.cginc
+¦       tooninc.cginc.meta
+¦       
++---Text
+        LiberationSans SDF - Outline 2.mat
+        LiberationSans SDF - Outline 2.mat.meta
+        

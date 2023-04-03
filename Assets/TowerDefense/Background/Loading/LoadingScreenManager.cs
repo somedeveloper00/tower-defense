@@ -43,7 +43,6 @@ namespace TowerDefense.Background.Loading {
 
         public async void EndLoadingScreen() {
             if (t < minScreenDuration) {
-                Debug.Log( $"ending loading in {minScreenDuration - t} s" );
                 await Task.Delay( (int)(1000 * (minScreenDuration - t)) );
             }
 
