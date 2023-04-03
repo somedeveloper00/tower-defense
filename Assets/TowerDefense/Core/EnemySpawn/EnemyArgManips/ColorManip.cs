@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using Newtonsoft.Json;
@@ -8,6 +9,7 @@ using UnityEngine;
 
 namespace TowerDefense.Core.EnemySpawn {
     [DisplayName("col")]
+    [Serializable]
     public class ColorManip : EnemyArgManip {
 
         [JsonIgnore]
@@ -20,7 +22,7 @@ namespace TowerDefense.Core.EnemySpawn {
             set => cols = value.Select( ColorUtility.ToHtmlStringRGBA ).ToList();
         }
 
-        [JsonProperty] List<string> cols = new List<string>();
+        [JsonProperty, SerializeField, HideInInspector] List<string> cols = new List<string>();
 
         protected override void Apply(Enemy enemy) {
             if (colors is null || colors.Count == 0) return;

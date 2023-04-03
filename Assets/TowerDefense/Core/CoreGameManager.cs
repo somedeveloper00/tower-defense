@@ -22,8 +22,12 @@ using UnityEngine.SceneManagement;
 
 namespace TowerDefense.Core {
     public class CoreGameManager : MonoBehaviour {
+
+        public static CoreGameManager Current;
+        
         public RoadManager roadManager;
         public float life = 20;
+        
         [SerializeField] float winDialogueDelay = 1;
         [SerializeField] float loseDialogueDelay = 1;
 
@@ -36,6 +40,7 @@ namespace TowerDefense.Core {
         
         void OnEnable() {
             CoreGameEvents.Current.OnCoreStarterFinished += OnCoreStarterFinished;
+            Current = this;
         }
 
 
@@ -64,13 +69,16 @@ namespace TowerDefense.Core {
         }
 
         public void RestartGame() {
-            StartCoroutine( _starter.StartGame( removeScene ) );
+            BackgroundRunner.Current.StartCoroutine( coroutine( _starter ) );
 
-            void removeScene() {
-                StartCoroutine( enumerator() );
-                IEnumerator enumerator() {
-                    yield return SceneManager.UnloadSceneAsync( gameObject.scene );
-                }
+            IEnumerator coroutine(CoreStarter coreStarter) {
+                LoadingScreenManager.Current.StartLoadingScreen();
+                yield return null;
+                yield return SceneManager.UnloadSceneAsync( gameObject.scene );
+                bool canContinue = false;
+                BackgroundRunner.Current.StartCoroutine( coreStarter.StartGame( () => canContinue = true ) );
+                yield return new WaitUntil( () => canContinue );
+                LoadingScreenManager.Current.EndLoadingScreen();
             }
         }
 
@@ -133,7 +141,6 @@ namespace TowerDefense.Core {
             var dialogue =
                 DialogueManager.Current.GetOrCreate<WinDialogue>( parentTransform: CoreUI.Current.transform );
             dialogue.stars = 3;
-            dialogue.coreGameManager = this;
 
             // Tweener.Generate( () => Time.timeScale, v => Time.timeScale = v, 0, Ease.OutCubic, 1 );
             // dialogue.onClose += () => Time.timeScale = 1;
@@ -143,7 +150,6 @@ namespace TowerDefense.Core {
             await Task.Delay( (int)(loseDialogueDelay * 1000) );
             var dialogue =
                 DialogueManager.Current.GetOrCreate<LoseDialogue>( parentTransform: CoreUI.Current.transform );
-            dialogue.onRetryClick += RestartGame;
             dialogue.onLobbyClick += BackToLobby;
             
             // Tweener.Generate( () => Time.timeScale, v => Time.timeScale = v, 0, Ease.OutCubic, 1 );

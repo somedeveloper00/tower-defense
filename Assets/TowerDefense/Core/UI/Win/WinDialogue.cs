@@ -8,7 +8,6 @@ namespace TowerDefense.Core.UI.Win {
     [DeclareFoldoutGroup("ref", Title = "References", Expanded = true)]
     public class WinDialogue : Dialogue {
         public int stars = 0;
-        public CoreGameManager coreGameManager;
 
         [GroupNext( "ref" )]
         [SerializeField] SequenceAnim inSequence, outSequence;
@@ -30,13 +29,8 @@ namespace TowerDefense.Core.UI.Win {
         }
 
         void onLobbyBtnClick() {
-            CloseWithAnim();
-            onClose += coreGameManager.BackToLobby;
-        }
-
-        public void CloseWithAnim() {
-            outSequence.PlaySequence();
-            outSequence.sequence.onComplete += this.Close;
+            canvasRaycaster.enabled = false;
+            onClose += CoreGameManager.Current.BackToLobby;
         }
     }
 }

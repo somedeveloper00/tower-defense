@@ -9,7 +9,6 @@ namespace TowerDefense.Core.UI.Lose {
     [DeclareFoldoutGroup("ref", Title = "References", Expanded = true)]
     public class LoseDialogue : Dialogue {
 
-        public Action onRetryClick;
         public Action onLobbyClick;
         
         [GroupNext("ref")]
@@ -31,17 +30,18 @@ namespace TowerDefense.Core.UI.Lose {
             inSequence.PlaySequence();
             inSequence.sequence.onComplete -= enableListeners;
             inSequence.sequence.onComplete += enableListeners;
+            
+            void enableListeners() => canvasRaycaster.enabled = true;
         }
         
-        void enableListeners() {
-            canvasRaycaster.enabled = true;
-        }
         
         void onRetryBtnClick() {
-            onRetryClick?.Invoke();
+            canvasRaycaster.enabled = false;
+            CoreGameManager.Current.RestartGame();
         }
         
         void onReturnBtnClick() {
+            canvasRaycaster.enabled = false;
             onLobbyClick?.Invoke();
             outSequence.PlaySequence();
         }

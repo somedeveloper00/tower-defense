@@ -19,12 +19,12 @@ MonoBehaviour:
       - time: 0
         spawns:
         - name: balloon-simple
-          count: 5
-          timeIntervals: 1
+          count: 30
+          timeIntervals: 0.1
           argv:
           - rid: 1861648087056908320
           - rid: 1861648087056908321
-      t: 0
+      t: 32.98645
   references:
     version: 2
     RefIds:
@@ -32,9 +32,11 @@ MonoBehaviour:
       type: {class: BasicManip, ns: TowerDefense.Core.EnemySpawn, asm: Assembly-CSharp}
       data:
         type: basic
-        speedMultip: 2
-        lifeMultip: 1
+        speedMultip: 10
+        lifeMultip: 10
     - rid: 1861648087056908321
       type: {class: ColorManip, ns: TowerDefense.Core.EnemySpawn, asm: Assembly-CSharp}
       data:
         type: col
+        cols:
+        - 7B7B7BFF
