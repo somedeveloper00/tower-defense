@@ -9,7 +9,7 @@ namespace TowerDefense.Core {
     [CreateAssetMenu( fileName = "CoreGameEvents", menuName = "Core/Game Events", order = 0 )]
     public class CoreGameEvents : ScriptableObject {
         public Action<CoreGameManager> OnGameStart;
-        public Action<CoreStarter> OnCoreStarterFinished;
+        public Action<CoreLevelData> OnStartupFinished;
         public Action<EnemySpawner> OnEnemySpawnerInitialize;
         public Action<Enemy> OnEnemySpawn;
         public Action<Enemy> OnEnemyDestroy;

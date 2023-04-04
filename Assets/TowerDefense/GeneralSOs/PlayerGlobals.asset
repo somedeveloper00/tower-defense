@@ -16,9 +16,11 @@ MonoBehaviour:
     name: player 1
     defenders:
     - monkey
-    level: 100
-  gameData:
+  gameLevelsData:
     levels:
-    - title: 
-      arguments: []
-      starter: {fileID: 0}
+    - status: 2
+      gameData: {fileID: 11400000, guid: 4431fc5307db0224ea69d20b03b71b26, type: 2}
+    - status: 2
+      gameData: {fileID: 11400000, guid: 0e17d27ff12c11545b14fe163b20d947, type: 2}
+    - status: 2
+      gameData: {fileID: 11400000, guid: ea72b93161314ce468b259cfd4ac0bcf, type: 2}

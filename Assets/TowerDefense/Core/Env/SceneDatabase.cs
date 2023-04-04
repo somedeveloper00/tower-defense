@@ -7,7 +7,7 @@ using UnityEngine;
 namespace TowerDefense.Core.Env {
     [CreateAssetMenu( fileName = "SceneDatabase", menuName = "Common/Scene Database", order = 0 )]
     public class SceneDatabase : ScriptableObject {
-        
+
         public static SceneDatabase Instance;
         void OnEnable() => Instance = this;
 

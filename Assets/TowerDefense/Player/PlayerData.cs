@@ -8,7 +8,6 @@ namespace TowerDefense.Player {
     public class PlayerData : ITransportable {
         public string name;
         public List<string> defenders = new();
-        public int level;
 
         public string ToJson() => JsonConvert.SerializeObject( this );
         public void FromJson(string json) {

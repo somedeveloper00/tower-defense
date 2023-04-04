@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91b9bad79ede404b92d88cc8af708d16, type: 3}
+  m_Name: level 1
+  m_EditorClassIdentifier: 
+  env: env1
+  title: "\u0645\u0631\u062D\u0644\u0647 \u06F1"
+  id: 11
+  arguments: []
+  spawnings:
+  - onTime:
+    - time: 0
+      spawns:
+      - name: balloon-simple
+        count: 15
+        timeIntervals: 1
+        argv: []
+  references:
+    version: 2
+    RefIds: []

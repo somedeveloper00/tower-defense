@@ -11,6 +11,8 @@ namespace TowerDefense.Input {
                 current = this;
             }
             else if (current != this) {
+                foreach (var pointerInputModule in GetComponents<PointerInputModule>())
+                    Destroy( pointerInputModule );
                 Destroy( _eventSystem );
             }
             base.Start();

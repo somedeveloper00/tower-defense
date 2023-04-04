@@ -247,6 +247,7 @@ MonoBehaviour:
   useJson: 0
   coreStarter: {fileID: 11400000, guid: 4431fc5307db0224ea69d20b03b71b26, type: 2}
   json: '{"env":"env1","spawnings":[{"onTime":[{"time":0.0,"spawns":[{"name":"balloon-simple","count":2,"timeIntervals":1.0,"argv":[{"type":"basic","speedMultip":2.0,"lifeMultip":1.0},{"type":"col","cols":["F762FEFF"]}]}]}],"t":0.0}]}'
+  parentCanvasForDialogues: {fileID: 50481352}
   inSequence: {fileID: 130184984}
   playBtn: {fileID: 1372271026}
   exitBtn: {fileID: 1572722278}
@@ -1248,9 +1249,9 @@ RectTransform:
   m_Father: {fileID: 540992042}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -20.174}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -730, y: -410}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 230, y: 310}
   m_SizeDelta: {x: 997.49, y: 546.2117}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &781278728
@@ -1266,7 +1267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6037736, g: 0.6037736, b: 0.6037736, a: 1}
+  m_Color: {r: 0.7169812, g: 0.7169812, b: 0.7169812, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1661,9 +1662,9 @@ RectTransform:
   m_Father: {fileID: 540992042}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -48.379}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -871, y: -292}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 89, y: 428}
   m_SizeDelta: {x: 769.1113, y: 421.1547}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1179355405
@@ -1679,7 +1680,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6037736, g: 0.6037736, b: 0.6037736, a: 1}
+  m_Color: {r: 0.4716981, g: 0.4716981, b: 0.4716981, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1737,10 +1738,10 @@ RectTransform:
   m_Father: {fileID: 50481352}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -843.77136, y: 166.1838}
-  m_SizeDelta: {x: 232.4573, y: 747.2724}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 116.22998, y: -373.64}
+  m_SizeDelta: {x: 232.45728, y: 747.27246}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1308073410
 GameObject:
@@ -1855,7 +1856,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -507, y: 215}
+  m_AnchoredPosition: {x: -568, y: 360}
   m_SizeDelta: {x: 463.9923, y: 192.8446}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1372271026
@@ -2094,9 +2095,9 @@ RectTransform:
   m_Father: {fileID: 540992042}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 6.799}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 111, y: -630}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -900, y: -1}
   m_SizeDelta: {x: 2087.3494, y: 1143.0034}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1819713140
@@ -2112,7 +2113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6037736, g: 0.6037736, b: 0.6037736, a: 1}
+  m_Color: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AnimFlex.Tweening;
 using DialogueSystem;
 using TowerDefense.Background;
 using TowerDefense.Background.Loading;
@@ -24,7 +22,7 @@ namespace TowerDefense.Core {
     public class CoreGameManager : MonoBehaviour {
 
         public static CoreGameManager Current;
-        
+
         public RoadManager roadManager;
         public float life = 20;
         
@@ -35,11 +33,11 @@ namespace TowerDefense.Core {
         [ShowInInspector, ReadOnly] public readonly List<Defender> defenders = new(8);
         [ShowInInspector, ReadOnly] public readonly List<EnemySpawner> spawners = new(4);
 
-        CoreStarter _starter;
+        CoreLevelData _levelData;
         bool _lost = false;
         
         void OnEnable() {
-            CoreGameEvents.Current.OnCoreStarterFinished += OnCoreStarterFinished;
+            CoreGameEvents.Current.OnStartupFinished += OnCoreStarterFinished;
             Current = this;
         }
 
@@ -57,7 +55,7 @@ namespace TowerDefense.Core {
         }
 
         void OnDestroy() {
-            CoreGameEvents.Current.OnCoreStarterFinished -= OnCoreStarterFinished;
+            CoreGameEvents.Current.OnStartupFinished -= OnCoreStarterFinished;
             CoreGameEvents.Current.OnEnemySpawn -= OnEnemySpawn;
             CoreGameEvents.Current.OnEnemyReachEnd -= OnEnemyReachEnd;
             CoreGameEvents.Current.OnEnemyDestroy -= OnEnemyDestroy;
@@ -69,14 +67,14 @@ namespace TowerDefense.Core {
         }
 
         public void RestartGame() {
-            BackgroundRunner.Current.StartCoroutine( coroutine( _starter ) );
+            BackgroundRunner.Current.StartCoroutine( coroutine( _levelData ) );
 
-            IEnumerator coroutine(CoreStarter coreStarter) {
+            IEnumerator coroutine(CoreLevelData coreStarter) {
                 LoadingScreenManager.Current.StartLoadingScreen();
                 yield return null;
                 yield return SceneManager.UnloadSceneAsync( gameObject.scene );
                 bool canContinue = false;
-                BackgroundRunner.Current.StartCoroutine( coreStarter.StartGame( () => canContinue = true ) );
+                BackgroundRunner.Current.StartCoroutine( CoreStartup.StartCore( _levelData, () => canContinue = true ) );
                 yield return new WaitUntil( () => canContinue );
                 LoadingScreenManager.Current.EndLoadingScreen();
             }
@@ -94,8 +92,8 @@ namespace TowerDefense.Core {
         }
         
         
-        void OnCoreStarterFinished(CoreStarter coreStarter) {
-            _starter = Instantiate( coreStarter );
+        void OnCoreStarterFinished(CoreLevelData coreLevelData) {
+            _levelData = Instantiate( coreLevelData );
         }
 
         void OnSpawnerInitialize(EnemySpawner spawner) {

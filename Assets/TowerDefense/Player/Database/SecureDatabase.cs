@@ -47,7 +47,7 @@ namespace TowerDefense.Player.Database {
         public void Save() {
             string txt = string.Empty;
             if (data != null) {
-                txt = JsonConvert.SerializeObject( txt );
+                txt = JsonConvert.SerializeObject( data );
             }
             encryptAndSaveData( txt, path );
         }

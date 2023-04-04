@@ -1,23 +1,32 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Threading;
 using AnimFlex.Sequencer.UserEnd;
+using DialogueSystem;
 using TowerDefense.Background;
 using TowerDefense.Background.Loading;
+using TowerDefense.Core;
+using TowerDefense.Core.EnemySpawn;
+using TowerDefense.Core.Env;
 using TowerDefense.Core.Starter;
+using TowerDefense.Lobby.LevelChoosing;
 using TriInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace TowerDefense.Lobby {
     [DeclareFoldoutGroup("ref", Title = "References", Expanded = true)]
     public class LobbyManager : MonoBehaviour {
 
+        public static LobbyManager Current;
+        void OnEnable() => Current = this;
+
         public bool useJson = true;
 
-        [ShowIf( nameof(useJson), false )] public CoreStarter coreStarter;
-        [ShowIf( nameof(useJson), true ), TextArea] public string json;
         [GroupNext( "ref" )] 
+        [SerializeField] RectTransform parentCanvasForDialogues;
         [SerializeField] SequenceAnim inSequence;
         [SerializeField] Button playBtn;
         [SerializeField] Button exitBtn;
@@ -38,7 +47,8 @@ namespace TowerDefense.Lobby {
         }
         
         void onPlayBtnClick() {
-            StartGame();
+            // StartGame();
+            DialogueManager.Current.GetOrCreate<LevelChoosingDialogue>( parentTransform: parentCanvasForDialogues );
         }
         void onExitBtnClick() {
             Application.Quit();
@@ -50,8 +60,7 @@ namespace TowerDefense.Lobby {
             
         }
         
-        [Button(ButtonSizes.Large)]
-        public void StartGame() {
+        public void StartGame(CoreLevelData levelDataObject, string levelDataJson) {
 
             BackgroundRunner.Current.StartCoroutine( start() );
 
@@ -60,9 +69,9 @@ namespace TowerDefense.Lobby {
                 yield return null;
                 
                 // handle josn to object
-                if (useJson) {
-                    coreStarter = ScriptableObject.CreateInstance<CoreStarter>();
-                    var thread = new Thread( setupCoreStarter );
+                if (!levelDataObject) {
+                    var level = ScriptableObject.CreateInstance<CoreLevelData>();
+                    var thread = new Thread( () => level.FromJson( levelDataJson ) );
                     thread.IsBackground = true;
                     thread.Start();
                     yield return new WaitUntil( () => thread.IsAlive == false );
@@ -70,19 +79,19 @@ namespace TowerDefense.Lobby {
 
                 yield return SceneManager.UnloadSceneAsync( gameObject.scene );
                 yield return null;
-                BackgroundRunner.Current.StartCoroutine(
-                    coreStarter.StartGame( () => BackgroundRunner.Current.StartCoroutine( onComplete() ) ) );
+                BackgroundRunner.Current.StartCoroutine( CoreStartup.StartCore( levelDataObject, onComplete: () => {
+                    BackgroundRunner.Current.StartCoroutine( onComplete() );
+                } ) );
             }
 
             IEnumerator onComplete() {
                 yield return null;
-                Debug.Log( $"lobby scene unloaded fully" );
                 LoadingScreenManager.Current.EndLoadingScreen();
-            }
-
-            void setupCoreStarter() {
-                coreStarter.FromJson( json );
+                Debug.Log( $"core game starting finished." );
             }
         }
+        
+
+
     }
 }

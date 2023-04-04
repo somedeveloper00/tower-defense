@@ -56,7 +56,7 @@ namespace TowerDefense.Core.EnemySpawn {
             [JsonIgnore]
             public SpawnIn OnSpawnIn;
             
-            public float t = 0;
+            [NonSerialized] public float t = 0;
 
             public void ResetTime() => t = 0;
 

@@ -30,7 +30,8 @@ namespace TowerDefense.Core.UI.Win {
 
         void onLobbyBtnClick() {
             canvasRaycaster.enabled = false;
-            onClose += CoreGameManager.Current.BackToLobby;
+            CoreGameManager.Current.BackToLobby();
+            Close();
         }
     }
 }
