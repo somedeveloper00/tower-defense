@@ -13,7 +13,7 @@ namespace TowerDefense.Lobby.LevelChoosing {
 
         void Start() {
             playBtn.onClick.AddListener( onPlayButtonClick );
-            playBtn.interactable = levelData.status.HasFlag( GameLevelsData.LevelStatus.Unlocked );
+            playBtn.interactable = levelData.runtimeData.status.HasFlag( GameLevelsData.LevelStatus.Unlocked );
             title.text = levelData.gameData.title;
         }
         void onPlayButtonClick() {

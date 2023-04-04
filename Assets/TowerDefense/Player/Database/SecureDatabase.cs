@@ -11,8 +11,9 @@ using UnityEditor;
 
 namespace TowerDefense.Player.Database {
     public class SecureDatabase : IDatabase {
-        
-        string path = Path.Combine( Application.persistentDataPath, "s.dat" );
+
+        string path;
+        public SecureDatabase(string filepath) => path = Path.Combine( Application.persistentDataPath, filepath );
 
         public static SecureDatabase Current;
 #if UNITY_EDITOR
@@ -20,15 +21,13 @@ namespace TowerDefense.Player.Database {
 #endif
         [RuntimeInitializeOnLoadMethod( RuntimeInitializeLoadType.BeforeSplashScreen )]
         static void start() {
-            Current = new SecureDatabase();
+            Current = new SecureDatabase("s.dat");
             Current.Load();
             Debug.Log( $"secure data loaded." );
         }
 
-        SecureDatabase() { }
-
-
-        static JObject data;
+        
+        JObject data;
 
 
         public void Load() {
@@ -78,11 +77,9 @@ namespace TowerDefense.Player.Database {
             data[key] = JsonConvert.DeserializeObject<JObject>( obj.ToJson() );
         }
 
-        public void Delete(string key) {
-            data.Remove( key );
-        }
+        public void Delete(string key) => data.Remove( key );
 
-        
+
         static void encryptAndSaveData(string txt, string path) {
             File.WriteAllText( path, txt );
             // using var fs = new FileStream( path, FileMode.OpenOrCreate );
@@ -96,6 +93,5 @@ namespace TowerDefense.Player.Database {
             // using var br = new BinaryReader( fs );
             // return br.ReadString();
         }
-
     }
 }

@@ -14,6 +14,7 @@ using TowerDefense.Core.Starter;
 using TowerDefense.Core.UI;
 using TowerDefense.Core.UI.Lose;
 using TowerDefense.Core.UI.Win;
+using TowerDefense.Player;
 using TriInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -140,8 +141,17 @@ namespace TowerDefense.Core {
                 DialogueManager.Current.GetOrCreate<WinDialogue>( parentTransform: CoreUI.Current.transform );
             dialogue.stars = 3;
 
-            // Tweener.Generate( () => Time.timeScale, v => Time.timeScale = v, 0, Ease.OutCubic, 1 );
-            // dialogue.onClose += () => Time.timeScale = 1;
+            // handle data modification
+            var levels = PlayerGlobals.Current.gameLevelsData.levels;
+            var lvlIndex = levels.FindIndex( lvl => lvl.gameData.id == _levelData.id );
+            var level = levels[lvlIndex];
+            level.runtimeData.status |= GameLevelsData.LevelStatus.Finished;
+            level.runtimeData.stars = 3;
+            level.runtimeData.playCount++;
+            if (lvlIndex < levels.Count) {
+                levels[lvlIndex + 1].runtimeData.status |= GameLevelsData.LevelStatus.Unlocked; // unlock next
+            }
+            PlayerGlobals.Current.Save();
         }
 
         async void OnLose() {
@@ -150,8 +160,10 @@ namespace TowerDefense.Core {
                 DialogueManager.Current.GetOrCreate<LoseDialogue>( parentTransform: CoreUI.Current.transform );
             dialogue.onLobbyClick += BackToLobby;
             
-            // Tweener.Generate( () => Time.timeScale, v => Time.timeScale = v, 0, Ease.OutCubic, 1 );
-            // dialogue.onClose += () => Time.timeScale = 1;
+            // handle data modification
+            var level = PlayerGlobals.Current.gameLevelsData.levels.Find( lvl => lvl.gameData.id == _levelData.id );
+            level.runtimeData.playCount++;
+            PlayerGlobals.Current.Save();
         }
     }
 }

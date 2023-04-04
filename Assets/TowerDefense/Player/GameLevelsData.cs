@@ -14,9 +14,10 @@ namespace TowerDefense.Player {
 
         [Serializable]
         public class Level {
-            public LevelStatus status;
             [InlineEditor]
             [JsonIgnore] public CoreLevelData gameData;
+            public RuntimeData runtimeData;
+
 
             [JsonProperty( "gameData" )]
             JObject gameDataJson {
@@ -32,10 +33,17 @@ namespace TowerDefense.Player {
             }
         }
 
+        [Serializable]
+        public class RuntimeData {
+            public LevelStatus status;
+            public int stars = 0;
+            public int playCount = 0;
+        }
+        
         [Flags]
         public enum LevelStatus {
             Unlocked = 1 << 1,
-            Finished = 1 << 2
+            Finished = 1 << 2,
         }
 
 
