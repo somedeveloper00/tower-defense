@@ -2,7 +2,7 @@
 
 namespace TowerDefense.Input {
     public class EventSystemSingleton : EventSystem {
-        static EventSystemSingleton current;
+        new static EventSystemSingleton current;
         EventSystem _eventSystem;
 
         protected override void Start() {

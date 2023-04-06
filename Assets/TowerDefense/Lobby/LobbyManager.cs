@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Threading;
 using AnimFlex.Sequencer.UserEnd;
 using DialogueSystem;
+using TowerDefense.Ad;
 using TowerDefense.Background;
 using TowerDefense.Background.Loading;
-using TowerDefense.Core;
-using TowerDefense.Core.EnemySpawn;
-using TowerDefense.Core.Env;
 using TowerDefense.Core.Starter;
 using TowerDefense.Lobby.LevelChoosing;
 using TriInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace TowerDefense.Lobby {
@@ -89,6 +85,15 @@ namespace TowerDefense.Lobby {
                 LoadingScreenManager.Current.EndLoadingScreen();
                 Debug.Log( $"core game starting finished." );
             }
+        }
+
+        [Button]
+        public void InitializeTapsell() {
+            AdManager.Initialize();
+        }
+        [Button]
+        public void ShowInterstitialAd() {
+            BackgroundRunner.Current.StartCoroutine( AdManager.ShowRewardedAd() );
         }
         
 

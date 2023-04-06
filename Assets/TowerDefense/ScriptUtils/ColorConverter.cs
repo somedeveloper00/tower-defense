@@ -3,12 +3,15 @@ using Newtonsoft.Json;
 using UnityEngine;
 
 namespace TowerDefense {
-    public class ColorConverter : JsonConverter<Color> {
-        public override void WriteJson(JsonWriter writer, Color value, JsonSerializer serializer) {
-            writer.WriteValue( ColorUtility.ToHtmlStringRGBA( value ) );
+    public class ColorConverter : JsonConverter {
+        public override bool CanConvert(Type objectType) => objectType == typeof(Color);
+
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) {
+            writer.WriteValue( ColorUtility.ToHtmlStringRGBA( (Color)value ) );
         }
 
-        public override Color ReadJson(JsonReader reader, Type objectType, Color existingValue, bool hasExistingValue, JsonSerializer serializer) {
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
+            JsonSerializer serializer) {
             Color col = Color.white;
             ColorUtility.TryParseHtmlString( reader.ReadAsString(), out col );
             return col;

@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TMPro;
 using TriInspector;
-using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 using Object = UnityEngine.Object;
 

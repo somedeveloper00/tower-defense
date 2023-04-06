@@ -148,7 +148,7 @@ namespace TowerDefense.Core {
             level.runtimeData.status |= GameLevelsData.LevelStatus.Finished;
             level.runtimeData.stars = 3;
             level.runtimeData.playCount++;
-            if (lvlIndex < levels.Count) {
+            if (lvlIndex < levels.Count - 1) {
                 levels[lvlIndex + 1].runtimeData.status |= GameLevelsData.LevelStatus.Unlocked; // unlock next
             }
             PlayerGlobals.Current.Save();

@@ -51,7 +51,7 @@ namespace TowerDefense.Player.Database {
             encryptAndSaveData( txt, path );
         }
 
-        public bool KeyExists(string key) => data.ContainsKey( key );
+        public bool KeyExists(string key) => data.GetValue( key ) != null;
 
         public T GetValue<T>(string key) where T : ITransportable, new() {
             var field = data.GetValue( key );

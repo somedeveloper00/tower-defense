@@ -3,9 +3,11 @@ using System.Linq;
 using System.Collections;
 using JetBrains.Annotations;
 using TowerDefense.Core.Enemies;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Serialization;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace TowerDefense.Core.Defenders {
     public abstract class Defender : MonoBehaviour { 
@@ -17,12 +19,14 @@ namespace TowerDefense.Core.Defenders {
         protected Enemy focusedenemy;
         protected float timeSinceLastAttack;
 
+#if UNITY_EDITOR
         protected virtual void OnDrawGizmosSelected() {
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere( transform.position, attackRange );
             Handles.color = new (Color.red.r, Color.red.g, Color.red.b, 0.25f);
             Handles.DrawSolidDisc( transform.position, Vector3.down, attackRange );
         }
+#endif
 
         protected float getTimeToNextAttack() {
             if ( timeSinceLastAttack == 0 ) return 0;
