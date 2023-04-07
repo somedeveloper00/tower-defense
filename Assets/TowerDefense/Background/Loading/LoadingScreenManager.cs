@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using AnimFlex.Sequencer.UserEnd;
 using TriInspector;
 using UnityEngine;
 
@@ -9,6 +8,7 @@ namespace TowerDefense.Background.Loading {
     public class LoadingScreenManager : MonoBehaviour {
         public static LoadingScreenManager Current;
 
+        public State state;
         public Action onEndAnimComplete;
         public Action onEndAnimStart;
 
@@ -67,6 +67,11 @@ namespace TowerDefense.Background.Loading {
                     Debug.LogException( e );
                 }
             };
+        }
+        
+        
+        public enum State {
+            Undefined, StartingGame, GoingToCore, BackFromCore, RestartingCore
         }
     }
 }

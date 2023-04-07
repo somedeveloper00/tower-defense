@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Threading;
 using AnimFlex.Sequencer.UserEnd;
 using DialogueSystem;
 using TowerDefense.Ad;
 using TowerDefense.Background;
 using TowerDefense.Background.Loading;
+using TowerDefense.Common;
 using TowerDefense.Core.Starter;
 using TowerDefense.Lobby.LevelChoosing;
 using TriInspector;
@@ -14,6 +16,7 @@ using UnityEngine.UI;
 
 namespace TowerDefense.Lobby {
     [DeclareFoldoutGroup("ref", Title = "References", Expanded = true)]
+    [DeclareFoldoutGroup("ad", Title = "Ad params", Expanded = false)]
     public class LobbyManager : MonoBehaviour {
 
         public static LobbyManager Current;
@@ -29,13 +32,23 @@ namespace TowerDefense.Lobby {
         [SerializeField] Button shopBtn;
         [SerializeField] Button settingsBtn;
 
+        [GroupNext( "ad" )] 
+        [SerializeField] string[] loadingAdText;
+
         void Start() {
             playBtn.onClick.AddListener( onPlayBtnClick );
             exitBtn.onClick.AddListener( onExitBtnClick );
             shopBtn.onClick.AddListener( onShopBtnClick );
             settingsBtn.onClick.AddListener( onSettingsBtnClick );
             if (LoadingScreenManager.Current.IsON()) {
-                LoadingScreenManager.Current.onEndAnimStart += inSequence.PlaySequence;
+                LoadingScreenManager.Current.onEndAnimStart += () => {
+                    if (LoadingScreenManager.Current.state == LoadingScreenManager.State.StartingGame) {
+                        ShowFullScreenBannerAd();
+                    }
+                    else {
+                        ShowFullScreenVideoAd();
+                    }
+                };
             }
             else {
                 inSequence.PlaySequence();
@@ -46,12 +59,15 @@ namespace TowerDefense.Lobby {
             // StartGame();
             DialogueManager.Current.GetOrCreate<LevelChoosingDialogue>( parentTransform: parentCanvasForDialogues );
         }
+        
         void onExitBtnClick() {
             Application.Quit();
         }
+        
         void onShopBtnClick() {
             
         }
+        
         void onSettingsBtnClick() {
             
         }
@@ -62,6 +78,7 @@ namespace TowerDefense.Lobby {
 
             IEnumerator start() {
                 LoadingScreenManager.Current.StartLoadingScreen();
+                LoadingScreenManager.Current.state = LoadingScreenManager.State.GoingToCore;
                 yield return null;
                 
                 // handle josn to object
@@ -88,15 +105,23 @@ namespace TowerDefense.Lobby {
         }
 
         [Button]
-        public void InitializeTapsell() {
-            AdManager.Initialize();
+        public async void ShowFullScreenBannerAd() {
+            var loadingDialogue = DialogueManager.Current.GetOrCreate<MessageDialogue>( parentCanvasForDialogues );
+            loadingDialogue.UsePresetForLoadingAd();
+            
+            await AdManager.Current.ShowFullScreenBannerAd( "642ff0e183b1d13d3401721e" );
+            inSequence.PlaySequence();
+            await loadingDialogue.Close();
         }
         [Button]
-        public void ShowInterstitialAd() {
-            BackgroundRunner.Current.StartCoroutine( AdManager.ShowRewardedAd() );
+        public async void ShowFullScreenVideoAd() {
+            var loadingDialogue = DialogueManager.Current.GetOrCreate<MessageDialogue>( parentCanvasForDialogues );
+            loadingDialogue.UsePresetForLoadingAd();
+            
+            await AdManager.Current.ShowFullScreenVideoAd( "642ee1bd2eeae447e5ae5bb3" );
+            inSequence.PlaySequence();
+            await loadingDialogue.Close();
         }
-        
-
 
     }
 }

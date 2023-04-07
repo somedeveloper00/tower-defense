@@ -1,15 +1,25 @@
 ﻿using System.Collections;
+using TowerDefense.Ad;
 using TowerDefense.Background.Loading;
 using TowerDefense.Core.Env;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace TowerDefense.Background {
-    public class LoadLobbyOnStart : MonoBehaviour {
-        [SerializeField] bool destroySelf = true;
+    public class GameInitializer : MonoBehaviour {
+        
         IEnumerator Start() {
-            LoadingScreenManager.Current.StartLoadingScreen();
             
+            LoadingScreenManager.Current.StartLoadingScreen();
+            LoadingScreenManager.Current.state = LoadingScreenManager.State.StartingGame;
+            
+            // load ad
+            if (Application.isEditor) new EditorAdManager();
+            else new TapsellAdManager();
+            bool success = false;
+            yield return new WaitForTask<bool>( AdManager.Current.Initialize(), result => success = result );
+            Debug.Log( success ? $"ad initalized successfully" : $"Ad failed to initialize" );
+
             var scenePath = SceneDatabase.Instance.GetScenePath( "lobby" );
             yield return SceneManager.LoadSceneAsync( scenePath, LoadSceneMode.Additive);
             yield return null;
@@ -17,7 +27,6 @@ namespace TowerDefense.Background {
             SceneManager.SetActiveScene( SceneManager.GetSceneByPath( scenePath ) );
             
             LoadingScreenManager.Current.EndLoadingScreen();
-            if (destroySelf) Destroy( gameObject );
         }
     }
 }

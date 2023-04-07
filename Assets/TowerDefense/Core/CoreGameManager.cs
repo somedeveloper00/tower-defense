@@ -72,6 +72,8 @@ namespace TowerDefense.Core {
 
             IEnumerator coroutine(CoreLevelData coreStarter) {
                 LoadingScreenManager.Current.StartLoadingScreen();
+                LoadingScreenManager.Current.state = LoadingScreenManager.State.RestartingCore;
+                
                 yield return null;
                 yield return SceneManager.UnloadSceneAsync( gameObject.scene );
                 bool canContinue = false;
@@ -86,6 +88,7 @@ namespace TowerDefense.Core {
 
             IEnumerator enumerator() {
                 LoadingScreenManager.Current.StartLoadingScreen();
+                LoadingScreenManager.Current.state = LoadingScreenManager.State.BackFromCore;
                 yield return SceneManager.LoadSceneAsync( SceneDatabase.Instance.GetScenePath( "lobby" ), LoadSceneMode.Additive );
                 yield return SceneManager.UnloadSceneAsync( gameObject.scene );
                 LoadingScreenManager.Current.EndLoadingScreen();
