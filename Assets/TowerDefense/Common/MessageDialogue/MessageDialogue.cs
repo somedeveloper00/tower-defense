@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AnimFlex.Sequencer.UserEnd;
@@ -9,7 +10,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace TowerDefense.Common {
+    [DeclareFoldoutGroup("ref", Title = "References", Expanded = true)]
     public class MessageDialogue : Dialogue {
+        [GroupNext("ref")]
+        [SerializeField] Image panelImg;
+        [SerializeField] Image titleBarImg;
         [SerializeField] GameObject loadingLayout;
         [SerializeField] GameObject closeLayout;
         [SerializeField] Button closeBtn;
@@ -21,7 +26,9 @@ namespace TowerDefense.Common {
         [SerializeField] SequenceAnim outSequence;
         [SerializeField] RectTransform buttonsLayout;
         [SerializeField] List<ButtonType> buttonTypes = new();
-
+        [SerializeField] LoadingBar loadingBar;
+        
+        [UnGroupNext]
         [Title("Params")]
         [SerializeField] string[] loadingAdText;
         [SerializeField] string confirmTxt;
@@ -31,6 +38,7 @@ namespace TowerDefense.Common {
         /// <summary>
         /// the text of the clicked button. null if no button pressed, and "cancel" if closed by X or clicked outside dialogue
         /// </summary>
+        [NonSerialized]
         public string result = null;
         
         Coroutine _bodyTxtCoroutine;
@@ -83,10 +91,21 @@ namespace TowerDefense.Common {
 
         public void AddButton(string buttonText, string buttonType) {
             var btn = Instantiate( buttonTypes.Find( b => b.name == buttonType ), buttonsLayout );
+            btn.gameObject.SetActive( true );
             btn.text.text = buttonText;
-            btn.button.onClick.AddListener( () => result = buttonText );
+            btn.button.onClick.AddListener( () => {
+                result = buttonText;
+                Close();
+            } );
         }
 
+        public void SetPanelColor(Color color) => panelImg.color = color;
+        
+        public void SetTitlebarColor(Color color) => titleBarImg.color = color;
+
+        public void SetLoadingBarRotating() => loadingBar.PlayRotatingAnim();
+        
+        public void SetLoadingBarProgress(float progress) => loadingBar.SetProgress( progress );
 #endregion
 
 
@@ -95,6 +114,7 @@ namespace TowerDefense.Common {
                 base.Close();
             }
             else {
+                canvasRaycaster.enabled = false;
                 outSequence.PlaySequence();
                 outSequence.sequence.onComplete += base.Close;
             }
@@ -105,19 +125,26 @@ namespace TowerDefense.Common {
 
         public void UsePresetForLoadingAd() {
             SetBodyTextAnim( 1, loadingAdText );
+            DisableTitleText();
             SetLoadingLayoutActive( true );
+            SetLoadingBarRotating();
+            SetCloseButtonActive( false );
+            SetCanCloseByOutsideClick( false );
         }
 
         /// <summary>
         /// result will be either "confirm" or "cancel"
         /// </summary>
         public void UsePresetForConfirmation(string questionText) {
+            DisableTitleText();
             SetBodyText( questionText );
             AddButton( confirmTxt, "confirm" );
-            AddButton( cancelTxt, "reject" );
+            SetCloseButtonActive( false );
+            AddButton( cancelTxt, "cancel" );
         }
 
-        public void UsePresetForNotice(string noticeText) {
+        public void UsePresetForNotice(string title, string noticeText) {
+            SetTitleText( title );
             SetBodyText( noticeText );
             AddButton( okTxt, "ok" );
         }

@@ -1,6 +1,8 @@
 ﻿using System;
 using AnimFlex.Sequencer.UserEnd;
 using DialogueSystem;
+using TowerDefense.Ad;
+using TowerDefense.Common;
 using TriInspector;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,11 +11,12 @@ namespace TowerDefense.Core.UI.Lose {
     [DeclareFoldoutGroup("ref", Title = "References", Expanded = true)]
     public class LoseDialogue : Dialogue {
 
-        public Action onLobbyClick;
-        
+        [SerializeField] string adSorryTitleTxt;
+        [SerializeField] string adSorryTxt;
         [GroupNext("ref")]
         [SerializeField] SequenceAnim inSequence, outSequence;
         [SerializeField] Button retryBtn, returnBtn;
+        
 
         protected override void OnEnable() {
             base.OnEnable();
@@ -35,14 +38,28 @@ namespace TowerDefense.Core.UI.Lose {
         }
         
         
-        void onRetryBtnClick() {
+        async void onRetryBtnClick() {
+            // show rewarded ad
             canvasRaycaster.enabled = false;
-            CoreGameManager.Current.RestartGame();
+            // var loading = DialogueManager.Current.GetOrCreate<MessageDialogue>( transform.parent );
+            // loading.UsePresetForLoadingAd();
+            var result = await AdManager.Current.ShowFullScreenRewardVideoAd( "643006352eeae447e5ae5bd3" );
+            // await loading.Close();
+            
+            if (result == AdManager.RewardAdResult.Success) {
+                CoreGameManager.Current.RestartGame();
+            }
+            else {
+                var msgDialogue = DialogueManager.Current.GetOrCreate<MessageDialogue>( transform.parent );
+                msgDialogue.UsePresetForNotice( adSorryTitleTxt, adSorryTxt );
+                await msgDialogue.AwaitClose();
+                canvasRaycaster.enabled = true;
+            }
         }
         
         void onReturnBtnClick() {
             canvasRaycaster.enabled = false;
-            onLobbyClick?.Invoke();
+            CoreGameManager.Current.BackToLobby();
             outSequence.PlaySequence();
         }
     }

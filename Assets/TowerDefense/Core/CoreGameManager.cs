@@ -161,7 +161,6 @@ namespace TowerDefense.Core {
             await Task.Delay( (int)(loseDialogueDelay * 1000) );
             var dialogue =
                 DialogueManager.Current.GetOrCreate<LoseDialogue>( parentTransform: CoreUI.Current.transform );
-            dialogue.onLobbyClick += BackToLobby;
             
             // handle data modification
             var level = PlayerGlobals.Current.gameLevelsData.levels.Find( lvl => lvl.gameData.id == _levelData.id );

@@ -380,12 +380,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useJson: 0
+  raycaster: {fileID: 50481349}
   parentCanvasForDialogues: {fileID: 50481352}
   inSequence: {fileID: 130184984}
   playBtn: {fileID: 1372271026}
   exitBtn: {fileID: 1572722278}
   shopBtn: {fileID: 319976852}
   settingsBtn: {fileID: 319976852}
+  loadingAdText: []
 --- !u!1 &105442857
 GameObject:
   m_ObjectHideFlags: 0

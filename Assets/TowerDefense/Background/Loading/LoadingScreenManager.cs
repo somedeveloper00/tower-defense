@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using TowerDefense.Ad;
 using TriInspector;
 using UnityEngine;
 
@@ -9,8 +10,8 @@ namespace TowerDefense.Background.Loading {
         public static LoadingScreenManager Current;
 
         public State state;
-        public Action onEndAnimComplete;
-        public Action onEndAnimStart;
+        public Action onEndAnimComplete, onEndAnimCompleteOnce;
+        public Action onEndAnimStart, onEndAnimStartOnce;
 
         [SerializeField] float minScreenDuration = 2;
 
@@ -30,13 +31,17 @@ namespace TowerDefense.Background.Loading {
             if (t >= 0) t += Time.deltaTime;
         }
 
-        public void StartLoadingScreen() {
+        public async void StartLoadingScreen() {
             if (t >= 0 || _currentUi != null) return;
             Debug.Log( $"started loading" );
             _currentUi = Instantiate( prefab, transform );
             _currentUi.canvas.gameObject.SetActive( true );
             _currentUi.inSequence.PlaySequence();
             t = 0;
+
+            // setup banner ad
+            if (AdManager.Current is not null && await AdManager.Current.IsInitialized())
+                await AdManager.Current.ShowSidedBannerAd( "642fee1e2eeae447e5ae5bc9" );
         }
 
         public bool IsON() => t >= 0 || _currentUi != null; 
@@ -52,6 +57,10 @@ namespace TowerDefense.Background.Loading {
 
             try {
                 onEndAnimStart?.Invoke();
+                if (onEndAnimStartOnce is not null) {
+                    onEndAnimStartOnce?.Invoke();
+                    onEndAnimStartOnce = null;
+                }
             }
             catch (Exception e) {
                 Debug.LogException( e );
@@ -62,11 +71,19 @@ namespace TowerDefense.Background.Loading {
                 _currentUi.DestroyGameObject();
                 try {
                     onEndAnimComplete?.Invoke();
+                    if (onEndAnimCompleteOnce is not null) {
+                        onEndAnimCompleteOnce?.Invoke();
+                        onEndAnimCompleteOnce = null;
+                    }
                 }
                 catch (Exception e) {
                     Debug.LogException( e );
                 }
             };
+            
+            // remove banner 
+            if (AdManager.Current is not null && await AdManager.Current.IsInitialized())
+                await AdManager.Current.RemoveSidedBannerAd( "642fee1e2eeae447e5ae5bc9" );
         }
         
         

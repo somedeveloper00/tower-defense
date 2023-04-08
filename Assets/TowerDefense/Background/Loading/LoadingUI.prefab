@@ -1746,7 +1746,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 20000
+  m_SortingOrder: 2000
   m_TargetDisplay: 0
 --- !u!114 &6965427606040236669
 MonoBehaviour:

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using TapsellPlusSDK;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ namespace TowerDefense.Ad {
 
         const int RETRY_COUNT = 10;
         bool initialized = false;
+        Dictionary<string, string> activeBanners = new(); 
 
         public override async Task<bool> Initialize() {
             int tryCount = 0;
@@ -153,12 +155,14 @@ namespace TowerDefense.Ad {
             }
             
             // show ad
-            TapsellPlus.ShowStandardBannerAd( responseId, TapsellPlusSDK.Gravity.Center, TapsellPlusSDK.Gravity.Top,
+            TapsellPlus.ShowStandardBannerAd( responseId, TapsellPlusSDK.Gravity.Top, TapsellPlusSDK.Gravity.Top,
                 onAdOpened: model => { }, onShowError: model => { } );
+            activeBanners.Add( adId, responseId );
         }
 
         public override Task RemoveSidedBannerAd(string adId) {
-            TapsellPlus.DestroyStandardBannerAd( adId );
+            if (activeBanners.TryGetValue( adId, out var responseId ))
+                TapsellPlus.DestroyStandardBannerAd( responseId );
             return null;
         }
 

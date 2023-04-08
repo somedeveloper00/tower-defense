@@ -10,9 +10,9 @@ scopes = {
 	"last_search.83F126EB" = "t:animator"
 	"OpenInspectorPreview.83F126EB" = "0"
 	"currentGroup.83F126EB" = "asset"
-	"last_search.785D90A9" = "focus"
+	"last_search.785D90A9" = "losedial"
 	"OpenInspectorPreview.785D90A9" = "0"
-	"currentGroup.785D90A9" = "asset"
+	"currentGroup.785D90A9" = "all"
 }
 providers = {
 	adb = {
@@ -62,6 +62,8 @@ providers = {
 	}
 }
 recentSearches = [
+	"l"
+	"d"
 	"focus"
 	"sho"
 ]

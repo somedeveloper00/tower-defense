@@ -170,6 +170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ac76af5cea34dfbb08160473fcb3ad0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: 0
   minScreenDuration: 2
   prefab: {fileID: 1665070267, guid: 3435a5e5fe6a68f478d0218d95c44c42, type: 3}
 --- !u!114 &321326629
@@ -225,6 +226,10 @@ PrefabInstance:
     - target: {fileID: 132536, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
       propertyPath: m_Name
       value: IngameDebugConsole
+      objectReference: {fileID: 0}
+    - target: {fileID: 22331464, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3000
       objectReference: {fileID: 0}
     - target: {fileID: 22426080, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
       propertyPath: m_AnchorMax.x
