@@ -41,8 +41,7 @@ namespace TowerDefense.Core {
             CoreGameEvents.Current.OnStartupFinished += OnCoreStarterFinished;
             Current = this;
         }
-
-
+        
         void Start() {
             CoreGameEvents.Current.OnGameStart?.Invoke( this );
             CoreGameEvents.Current.OnEnemySpawn += OnEnemySpawn;
@@ -67,6 +66,7 @@ namespace TowerDefense.Core {
             CoreGameEvents.Current.onLose -= OnLose;
         }
 
+        
         public void RestartGame() {
             BackgroundRunner.Current.StartCoroutine( coroutine( _levelData ) );
 
@@ -137,7 +137,7 @@ namespace TowerDefense.Core {
                 CoreGameEvents.Current.onLose?.Invoke();
             }
         }
-
+        
         async void OnWin() {
             await Task.Delay( (int)(winDialogueDelay * 1000) );
             var dialogue =

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AnimFlex.Sequencer.UserEnd;
 using DialogueSystem;
@@ -17,6 +18,8 @@ namespace TowerDefense.Common {
         [SerializeField] Image titleBarImg;
         [SerializeField] GameObject loadingLayout;
         [SerializeField] GameObject closeLayout;
+        [SerializeField] GameObject iconLayout;
+        [SerializeField] Image iconImage;
         [SerializeField] Button closeBtn;
         [SerializeField] Button outsideBtn;
         [SerializeField] RTLTextMeshPro bodyTxt;
@@ -34,6 +37,22 @@ namespace TowerDefense.Common {
         [SerializeField] string confirmTxt;
         [SerializeField] string cancelTxt;
         [SerializeField] string okTxt;
+        [SerializeField] string adCancelByUserTitle;
+        [SerializeField, TextArea] string adCancelByUserBody;
+        [SerializeField] string adFailedTitle;
+        [SerializeField, TextArea] string adFailedBody;
+        [SerializeField] Icon[] icons;
+
+        [Serializable]
+        public class Icon {
+            public IconType type;
+            public Texture2D texture;
+        }
+        public enum IconType {
+            None,
+            MonkeySad, MonkeyThinking, MonkeyThumbsUp, 
+            ShooterThumbsUp, ShooterAngry
+        }
         
         /// <summary>
         /// the text of the clicked button. null if no button pressed, and "cancel" if closed by X or clicked outside dialogue
@@ -106,6 +125,16 @@ namespace TowerDefense.Common {
         public void SetLoadingBarRotating() => loadingBar.PlayRotatingAnim();
         
         public void SetLoadingBarProgress(float progress) => loadingBar.SetProgress( progress );
+
+        public void SetIcon(IconType iconType) {
+            if (iconType == IconType.None) {
+                iconLayout.SetActive( false );
+                return;
+            }
+            iconLayout.SetActive( true );
+            var tex = icons.First( i => i.type == iconType ).texture;
+            iconImage.sprite = Sprite.Create( tex, new Rect( 0, 0, tex.width, tex.height ), Vector2.zero );
+        }
 #endregion
 
 
@@ -143,7 +172,21 @@ namespace TowerDefense.Common {
             AddButton( cancelTxt, "cancel" );
         }
 
-        public void UsePresetForNotice(string title, string noticeText) {
+        public void UsePresetForAdCancelledByUser() {
+            SetTitleText( adCancelByUserTitle );
+            SetBodyText( adCancelByUserBody );
+            SetIcon( IconType.MonkeySad );
+            AddButton( okTxt, "ok" );
+        }
+        
+        public void UsePresetForAdFailed() {
+            SetTitleText( adFailedTitle );
+            SetBodyText( adFailedBody );
+            SetIcon( IconType.MonkeyThinking );
+            AddButton( okTxt, "ok" );
+        }
+
+        public void UsePresetForNotice(string title, string noticeText, IconType icon = IconType.None) {
             SetTitleText( title );
             SetBodyText( noticeText );
             AddButton( okTxt, "ok" );

@@ -41,17 +41,22 @@ namespace TowerDefense.Core.UI.Lose {
         async void onRetryBtnClick() {
             // show rewarded ad
             canvasRaycaster.enabled = false;
-            // var loading = DialogueManager.Current.GetOrCreate<MessageDialogue>( transform.parent );
-            // loading.UsePresetForLoadingAd();
+            var loading = DialogueManager.Current.GetOrCreate<MessageDialogue>( transform.parent );
+            loading.UsePresetForLoadingAd();
             var result = await AdManager.Current.ShowFullScreenRewardVideoAd( "643006352eeae447e5ae5bd3" );
-            // await loading.Close();
+            await loading.Close();
             
             if (result == AdManager.RewardAdResult.Success) {
                 CoreGameManager.Current.RestartGame();
             }
-            else {
+            else if (result == AdManager.RewardAdResult.CancelByUser) {
                 var msgDialogue = DialogueManager.Current.GetOrCreate<MessageDialogue>( transform.parent );
-                msgDialogue.UsePresetForNotice( adSorryTitleTxt, adSorryTxt );
+                msgDialogue.UsePresetForAdCancelledByUser();
+                await msgDialogue.AwaitClose();
+                canvasRaycaster.enabled = true;
+            }else if (result == AdManager.RewardAdResult.Fail) {
+                var msgDialogue = DialogueManager.Current.GetOrCreate<MessageDialogue>( transform.parent );
+                msgDialogue.UsePresetForAdCancelledByUser();
                 await msgDialogue.AwaitClose();
                 canvasRaycaster.enabled = true;
             }

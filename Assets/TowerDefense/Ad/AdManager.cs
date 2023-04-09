@@ -13,6 +13,8 @@ namespace TowerDefense.Ad {
         public abstract Task<bool> IsInitialized();
 
         public abstract Task ShowSidedBannerAd(string adId);
+        
+        public abstract Task<bool> IsSidedBannerAdShowing(string adId);
             
         public abstract Task RemoveSidedBannerAd(string adId);
         

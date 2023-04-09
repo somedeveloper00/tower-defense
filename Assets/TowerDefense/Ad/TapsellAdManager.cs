@@ -95,9 +95,10 @@ namespace TowerDefense.Ad {
             
             TapsellPlus.ShowInterstitialAd( responseId,
                 onAdOpened: model => {
-                    // canPass = true;
+                    Debug.Log( $"fullscreen tapsell ad opened: {responseId}" );
                 },
                 onAdClosed: model => {
+                    Debug.Log( $"fullscreen tapsell ad closed: {responseId}" );
                     canPass = true;
                     success = true;
                 },
@@ -133,7 +134,6 @@ namespace TowerDefense.Ad {
 
             TapsellPlus.RequestStandardBannerAd( adId, BannerType.Banner320X50,
                 tapsellPlusAdModel => {
-                    Debug.Log( $"standard banned ad request success: {tapsellPlusAdModel.responseId}" );
                     responseId = tapsellPlusAdModel.responseId;
                     canPass = true;
                 },
@@ -155,22 +155,36 @@ namespace TowerDefense.Ad {
             }
             
             // show ad
+            canPass = false;
             TapsellPlus.ShowStandardBannerAd( responseId, TapsellPlusSDK.Gravity.Top, TapsellPlusSDK.Gravity.Top,
-                onAdOpened: model => { }, onShowError: model => { } );
-            activeBanners.Add( adId, responseId );
+                onAdOpened: model => {
+                    canPass = true;
+                    activeBanners.Add( adId, responseId );
+                    Debug.Log( $"tapsell sided banner ad openned: {responseId}" );
+                }, onShowError: model => {
+                    canPass = true;
+                    Debug.LogError( model.errorMessage );
+                } );
+            while (!canPass) await Task.Delay( 10 );
         }
 
+        public override Task<bool> IsSidedBannerAdShowing(string adId) {
+            return Task.FromResult( activeBanners.ContainsKey( adId ) );
+        }
+        
         public override Task RemoveSidedBannerAd(string adId) {
-            if (activeBanners.TryGetValue( adId, out var responseId ))
+            if (activeBanners.Remove( adId, out var responseId )) {
                 TapsellPlus.DestroyStandardBannerAd( responseId );
-            return null;
+                Debug.Log( $"tapsell sided ad removed: {responseId}" );
+            }
+
+            return Task.FromResult( 0 );
         }
 
         public override async Task<RewardAdResult> ShowFullScreenRewardVideoAd(string adId) {
             int tryCount = 0;
             trying:
             tryCount++;
-            Debug.Log( $"requesting for interstitial ad" );
             string responseId = null;
             bool canPass = false;
             TapsellPlus.RequestRewardedVideoAd( adId,
@@ -205,9 +219,10 @@ namespace TowerDefense.Ad {
             
             TapsellPlus.ShowRewardedVideoAd( responseId,
                 onAdOpened: model => {
-                    
+                    Debug.Log( $"tapsel rewarder ad opened: {result}" );   
                 },
                 onAdClosed: model => {
+                    Debug.Log( $"tapsel rewarded ad closed: {result}" );   
                     canPass = true;
                     result = RewardAdResult.CancelByUser;
                 },
@@ -217,6 +232,7 @@ namespace TowerDefense.Ad {
                     result = RewardAdResult.Fail;
                 },
                 onAdRewarded: model => {
+                    Debug.Log( $"tapsel rewarded ad successful: {result}" );   
                     canPass = true;
                     result = RewardAdResult.Success;
                 });

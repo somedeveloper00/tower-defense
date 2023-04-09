@@ -7,6 +7,7 @@ using UnityEngine;
 namespace TowerDefense.Background.Loading {
     [DeclareFoldoutGroup("ref", Title = "References", Expanded = true)]
     public class LoadingScreenManager : MonoBehaviour {
+        
         public static LoadingScreenManager Current;
 
         public State state;
@@ -22,7 +23,7 @@ namespace TowerDefense.Background.Loading {
         float t = -1;
 
         LoadingSceneUI _currentUi;
-        
+
         void OnEnable() {
             Current = this;
         }
@@ -33,27 +34,29 @@ namespace TowerDefense.Background.Loading {
 
         public async void StartLoadingScreen() {
             if (t >= 0 || _currentUi != null) return;
-            Debug.Log( $"started loading" );
+            Debug.Log( $"loading started" );
             _currentUi = Instantiate( prefab, transform );
             _currentUi.canvas.gameObject.SetActive( true );
             _currentUi.inSequence.PlaySequence();
             t = 0;
 
-            // setup banner ad
-            if (AdManager.Current is not null && await AdManager.Current.IsInitialized())
-                await AdManager.Current.ShowSidedBannerAd( "642fee1e2eeae447e5ae5bc9" );
+
+            Debug.Log( $"loading finished starting" );
         }
 
         public bool IsON() => t >= 0 || _currentUi != null; 
 
         public async void EndLoadingScreen() {
+            // wait if it was too quick
             if (t < minScreenDuration) {
-                await Task.Delay( (int)(1000 * (minScreenDuration - t)) );
+                await Task.Delay( (int)( 1000 * ( minScreenDuration - t ) ) );
             }
 
             t = -1;
-            Debug.Log( $"ended loading" );
-            _currentUi.inSequence.sequence.Stop();
+            Debug.Log( $"loading ending" );
+            if (_currentUi != null && _currentUi.inSequence.sequence is not null &&
+                _currentUi.inSequence.sequence.IsPlaying())
+                _currentUi.inSequence.sequence.Stop();
 
             try {
                 onEndAnimStart?.Invoke();
@@ -80,10 +83,7 @@ namespace TowerDefense.Background.Loading {
                     Debug.LogException( e );
                 }
             };
-            
-            // remove banner 
-            if (AdManager.Current is not null && await AdManager.Current.IsInitialized())
-                await AdManager.Current.RemoveSidedBannerAd( "642fee1e2eeae447e5ae5bc9" );
+            Debug.Log( $"loading finished ending" );
         }
         
         

@@ -14,16 +14,19 @@ using TriInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace TowerDefense.Lobby {
     [DeclareFoldoutGroup( "ref", Title = "References", Expanded = true )]
     [DeclareFoldoutGroup( "ad", Title = "Ad params", Expanded = false )]
     public class LobbyManager : MonoBehaviour {
 
+        public const string SidedBanner_AdId = "6432787d2eeae447e5ae5de3";
+        public const string FullScreenVideoAd_AdId = "642ee1bd2eeae447e5ae5bb3";
+        public const string FullScreenBannerAd_AdId = "642ff0e183b1d13d3401721e";
+
         public static LobbyManager Current;
         void OnEnable() => Current = this;
-
-        public bool useJson = true;
 
         [GroupNext( "ref" )] [SerializeField] GraphicRaycaster raycaster;
         [SerializeField] RectTransform parentCanvasForDialogues;
@@ -32,8 +35,6 @@ namespace TowerDefense.Lobby {
         [SerializeField] Button exitBtn;
         [SerializeField] Button shopBtn;
         [SerializeField] Button settingsBtn;
-
-        [GroupNext( "ad" )] [SerializeField] string[] loadingAdText;
 
         void Start() {
             playBtn.onClick.AddListener( onPlayBtnClick );
@@ -47,17 +48,30 @@ namespace TowerDefense.Lobby {
             raycaster.enabled = false;
 
             if (LoadingScreenManager.Current != null && LoadingScreenManager.Current.IsON()) {
-                LoadingScreenManager.Current.onEndAnimStartOnce += () => {
+                // ReSharper disable once AsyncVoidLambda
+                LoadingScreenManager.Current.onEndAnimStartOnce += async () => {
                     if (LoadingScreenManager.Current.state == LoadingScreenManager.State.StartingGame) {
-                        ShowFullScreenBannerAd();
+                        inSequence.PlaySequence();
                     }
-                    else {
-                        ShowFullScreenVideoAd();
+                    else if (LoadingScreenManager.Current.state == LoadingScreenManager.State.BackFromCore) {
+                        if (Random.Range( 0, 2 ) == 0) await ShowFullScreenBannerAd();
+                        else await ShowFullScreenBannerAd();
+                        inSequence.PlaySequence();
                     }
+                    await ShowSidedBannerAd();
                 };
             }
             else {
                 inSequence.PlaySequence();
+            }
+        }
+
+        void OnDestroy() {
+            removeBannerAsync();
+            
+            async void removeBannerAsync() {
+                while (await IsShowingSidedBannerAd()) 
+                    await RemoveSidedBannerAd();
             }
         }
 
@@ -105,80 +119,36 @@ namespace TowerDefense.Lobby {
             }
         }
 
-#if UNITY_EDITOR
-        [Button]
-        public async void ShowFullScreenBannerAd() {
-            // var loadingDialogue = DialogueManager.Current.GetOrCreate<MessageDialogue>( parentCanvasForDialogues );
-            // loadingDialogue.UsePresetForLoadingAd();
-
+        public async Task ShowFullScreenBannerAd() {
+            var loadingDialogue = DialogueManager.Current.GetOrCreate<MessageDialogue>( parentCanvasForDialogues );
+            loadingDialogue.UsePresetForLoadingAd();
 
             raycaster.enabled = false;
-            await AdManager.Current.ShowFullScreenBannerAd( "642ff0e183b1d13d3401721e" );
-            inSequence.PlaySequence();
+            await AdManager.Current.ShowFullScreenBannerAd( FullScreenBannerAd_AdId );
             Debug.Log( $"finished fullscreen ad" );
-            // await loadingDialogue.Close();
+            await loadingDialogue.Close();
         }
 
-        [Button]
-        public async void ShowFullScreenVideoAd() {
-            // var loadingDialogue = DialogueManager.Current.GetOrCreate<MessageDialogue>( parentCanvasForDialogues );
-            // loadingDialogue.UsePresetForLoadingAd();
+        public async Task ShowFullScreenVideoAd() {
+            var loadingDialogue = DialogueManager.Current.GetOrCreate<MessageDialogue>( parentCanvasForDialogues );
+            loadingDialogue.UsePresetForLoadingAd();
 
             raycaster.enabled = false;
-            await AdManager.Current.ShowFullScreenVideoAd( "642ee1bd2eeae447e5ae5bb3" );
-            inSequence.PlaySequence();
+            await AdManager.Current.ShowFullScreenVideoAd( FullScreenVideoAd_AdId );
             Debug.Log( $"finished fullscreen vid ad" );
-            // await loadingDialogue.Close();
+            await loadingDialogue.Close();
         }
 
-
-        [Button]
-        async void MessageTestAd() {
-            var dialogue = DialogueManager.Current.GetOrCreate<MessageDialogue>( parentCanvasForDialogues );
-            dialogue.UsePresetForLoadingAd();
-            await Task.Delay( 5000 );
-            await dialogue.Close();
+        public async Task ShowSidedBannerAd() {
+            await AdManager.Current.ShowSidedBannerAd( SidedBanner_AdId );
+            Debug.Log( $"showed sided banner ad" );
         }
 
-        [Button]
-        void MessageTestNotice() {
-            var dialogue = DialogueManager.Current.GetOrCreate<MessageDialogue>( parentCanvasForDialogues );
-            dialogue.UsePresetForNotice( "اوهوی! با توام!!!", "این یک تست برای خبررسانی است. \n حالت خوبه؟" );
+        public async Task<bool> IsShowingSidedBannerAd() => await AdManager.Current.IsSidedBannerAdShowing( SidedBanner_AdId );
+        
+        public async Task RemoveSidedBannerAd() {
+            await AdManager.Current.RemoveSidedBannerAd( SidedBanner_AdId );
+            Debug.Log( $"removed sided banner ad" );
         }
-
-        [Button]
-        void MessageTestConf() {
-            var dialogue = DialogueManager.Current.GetOrCreate<MessageDialogue>( parentCanvasForDialogues );
-            dialogue.UsePresetForConfirmation( "قبول میکنی؟" );
-        }
-
-        [Button]
-        async void MessageTestFullLoad() {
-            var dialogue = DialogueManager.Current.GetOrCreate<MessageDialogue>( parentCanvasForDialogues );
-            dialogue.SetLoadingLayoutActive( true );
-            dialogue.AddButton( "بده", "ok" );
-            dialogue.AddButton( "قبوله", "confirm" );
-            dialogue.AddButton( "کنکله", "cancel" );
-            dialogue.SetLoadingBarProgress( 0 );
-            dialogue.SetBodyText( "الآن باید صفر باشه" );
-            await Task.Delay( 2000 );
-            dialogue.SetLoadingBarProgress( 0.7f );
-            dialogue.SetBodyText( "زیاد شد. نه؟" );
-            await Task.Delay( 2000 );
-            dialogue.SetLoadingBarRotating();
-            dialogue.SetBodyText( "حالا رفت رو حالت چرخشی!!! هورا داره کار میکنه (:" );
-            await Task.Delay( 2000 );
-            dialogue.SetLoadingBarProgress( 1 );
-            dialogue.SetBodyText( "حالا فول شد" );
-            await Task.Delay( 2000 );
-            dialogue.SetBodyText( "اوکی ۳ ثانیه بعد میبندمش. ۳" );
-            await Task.Delay( 1000 );
-            dialogue.SetBodyText( "اوکی ۳ ثانیه بعد میبندمش. ۲" );
-            await Task.Delay( 1000 );
-            dialogue.SetBodyText( "اوکی ۳ ثانیه بعد میبندمش. ۱" );
-            await Task.Delay( 1000 );
-            await dialogue.Close();
-        }
-#endif
     }
 }

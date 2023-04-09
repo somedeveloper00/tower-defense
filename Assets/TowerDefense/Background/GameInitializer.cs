@@ -2,6 +2,7 @@
 using TowerDefense.Ad;
 using TowerDefense.Background.Loading;
 using TowerDefense.Core.Env;
+using TowerDefense.Player.Database;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,7 +20,11 @@ namespace TowerDefense.Background {
             bool success = false;
             yield return new WaitForTask<bool>( AdManager.Current.Initialize(), result => success = result );
             Debug.Log( success ? $"ad initalized successfully" : $"Ad failed to initialize" );
+            
+            // load data
+            SecureDatabase.Current.Load();
 
+            // load lobby
             var scenePath = SceneDatabase.Instance.GetScenePath( "lobby" );
             yield return SceneManager.LoadSceneAsync( scenePath, LoadSceneMode.Additive);
             yield return null;

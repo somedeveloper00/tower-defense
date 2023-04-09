@@ -20,16 +20,21 @@ MonoBehaviour:
     levels:
     - gameData: {fileID: 11400000, guid: 4431fc5307db0224ea69d20b03b71b26, type: 2}
       runtimeData:
-        status: 6
-        stars: 3
-        playCount: 1
+        status: 2
+        stars: 0
+        playCount: 0
     - gameData: {fileID: 11400000, guid: 0e17d27ff12c11545b14fe163b20d947, type: 2}
       runtimeData:
-        status: 6
-        stars: 3
-        playCount: 1
+        status: 0
+        stars: 0
+        playCount: 0
     - gameData: {fileID: 11400000, guid: ea72b93161314ce468b259cfd4ac0bcf, type: 2}
       runtimeData:
-        status: 2
+        status: 0
+        stars: 0
+        playCount: 0
+    - gameData: {fileID: 11400000, guid: 55e014981ae16184686d2bef70020e6c, type: 2}
+      runtimeData:
+        status: 0
         stars: 0
         playCount: 0

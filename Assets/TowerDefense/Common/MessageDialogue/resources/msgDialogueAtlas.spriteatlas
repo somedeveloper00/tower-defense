@@ -20,7 +20,19 @@ SpriteAtlas:
       readable: 0
       crunchedCompression: 0
       sRGB: 1
-    platformSettings: []
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
     packingSettings:
       serializedVersion: 2
       padding: 4
@@ -38,20 +50,34 @@ SpriteAtlas:
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: 0cb51c80b39f25542827a13a8beeb7e6, type: 3}
   - {fileID: 21300000, guid: db3d676169b693940bdf4c07f413610f, type: 3}
+  - {fileID: 21300000, guid: d5710ed2b40bdd441b771924d7b9afaa, type: 3}
   - {fileID: 21300000, guid: c72426e25b5aba844b770735f01e2af1, type: 3}
   - {fileID: 21300000, guid: f291e563fb4e0c94f91bc200d052bdd8, type: 3}
+  - {fileID: 21300000, guid: 1e903af4f3bda0f488315f2668ad236c, type: 3}
   - {fileID: 21300000, guid: a3e7fdf41d3613c438a51a50994971f8, type: 3}
   - {fileID: 21300000, guid: f1af6c25acbb2f540b22d796ae9a4597, type: 3}
+  - {fileID: 21300000, guid: aa621385e905b7e4c95ffc8ffa6f7403, type: 3}
   - {fileID: 21300000, guid: 91f5933aca64b73499ed0707bfe85b25, type: 3}
+  - {fileID: 21300000, guid: 76b6d92b4af4afa47aca27d98a6d6ec3, type: 3}
+  - {fileID: 21300000, guid: dfd5cafc6300a0a4b8da82975213d8f2, type: 3}
+  - {fileID: 21300000, guid: e3aad40ec1066fb44b26429f9167e883, type: 3}
   - {fileID: 21300000, guid: b53d9daeee56b8d43abb7fa30661eb89, type: 3}
   m_PackedSpriteNamesToIndex:
+  - icon_monkey_thumbsup
   - load-fill
+  - icon_frame
   - bodytxt-bck
   - load-bck
+  - icon_monkey_sad
   - exitbtn
   - load-outlne
+  - icon_shooter_angry
   - panel
+  - icon_monkey_thinking
+  - icon_mask
+  - icon_shooter_thumbsup
   - titlebar
   m_RenderDataMap: {}
   m_Tag: msgDialogueAtlas
