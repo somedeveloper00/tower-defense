@@ -244,7 +244,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37e5486f91944aadaab6b2aed08db2c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useJson: 0
   raycaster: {fileID: 50481349}
   parentCanvasForDialogues: {fileID: 50481352}
   inSequence: {fileID: 130184984}
@@ -252,7 +251,6 @@ MonoBehaviour:
   exitBtn: {fileID: 1572722278}
   shopBtn: {fileID: 319976852}
   settingsBtn: {fileID: 319976852}
-  loadingAdText: []
 --- !u!1 &105442857
 GameObject:
   m_ObjectHideFlags: 0
@@ -932,7 +930,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 478, y: -135.89}
+  m_AnchoredPosition: {x: 522, y: -101}
   m_SizeDelta: {x: 340.2466, y: 147.0557}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &319976852
@@ -1091,8 +1089,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 540, y: 0}
-  m_SizeDelta: {x: 1080, y: 0}
+  m_AnchoredPosition: {x: 608.88696, y: 0}
+  m_SizeDelta: {x: 1237.3042, y: 340.1714}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &611883751
 MonoBehaviour:
@@ -1116,7 +1114,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: b094dac0cd19ab24cbafb3010b76eccc, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -1778,8 +1776,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -540, y: 0}
-  m_SizeDelta: {x: 1080, y: 0}
+  m_AnchoredPosition: {x: -532.0021, y: 0}
+  m_SizeDelta: {x: 1081.7771, y: 156.4036}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1308073412
 MonoBehaviour:
@@ -1803,7 +1801,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 79f5f0b0f19fa2a47bbf33a57a197190, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -1856,7 +1854,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -520.24023, y: 341.63086}
+  m_AnchoredPosition: {x: -960, y: 326.68}
   m_SizeDelta: {x: 368.4728, y: 156.1063}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1372271026

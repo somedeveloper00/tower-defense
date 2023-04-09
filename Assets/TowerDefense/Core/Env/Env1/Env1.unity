@@ -16808,7 +16808,6 @@ MonoBehaviour:
         timeIntervals: 0.2
         argv:
         - rid: 5878960634005815580
-    t: 0
   references:
     version: 2
     RefIds:

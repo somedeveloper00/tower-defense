@@ -15,7 +15,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &2118779201
 RectTransform:
@@ -362,7 +362,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000030518, y: 208}
+  m_AnchoredPosition: {x: 0.000030518, y: 265.99997}
   m_SizeDelta: {x: 1269, y: 294}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5641910109005994102
@@ -438,7 +438,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -140, y: 6}
+  m_AnchoredPosition: {x: -140, y: 64}
   m_SizeDelta: {x: 179, y: 171}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5641910109364730484
@@ -532,11 +532,11 @@ MonoBehaviour:
   resetOnPlay: 1
   sequence:
     nodes:
-    - name: main scale
+    - name: main
       delay: 0
       clip:
         rid: 5878960743082623000
-    - name: main fade
+    - name: main
       delay: 0
       clip:
         rid: 5878960743082623002
@@ -604,9 +604,9 @@ MonoBehaviour:
             m_RotationOrder: 4
           useCurve: 0
           useQuaternion: 0
-          relative: 0
+          relative: 1
           useTargetTransform: 0
-          from: 1
+          from: 0
           ease: 26
           duration: 1.4
           delay: 0
@@ -845,11 +845,12 @@ MonoBehaviour:
           onKill:
             m_PersistentCalls:
               m_Calls: []
+          multiDelay: 0.08
+          reverseOrder: 0
           selections:
           - transform: {fileID: 5641910108666132286}
             type: 2
           target: {x: 0, y: 0, z: 0}
-          multiDelay: 0.08
     - rid: 5878960743082623012
       type: {class: CEmpty, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
     - rid: 5878960743082623015
@@ -886,11 +887,12 @@ MonoBehaviour:
           onKill:
             m_PersistentCalls:
               m_Calls: []
+          multiDelay: 0.08
+          reverseOrder: 0
           selections:
           - transform: {fileID: 5641910108666132286}
             type: 2
           target: {x: 0, y: -200, z: 0}
-          multiDelay: 0.08
     - rid: 5878960743082623016
       type: {class: CMultiTweenerScale, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
       data:
@@ -925,6 +927,8 @@ MonoBehaviour:
           onKill:
             m_PersistentCalls:
               m_Calls: []
+          multiDelay: 0.4
+          reverseOrder: 0
           selections:
           - transform: {fileID: 5641910109364730474}
             type: 0
@@ -933,7 +937,6 @@ MonoBehaviour:
           - transform: {fileID: 5641910110242250076}
             type: 0
           target: {x: 0, y: 0, z: 1}
-          multiDelay: 0.4
     - rid: 5878960743082623017
       type: {class: CEmpty, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
     - rid: 5878960743082623018
@@ -1287,7 +1290,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 57.999966}
   m_SizeDelta: {x: 1051.7253, y: 663.8282}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5641910109769178026
@@ -1710,7 +1713,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -12.998, y: -412}
+  m_AnchoredPosition: {x: -12.998, y: -354.00003}
   m_SizeDelta: {x: 246.87, y: 126.4114}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5641910110189285400
@@ -2167,7 +2170,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 39}
+  m_AnchoredPosition: {x: 0, y: 96.99997}
   m_SizeDelta: {x: 220.8733, y: 211.0019}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5641910110242250078
@@ -2243,7 +2246,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 140, y: 6}
+  m_AnchoredPosition: {x: 140, y: 63.999966}
   m_SizeDelta: {x: 179, y: 171}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5641910110565560456
