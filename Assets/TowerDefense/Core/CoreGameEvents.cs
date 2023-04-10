@@ -3,6 +3,7 @@ using TowerDefense.Core.Enemies;
 using TowerDefense.Core.Defenders;
 using TowerDefense.Core.EnemySpawn;
 using TowerDefense.Core.Starter;
+using TowerDefense.Core.UI.Win;
 using UnityEngine;
 
 namespace TowerDefense.Core {
@@ -17,7 +18,7 @@ namespace TowerDefense.Core {
         public Action<Defender> OnDefenderDestroy;
         public Action<Enemy> OnEnemyReachEnd;
         public Action onLose;
-        public Action onWin;
+        public Action<WinData> onWin;
 
         public static CoreGameEvents Current;
 

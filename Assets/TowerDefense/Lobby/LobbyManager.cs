@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using AnimFlex.Sequencer.UserEnd;
@@ -100,10 +101,7 @@ namespace TowerDefense.Lobby {
                 // handle josn to object
                 if (!levelDataObject) {
                     var level = ScriptableObject.CreateInstance<CoreLevelData>();
-                    var thread = new Thread( () => level.FromJson( levelDataJson ) );
-                    thread.IsBackground = true;
-                    thread.Start();
-                    yield return new WaitUntil( () => thread.IsAlive == false );
+                    yield return new WaitForTask( Task.Run( () => level.FromJson( levelDataJson ) ) );
                 }
 
                 yield return SceneManager.UnloadSceneAsync( gameObject.scene );

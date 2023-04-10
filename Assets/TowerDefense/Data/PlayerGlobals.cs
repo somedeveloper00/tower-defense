@@ -1,5 +1,8 @@
-﻿using TowerDefense.Background;
+﻿using System.Collections.Generic;
+using TowerDefense.Background;
+using TowerDefense.Core.Starter;
 using TowerDefense.Data.Database;
+using TowerDefense.Data.Progress;
 using UnityEngine;
 
 namespace TowerDefense.Data {
@@ -12,21 +15,73 @@ namespace TowerDefense.Data {
             GameInitializer.onSecureDataLoad += Load;
         }
 
-        public PlayerData playerData;
-        public GameLevelsData gameLevelsData;
 
-        
+        public LevelsData levelsData;
+        public DefendersProgress defendersProg = new ();
+        public LevelProgress levelProg = new ();
+
+
         public void Load(SecureDatabase secureDatabase) {
-            playerData = secureDatabase.GetValue<PlayerData>( "playerData" );
-            gameLevelsData = secureDatabase.GetValue<GameLevelsData>( "gameData" );
+            if (secureDatabase.TryGetValue<DefendersProgress>( "defprog", out var defProg ))
+                defendersProg = defProg;
+            if (secureDatabase.TryGetValue<LevelProgress>( "lvlprog", out var lvlProg ))
+                levelProg = lvlProg;
+
+            // making sure level 1 is always unlocked
+            GetOrCreateLevelProg( levelsData.coreLevels[0].id ).status |= LevelProgress.LevelStatus.Unlocked;
+            
             Debug.Log( $"player global data loaded" );
         }
 
         public void Save(SecureDatabase secureDatabase) {
-            secureDatabase.Set( "playerData", playerData );
-            secureDatabase.Set( "gameData", gameLevelsData );
+            secureDatabase.Set( "defprog", defendersProg );
+            secureDatabase.Set( "lvlprog", levelProg );
             secureDatabase.Save();
             Debug.Log( $"player global data saved" );
+        }
+
+        public bool TryGetLevelData(int id, out CoreLevelData level) {
+            for (int i = 0; i < levelsData.coreLevels.Count; i++) {
+                if (levelsData.coreLevels[i].id == id) {
+                    if (i < levelsData.coreLevels.Count - 1) {
+                        level = levelsData.coreLevels[i];
+                        return true;
+                    }
+                    level = null;
+                    return false;
+
+                }
+            }
+            level = null;
+            return false;
+        }
+
+        public LevelProgress.Level GetOrCreateLevelProg(int id) {
+            for (int i = 0; i < levelProg.levels.Count; i++) {
+                if (levelProg.levels[i].id == id) return levelProg.levels[i];
+            }
+
+            var lvl = new LevelProgress.Level();
+            lvl.id = id;
+            levelProg.levels.Add( lvl );
+            return lvl;
+        }
+
+        public bool TryGetNextLevelProg(int id, out LevelProgress.Level level) {
+            for (int i = 0; i < levelsData.coreLevels.Count; i++) {
+                if (levelsData.coreLevels[i].id == id) {
+                    if (i < levelsData.coreLevels.Count - 1) {
+                        var nextId = levelsData.coreLevels[i + 1].id;
+                        level = GetOrCreateLevelProg( nextId );
+                        return true;
+                    }
+                    level = null;
+                    return false;
+
+                }
+            }
+            level = null;
+            return false;
         }
     }
 }

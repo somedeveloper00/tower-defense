@@ -1,21 +1,21 @@
-﻿using System;
+﻿// ReSharper disable Unity.NoNullPropagation
 using System.Collections;
 using System.Threading.Tasks;
 using DialogueSystem;
-using RTLTMPro;
 using TowerDefense.Background;
 using TowerDefense.Common;
+using TowerDefense.Data.Database;
 using TriInspector;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace TowerDefense.Lobby {
     public class Tests : MonoBehaviour {
-        public RTLTextMeshPro debugtxt;
-        public Button start, stop, fullTest;
+        public Button fullTest, deleteAll;
 
         void Start() {
-            fullTest.onClick.AddListener( () => StartCoroutine( MessageTestFullLoad() ) );
+            fullTest?.onClick.AddListener( () => StartCoroutine( MessageTestFullLoad() ) );
+            deleteAll?.onClick.AddListener( DeleteSaveData );
         }
 
         [Button]
@@ -36,6 +36,10 @@ namespace TowerDefense.Lobby {
         void MessageTestConf() {
             var dialogue = DialogueManager.Current.GetOrCreate<MessageDialogue>();
             dialogue.UsePresetForConfirmation( "قبول میکنی؟" );
+        }
+
+        void DeleteSaveData() {
+            SecureDatabase.Current.DeleteAll();
         }
 
         [Button]

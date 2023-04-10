@@ -12,6 +12,7 @@ namespace TowerDefense.Data.Database {
         public T GetValue<T>(string key) where T : ITransportable, new();
         public void Set(string key, ITransportable obj);
         public void Delete(string key);
+        public void DeleteAll();
 
         public bool TryGetInt(string key, out int result) {
             var r = TryGetValue( key, out IntTransport intTrans );

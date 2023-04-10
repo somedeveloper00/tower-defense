@@ -156,7 +156,7 @@ namespace TowerDefense.Ad {
             
             // show ad
             canPass = false;
-            TapsellPlus.ShowStandardBannerAd( responseId, TapsellPlusSDK.Gravity.Top, TapsellPlusSDK.Gravity.Top,
+            TapsellPlus.ShowStandardBannerAd( responseId, TapsellPlusSDK.Gravity.Bottom, TapsellPlusSDK.Gravity.Bottom,
                 onAdOpened: model => {
                     canPass = true;
                     activeBanners.Add( adId, responseId );

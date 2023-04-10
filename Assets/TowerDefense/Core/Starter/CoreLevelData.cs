@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using TowerDefense.Core.EnemySpawn;
@@ -7,7 +6,6 @@ using TowerDefense.Core.Env;
 using TowerDefense.Transport;
 using TriInspector;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace TowerDefense.Core.Starter {
     [CreateAssetMenu( fileName = "Level", menuName = "Core/Level", order = 0 )]
@@ -17,6 +15,13 @@ namespace TowerDefense.Core.Starter {
         public int id;
         public List<string> arguments = new();
         public List<EnemySpawner.SpawningMethod> spawnings = new();
+        public int[] starTime = new int[3];
+
+        void OnValidate() {
+            if (starTime.Length != 3)
+                Array.Resize( ref starTime, 3 );
+        }
+
 
         string[] _all_envs => SceneDatabase.Instance.GetAllNames();
 
@@ -32,6 +37,5 @@ namespace TowerDefense.Core.Starter {
             spawnings.Clear();
             JsonConvert.PopulateObject( json, this );
         }
-        
     }
 }

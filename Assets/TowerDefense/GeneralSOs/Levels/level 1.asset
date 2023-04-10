@@ -24,6 +24,7 @@ MonoBehaviour:
         count: 15
         timeIntervals: 1
         argv: []
+  starTime: 2c010000c800000064000000
   references:
     version: 2
     RefIds: []

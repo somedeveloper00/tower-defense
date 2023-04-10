@@ -85,6 +85,11 @@ namespace TowerDefense.Data.Database {
 
         public void Delete(string key) => data.Remove( key );
 
+        public void DeleteAll() {
+            File.Delete( path );
+            data = new JObject();
+        }
+
 
         static void encryptAndSaveData(string txt, string path) {
             File.WriteAllText( path, txt );

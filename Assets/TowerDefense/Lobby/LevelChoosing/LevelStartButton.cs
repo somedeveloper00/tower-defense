@@ -1,6 +1,8 @@
 ﻿using System;
 using RTLTMPro;
+using TowerDefense.Core.Starter;
 using TowerDefense.Data;
+using TowerDefense.Data.Progress;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,15 +11,16 @@ namespace TowerDefense.Lobby.LevelChoosing {
         [SerializeField] Button playBtn;
         [SerializeField] RTLTextMeshPro title;
 
-        [NonSerialized] public GameLevelsData.Level levelData;
+        [NonSerialized] public CoreLevelData coreLevelData;
+        [NonSerialized] public LevelProgress.Level levelProgress;
 
         void Start() {
             playBtn.onClick.AddListener( onPlayButtonClick );
-            playBtn.interactable = levelData.runtimeData.status.HasFlag( GameLevelsData.LevelStatus.Unlocked );
-            title.text = levelData.gameData.title;
+            playBtn.interactable = levelProgress.status.HasFlag( LevelProgress.LevelStatus.Unlocked );
+            title.text = coreLevelData.title;
         }
         void onPlayButtonClick() {
-            LobbyManager.Current.StartGame( levelData.gameData, null );
+            LobbyManager.Current.StartGame( coreLevelData, null );
         }
     }
 }

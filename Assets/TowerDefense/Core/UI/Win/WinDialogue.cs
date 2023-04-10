@@ -7,7 +7,7 @@ using UnityEngine.UI;
 namespace TowerDefense.Core.UI.Win {
     [DeclareFoldoutGroup("ref", Title = "References", Expanded = true)]
     public class WinDialogue : Dialogue {
-        public int stars = 0;
+        public WinData winData;
 
         [GroupNext( "ref" )]
         [SerializeField] SequenceAnim inSequence, outSequence;
@@ -22,7 +22,7 @@ namespace TowerDefense.Core.UI.Win {
         protected override void Start() {
             base.Start();
             for (int i = 0; i < starObjects.Length; i++) {
-                starObjects[i].SetActive( i < stars );
+                starObjects[i].SetActive( i < winData.stars );
             }
             returnButton.onClick.AddListener( onLobbyBtnClick );
             inSequence.PlaySequence();

@@ -34,5 +34,6 @@ namespace TowerDefense.Data.Database {
 
         public void Set(string key, ITransportable obj) => PlayerPrefs.SetString( key, obj.ToJson() );
         public void Delete(string key) => PlayerPrefs.DeleteKey( key );
+        public void DeleteAll() => PlayerPrefs.DeleteAll();
     }
 }

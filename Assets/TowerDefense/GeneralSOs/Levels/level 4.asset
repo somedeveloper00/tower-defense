@@ -20,50 +20,23 @@ MonoBehaviour:
   - onTime:
     - time: 0
       spawns:
-      - name: balloon-simple
+      - name: balloon-hard
         count: 40
         timeIntervals: 1
-        argv:
-        - rid: 1861648108761907637
-        - rid: 1861648108761907638
+        argv: []
     - time: 10
       spawns:
-      - name: balloon-simple
+      - name: balloon-fast
         count: 10
         timeIntervals: 0.4
-        argv:
-        - rid: 1861648108761907470
-        - rid: 1861648108761907469
+        argv: []
     - time: 15
       spawns:
       - name: balloon-simple
         count: 20
         timeIntervals: 1
         argv: []
+  starTime: 2c010000c800000096000000
   references:
     version: 2
-    RefIds:
-    - rid: 1861648108761907469
-      type: {class: ColorManip, ns: TowerDefense.Core.EnemySpawn, asm: Assembly-CSharp}
-      data:
-        type: col
-        cols:
-        - 19C513FF
-    - rid: 1861648108761907470
-      type: {class: BasicManip, ns: TowerDefense.Core.EnemySpawn, asm: Assembly-CSharp}
-      data:
-        type: basic
-        speedMultip: 2
-        lifeMultip: 1
-    - rid: 1861648108761907637
-      type: {class: BasicManip, ns: TowerDefense.Core.EnemySpawn, asm: Assembly-CSharp}
-      data:
-        type: basic
-        speedMultip: 1
-        lifeMultip: 2
-    - rid: 1861648108761907638
-      type: {class: ColorManip, ns: TowerDefense.Core.EnemySpawn, asm: Assembly-CSharp}
-      data:
-        type: col
-        cols:
-        - 60667EFF
+    RefIds: []

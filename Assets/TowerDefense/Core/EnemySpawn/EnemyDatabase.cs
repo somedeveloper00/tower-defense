@@ -13,20 +13,28 @@ namespace TowerDefense.Core.EnemySpawn {
 
         [SerializeField] List<EnemyType> enemySpawnTypes;
 
-        public Enemy GetEnemyPrefab(string name) {
-            foreach (var enemySpawnType in enemySpawnTypes) {
-                if ( enemySpawnType.prefab != null && enemySpawnType.name == name )
-                    return enemySpawnType.prefab;
-            }
-            throw new Exception( "enemy of name not found: " + name );
-        }
+        public Enemy GetEnemyPrefab(string name) => getEnemyType( name ).prefab;
+        public int GetEnemyWorth(string name) => getEnemyType( name ).worth;
 
         public string[] GetAllNames() => enemySpawnTypes.Select( e => e.name ).ToArray();
+
+        Dictionary<string, EnemyType> cache = new();
+        
+        private EnemyType getEnemyType(string name) {
+            if (cache.TryGetValue( name, out var e )) return e;
+            foreach (var enemySpawnType in enemySpawnTypes)
+                if (enemySpawnType.prefab != null && enemySpawnType.name == name) {
+                    cache.Add( name, enemySpawnType );
+                    return enemySpawnType;
+                }
+            throw new Exception( $"enemy not found: {name}" );
+        }
 
         [Serializable]
         public class EnemyType {
             public string name;
             public Enemy prefab;
+            public int worth;
         }
     }
 }

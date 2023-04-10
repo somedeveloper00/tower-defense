@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingLife: 20
-  life: 20
+  life: 0
   roadManager: {fileID: 0}
   speed: 1
   rotationSpeed: 0
