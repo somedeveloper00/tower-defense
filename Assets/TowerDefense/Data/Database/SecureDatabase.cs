@@ -1,19 +1,25 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using TowerDefense.Transport;
-using UnityEngine;
-
-#if UNITY_EDITOR
 using UnityEditor;
-#endif
+using UnityEngine;
+using Debug = UnityEngine.Debug;
 
-namespace TowerDefense.Player.Database {
+namespace TowerDefense.Data.Database {
     public class SecureDatabase : IDatabase {
 
         string path;
         public SecureDatabase(string filepath) => path = Path.Combine( Application.persistentDataPath, filepath );
+
+#if UNITY_EDITOR
+        [MenuItem("Files/Open Secure Database File")]
+        static void openPathInExplorer() {
+            Process.Start( Current.path );
+        }
+#endif
 
         public static SecureDatabase Current;
 #if UNITY_EDITOR

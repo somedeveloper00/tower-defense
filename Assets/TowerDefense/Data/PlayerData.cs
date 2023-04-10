@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using TowerDefense.Transport;
 
-namespace TowerDefense.Player {
+namespace TowerDefense.Data {
     [Serializable]
     public class PlayerData : ITransportable {
         public string name;

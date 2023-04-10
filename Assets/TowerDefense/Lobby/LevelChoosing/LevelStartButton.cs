@@ -1,6 +1,6 @@
 ﻿using System;
 using RTLTMPro;
-using TowerDefense.Player;
+using TowerDefense.Data;
 using UnityEngine;
 using UnityEngine.UI;
 

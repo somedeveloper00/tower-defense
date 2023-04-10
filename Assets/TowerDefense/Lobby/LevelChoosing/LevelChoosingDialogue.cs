@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using DialogueSystem;
-using TowerDefense.Player;
+using TowerDefense.Data;
 using UnityEngine;
 using UnityEngine.UI;
 

@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Threading.Tasks;
 using DialogueSystem;
 using RTLTMPro;
+using TowerDefense.Background;
 using TowerDefense.Common;
 using TriInspector;
 using UnityEngine;
@@ -12,7 +14,10 @@ namespace TowerDefense.Lobby {
         public RTLTextMeshPro debugtxt;
         public Button start, stop, fullTest;
 
-#if UNITY_EDITOR
+        void Start() {
+            fullTest.onClick.AddListener( () => StartCoroutine( MessageTestFullLoad() ) );
+        }
+
         [Button]
         async void MessageTestAd() {
             var dialogue = DialogueManager.Current.GetOrCreate<MessageDialogue>();
@@ -34,7 +39,7 @@ namespace TowerDefense.Lobby {
         }
 
         [Button]
-        async void MessageTestFullLoad() {
+        IEnumerator MessageTestFullLoad() {
             var dialogue = DialogueManager.Current.GetOrCreate<MessageDialogue>();
             dialogue.SetLoadingLayoutActive( true );
             dialogue.AddButton( "بده", "ok" );
@@ -42,24 +47,23 @@ namespace TowerDefense.Lobby {
             dialogue.AddButton( "کنکله", "cancel" );
             dialogue.SetLoadingBarProgress( 0 );
             dialogue.SetBodyText( "الآن باید صفر باشه" );
-            await Task.Delay( 2000 );
+            yield return new WaitForSeconds( 2 );
             dialogue.SetLoadingBarProgress( 0.7f );
             dialogue.SetBodyText( "زیاد شد. نه؟" );
-            await Task.Delay( 2000 );
+            yield return new WaitForSeconds( 2 );
             dialogue.SetLoadingBarRotating();
             dialogue.SetBodyText( "حالا رفت رو حالت چرخشی!!! هورا داره کار میکنه (:" );
-            await Task.Delay( 2000 );
+            yield return new WaitForSeconds( 2 );
             dialogue.SetLoadingBarProgress( 1 );
             dialogue.SetBodyText( "حالا فول شد" );
-            await Task.Delay( 2000 );
+            yield return new WaitForSeconds( 2 );
             dialogue.SetBodyText( "اوکی ۳ ثانیه بعد میبندمش. ۳" );
-            await Task.Delay( 1000 );
+            yield return new WaitForSeconds( 1 );
             dialogue.SetBodyText( "اوکی ۳ ثانیه بعد میبندمش. ۲" );
-            await Task.Delay( 1000 );
+            yield return new WaitForSeconds( 1 );
             dialogue.SetBodyText( "اوکی ۳ ثانیه بعد میبندمش. ۱" );
-            await Task.Delay( 1000 );
-            await dialogue.Close();
+            yield return new WaitForSeconds( 1 );
+            yield return new WaitForTask( dialogue.Close() );
         }
-#endif
     }
 }

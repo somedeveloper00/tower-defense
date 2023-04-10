@@ -14,7 +14,8 @@ using TowerDefense.Core.Starter;
 using TowerDefense.Core.UI;
 using TowerDefense.Core.UI.Lose;
 using TowerDefense.Core.UI.Win;
-using TowerDefense.Player;
+using TowerDefense.Data;
+using TowerDefense.Data.Database;
 using TriInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -154,7 +155,7 @@ namespace TowerDefense.Core {
             if (lvlIndex < levels.Count - 1) {
                 levels[lvlIndex + 1].runtimeData.status |= GameLevelsData.LevelStatus.Unlocked; // unlock next
             }
-            PlayerGlobals.Current.Save();
+            PlayerGlobals.Current.Save( SecureDatabase.Current );
         }
 
         async void OnLose() {
@@ -165,7 +166,7 @@ namespace TowerDefense.Core {
             // handle data modification
             var level = PlayerGlobals.Current.gameLevelsData.levels.Find( lvl => lvl.gameData.id == _levelData.id );
             level.runtimeData.playCount++;
-            PlayerGlobals.Current.Save();
+            PlayerGlobals.Current.Save( SecureDatabase.Current );
         }
     }
 }

@@ -35,7 +35,7 @@ namespace TowerDefense.Common {
                     bar.anchoredPosition = Vector2.Lerp( posFrom, posTo, val );
                     bar.sizeDelta = Vector2.Lerp( sizeFrom, sizeTo, val );
                 },
-                1, duration: duration );
+                1, duration: duration, isValid: () => this && bar );
         }
 
         public void PlayRotatingAnim() {

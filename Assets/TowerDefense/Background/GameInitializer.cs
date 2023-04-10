@@ -1,13 +1,16 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using TowerDefense.Ad;
 using TowerDefense.Background.Loading;
 using TowerDefense.Core.Env;
-using TowerDefense.Player.Database;
+using TowerDefense.Data.Database;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace TowerDefense.Background {
     public class GameInitializer : MonoBehaviour {
+        
+        public static Action<SecureDatabase> onSecureDataLoad;
         
         IEnumerator Start() {
             
@@ -22,7 +25,7 @@ namespace TowerDefense.Background {
             Debug.Log( success ? $"ad initalized successfully" : $"Ad failed to initialize" );
             
             // load data
-            SecureDatabase.Current.Load();
+            onSecureDataLoad?.Invoke( SecureDatabase.Current );
 
             // load lobby
             var scenePath = SceneDatabase.Instance.GetScenePath( "lobby" );

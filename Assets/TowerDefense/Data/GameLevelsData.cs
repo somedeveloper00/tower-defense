@@ -7,7 +7,7 @@ using TowerDefense.Transport;
 using TriInspector;
 using UnityEngine;
 
-namespace TowerDefense.Player {
+namespace TowerDefense.Data {
     [Serializable]
     public class GameLevelsData : ITransportable {
         public List<Level> levels = new();

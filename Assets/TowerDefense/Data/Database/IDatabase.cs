@@ -2,7 +2,7 @@ using System;
 using Newtonsoft.Json;
 using TowerDefense.Transport;
 
-namespace TowerDefense.Player.Database {
+namespace TowerDefense.Data.Database {
     public interface IDatabase {
         public void Load();
         public void Save();
