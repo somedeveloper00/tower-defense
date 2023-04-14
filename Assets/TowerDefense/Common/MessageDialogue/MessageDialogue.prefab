@@ -50,6 +50,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playOnEnable: 0
+  useProxyAsCore: 1
+  useDefaultCoreProxy: 1
+  defaultCoreProxy: AnimFlex.Core.Proxy.AnimFlexCoreProxyUnscaled
+  coreProxy: {fileID: 0}
   resetOnPlay: 1
   sequence:
     nodes:
@@ -825,10 +829,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playOnEnable: 1
+  useProxyAsCore: 1
+  useDefaultCoreProxy: 1
+  defaultCoreProxy: AnimFlex.Core.Proxy.AnimFlexCoreProxyUnscaled
+  coreProxy: {fileID: 0}
   resetOnPlay: 1
   sequence:
     nodes:
-    - name: main
+    - name: bck
+      delay: 0
+      clip:
+        rid: 1861648332609814617
+    - name: all
       delay: 0
       clip:
         rid: 1861648198143836165
@@ -967,6 +979,12 @@ MonoBehaviour:
           - transform: {fileID: 2701784866826361080}
             type: 1
           target: {x: 0, y: -200, z: 0}
+    - rid: 1861648332609814617
+      type: {class: CSetPropertyValueFloat, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
+      data:
+        component: {fileID: 7526248553148292152}
+        propertyName: alpha
+        value: 0
 --- !u!1 &2701784867036793285
 GameObject:
   m_ObjectHideFlags: 0
@@ -1517,6 +1535,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playOnEnable: 0
+  useProxyAsCore: 0
+  useDefaultCoreProxy: 0
+  defaultCoreProxy: 
+  coreProxy: {fileID: 0}
   resetOnPlay: 1
   sequence:
     nodes:
@@ -2897,7 +2919,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7526248553148293014}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0

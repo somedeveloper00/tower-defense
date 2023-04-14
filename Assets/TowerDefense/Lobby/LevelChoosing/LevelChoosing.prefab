@@ -402,7 +402,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 50
+  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &1106742564704947975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -538,7 +538,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 50
+  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &1106742565077877706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -633,9 +633,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playOnEnable: 1
+  useProxyAsCore: 0
+  coreProxy: {fileID: 0}
   resetOnPlay: 1
   sequence:
     nodes:
+    - name: Node 1
+      delay: 0
+      clip:
+        rid: 1861648313085854041
     - name: main
       delay: 0
       clip:
@@ -658,7 +664,7 @@ MonoBehaviour:
           useQuaternion: 0
           relative: 0
           useTargetTransform: 0
-          from: 1
+          from: 0
           ease: 0
           duration: 0.2
           delay: 0
@@ -678,7 +684,13 @@ MonoBehaviour:
             m_PersistentCalls:
               m_Calls: []
           fromObject: {fileID: 1106742564565935016}
-          target: 0
+          target: 1
+    - rid: 1861648313085854041
+      type: {class: CSetPropertyValueFloat, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
+      data:
+        component: {fileID: 1106742564565935016}
+        propertyName: alpha
+        value: 0
 --- !u!1 &1106742565435468730
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 ﻿
 using Newtonsoft.Json;
+using UnityEngine;
 
 namespace TowerDefense.Transport
 {
@@ -21,6 +22,17 @@ namespace TowerDefense.Transport
 		public static T Cloned<T>(this T value) where T : ITransportable, new() {
 			var json = value.ToJson();
 			var obj = new T();
+			obj.FromJson( json );
+			return obj;
+		}
+		
+		/// <summary>
+		/// clone for scriptable objects
+		/// </summary>
+		/// <returns></returns>
+		public static T ClonedSO<T>(this T value) where T : ScriptableObject, ITransportable, new() {
+			var json = value.ToJson();
+			var obj = ScriptableObject.CreateInstance<T>();
 			obj.FromJson( json );
 			return obj;
 		}

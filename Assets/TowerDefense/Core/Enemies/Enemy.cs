@@ -11,6 +11,7 @@ namespace TowerDefense.Core.Enemies {
         public RoadManager roadManager;
         public float speed;
         public float rotationSpeed = 1;
+        public uint coinReward = 1;
 
         public event Action<Damage> onTakeDamage;
         public event Action<float> onLifeChanged;

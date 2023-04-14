@@ -10,6 +10,7 @@ using TowerDefense.Background;
 using TowerDefense.Background.Loading;
 using TowerDefense.Common;
 using TowerDefense.Core.Starter;
+using TowerDefense.Data;
 using TowerDefense.Lobby.LevelChoosing;
 using TriInspector;
 using UnityEngine;
@@ -89,7 +90,7 @@ namespace TowerDefense.Lobby {
 
         void onSettingsBtnClick() { }
 
-        public void StartGame(CoreLevelData levelDataObject, string levelDataJson) {
+        public void StartGame(CoreLevelData levelDataObject) {
 
             BackgroundRunner.Current.StartCoroutine( start() );
 
@@ -97,12 +98,6 @@ namespace TowerDefense.Lobby {
                 LoadingScreenManager.Current.StartLoadingScreen();
                 LoadingScreenManager.Current.state = LoadingScreenManager.State.GoingToCore;
                 yield return null;
-
-                // handle josn to object
-                if (!levelDataObject) {
-                    var level = ScriptableObject.CreateInstance<CoreLevelData>();
-                    yield return new WaitForTask( Task.Run( () => level.FromJson( levelDataJson ) ) );
-                }
 
                 yield return SceneManager.UnloadSceneAsync( gameObject.scene );
                 yield return null;

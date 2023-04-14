@@ -1,9 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using TowerDefense.Transport;
 
-namespace TowerDefense.Core.UI.Win {
-    public class WinData : ITransportable {
-        public int stars;
+namespace TowerDefense.Core.UI.Lose {
+    [Serializable]
+    public class LoseData : ITransportable {
         public float time;
         public ulong coins;
 

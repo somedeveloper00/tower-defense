@@ -2,6 +2,8 @@
 using System.Collections;
 using TowerDefense.Core.EnemySpawn;
 using TowerDefense.Core.Env;
+using TowerDefense.Data;
+using TowerDefense.Transport;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
@@ -14,8 +16,8 @@ namespace TowerDefense.Core.Starter {
         /// </summary>
         /// <returns></returns>
         public static IEnumerator StartCore(CoreLevelData level, Action onComplete = null) {
-            var clevel = ScriptableObject.CreateInstance<CoreLevelData>();
-            clevel.TakeFrom( level );
+            CoreLevelData clevel;
+            clevel = level.ClonedSO();
             var path = SceneDatabase.Instance.GetScenePath( clevel.env );
             yield return null;
             yield return SceneManager.LoadSceneAsync( path, LoadSceneMode.Additive );

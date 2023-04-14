@@ -14,13 +14,9 @@ namespace TowerDefense.Core.UI.Win {
         [SerializeField] GameObject[] starObjects;
         [SerializeField] Button returnButton;
 
-        protected override void OnEnable() {
-            base.OnEnable();
-            canvasGroup.alpha = 0;
-        }
-
         protected override void Start() {
             base.Start();
+            canvasGroup.alpha = 0;
             for (int i = 0; i < starObjects.Length; i++) {
                 starObjects[i].SetActive( i < winData.stars );
             }

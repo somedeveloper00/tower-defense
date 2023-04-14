@@ -27,6 +27,8 @@ MonoBehaviour:
     - time: 2
       spawns: []
   starTime: 2c010000c800000096000000
+  coinMultiplier: 1
+  coinBonusForStars: 6400000000000000c800000000000000f401000000000000
   references:
     version: 2
     RefIds: []

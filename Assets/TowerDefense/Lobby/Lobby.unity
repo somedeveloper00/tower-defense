@@ -174,7 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_UiScaleMode: 1
-  m_ReferencePixelsPerUnit: 100
+  m_ReferencePixelsPerUnit: 1
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
@@ -366,6 +366,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playOnEnable: 0
+  useProxyAsCore: 1
+  useDefaultCoreProxy: 1
+  defaultCoreProxy: AnimFlex.Core.Proxy.AnimFlexCoreProxyUnscaled
+  coreProxy: {fileID: 0}
   resetOnPlay: 1
   sequence:
     nodes:
@@ -479,7 +483,7 @@ MonoBehaviour:
             m_PersistentCalls:
               m_Calls: []
           fromObject: {fileID: 611883750}
-          target: {x: -50, y: 0, z: 0}
+          target: {x: -500, y: 0, z: 0}
     - rid: 1861648045514162180
       type: {class: CMultiTweenerLocalPosition, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
       data:
@@ -1034,7 +1038,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 100
+  m_PixelsPerUnitMultiplier: 1
 --- !u!222 &229995435
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1290,7 +1294,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 100
+  m_PixelsPerUnitMultiplier: 1
 --- !u!222 &487494302
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2354,7 +2358,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 100
+  m_PixelsPerUnitMultiplier: 1
 --- !u!222 &1372271028
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -17,15 +17,18 @@ namespace TowerDefense.Data {
 
 
         public LevelsData levelsData;
+        public EcoProgress ecoProg;
         public DefendersProgress defendersProg = new ();
         public LevelProgress levelProg = new ();
 
 
         public void Load(SecureDatabase secureDatabase) {
-            if (secureDatabase.TryGetValue<DefendersProgress>( "defprog", out var defProg ))
-                defendersProg = defProg;
-            if (secureDatabase.TryGetValue<LevelProgress>( "lvlprog", out var lvlProg ))
-                levelProg = lvlProg;
+            if (secureDatabase.TryGetValue<DefendersProgress>( "defprog", out var defendersProg ))
+                this.defendersProg = defendersProg;
+            if (secureDatabase.TryGetValue<LevelProgress>( "lvlprog", out var levelProg ))
+                this.levelProg = levelProg;
+            if (secureDatabase.TryGetValue<EcoProgress>( "ecoprog", out var ecoProg ))
+                this.ecoProg = ecoProg;
 
             // making sure level 1 is always unlocked
             GetOrCreateLevelProg( levelsData.coreLevels[0].id ).status |= LevelProgress.LevelStatus.Unlocked;
@@ -36,6 +39,8 @@ namespace TowerDefense.Data {
         public void Save(SecureDatabase secureDatabase) {
             secureDatabase.Set( "defprog", defendersProg );
             secureDatabase.Set( "lvlprog", levelProg );
+            secureDatabase.Set( "ecoprog", ecoProg );
+            
             secureDatabase.Save();
             Debug.Log( $"player global data saved" );
         }

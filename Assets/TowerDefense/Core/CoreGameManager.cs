@@ -1,8 +1,9 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AnimFlex.Core.Proxy;
+using AnimFlex.Tweening;
 using DialogueSystem;
 using TowerDefense.Background;
 using TowerDefense.Background.Loading;
@@ -39,7 +40,10 @@ namespace TowerDefense.Core {
 
         CoreLevelData _levelData;
         bool _gameActive = false;
-        float gameTime = 0;
+        float _gameTime = 0;
+        ulong _coinsReceivedFromEnemiesKilled = 0;
+        Tweener _slowDownTweener = null;
+        
         
         void OnEnable() {
             CoreGameEvents.Current.OnStartupFinished += OnCoreStarterFinished;
@@ -47,7 +51,7 @@ namespace TowerDefense.Core {
         }
         
         void Start() {
-            gameTime = 0;
+            _gameTime = 0;
             _gameActive = true;
             CoreGameEvents.Current.OnGameStart?.Invoke( this );
             CoreGameEvents.Current.OnEnemySpawn += OnEnemySpawn;
@@ -66,11 +70,17 @@ namespace TowerDefense.Core {
             CoreGameEvents.Current.OnDefenderDestroy -= OnDefenderDestroy;
             CoreGameEvents.Current.OnDefenderSpawn -= OnDefenderSpawn;
             CoreGameEvents.Current.OnEnemySpawnerInitialize -= OnSpawnerInitialize;
+            if (_slowDownTweener is not null && _slowDownTweener.IsActive()) {
+                _slowDownTweener.Kill( false, false );
+            }
+            if (Time.timeScale != 1) {
+                Time.timeScale = 1;
+            }
         }
 
         void Update() {
             if (_gameActive) {
-                gameTime += Time.deltaTime;
+                _gameTime += Time.deltaTime;
             }
         }
 
@@ -125,6 +135,7 @@ namespace TowerDefense.Core {
         }
 
         void OnEnemyDestroy(Enemy enemy) {
+            _coinsReceivedFromEnemiesKilled += enemy.coinReward;
             Destroy( enemy.gameObject );
             enemies.Remove( enemy );
             // check if any spawners has any enemy to spawn
@@ -147,10 +158,10 @@ namespace TowerDefense.Core {
         async void Win() {
             // making data for win
             var winData = new WinData();
-            winData.time = gameTime;
-            winData.stars = gameTime > _levelData.starTime[2] ? 3 :
-                gameTime > _levelData.starTime[1] ? 2 :
-                gameTime > _levelData.starTime[0] ? 1 : 0;
+            winData.time = _gameTime;
+            winData.stars = _levelData.EvaluateStar( _gameTime );
+            winData.coins = (ulong)( _coinsReceivedFromEnemiesKilled * _levelData.coinMultiplier )
+                            + (ulong)winData.stars * _levelData.EvaluateBonusCoinForStar( winData.stars );
             Debug.Log( $"Won Game!: {winData.ToJson()}" );
 
             CoreGameEvents.Current.onWin?.Invoke( winData );
@@ -159,30 +170,51 @@ namespace TowerDefense.Core {
             // handle data modification
             var level = PlayerGlobals.Current.GetOrCreateLevelProg( _levelData.id );
             level.status |= LevelProgress.LevelStatus.Finished;
-            level.stars = 3;
+            level.stars = winData.stars;
+            level.coinsReceived += winData.coins;
             level.playCount++;
             // check if there's next level, if so unlock it 
             if (PlayerGlobals.Current.TryGetNextLevelProg( level.id, out var nextLevel )) {
                 nextLevel.status |= LevelProgress.LevelStatus.Unlocked; 
             }
+            PlayerGlobals.Current.ecoProg.coins += winData.coins;
             PlayerGlobals.Current.Save( SecureDatabase.Current );
+            
+            // slow down time
+            _slowDownTweener = Tweener.Generate( () => Time.timeScale, value => Time.timeScale = value, 0f,
+                winDialogueDelay, proxy: AnimFlexCoreProxyUnscaled.Default );
             
             // open win dialogue
             await Task.Delay( (int)(winDialogueDelay * 1000) );
             var dialogue =
                 DialogueManager.Current.GetOrCreate<WinDialogue>( parentTransform: CoreUI.Current.transform );
             dialogue.winData = winData;
+            
         }
 
         async void Lose() {
-            await Task.Delay( (int)(loseDialogueDelay * 1000) );
-            var dialogue =
-                DialogueManager.Current.GetOrCreate<LoseDialogue>( parentTransform: CoreUI.Current.transform );
+
+            // making data for lose 
+            var loseData = new LoseData();
+            loseData.time = _gameTime;
+            loseData.coins = (ulong)( _coinsReceivedFromEnemiesKilled * _levelData.coinMultiplier );
+            CoreGameEvents.Current.onLose?.Invoke(loseData);
             
             // handle data modification
             var level = PlayerGlobals.Current.GetOrCreateLevelProg( _levelData.id );
             level.playCount++;
+            level.coinsReceived += loseData.coins;
+            PlayerGlobals.Current.ecoProg.coins += loseData.coins;
             PlayerGlobals.Current.Save( SecureDatabase.Current );
+            
+            // slow down time
+            _slowDownTweener = Tweener.Generate( () => Time.timeScale, value => Time.timeScale = value, 0f, loseDialogueDelay,
+                proxy: AnimFlexCoreProxyUnscaled.Default );
+
+            // open lose dialogue
+            await Task.Delay( (int)(loseDialogueDelay * 1000) );
+            var dialogue = DialogueManager.Current.GetOrCreate<LoseDialogue>( parentTransform: CoreUI.Current.transform );
+            dialogue.loseData = loseData;
         }
     }
 }

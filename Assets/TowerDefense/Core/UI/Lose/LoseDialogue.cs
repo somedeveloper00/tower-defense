@@ -1,6 +1,6 @@
-﻿using System;
-using AnimFlex.Sequencer.UserEnd;
+﻿using AnimFlex.Sequencer.UserEnd;
 using DialogueSystem;
+using RTLTMPro;
 using TowerDefense.Ad;
 using TowerDefense.Common;
 using TriInspector;
@@ -11,30 +11,24 @@ namespace TowerDefense.Core.UI.Lose {
     [DeclareFoldoutGroup("ref", Title = "References", Expanded = true)]
     public class LoseDialogue : Dialogue {
 
-        [SerializeField] string adSorryTitleTxt;
-        [SerializeField] string adSorryTxt;
+        public LoseData loseData;
+        
         [GroupNext("ref")]
+        [SerializeField] RTLTextMeshPro coinAmountTxt;
         [SerializeField] SequenceAnim inSequence, outSequence;
         [SerializeField] Button retryBtn, returnBtn;
         
 
         protected override void OnEnable() {
             base.OnEnable();
-            
-            canvasRaycaster.enabled = false;
-            canvasGroup.alpha = 0;
-            
             retryBtn.onClick.AddListener( onRetryBtnClick );
             returnBtn.onClick.AddListener( onReturnBtnClick );
         }
 
         protected override void Start() {
             base.Start();
-            inSequence.PlaySequence();
-            inSequence.sequence.onComplete -= enableListeners;
-            inSequence.sequence.onComplete += enableListeners;
-            
-            void enableListeners() => canvasRaycaster.enabled = true;
+            // inSequence.PlaySequence();
+            coinAmountTxt.text = loseData.coins.ToString( "#,0" );
         }
         
         

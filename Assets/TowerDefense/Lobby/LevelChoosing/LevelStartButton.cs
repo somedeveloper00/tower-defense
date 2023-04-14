@@ -20,7 +20,7 @@ namespace TowerDefense.Lobby.LevelChoosing {
             title.text = coreLevelData.title;
         }
         void onPlayButtonClick() {
-            LobbyManager.Current.StartGame( coreLevelData, null );
+            LobbyManager.Current.StartGame( coreLevelData );
         }
     }
 }
