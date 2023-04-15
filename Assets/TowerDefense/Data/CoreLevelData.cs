@@ -28,6 +28,10 @@ namespace TowerDefense.Data {
         /// </summary>
         public ulong[] coinBonusForStars;
 
+        [Tooltip("The recommended amount of coins for this level")]
+        public uint recomendedCoins = 100;
+        
+
         void OnValidate() {
             if (starTime.Length != 3) Array.Resize( ref starTime, 3 );
             if (coinBonusForStars.Length != 3) Array.Resize( ref coinBonusForStars, 3 );

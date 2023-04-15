@@ -11,10 +11,10 @@ using UnityEditor;
 
 namespace TowerDefense.Core.Defenders {
     public abstract class Defender : MonoBehaviour { 
-        public CoreGameManager coreGameManager;
         public float attackRange;
         public float attackPower;
         public float attackReloadTime;
+        public ulong cost;
         
         protected Enemy focusedenemy;
         protected float timeSinceLastAttack;
@@ -40,7 +40,7 @@ namespace TowerDefense.Core.Defenders {
                 Vector3.Distance( focusedenemy.transform.position, transform.position ) > attackRange;
             
             if ( shouldFindNewEnemy ) {
-                var enemiesInRange = coreGameManager.enemies.Where( e =>
+                var enemiesInRange = CoreGameManager.Current.enemies.Where( e =>
                     Vector3.Distance( e.transform.position, transform.position ) < attackRange );
                 // get one that's closer to escaping
                 Enemy enem = null;

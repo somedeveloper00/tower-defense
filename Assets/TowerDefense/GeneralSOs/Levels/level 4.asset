@@ -39,6 +39,7 @@ MonoBehaviour:
   starTime: 2c010000c800000096000000
   coinMultiplier: 1
   coinBonusForStars: 64000000000000002c010000000000005802000000000000
+  recomendedCoins: 60
   references:
     version: 2
     RefIds: []

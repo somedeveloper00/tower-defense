@@ -18,6 +18,13 @@ namespace TowerDefense.Lobby {
             deleteAll?.onClick.AddListener( DeleteSaveData );
         }
 
+        public void deleteData() {
+            SecureDatabase.Current.DeleteAll();
+            PreferencesDatabase.Current.DeleteAll();
+            SecureDatabase.Current.Load();
+            PreferencesDatabase.Current.Load();
+        }
+
         [Button]
         async void MessageTestAd() {
             var dialogue = DialogueManager.Current.GetOrCreate<MessageDialogue>();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using TriInspector;
 using UnityEngine;
 
@@ -10,6 +11,8 @@ namespace TowerDefense.Core.Defenders {
         [SerializeField] List<DefenderItem> defenderItems;
 
         public static DefenderDatabase Current;
+
+        public string[] GetAllNames() => defenderItems.Select( d => d.name ).ToArray();
 
         public Defender GetDefenderMainPrefab(string name) => defenderItems.Find( d => d.name == name ).mainPrefab;
         public GameObject GetDefenderPlaceholderPrefab(string name) => defenderItems.Find( d => d.name == name ).placeholderPrefab;

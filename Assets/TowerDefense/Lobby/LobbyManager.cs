@@ -90,7 +90,13 @@ namespace TowerDefense.Lobby {
 
         void onSettingsBtnClick() { }
 
-        public void StartGame(CoreLevelData levelDataObject) {
+        public void StartGame(CoreLevelData levelDataObject, CoreSessionPack sessionPack) {
+
+            if (PlayerGlobals.Current.ecoProg.coins < sessionPack.coins) {
+                throw new Exception( "not enough coins" );
+            }
+
+            PlayerGlobals.Current.ecoProg.coins -= sessionPack.coins;
 
             BackgroundRunner.Current.StartCoroutine( start() );
 
@@ -101,7 +107,8 @@ namespace TowerDefense.Lobby {
 
                 yield return SceneManager.UnloadSceneAsync( gameObject.scene );
                 yield return null;
-                BackgroundRunner.Current.StartCoroutine( CoreStartup.StartCore( levelDataObject,
+
+                BackgroundRunner.Current.StartCoroutine( CoreStartup.StartCore( levelDataObject, sessionPack,
                     onComplete: () => { BackgroundRunner.Current.StartCoroutine( onComplete() ); } ) );
             }
 

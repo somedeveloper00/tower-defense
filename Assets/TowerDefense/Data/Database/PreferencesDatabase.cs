@@ -12,9 +12,9 @@ namespace TowerDefense.Data.Database {
         [RuntimeInitializeOnLoadMethod( RuntimeInitializeLoadType.BeforeSplashScreen )]
         static void start() => Current = new PreferencesDatabase();
         PreferencesDatabase() { }
-        
+
         public void Load() { }
-        public void Save() => PlayerPrefs.Save();
+    public void Save() => PlayerPrefs.Save();
         public bool KeyExists(string key) => PlayerPrefs.HasKey( key );
         public T GetValue<T>(string key) where T : ITransportable, new() {
             var r = new T();

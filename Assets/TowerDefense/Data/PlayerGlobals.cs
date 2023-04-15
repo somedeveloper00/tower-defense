@@ -15,6 +15,10 @@ namespace TowerDefense.Data {
             GameInitializer.onSecureDataLoad += Load;
         }
 
+        /// <summary>
+        /// minumum amount of coin required for entering a level
+        /// </summary>
+        public const int MIN_COIN_FOR_LEVEL = 100;   
 
         public LevelsData levelsData;
         public EcoProgress ecoProg;

@@ -19,7 +19,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: ea72b93161314ce468b259cfd4ac0bcf, type: 2}
     - {fileID: 11400000, guid: 55e014981ae16184686d2bef70020e6c, type: 2}
   ecoProg:
-    coins: 7
+    coins: 200
   defendersProg:
     defenders: []
   levelProg:

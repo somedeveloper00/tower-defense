@@ -14,6 +14,7 @@ namespace TowerDefense.Core.DefenderSpawn {
 
         public void SpawnUsingSelector(string defenderName) {
             StartCoroutine( enumerator() );
+            Debug.Log( "jooj" );
 
             IEnumerator enumerator() {
                 var placeholder = DefenderDatabase.Current.GetDefenderPlaceholderPrefab( defenderName );
@@ -31,11 +32,13 @@ namespace TowerDefense.Core.DefenderSpawn {
             }
         }
 
-        public void SpawnManyUsingSelector(string name, int count) {
-            
-        }
-
         public void SpawnDefender(Defender prefab, Vector3 position) {
+            if (CoreGameManager.Current.sessionPack.coins < prefab.cost) {
+                throw new Exception( "coins is not sufficent" );
+            }
+            Debug.Log( $"{CoreGameManager.Current.sessionPack.coins} === {prefab.cost}" );
+            CoreGameManager.Current.sessionPack.coins -= prefab.cost;
+            CoreGameEvents.Current.onSessionCoinModified?.Invoke();
             var defender = Instantiate( prefab, position, Quaternion.identity, transform );
             CoreGameEvents.Current.OnDefenderSpawn?.Invoke( defender );
             Debug.Log( $"spawned {defender}" );

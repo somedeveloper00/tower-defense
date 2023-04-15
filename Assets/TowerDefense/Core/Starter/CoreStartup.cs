@@ -15,7 +15,7 @@ namespace TowerDefense.Core.Starter {
         /// creates a copy of the level and loads the core and executes all the necessary calls to startup the gameplay
         /// </summary>
         /// <returns></returns>
-        public static IEnumerator StartCore(CoreLevelData level, Action onComplete = null) {
+        public static IEnumerator StartCore(CoreLevelData level, CoreSessionPack sessionPack, Action onComplete = null) {
             CoreLevelData clevel;
             clevel = level.ClonedSO();
             var path = SceneDatabase.Instance.GetScenePath( clevel.env );
@@ -29,7 +29,7 @@ namespace TowerDefense.Core.Starter {
             }
 
             onComplete?.Invoke();
-            CoreGameEvents.Current.OnStartupFinished?.Invoke( clevel );
+            CoreGameEvents.Current.OnStartupFinished?.Invoke( level, sessionPack );
         }
     }
 }

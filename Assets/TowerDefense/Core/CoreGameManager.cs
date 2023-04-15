@@ -34,17 +34,20 @@ namespace TowerDefense.Core {
         [SerializeField] float winDialogueDelay = 1;
         [SerializeField] float loseDialogueDelay = 1;
 
-        [ShowInInspector, ReadOnly] public readonly List<Enemy> enemies = new(16);
-        [ShowInInspector, ReadOnly] public readonly List<Defender> defenders = new(8);
-        [ShowInInspector, ReadOnly] public readonly List<EnemySpawner> spawners = new(4);
-
+        [Title("Runtime")]
+        [ShowInInspector] public readonly List<Enemy> enemies = new(16);
+        [ShowInInspector] public readonly List<Defender> defenders = new(8);
+        [ShowInInspector] public readonly List<EnemySpawner> spawners = new(4);
+        [ShowInInspector] public CoreSessionPack sessionPack;
+        
         CoreLevelData _levelData;
         bool _gameActive = false;
         float _gameTime = 0;
         ulong _coinsReceivedFromEnemiesKilled = 0;
         Tweener _slowDownTweener = null;
         
-        
+
+
         void OnEnable() {
             CoreGameEvents.Current.OnStartupFinished += OnCoreStarterFinished;
             Current = this;
@@ -60,6 +63,7 @@ namespace TowerDefense.Core {
             CoreGameEvents.Current.OnDefenderDestroy += OnDefenderDestroy;
             CoreGameEvents.Current.OnDefenderSpawn += OnDefenderSpawn;
             CoreGameEvents.Current.OnEnemySpawnerInitialize += OnSpawnerInitialize;
+            CoreGameEvents.Current.onSessionCoinModified?.Invoke();
         }
 
         void OnDestroy() {
@@ -94,7 +98,7 @@ namespace TowerDefense.Core {
                 yield return null;
                 yield return SceneManager.UnloadSceneAsync( gameObject.scene );
                 bool canContinue = false;
-                BackgroundRunner.Current.StartCoroutine( CoreStartup.StartCore( _levelData, () => canContinue = true ) );
+                BackgroundRunner.Current.StartCoroutine( CoreStartup.StartCore( _levelData, sessionPack, () => canContinue = true ) );
                 yield return new WaitUntil( () => canContinue );
                 LoadingScreenManager.Current.EndLoadingScreen();
             }
@@ -113,8 +117,9 @@ namespace TowerDefense.Core {
         }
         
         
-        void OnCoreStarterFinished(CoreLevelData coreLevelData) {
+        void OnCoreStarterFinished(CoreLevelData coreLevelData, CoreSessionPack sessionPack) {
             _levelData = Instantiate( coreLevelData );
+            this.sessionPack = sessionPack;
         }
 
         void OnSpawnerInitialize(EnemySpawner spawner) {
@@ -122,7 +127,6 @@ namespace TowerDefense.Core {
         }
 
         void OnDefenderSpawn(Defender defender) {
-            defender.coreGameManager = this;
             defenders.Add( defender );
         }
 
@@ -138,23 +142,33 @@ namespace TowerDefense.Core {
             _coinsReceivedFromEnemiesKilled += enemy.coinReward;
             Destroy( enemy.gameObject );
             enemies.Remove( enemy );
-            // check if any spawners has any enemy to spawn
-            if (enemies.Count == 0 && spawners.All( s => s.IsDone() )) {
-                Win();
-            }
+            if (checkForWin()) Win();
         }
 
         void OnEnemyReachEnd(Enemy enemy) {
             Destroy( enemy.gameObject );
             enemies.Remove( enemy );
             life -= 1;
+            if (checkForLose()) Lose();
+            if (checkForWin()) Win();
+        }
+
+        bool checkForLose() {
             if (life <= 0 && _gameActive) {
                 _gameActive = false;
-                Debug.Log( $"Lost Game!" );
-                Lose();
+                return true;
             }
+
+            return false;
         }
-        
+
+        bool checkForWin() {
+            if (enemies.Count == 0 && spawners.All( s => s.IsDone() )) {
+                return true;
+            }
+            return false;
+        }
+
         async void Win() {
             // making data for win
             var winData = new WinData();
@@ -198,6 +212,7 @@ namespace TowerDefense.Core {
             var loseData = new LoseData();
             loseData.time = _gameTime;
             loseData.coins = (ulong)( _coinsReceivedFromEnemiesKilled * _levelData.coinMultiplier );
+            Debug.Log( $"Won Game!: {loseData.ToJson()}" );
             CoreGameEvents.Current.onLose?.Invoke(loseData);
             
             // handle data modification
