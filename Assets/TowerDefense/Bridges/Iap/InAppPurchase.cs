@@ -8,7 +8,7 @@ namespace TowerDefense.Bridges.Iap {
 
         protected InAppPurchase() => Current = this;
 
-        public abstract Task<Result> Initialize();
+        public abstract Task<Result> InitializeIfNotAlready();
         public abstract void Close();
 
         public abstract Task<Result<List<PurchasableInfo>>> GetPurchasableInfos(string productId);
@@ -27,7 +27,8 @@ namespace TowerDefense.Bridges.Iap {
 
         [Serializable]
         public class PurchasableInfo {
-            public string sku, title, price, description;
+            public string sku, title, description;
+            public ulong price;
             public bool isAvailable = true;
         }
 

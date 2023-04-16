@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using TapsellPlusSDK;
 using UnityEngine;
@@ -159,8 +160,13 @@ namespace TowerDefense.Bridges.Ad {
             TapsellPlus.ShowStandardBannerAd( responseId, TapsellPlusSDK.Gravity.Bottom, TapsellPlusSDK.Gravity.Bottom,
                 onAdOpened: model => {
                     canPass = true;
-                    activeBanners.Add( adId, responseId );
-                    Debug.Log( $"tapsell sided banner ad openned: {responseId}" );
+                    try {
+                        activeBanners.Add( adId, responseId );
+                        Debug.Log( $"tapsell sided banner ad openned: {responseId}" );
+                    }
+                    catch (Exception e) {
+                        Debug.LogError( e );
+                    }
                 }, onShowError: model => {
                     canPass = true;
                     Debug.LogError( model.errorMessage );

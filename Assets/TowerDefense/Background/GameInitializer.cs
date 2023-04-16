@@ -27,7 +27,7 @@ namespace TowerDefense.Background {
             
             // load in app purchasing
             var iapManager = new BazaarInAppPurchase();
-            yield return new WaitForTask( iapManager.Initialize() );
+            yield return new WaitForTask( iapManager.InitializeIfNotAlready() );
             
             // load data
             onSecureDataLoad?.Invoke( SecureDatabase.Current );

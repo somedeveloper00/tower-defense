@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Bazaar.Data;
 using Bazaar.Poolakey;
 using Bazaar.Poolakey.Data;
 using Newtonsoft.Json;
+using RTLTMPro;
 using UnityEngine;
 
 namespace TowerDefense.Bridges.Iap {
@@ -16,8 +18,10 @@ namespace TowerDefense.Bridges.Iap {
 
         const int RETRY_COUNT = 4;
 
-        public override async Task<Result> Initialize() {
+        public override async Task<Result> InitializeIfNotAlready() {
 
+            if (payment != null) return Result.Success;
+            
             SecurityCheck securityCheck = SecurityCheck.Enable( RSA );
             PaymentConfiguration paymentConfiguration = new PaymentConfiguration( securityCheck );
             payment = new Payment( paymentConfiguration );
@@ -48,15 +52,18 @@ namespace TowerDefense.Bridges.Iap {
             payment?.Disconnect();
         }
 
-        public override async Task<Result<List<PurchasableInfo>>> GetPurchasableInfos(string id) {
+        public override async Task<Result<List<PurchasableInfo>>> GetPurchasableInfos(string productId) {
 
+            await InitializeIfNotAlready();
+            
             int tryCount = 0;
             retry:
             tryCount++;
 
-            var result = await payment.GetSkuDetails( id, SKUDetails.Type.inApp );
+            var result = await payment.GetSkuDetails( productId, SKUDetails.Type.inApp );
             if (result.status != Status.Success) {
                 if (tryCount < RETRY_COUNT) {
+                    Debug.Log( $"failed getting info for sku: {productId}. trying again ({tryCount})" );
                     await Task.Delay( 1000 );
                     goto retry;
                 }
@@ -72,7 +79,7 @@ namespace TowerDefense.Bridges.Iap {
                 data = result.data.Select( data => new PurchasableInfo() {
                     sku = data.sku,
                     title = data.title,
-                    price = data.title,
+                    price = ulong.Parse(Per2EnNum( data.price )),
                     description = data.description,
                     isAvailable = data.isAvailable
                 } ).ToList()
@@ -80,6 +87,8 @@ namespace TowerDefense.Bridges.Iap {
         }
 
         public override async Task<Result<List<SubscriptionInfo>>> GetSubscriptionInfos(string id) {
+
+            await InitializeIfNotAlready();
 
             int tryCount = 0;
             retry:
@@ -111,6 +120,8 @@ namespace TowerDefense.Bridges.Iap {
         }
 
         public override async Task<Result<List<PurchaseRecord>>> GetPurchaseRecords(string id) {
+
+            await InitializeIfNotAlready();
 
             int tryCount = 0;
             retry:
@@ -147,6 +158,8 @@ namespace TowerDefense.Bridges.Iap {
 
         public override async Task<Result<List<PurchaseRecord>>> GetSubscriptionRecords(string id) {
 
+            await InitializeIfNotAlready();
+
             int tryCount = 0;
             retry:
             tryCount++;
@@ -181,21 +194,26 @@ namespace TowerDefense.Bridges.Iap {
             };
         }
 
-        public override async Task<Result<PurchaseRecord>>
-            PurchasePurchasable(string productId, string payload = null) {
+        public override async Task<Result<PurchaseRecord>> PurchasePurchasable(string productId, string payload = null) {
+
+            await InitializeIfNotAlready();
 
             int tryCount = 0;
             retry:
             tryCount++;
 
             var result = await payment.Purchase( productId, SKUDetails.Type.inApp, payload: payload );
-            if (result.status != Status.Success) {
+            if (result.status == Status.Unknown) {
                 if (tryCount < RETRY_COUNT) {
                     await Task.Delay( 1000 );
                     goto retry;
                 }
 
                 Debug.Log( "failed to connect to bazaar. max retries reached." );
+                return Result<PurchaseRecord>.Failed;
+            }
+
+            if (result.status != Status.Success) {
                 return Result<PurchaseRecord>.Failed;
             }
             
@@ -217,8 +235,9 @@ namespace TowerDefense.Bridges.Iap {
             };
         }
 
-        public override async Task<Result<PurchaseRecord>>
-            PurchaseSubscription(string productId, string payload = null) {
+        public override async Task<Result<PurchaseRecord>> PurchaseSubscription(string productId, string payload = null) {
+
+            await InitializeIfNotAlready();
 
             int tryCount = 0;
             retry:
@@ -255,6 +274,8 @@ namespace TowerDefense.Bridges.Iap {
 
         public override async Task<Result> ConsumePurchase(string purchaseToken) {
 
+            await InitializeIfNotAlready();
+
             int tryCount = 0;
             retry:
             tryCount++;
@@ -273,6 +294,27 @@ namespace TowerDefense.Bridges.Iap {
             Debug.Log( $"result: {JsonConvert.SerializeObject( result.data )}" );
 
             return Result.Success;
+        }
+
+        public static string Per2EnNum(string perNum) {
+            var builder = new StringBuilder( perNum );
+            for (int i = 0; i < builder.Length; i++) {
+                switch (builder[i]) {
+                    case '۰': builder[i] = '0'; break;
+                    case '۱': builder[i] = '1'; break;
+                    case '۲': builder[i] = '2'; break;
+                    case '۳': builder[i] = '3'; break;
+                    case '۴': builder[i] = '4'; break;
+                    case '۵': builder[i] = '5'; break;
+                    case '۶': builder[i] = '6'; break;
+                    case '۷': builder[i] = '7'; break;
+                    case '۸': builder[i] = '8'; break;
+                    case '۹': builder[i] = '9'; break;
+                    default: builder.Remove( i--, 1 ); break;
+                }
+            }
+
+            return builder.Length == 0 ? "0" : builder.ToString();
         }
     }
 }

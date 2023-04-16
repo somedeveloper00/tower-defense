@@ -1,26 +1,34 @@
 ﻿using System.Collections.Generic;
 using AnimFlex.Sequencer.UserEnd;
 using DialogueSystem;
-using TowerDefense.Bridges.Iap;
 using TowerDefense.Common;
+using TriInspector;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace TowerDefense.Lobby.ShopDialogue {
+    [DeclareFoldoutGroup( "ref", Title = "References", Expanded = true )]
     public class ShopDialogue : Dialogue {
 
-        public string productId;
-
+        [GroupNext("ref")]
+        [SerializeField] List<PurchaseButton> purchaseButtons = new();
         [SerializeField] SequenceAnim outSeq;
-        [SerializeField] string startLoadingTitleText;
-        [SerializeField] string startLoadingBodyText;
-        [SerializeField] string failedLoadingTitleText;
-        [SerializeField] string failedLoadingBodyText;
-        [SerializeField] MessageDialogue.IconType failedLoadingIcon;
-        [SerializeField] PurchaseButton purchaseButtonSample;
         [SerializeField] Button closeBtn;
+        
+        [SerializeField, TextArea] string startLoadingTitleText;
+        [SerializeField, TextArea] string startLoadingBodyText;
+        [SerializeField, TextArea] string failedLoadingTitleText;
+        [SerializeField, TextArea] string failedLoadingBodyText;
+        [SerializeField] MessageDialogue.IconType failedLoadingIcon;
 
-        List<PurchaseButton> purchaseButtons = new();
+#if UNITY_EDITOR
+        [Button]
+        void fillPurchaseButtonsFromChildren() {
+            purchaseButtons.Clear();
+            purchaseButtons.AddRange( GetComponentsInChildren<PurchaseButton>( true ) );
+        }
+#endif
+
 
         protected override async void Start() {
             base.Start();
@@ -28,10 +36,23 @@ namespace TowerDefense.Lobby.ShopDialogue {
             
             var loading = DialogueManager.Current.GetOrCreate<MessageDialogue>( transform.parent );
             loading.UsePresetForLoading( startLoadingTitleText, startLoadingBodyText );
-            var result = await InAppPurchase.Current.GetPurchasableInfos( productId );
+            loading.SetCloseButtonActive( true );
+            loading.onClose += closeIfCanceledByUser;
             
-            // failed. close this dialogue and ask to come back later
-            if (!result.success) {
+            // load all purchasable items
+            for (var i = 0; i < purchaseButtons.Count; i++) {
+                var r = await purchaseButtons[i].updateInfo();
+                if (!r) {
+                    purchaseButtons.RemoveAt( i-- );
+                }
+            }
+            // just in case if the tasks took too long
+            if (this == null) return;
+
+            loading.onClose -= closeIfCanceledByUser;
+
+            // if no purchase item available, then quit
+            if (purchaseButtons.Count == 0) {
                 loading.SetLoadingLayoutActive( false );
                 loading.SetTitleText( failedLoadingTitleText );
                 loading.SetBodyText( failedLoadingBodyText );
@@ -39,27 +60,23 @@ namespace TowerDefense.Lobby.ShopDialogue {
                 loading.AddOkButton();
                 await loading.AwaitClose();
                 CloseWithAnim();
+                return;
             }
-            else {
-                setUpPurchaseButtons( result.data );
-            }
-        }
 
-        void setUpPurchaseButtons(List<InAppPurchase.PurchasableInfo> purchasableInfos) {
-            foreach (var purchaseInfo in purchasableInfos) {
-                var purchaseButton = Instantiate( purchaseButtonSample, purchaseButtonSample.transform.parent );
-                purchaseButton.sku = purchaseInfo.sku;
-                purchaseButton.cost = ulong.Parse( purchaseInfo.price );
-                purchaseButton.title = purchaseInfo.title;
-                purchaseButton.description = purchaseInfo.description;
-                purchaseButton.UpdateView();
-                purchaseButtons.Add( purchaseButton );
+            await loading.Close();
+
+            void closeIfCanceledByUser() {
+                Debug.Log( $"closing....result was {loading.result}" );
+                if (loading.result == "cancel") {
+                    CloseWithAnim();
+                }
             }
         }
 
         public void CloseWithAnim() {
-            outSeq.PlaySequence();
-            outSeq.sequence.onComplete += Close;
+            Close();
+            // outSeq.PlaySequence();
+            // outSeq.sequence.onComplete += Close;
         }
     }
 }
