@@ -28,7 +28,7 @@ namespace TowerDefense.Common {
         [SerializeField] GameObject titleTxtLayout;
         [SerializeField] SequenceAnim outSequence;
         [SerializeField] RectTransform buttonsLayout;
-        [SerializeField] List<ButtonType> buttonTypes = new();
+        [SerializeField] List<TextButton> buttonTypes = new();
         [SerializeField] LoadingBar loadingBar;
         
         [UnGroupNext]
@@ -153,6 +153,28 @@ namespace TowerDefense.Common {
 
 #region Helpers
 
+        /// <summary>
+        /// general loading dialogue. the body text will ahve three dots animation
+        /// </summary>
+        public void UsePresetForLoading(string bodyText = null, string titleText = null) {
+            if (!string.IsNullOrEmpty( bodyText )) {
+                SetBodyTextAnim( 1, bodyText, bodyText + ".", bodyText + "..", bodyText + "..." );
+            }
+            else {
+                DisableBodyText();
+            }
+            if (!string.IsNullOrEmpty( titleText )) {
+                SetTitleText( titleText );
+            }
+            else {
+                DisableTitleText();
+            }
+            SetLoadingLayoutActive( true );
+            SetLoadingBarRotating();
+            SetCloseButtonActive( false );
+            SetCanCloseByOutsideClick( false );
+        }
+
         public void UsePresetForLoadingAd() {
             SetBodyTextAnim( 1, loadingAdText );
             DisableTitleText();
@@ -168,34 +190,43 @@ namespace TowerDefense.Common {
         public void UsePresetForConfirmation(string questionText) {
             DisableTitleText();
             SetBodyText( questionText );
-            AddButton( confirmTxt, "confirm" );
+            AddConfirmButton();
             SetCloseButtonActive( false );
-            AddButton( cancelTxt, "cancel" );
+            AddCancelButton();
         }
 
         public void UsePresetForAdCancelledByUser() {
             SetTitleText( adCancelByUserTitle );
             SetBodyText( adCancelByUserBody );
             SetIcon( IconType.MonkeySad );
-            AddButton( okTxt, "ok" );
+            AddOkButton();
         }
-        
+
         public void UsePresetForAdFailed() {
             SetTitleText( adFailedTitle );
             SetBodyText( adFailedBody );
             SetIcon( IconType.MonkeyThinking );
-            AddButton( okTxt, "ok" );
+            AddOkButton();
         }
 
         public void UsePresetForNotice(string title, string noticeText, IconType icon = IconType.None) {
             SetTitleText( title );
             SetBodyText( noticeText );
+            AddOkButton();
+        }
+
+        public void AddOkButton() {
             AddButton( okTxt, "ok" );
         }
 
+        public void AddConfirmButton() {
+            AddButton( confirmTxt, "confirm" );
+        }
+
+        public void AddCancelButton() {
+            AddButton( cancelTxt, "cancel" );
+        }
+
 #endregion
-
-
-        
     }
 }

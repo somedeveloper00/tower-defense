@@ -12,6 +12,7 @@ using System.IO;
 using System.Text;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Debug = UnityEngine.Debug;
 
 namespace TowerDefense {
@@ -87,7 +88,7 @@ namespace TowerDefense {
                     ObjMaterial objMaterial = new ObjMaterial { name = mats[material].name };
 
                     if (mats[material].mainTexture)
-                        objMaterial.textureName = EditorUtility.GetAssetPath( mats[material].mainTexture );
+                        objMaterial.textureName = AssetDatabase.GetAssetPath( mats[material].mainTexture );
                     else
                         objMaterial.textureName = null;
 
@@ -218,7 +219,7 @@ namespace TowerDefense {
                         mf[i] = (MeshFilter)mfList[i];
                     }
 
-                    string filename = EditorApplication.currentScene + "-" + exportedObjects;
+                    string filename = SceneManager.GetActiveScene() + "-" + exportedObjects;
 
                     int stripIndex = filename.LastIndexOf( '/' ); //FIXME: Path.PathSeparator here (?)
 

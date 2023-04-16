@@ -5,9 +5,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using AnimFlex.Sequencer.UserEnd;
 using DialogueSystem;
-using TowerDefense.Ad;
 using TowerDefense.Background;
 using TowerDefense.Background.Loading;
+using TowerDefense.Bridges.Ad;
 using TowerDefense.Common;
 using TowerDefense.Core.Starter;
 using TowerDefense.Data;
@@ -86,7 +86,9 @@ namespace TowerDefense.Lobby {
             Application.Quit();
         }
 
-        void onShopBtnClick() { }
+        void onShopBtnClick() {
+            DialogueManager.Current.GetOrCreate<ShopDialogue.ShopDialogue>( parentCanvasForDialogues );
+        }
 
         void onSettingsBtnClick() { }
 

@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using UnityEngine;
 
-namespace TowerDefense.Ad {
+namespace TowerDefense.Bridges.Ad {
     public class EditorAdManager : AdManager {
         public override async Task<bool> Initialize() {
             await Task.Delay( 2000 );

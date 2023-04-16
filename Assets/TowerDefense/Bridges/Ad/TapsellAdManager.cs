@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using TapsellPlusSDK;
 using UnityEngine;
 
-namespace TowerDefense.Ad {
+namespace TowerDefense.Bridges.Ad {
     class TapsellAdManager : AdManager {
 
         const int RETRY_COUNT = 10;

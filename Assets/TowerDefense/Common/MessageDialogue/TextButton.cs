@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace TowerDefense.Common {
-    class ButtonType : MonoBehaviour {
-        public string name;
+    class TextButton : MonoBehaviour {
+        public new string name;
         public Button button;
         public RTLTextMeshPro text;
     }

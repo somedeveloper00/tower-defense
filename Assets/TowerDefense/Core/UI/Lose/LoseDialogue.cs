@@ -1,7 +1,7 @@
 ﻿using AnimFlex.Sequencer.UserEnd;
 using DialogueSystem;
 using RTLTMPro;
-using TowerDefense.Ad;
+using TowerDefense.Bridges.Ad;
 using TowerDefense.Common;
 using TriInspector;
 using UnityEngine;

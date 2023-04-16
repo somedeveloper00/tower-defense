@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace TowerDefense.Ad {
+namespace TowerDefense.Bridges.Ad {
 
     public abstract class AdManager {
 

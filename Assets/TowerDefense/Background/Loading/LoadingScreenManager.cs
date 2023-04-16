@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using TowerDefense.Ad;
 using TriInspector;
 using UnityEngine;
 
@@ -32,7 +31,7 @@ namespace TowerDefense.Background.Loading {
             if (t >= 0) t += Time.deltaTime;
         }
 
-        public async void StartLoadingScreen() {
+        public void StartLoadingScreen() {
             if (t >= 0 || _currentUi != null) return;
             Debug.Log( $"loading started" );
             _currentUi = Instantiate( prefab, transform );

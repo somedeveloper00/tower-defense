@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections;
-using TowerDefense.Ad;
 using TowerDefense.Background.Loading;
+using TowerDefense.Bridges.Ad;
+using TowerDefense.Bridges.Iap;
 using TowerDefense.Core.Env;
 using TowerDefense.Data.Database;
 using UnityEngine;
@@ -24,6 +25,10 @@ namespace TowerDefense.Background {
             yield return new WaitForTask<bool>( AdManager.Current.Initialize(), result => success = result );
             Debug.Log( success ? $"ad initalized successfully" : $"Ad failed to initialize" );
             
+            // load in app purchasing
+            var iapManager = new BazaarInAppPurchase();
+            yield return new WaitForTask( iapManager.Initialize() );
+            
             // load data
             onSecureDataLoad?.Invoke( SecureDatabase.Current );
 
@@ -35,6 +40,10 @@ namespace TowerDefense.Background {
             SceneManager.SetActiveScene( SceneManager.GetSceneByPath( scenePath ) );
             
             LoadingScreenManager.Current.EndLoadingScreen();
+        }
+
+        void OnApplicationQuit() {
+            InAppPurchase.Current.Close();
         }
     }
 }
