@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -6,7 +7,9 @@ using Bazaar.Data;
 using Bazaar.Poolakey;
 using Bazaar.Poolakey.Data;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using RTLTMPro;
+using TowerDefense.Transport;
 using UnityEngine;
 
 namespace TowerDefense.Bridges.Iap {
@@ -72,16 +75,22 @@ namespace TowerDefense.Bridges.Iap {
                 return Result<List<PurchasableInfo>>.Failed;
             }
 
-            Debug.Log( $"result: {JsonConvert.SerializeObject( result.data )}" );
+            Debug.Log( $"result: {JsonConvert.SerializeObject( result.data, Formatting.Indented )}" );
             
             return new Result<List<PurchasableInfo>> {
                 success = true,
-                data = result.data.Select( data => new PurchasableInfo() {
-                    sku = data.sku,
-                    title = data.title,
-                    price = ulong.Parse(Per2EnNum( data.price )),
-                    description = data.description,
-                    isAvailable = data.isAvailable
+                data = result.data.Select( data => {
+                    // parse description
+                    var parsedDesc = JsonConvert.DeserializeObject<BazaarDescriptionData>( data.description );
+                    return new PurchasableInfo() {
+                        sku = data.sku,
+                        title = data.title,
+                        price = ulong.Parse( data.price.Per2EnNum( false ) ),
+                        isAvailable = data.isAvailable,
+                        description = parsedDesc.desc,
+                        rewardCoins = parsedDesc.coins,
+                        viewType = parsedDesc.view,
+                    };
                 } ).ToList()
             };
         }
@@ -296,25 +305,20 @@ namespace TowerDefense.Bridges.Iap {
             return Result.Success;
         }
 
-        public static string Per2EnNum(string perNum) {
-            var builder = new StringBuilder( perNum );
-            for (int i = 0; i < builder.Length; i++) {
-                switch (builder[i]) {
-                    case '۰': builder[i] = '0'; break;
-                    case '۱': builder[i] = '1'; break;
-                    case '۲': builder[i] = '2'; break;
-                    case '۳': builder[i] = '3'; break;
-                    case '۴': builder[i] = '4'; break;
-                    case '۵': builder[i] = '5'; break;
-                    case '۶': builder[i] = '6'; break;
-                    case '۷': builder[i] = '7'; break;
-                    case '۸': builder[i] = '8'; break;
-                    case '۹': builder[i] = '9'; break;
-                    default: builder.Remove( i--, 1 ); break;
-                }
-            }
+       
+        [Serializable]
+        public class BazaarDescriptionData : ITransportable {
+            [TextArea]
+            public string desc;
+            public ulong coins;
 
-            return builder.Length == 0 ? "0" : builder.ToString();
+            // [JsonProperty( "coins" )]
+            // string fixed_coins {
+            //     get => coins.ToString();
+            //     set => coins = ulong.Parse( Per2EnNum( value ) );
+            // }
+
+            public PurchasableInfo.ViewType view;
         }
     }
 }

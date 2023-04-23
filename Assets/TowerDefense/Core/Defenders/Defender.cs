@@ -15,6 +15,7 @@ namespace TowerDefense.Core.Defenders {
         public float attackPower;
         public float attackReloadTime;
         public ulong cost;
+        public Texture2D icon;
         
         protected Enemy focusedenemy;
         protected float timeSinceLastAttack;

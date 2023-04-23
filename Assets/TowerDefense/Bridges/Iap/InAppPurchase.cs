@@ -9,6 +9,7 @@ namespace TowerDefense.Bridges.Iap {
         protected InAppPurchase() => Current = this;
 
         public abstract Task<Result> InitializeIfNotAlready();
+        
         public abstract void Close();
 
         public abstract Task<Result<List<PurchasableInfo>>> GetPurchasableInfos(string productId);
@@ -27,9 +28,16 @@ namespace TowerDefense.Bridges.Iap {
 
         [Serializable]
         public class PurchasableInfo {
-            public string sku, title, description;
+            public string sku;
+            public string title, description;
             public ulong price;
+            public ulong rewardCoins;
+            public ViewType viewType;
             public bool isAvailable = true;
+
+            public enum ViewType {
+                Small, Medium, Large
+            }
         }
 
         [Serializable]

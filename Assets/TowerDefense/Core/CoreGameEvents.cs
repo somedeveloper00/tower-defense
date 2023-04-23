@@ -14,6 +14,8 @@ namespace TowerDefense.Core {
         public Action<CoreGameManager> OnGameStart;
         public StartupFinished OnStartupFinished;
         public Action onSessionCoinModified;
+        public Action onLifeModified;
+        public Action onTimeModified;
         public Action<EnemySpawner> OnEnemySpawnerInitialize;
         public Action<Enemy> OnEnemySpawn;
         public Action<Enemy> OnEnemyDestroy;

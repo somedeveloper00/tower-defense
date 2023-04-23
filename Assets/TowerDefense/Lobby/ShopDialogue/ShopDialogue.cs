@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using AnimFlex.Sequencer.UserEnd;
 using DialogueSystem;
-using TowerDefense.Common;
+using TowerDefense.Background;
+using TowerDefense.Bridges.Iap;
 using TriInspector;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,73 +12,65 @@ namespace TowerDefense.Lobby.ShopDialogue {
     [DeclareFoldoutGroup( "ref", Title = "References", Expanded = true )]
     public class ShopDialogue : Dialogue {
 
-        [GroupNext("ref")]
-        [SerializeField] List<PurchaseButton> purchaseButtons = new();
-        [SerializeField] SequenceAnim outSeq;
+        [GroupNext( "ref" )] 
+        [SerializeField] Transform purchasableProductParent;
+        [SerializeField] List<PurchasableProductSample> purchasableProductSamples;
+        [SerializeField] SequenceAnim inSeq, outSeq;
         [SerializeField] Button closeBtn;
         
-        [SerializeField, TextArea] string startLoadingTitleText;
-        [SerializeField, TextArea] string startLoadingBodyText;
-        [SerializeField, TextArea] string failedLoadingTitleText;
-        [SerializeField, TextArea] string failedLoadingBodyText;
-        [SerializeField] MessageDialogue.IconType failedLoadingIcon;
-
-#if UNITY_EDITOR
-        [Button]
-        void fillPurchaseButtonsFromChildren() {
-            purchaseButtons.Clear();
-            purchaseButtons.AddRange( GetComponentsInChildren<PurchaseButton>( true ) );
+        [Serializable]
+        class PurchasableProductSample {
+            public PurchaseCard prefab;
+            public InAppPurchase.PurchasableInfo.ViewType viewType;
         }
-#endif
+        
 
-
+        bool _opened = false;
+        List<PurchaseCard> purchaseCards = new();
+        
         protected override async void Start() {
             base.Start();
-            closeBtn.onClick.AddListener( Close );
+            canvasGroup.alpha = 0;
+            canvasRaycaster.enabled = false;
             
-            var loading = DialogueManager.Current.GetOrCreate<MessageDialogue>( transform.parent );
-            loading.UsePresetForLoading( startLoadingTitleText, startLoadingBodyText );
-            loading.SetCloseButtonActive( true );
-            loading.onClose += closeIfCanceledByUser;
-            
-            // load all purchasable items
-            for (var i = 0; i < purchaseButtons.Count; i++) {
-                var r = await purchaseButtons[i].updateInfo();
-                if (!r) {
-                    purchaseButtons.RemoveAt( i-- );
-                }
-            }
-            // just in case if the tasks took too long
-            if (this == null) return;
-
-            loading.onClose -= closeIfCanceledByUser;
-
-            // if no purchase item available, then quit
-            if (purchaseButtons.Count == 0) {
-                loading.SetLoadingLayoutActive( false );
-                loading.SetTitleText( failedLoadingTitleText );
-                loading.SetBodyText( failedLoadingBodyText );
-                loading.SetIcon( failedLoadingIcon );
-                loading.AddOkButton();
-                await loading.AwaitClose();
-                CloseWithAnim();
+            var success = await GamePurchaseHandler.Current.UpdateData();
+            if (!success || GamePurchaseHandler.Current.AvailablePurchsableInfos.Count == 0) {
+                Close();
                 return;
             }
 
-            await loading.Close();
+            // SUCCESS
 
-            void closeIfCanceledByUser() {
-                Debug.Log( $"closing....result was {loading.result}" );
-                if (loading.result == "cancel") {
-                    CloseWithAnim();
-                }
+            // just in case if the tasks took too long
+            if (this == null) return;
+
+            var productInfos = GamePurchaseHandler.Current.AvailablePurchsableInfos;
+            for (int i = 0; i < productInfos.Count; i++) {
+                var purchaseCard = Instantiate(
+                    purchasableProductSamples.Find( p => p.viewType == productInfos[i].viewType ).prefab,
+                    purchasableProductParent );
+                purchaseCard.productInfo = productInfos[i];
+                purchaseCard.gameObject.SetActive( true );
+                purchaseCards.Add( purchaseCard );
             }
+            
+            // show dialogue
+            closeBtn.onClick.AddListener( CloseWithAnim );
+            inSeq.PlaySequence();
+            inSeq.sequence.onComplete += () => {
+                canvasRaycaster.enabled = true;
+                _opened = true;
+            };
         }
 
         public void CloseWithAnim() {
-            Close();
-            // outSeq.PlaySequence();
-            // outSeq.sequence.onComplete += Close;
+            if (_opened) {
+                outSeq.PlaySequence();
+                outSeq.sequence.onComplete += Close;
+            }
+            else {
+                Close();
+            }
         }
     }
 }

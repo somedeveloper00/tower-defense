@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Runtime.CompilerServices;
-using System.Threading;
 using System.Threading.Tasks;
 using AnimFlex.Sequencer.UserEnd;
 using DialogueSystem;

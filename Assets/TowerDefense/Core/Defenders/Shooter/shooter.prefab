@@ -389,11 +389,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eac43ad0b41540b38257f3c058217f64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coreGameManager: {fileID: 0}
   attackRange: 8.12
   attackPower: 7
   attackReloadTime: 1
   cost: 7
+  icon: {fileID: 2800000, guid: aa621385e905b7e4c95ffc8ffa6f7403, type: 3}
   animator: {fileID: 4569676112645766391}
   rotationSpeed: 10
   shootEffectSpawnPoint: {fileID: 3648616713778789558}

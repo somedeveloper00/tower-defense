@@ -879,11 +879,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b132abbd7e4644b3ac6dbae493e9d475, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coreGameManager: {fileID: 0}
   attackRange: 1.3
   attackPower: 10
   attackReloadTime: 0.7
   cost: 5
+  icon: {fileID: 2800000, guid: 0cb51c80b39f25542827a13a8beeb7e6, type: 3}
   animator: {fileID: 5942010116766356857}
   animCrossfade: 0.1
   animIdle: idle

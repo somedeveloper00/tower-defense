@@ -29,7 +29,8 @@ namespace TowerDefense.Core {
         public static CoreGameManager Current;
 
         public RoadManager roadManager;
-        public float life = 20;
+        public int life = 20;
+        public float gameTime = 0;
         
         [SerializeField] float winDialogueDelay = 1;
         [SerializeField] float loseDialogueDelay = 1;
@@ -42,7 +43,6 @@ namespace TowerDefense.Core {
         
         CoreLevelData _levelData;
         bool _gameActive = false;
-        float _gameTime = 0;
         ulong _coinsReceivedFromEnemiesKilled = 0;
         Tweener _slowDownTweener = null;
         
@@ -54,7 +54,7 @@ namespace TowerDefense.Core {
         }
         
         void Start() {
-            _gameTime = 0;
+            gameTime = 0;
             _gameActive = true;
             CoreGameEvents.Current.OnGameStart?.Invoke( this );
             CoreGameEvents.Current.OnEnemySpawn += OnEnemySpawn;
@@ -64,6 +64,7 @@ namespace TowerDefense.Core {
             CoreGameEvents.Current.OnDefenderSpawn += OnDefenderSpawn;
             CoreGameEvents.Current.OnEnemySpawnerInitialize += OnSpawnerInitialize;
             CoreGameEvents.Current.onSessionCoinModified?.Invoke();
+            CoreGameEvents.Current.onLifeModified?.Invoke();
         }
 
         void OnDestroy() {
@@ -84,7 +85,8 @@ namespace TowerDefense.Core {
 
         void Update() {
             if (_gameActive) {
-                _gameTime += Time.deltaTime;
+                gameTime += Time.deltaTime;
+                CoreGameEvents.Current.onTimeModified?.Invoke();
             }
         }
 
@@ -149,6 +151,7 @@ namespace TowerDefense.Core {
             Destroy( enemy.gameObject );
             enemies.Remove( enemy );
             life -= 1;
+            CoreGameEvents.Current.onLifeModified?.Invoke();
             if (checkForLose()) Lose();
             if (checkForWin()) Win();
         }
@@ -172,8 +175,8 @@ namespace TowerDefense.Core {
         async void Win() {
             // making data for win
             var winData = new WinData();
-            winData.time = _gameTime;
-            winData.stars = _levelData.EvaluateStar( _gameTime );
+            winData.time = gameTime;
+            winData.stars = _levelData.EvaluateStar( gameTime );
             winData.coins = (ulong)( _coinsReceivedFromEnemiesKilled * _levelData.coinMultiplier )
                             + (ulong)winData.stars * _levelData.EvaluateBonusCoinForStar( winData.stars );
             Debug.Log( $"Won Game!: {winData.ToJson()}" );
@@ -210,7 +213,7 @@ namespace TowerDefense.Core {
 
             // making data for lose 
             var loseData = new LoseData();
-            loseData.time = _gameTime;
+            loseData.time = gameTime;
             loseData.coins = (ulong)( _coinsReceivedFromEnemiesKilled * _levelData.coinMultiplier );
             Debug.Log( $"Won Game!: {loseData.ToJson()}" );
             CoreGameEvents.Current.onLose?.Invoke(loseData);

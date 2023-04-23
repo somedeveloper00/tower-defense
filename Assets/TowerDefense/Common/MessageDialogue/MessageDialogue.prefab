@@ -55,7 +55,9 @@ MonoBehaviour:
   defaultCoreProxy: AnimFlex.Core.Proxy.AnimFlexCoreProxyUnscaled
   coreProxy: {fileID: 0}
   resetOnPlay: 1
+  activateNextClipsASAP: 1
   sequence:
+    activateNextClipsASAP: 1
     nodes:
     - name: bck
       delay: 0
@@ -828,18 +830,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047e8afad3c64e64b1323784efd490e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playOnEnable: 1
+  playOnEnable: 0
   useProxyAsCore: 1
   useDefaultCoreProxy: 1
   defaultCoreProxy: AnimFlex.Core.Proxy.AnimFlexCoreProxyUnscaled
   coreProxy: {fileID: 0}
   resetOnPlay: 1
+  activateNextClipsASAP: 1
   sequence:
+    activateNextClipsASAP: 1
     nodes:
     - name: bck
       delay: 0
       clip:
         rid: 1861648332609814617
+    - name: Node 4
+      delay: 0
+      clip:
+        rid: 1861648517077401755
     - name: all
       delay: 0
       clip:
@@ -984,7 +992,11 @@ MonoBehaviour:
       data:
         component: {fileID: 7526248553148292152}
         propertyName: alpha
-        value: 0
+        value: 0.01
+    - rid: 1861648517077401755
+      type: {class: CWaitFrame, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
+      data:
+        frames: 1
 --- !u!1 &2701784867036793285
 GameObject:
   m_ObjectHideFlags: 0
@@ -1540,7 +1552,9 @@ MonoBehaviour:
   defaultCoreProxy: 
   coreProxy: {fileID: 0}
   resetOnPlay: 1
+  activateNextClipsASAP: 1
   sequence:
+    activateNextClipsASAP: 1
     nodes:
     - name: enable/disable
       delay: 0
@@ -2985,6 +2999,7 @@ MonoBehaviour:
   bodyTxtLayout: {fileID: 2701784866638763845}
   titleTxt: {fileID: 2701784867125775960}
   titleTxtLayout: {fileID: 2701784868322526113}
+  inSequence: {fileID: 2701784867029372946}
   outSequence: {fileID: 634138959}
   buttonsLayout: {fileID: 2701784866826361080}
   buttonTypes:

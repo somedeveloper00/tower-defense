@@ -138,6 +138,7 @@ GameObject:
   - component: {fileID: 321326630}
   - component: {fileID: 321326632}
   - component: {fileID: 321326633}
+  - component: {fileID: 321326634}
   m_Layer: 0
   m_Name: main
   m_TagString: Untagged
@@ -244,6 +245,52 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   setDefault: 1
+--- !u!114 &321326634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 321326625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8d778dfc54a4e43b0e482f2beff1891, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AllPurchasableInfos:
+  - sku: small_coin
+    title: 
+    description: 
+    price: 0
+    rewardCoins: 0
+    viewType: 0
+    isAvailable: 0
+  - sku: medium_coin
+    title: 
+    description: 
+    price: 0
+    rewardCoins: 0
+    viewType: 0
+    isAvailable: 0
+  - sku: large_coin
+    title: 
+    description: 
+    price: 0
+    rewardCoins: 0
+    viewType: 0
+    isAvailable: 0
+  updatingDataTitleTxt: "\u0628\u0631\u0648\u0632\u0631\u0633\u0627\u0646\u06CC"
+  updatingDataBodyTxt: "\u0628\u0631\u0648\u0632\u0631\u0633\u0627\u0646\u06CC \u06A9\u0627\u0644\u0627\u0647\u0627\u06CC
+    \u0642\u0627\u0628\u0644 \u0641\u0631\u0648\u0634"
+  purchasingTitleTxt: "\u062E\u0631\u06CC\u062F \u0627\u0632 \u0641\u0631\u0648\u0634\u06AF\u0627\u0647"
+  purchasingBodyTxt: "\u062F\u0631 \u062D\u0627\u0644 \u0628\u0627\u0632 \u06A9\u0631\u062F\u0646
+    \u0635\u0641\u062D\u0647 \u062E\u0631\u06CC\u062F"
+  unsuccessfulPurchaseTitleTxt: "\u06CC\u06A9 \u0645\u0634\u06A9\u0644\u06CC \u0631\u062E
+    \u062F\u0627\u062F!"
+  unsuccessfulPurchaseBodyTxt: "\u0645\u062A\u0627\u0633\u0641\u0627\u0646\u0647
+    \u0645\u0634\u06A9\u0644\u06CC \u0631\u062E \u062F\u0627\u062F\u0647. \u0644\u0637\u0641\u0627
+    \u062F\u0648\u0628\u0627\u0631\u0647 \u062A\u0644\u0627\u0634 \u06A9\u0646\u06CC\u062F"
+  unsuccessfulPurchaseIcon: 1
 --- !u!1001 &1668924323
 PrefabInstance:
   m_ObjectHideFlags: 0

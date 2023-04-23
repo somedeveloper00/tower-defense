@@ -26,7 +26,7 @@ namespace TowerDefense.Common {
         [SerializeField] GameObject bodyTxtLayout;
         [SerializeField] RTLTextMeshPro titleTxt;
         [SerializeField] GameObject titleTxtLayout;
-        [SerializeField] SequenceAnim outSequence;
+        [SerializeField] SequenceAnim inSequence, outSequence;
         [SerializeField] RectTransform buttonsLayout;
         [SerializeField] List<TextButton> buttonTypes = new();
         [SerializeField] LoadingBar loadingBar;
@@ -61,10 +61,11 @@ namespace TowerDefense.Common {
         public string result = null;
         
         Coroutine _bodyTxtCoroutine;
+        bool _opened = false;
 
         protected override void Start() {
             base.Start();
-            canvasGroup.alpha = 0; // for inSeq anim
+            // canvasGroup.alpha = 0; // for inSeq anim
             outsideBtn.onClick.AddListener( () => {
                 result = "cancel";
                 Close();
@@ -73,21 +74,30 @@ namespace TowerDefense.Common {
                 result = "cancel";
                 Close();
             } );
+            inSequence.PlaySequence();
+            inSequence.sequence.onComplete += () => _opened = true;
         }
 
         #region Options
 
         public void SetLoadingLayoutActive(bool active) => loadingLayout.SetActive( active );
+        
         public void SetCloseButtonActive(bool active) => closeLayout.SetActive( active );
+        
         public void SetCanCloseByOutsideClick(bool can) => outsideBtn.interactable = can;
 
         public void DisableBodyText() => bodyTxtLayout.SetActive( false );
+       
         public void SetBodyText(string text) {
+            // stop text anim if playing
+            if (_bodyTxtCoroutine != null)
+                StopCoroutine( _bodyTxtCoroutine );
             bodyTxtLayout.SetActive( true );
             bodyTxt.text = text;
         }
         
         public void DisableTitleText() => titleTxtLayout.SetActive( false );
+        
         public void SetTitleText(string text) {
             titleTxtLayout.SetActive( true );
             titleTxt.text = text;
@@ -139,16 +149,19 @@ namespace TowerDefense.Common {
 #endregion
 
 
-        public Task Close(bool noAnim = false) {
+        public async Task Close(bool noAnim = false) {
             if (noAnim) {
+                if (inSequence.sequence.IsPlaying())
+                    inSequence.sequence?.Stop();
                 base.Close();
             }
             else {
+                while (!_opened) await Task.Yield();
                 canvasRaycaster.enabled = false;
                 outSequence.PlaySequence();
                 outSequence.sequence.onComplete += base.Close;
             }
-            return AwaitClose();
+            await AwaitClose();
         }
 
 #region Helpers
@@ -156,7 +169,7 @@ namespace TowerDefense.Common {
         /// <summary>
         /// general loading dialogue. the body text will ahve three dots animation
         /// </summary>
-        public void UsePresetForLoading(string bodyText = null, string titleText = null) {
+        public void UsePresetForLoading(string titleText = null, string bodyText = null) {
             if (!string.IsNullOrEmpty( bodyText )) {
                 SetBodyTextAnim( 1, bodyText, bodyText + ".", bodyText + "..", bodyText + "..." );
             }
