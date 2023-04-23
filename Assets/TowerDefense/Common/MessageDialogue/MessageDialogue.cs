@@ -13,6 +13,7 @@ using UnityEngine.UI;
 namespace TowerDefense.Common {
     [DeclareFoldoutGroup("ref", Title = "References", Expanded = true)]
     public class MessageDialogue : Dialogue {
+        
         [GroupNext("ref")]
         [SerializeField] Image panelImg;
         [SerializeField] Image titleBarImg;
@@ -30,9 +31,9 @@ namespace TowerDefense.Common {
         [SerializeField] RectTransform buttonsLayout;
         [SerializeField] List<TextButton> buttonTypes = new();
         [SerializeField] LoadingBar loadingBar;
-        
-        [UnGroupNext]
-        [Title("Params")]
+
+        [UnGroupNext] [Title( "Params" )] 
+        [SerializeField] float exitDelay = 0.3f;
         [SerializeField] string[] loadingAdText;
         [SerializeField] string confirmTxt;
         [SerializeField] string cancelTxt;
@@ -123,7 +124,8 @@ namespace TowerDefense.Common {
             var btn = Instantiate( buttonTypes.Find( b => b.name == buttonType ), buttonsLayout );
             btn.gameObject.SetActive( true );
             btn.text.text = buttonText;
-            btn.button.onClick.AddListener( () => {
+            btn.button.onClick.AddListener( async () => {
+                canvasRaycaster.enabled = false;
                 result = buttonText;
                 Close();
             } );
@@ -150,6 +152,7 @@ namespace TowerDefense.Common {
 
 
         public async Task Close(bool noAnim = false) {
+            await Task.Delay( (int)(exitDelay * 1000) );
             if (noAnim) {
                 if (inSequence.sequence.IsPlaying())
                     inSequence.sequence?.Stop();
