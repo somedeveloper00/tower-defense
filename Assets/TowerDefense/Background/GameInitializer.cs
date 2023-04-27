@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using GameAnalyticsSDK;
 using TowerDefense.Background.Loading;
 using TowerDefense.Bridges.Ad;
 using TowerDefense.Bridges.Iap;
@@ -12,6 +15,20 @@ namespace TowerDefense.Background {
     public class GameInitializer : MonoBehaviour {
         
         public static Action<SecureDatabase> onSecureDataLoad;
+        public List<OnInitTask> onInitTasks = new List<OnInitTask>();
+
+        public class OnInitTask {
+            public int order;
+            public Task task;
+
+            public OnInitTask(int order, Task task) {
+                this.order = order;
+                this.task = task;
+            }
+        }
+
+        public static GameInitializer Current;
+        void OnEnable() => Current = this;
         
         IEnumerator Start() {
             
@@ -29,8 +46,17 @@ namespace TowerDefense.Background {
             var iapManager = new BazaarInAppPurchase();
             yield return new WaitForTask( iapManager.InitializeIfNotAlready() );
             
+            // load analytics
+            GameAnalytics.Initialize();
+
             // load data
             onSecureDataLoad?.Invoke( SecureDatabase.Current );
+            
+            // do after load tasks
+            onInitTasks.Sort( (t1, t2) => t1.order.CompareTo( t2.order ) );
+            for (int i = 0; i < onInitTasks.Count; i++) {
+                yield return new WaitForTask( onInitTasks[i].task );
+            }
 
             // load lobby
             var scenePath = SceneDatabase.Instance.GetScenePath( "lobby" );
@@ -45,5 +71,7 @@ namespace TowerDefense.Background {
         void OnApplicationQuit() {
             InAppPurchase.Current.Close();
         }
+        
+        
     }
 }

@@ -23,7 +23,6 @@ namespace TowerDefense.Bridges.Ad {
         public abstract Task ShowFullScreenVideoAd(string adId);
         
         public abstract Task<RewardAdResult> ShowFullScreenRewardVideoAd(string adId);
-        
 
         public enum RewardAdResult {
             Success, CancelByUser, Fail

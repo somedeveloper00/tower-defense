@@ -7,6 +7,28 @@
       "dependencies": {},
       "hash": "697f32c616deb249b0736bf960e7c7f98855666a"
     },
+    "com.gameanalytics.sdk": {
+      "version": "7.6.1",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.google.external-dependency-manager": "1.2.168"
+      },
+      "url": "https://package.openupm.com"
+    },
+    "com.google.external-dependency-manager": {
+      "version": "file:../GooglePackages/com.google.external-dependency-manager-1.2.175.tgz",
+      "depth": 0,
+      "source": "local-tarball",
+      "dependencies": {}
+    },
+    "com.sabresaurus.playerprefseditor": {
+      "version": "1.4.1",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://package.openupm.com"
+    },
     "com.unity.2d.common": {
       "version": "6.0.2",
       "depth": 1,

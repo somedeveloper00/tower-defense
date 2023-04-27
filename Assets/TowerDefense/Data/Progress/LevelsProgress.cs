@@ -11,7 +11,7 @@ namespace TowerDefense.Data.Progress {
 
         [Serializable]
         public class Level {
-            public int id;
+            public string id;
             public LevelStatus status;
             public int stars = 0;
             [JsonProperty( "plays" )] public int playCount = 0;

@@ -16,6 +16,7 @@ namespace TowerDefense.Background.Loading {
         [SerializeField] float minScreenDuration = 2;
 
         [GroupNext( "ref" )] 
+        [SerializeField] Transform parentCanavs;
         [SerializeField] LoadingSceneUI prefab;
         
         [ShowInInspector, ReadOnly]
@@ -31,10 +32,13 @@ namespace TowerDefense.Background.Loading {
             if (t >= 0) t += Time.deltaTime;
         }
 
+        public RectTransform GetTransform() => (RectTransform)_currentUi.transform;
+        public Canvas GetCanvas() => _currentUi.canvas;
+
         public void StartLoadingScreen() {
             if (t >= 0 || _currentUi != null) return;
             Debug.Log( $"loading started" );
-            _currentUi = Instantiate( prefab, transform );
+            _currentUi = Instantiate( prefab, parentCanavs );
             _currentUi.canvas.gameObject.SetActive( true );
             _currentUi.inSequence.PlaySequence();
             t = 0;
@@ -70,7 +74,7 @@ namespace TowerDefense.Background.Loading {
             
             _currentUi.outSequence.PlaySequence();
             _currentUi.outSequence.sequence.onComplete += () => {
-                _currentUi.DestroyGameObject();
+                _currentUi.Close();
                 try {
                     onEndAnimComplete?.Invoke();
                     if (onEndAnimCompleteOnce is not null) {

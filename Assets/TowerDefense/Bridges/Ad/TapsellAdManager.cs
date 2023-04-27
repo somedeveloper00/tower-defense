@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using GameAnalyticsSDK;
 using TapsellPlusSDK;
 using UnityEngine;
 
@@ -8,8 +9,10 @@ namespace TowerDefense.Bridges.Ad {
     class TapsellAdManager : AdManager {
 
         const int RETRY_COUNT = 10;
+        const string AD_SDK_NAME = "tapsell";
+        
         bool initialized = false;
-        Dictionary<string, string> activeBanners = new(); 
+        Dictionary<string, string> activeBanners = new();
 
         public override async Task<bool> Initialize() {
             int tryCount = 0;
@@ -65,6 +68,7 @@ namespace TowerDefense.Bridges.Ad {
 
             TapsellPlus.RequestInterstitialAd( adId,
                 onRequestResponse: model => {
+                    GameAnalytics.NewAdEvent( GAAdAction.Loaded, GAAdType.Interstitial, AD_SDK_NAME, adId );
                     responseId = model.responseId;
                     canPass = true;
                 },
@@ -81,6 +85,7 @@ namespace TowerDefense.Bridges.Ad {
                 }
                 else {
                     Debug.Log( $"failed. max retried reached. giving up" );
+                    GameAnalytics.NewAdEvent( GAAdAction.FailedShow, GAAdType.Interstitial, AD_SDK_NAME, adId );
                     return;
                 }
             }
@@ -97,6 +102,7 @@ namespace TowerDefense.Bridges.Ad {
             TapsellPlus.ShowInterstitialAd( responseId,
                 onAdOpened: model => {
                     Debug.Log( $"fullscreen tapsell ad opened: {responseId}" );
+                    GameAnalytics.NewAdEvent( GAAdAction.Show, GAAdType.Interstitial, AD_SDK_NAME, adId );
                 },
                 onAdClosed: model => {
                     Debug.Log( $"fullscreen tapsell ad closed: {responseId}" );
@@ -109,6 +115,7 @@ namespace TowerDefense.Bridges.Ad {
                     canPass = true;
                 } );
             while (!canPass) await Task.Yield();
+            
             // retry if failed
             if (!success) {
                 if (tryCount < RETRY_COUNT) {
@@ -117,12 +124,83 @@ namespace TowerDefense.Bridges.Ad {
                 }
                 else {
                     Debug.Log( $"failed. max retried reached. giving up" );
+                    GameAnalytics.NewAdEvent( GAAdAction.FailedShow, GAAdType.Interstitial, AD_SDK_NAME, adId );
                     return;
                 }
             }
         }
 
-        public override Task ShowFullScreenVideoAd(string adId) => ShowFullScreenBannerAd( adId );
+        public override async Task ShowFullScreenVideoAd(string adId) {
+            int tryCount = 0;
+            
+            request_try:
+            tryCount++;
+            bool canPass = false;
+            string responseId = null;
+
+            TapsellPlus.RequestInterstitialAd( adId,
+                onRequestResponse: model => {
+                    GameAnalytics.NewAdEvent( GAAdAction.Loaded, GAAdType.Video, AD_SDK_NAME, adId );
+                    responseId = model.responseId;
+                    canPass = true;
+                },
+                onRequestError: error => {
+                    canPass = true;
+                } );
+            while (!canPass) await Task.Yield();
+            
+            // retry if failed
+            if (responseId is null) {
+                if (tryCount < RETRY_COUNT) {
+                    Debug.Log( $"failed. retrying..." );
+                    goto request_try;
+                }
+                else {
+                    Debug.Log( $"failed. max retried reached. giving up" );
+                    GameAnalytics.NewAdEvent( GAAdAction.FailedShow, GAAdType.Video, AD_SDK_NAME, adId );
+                    return;
+                }
+            }
+            
+            
+            // show ad
+            tryCount = 0;
+            bool success;
+            show_try:
+            tryCount++;
+            canPass = false;
+            success = false;
+            
+            TapsellPlus.ShowInterstitialAd( responseId,
+                onAdOpened: model => {
+                    Debug.Log( $"fullscreen tapsell ad opened: {responseId}" );
+                    GameAnalytics.NewAdEvent( GAAdAction.Show, GAAdType.Video, AD_SDK_NAME, adId );
+                },
+                onAdClosed: model => {
+                    Debug.Log( $"fullscreen tapsell ad closed: {responseId}" );
+                    canPass = true;
+                    success = true;
+                },
+                onShowError: model => {
+                    Debug.LogError( model.errorMessage );
+                    success = false;
+                    canPass = true;
+                } );
+            while (!canPass) await Task.Yield();
+            
+            // retry if failed
+            if (!success) {
+                if (tryCount < RETRY_COUNT) {
+                    Debug.Log( $"failed. retrying..." );
+                    goto show_try;
+                }
+                else {
+                    Debug.Log( $"failed. max retried reached. giving up" );
+                    GameAnalytics.NewAdEvent( GAAdAction.FailedShow, GAAdType.Video, AD_SDK_NAME, adId );
+                    return;
+                }
+            }
+        }
 
         public override async Task ShowSidedBannerAd(string adId) {
             
@@ -135,6 +213,7 @@ namespace TowerDefense.Bridges.Ad {
 
             TapsellPlus.RequestStandardBannerAd( adId, BannerType.Banner320X50,
                 tapsellPlusAdModel => {
+                    GameAnalytics.NewAdEvent( GAAdAction.Loaded, GAAdType.Banner, AD_SDK_NAME, adId );
                     responseId = tapsellPlusAdModel.responseId;
                     canPass = true;
                 },
@@ -152,6 +231,7 @@ namespace TowerDefense.Bridges.Ad {
                     goto trying;
                 }
                 Debug.Log( $"failed. max retried reached. giving up" );
+                GameAnalytics.NewAdEvent( GAAdAction.FailedShow, GAAdType.Banner, AD_SDK_NAME, adId );
                 return;
             }
             
@@ -160,6 +240,7 @@ namespace TowerDefense.Bridges.Ad {
             TapsellPlus.ShowStandardBannerAd( responseId, TapsellPlusSDK.Gravity.Bottom, TapsellPlusSDK.Gravity.Bottom,
                 onAdOpened: model => {
                     canPass = true;
+                    GameAnalytics.NewAdEvent( GAAdAction.Show, GAAdType.Banner, AD_SDK_NAME, adId );
                     try {
                         activeBanners.Add( adId, responseId );
                         Debug.Log( $"tapsell sided banner ad openned: {responseId}" );
@@ -170,6 +251,7 @@ namespace TowerDefense.Bridges.Ad {
                 }, onShowError: model => {
                     canPass = true;
                     Debug.LogError( model.errorMessage );
+                    GameAnalytics.NewAdEvent( GAAdAction.FailedShow, GAAdType.Banner, AD_SDK_NAME, adId );
                 } );
             while (!canPass) await Task.Delay( 10 );
         }
@@ -195,6 +277,7 @@ namespace TowerDefense.Bridges.Ad {
             bool canPass = false;
             TapsellPlus.RequestRewardedVideoAd( adId,
                 (response) => {
+                    GameAnalytics.NewAdEvent( GAAdAction.Loaded, GAAdType.RewardedVideo, AD_SDK_NAME, adId );
                     Debug.Log( $"ad request response: {response.responseId}" );
                     responseId = response.responseId;
                     canPass = true;
@@ -212,6 +295,7 @@ namespace TowerDefense.Bridges.Ad {
                     goto trying;
                 }
                 Debug.Log( $"failed. max retried reached. giving up" );
+                GameAnalytics.NewAdEvent( GAAdAction.FailedShow, GAAdType.RewardedVideo, AD_SDK_NAME, adId );
                 return RewardAdResult.Fail;
             }
 
@@ -226,6 +310,7 @@ namespace TowerDefense.Bridges.Ad {
             TapsellPlus.ShowRewardedVideoAd( responseId,
                 onAdOpened: model => {
                     Debug.Log( $"tapsel rewarder ad opened: {result}" );   
+                    GameAnalytics.NewAdEvent( GAAdAction.Show, GAAdType.RewardedVideo, AD_SDK_NAME, adId );
                 },
                 onAdClosed: model => {
                     Debug.Log( $"tapsel rewarded ad closed: {result}" );   
@@ -241,6 +326,7 @@ namespace TowerDefense.Bridges.Ad {
                     Debug.Log( $"tapsel rewarded ad successful: {result}" );   
                     canPass = true;
                     result = RewardAdResult.Success;
+                    GameAnalytics.NewAdEvent( GAAdAction.RewardReceived, GAAdType.RewardedVideo, AD_SDK_NAME, adId );
                 });
             while (!canPass) await Task.Yield();
             
@@ -251,6 +337,7 @@ namespace TowerDefense.Bridges.Ad {
                     goto show_try;
                 } 
                 Debug.Log( $"failed. max retried reached. giving up" );
+                GameAnalytics.NewAdEvent( GAAdAction.FailedShow, GAAdType.RewardedVideo, AD_SDK_NAME, adId );
             }
             
             return result;

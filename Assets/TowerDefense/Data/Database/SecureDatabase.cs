@@ -9,7 +9,7 @@ using UnityEngine;
 using Debug = UnityEngine.Debug;
 
 namespace TowerDefense.Data.Database {
-    public class SecureDatabase : IDatabase {
+    public class SecureDatabase : Database {
 
         string path;
         public SecureDatabase(string filepath) => path = Path.Combine( Application.persistentDataPath, filepath );
@@ -36,7 +36,7 @@ namespace TowerDefense.Data.Database {
         JObject data;
 
 
-        public void Load() {
+        public override void Load() {
             data = new JObject();
             if (File.Exists( path )) {
                 var fileData = decryptAndGetData( path );
@@ -49,7 +49,7 @@ namespace TowerDefense.Data.Database {
             }
         }
 
-        public void Save() {
+        public override void Save() {
             string txt = string.Empty;
             if (data != null) {
                 txt = JsonConvert.SerializeObject( data );
@@ -57,9 +57,9 @@ namespace TowerDefense.Data.Database {
             encryptAndSaveData( txt, path );
         }
 
-        public bool KeyExists(string key) => data.GetValue( key ) != null;
+        public override bool KeyExists(string key) => data.GetValue( key ) != null;
 
-        public T GetValue<T>(string key) where T : ITransportable, new() {
+        public override T GetValue<T>(string key) {
             var field = data.GetValue( key );
             if (field != null) {
                 return field.ToObject<T>();
@@ -68,7 +68,7 @@ namespace TowerDefense.Data.Database {
             throw new Exception( "key not found: " + key );
         }
 
-        public bool TryGetValue<T>(string key, out T result) where T : ITransportable, new() {
+        public override bool TryGetValue<T>(string key, out T result) {
             if (data.TryGetValue(key, out var token)) {
                 try {
                     result = token.ToObject<T>();
@@ -79,13 +79,13 @@ namespace TowerDefense.Data.Database {
             return false;
         }
 
-        public void Set(string key, ITransportable obj) {
+        public override void Set(string key, ITransportable obj) {
             data[key] = JsonConvert.DeserializeObject<JObject>( obj.ToJson() );
         }
 
-        public void Delete(string key) => data.Remove( key );
+        public override void Delete(string key) => data.Remove( key );
 
-        public void DeleteAll() {
+        public override void DeleteAll() {
             File.Delete( path );
             data = new JObject();
         }

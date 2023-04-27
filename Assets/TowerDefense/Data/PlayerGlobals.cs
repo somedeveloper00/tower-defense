@@ -49,7 +49,7 @@ namespace TowerDefense.Data {
             Debug.Log( $"player global data saved" );
         }
 
-        public bool TryGetLevelData(int id, out CoreLevelData level) {
+        public bool TryGetLevelData(string id, out CoreLevelData level) {
             for (int i = 0; i < levelsData.coreLevels.Count; i++) {
                 if (levelsData.coreLevels[i].id == id) {
                     if (i < levelsData.coreLevels.Count - 1) {
@@ -65,7 +65,7 @@ namespace TowerDefense.Data {
             return false;
         }
 
-        public LevelProgress.Level GetOrCreateLevelProg(int id) {
+        public LevelProgress.Level GetOrCreateLevelProg(string id) {
             for (int i = 0; i < levelProg.levels.Count; i++) {
                 if (levelProg.levels[i].id == id) return levelProg.levels[i];
             }
@@ -76,7 +76,7 @@ namespace TowerDefense.Data {
             return lvl;
         }
 
-        public bool TryGetNextLevelProg(int id, out LevelProgress.Level level) {
+        public bool TryGetNextLevelProg(string id, out LevelProgress.Level level) {
             for (int i = 0; i < levelsData.coreLevels.Count; i++) {
                 if (levelsData.coreLevels[i].id == id) {
                     if (i < levelsData.coreLevels.Count - 1) {

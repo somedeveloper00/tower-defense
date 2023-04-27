@@ -3,9 +3,11 @@ using System.Collections;
 using System.Threading.Tasks;
 using AnimFlex.Sequencer.UserEnd;
 using DialogueSystem;
+using GameAnalyticsSDK;
 using TowerDefense.Background;
 using TowerDefense.Background.Loading;
 using TowerDefense.Bridges.Ad;
+using TowerDefense.Bridges.Analytics;
 using TowerDefense.Common;
 using TowerDefense.Core.Starter;
 using TowerDefense.Data;
@@ -97,6 +99,9 @@ namespace TowerDefense.Lobby {
             }
 
             PlayerGlobals.Current.ecoProg.coins -= sessionPack.coins;
+            
+            GameAnalytics.NewResourceEvent( GAResourceFlowType.Sink, GameAnalyticsHelper.Currency_Coin,
+                sessionPack.coins, GameAnalyticsHelper.ItemType_GameStart, "GameStart" );
 
             BackgroundRunner.Current.StartCoroutine( start() );
 

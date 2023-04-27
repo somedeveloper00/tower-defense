@@ -809,8 +809,9 @@ PlayerSettings:
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
-    Android: RTLTMP
+    Android: RTLTMP;gameanalytics_admob_enabled
     Standalone: RTLTMP
+    iPhone: gameanalytics_admob_enabled
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:

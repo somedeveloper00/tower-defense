@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DialogueSystem;
+using GameAnalyticsSDK;
+using TowerDefense.Bridges.Analytics;
 using TowerDefense.Bridges.Iap;
 using TowerDefense.Common;
 using TowerDefense.Data;
@@ -84,6 +86,10 @@ namespace TowerDefense.Background {
             }
             // SUCCESS
             PlayerGlobals.Current.ecoProg.coins += product.rewardCoins;
+            
+            GameAnalytics.NewResourceEvent( GAResourceFlowType.Source, GameAnalyticsHelper.Currency_Coin,
+                product.rewardCoins, GameAnalyticsHelper.ItemType_IAP, "InAppPurchase" );
+            
             await loading.Close();
             return true;
         }

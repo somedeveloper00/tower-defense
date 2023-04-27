@@ -1,13 +1,9 @@
 ﻿using AnimFlex.Sequencer.UserEnd;
+using DialogueSystem;
 using UnityEngine;
 
 namespace TowerDefense.Background.Loading {
-    public class LoadingSceneUI : MonoBehaviour {
-        public Canvas canvas;
+    public class LoadingSceneUI : Dialogue {
         public SequenceAnim inSequence, outSequence;
-
-        public void DestroyGameObject() {
-            Destroy( gameObject );
-        }
     }
 }

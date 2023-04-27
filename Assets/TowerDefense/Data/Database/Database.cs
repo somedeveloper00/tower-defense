@@ -3,16 +3,16 @@ using Newtonsoft.Json;
 using TowerDefense.Transport;
 
 namespace TowerDefense.Data.Database {
-    public interface IDatabase {
-        public void Load();
-        public void Save();
-        public bool KeyExists(string key);
+    public abstract class Database {
+        public abstract void Load();
+        public abstract void Save();
+        public abstract bool KeyExists(string key);
         
-        public bool TryGetValue<T>(string key, out T result) where T : ITransportable, new();
-        public T GetValue<T>(string key) where T : ITransportable, new();
-        public void Set(string key, ITransportable obj);
-        public void Delete(string key);
-        public void DeleteAll();
+        public abstract bool TryGetValue<T>(string key, out T result) where T : ITransportable, new();
+        public abstract T GetValue<T>(string key) where T : ITransportable, new();
+        public abstract void Set(string key, ITransportable obj);
+        public abstract void Delete(string key);
+        public abstract void DeleteAll();
 
         public bool TryGetInt(string key, out int result) {
             var r = TryGetValue( key, out IntTransport intTrans );

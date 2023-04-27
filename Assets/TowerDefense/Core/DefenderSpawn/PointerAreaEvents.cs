@@ -11,12 +11,10 @@ namespace TowerDefense.Core.DefenderSpawn {
 
         public void OnPointerDown(PointerEventData eventData) {
             isDown = true;
-            Debug.Log( "down" );
             onPointerDown?.Invoke();
         }
 
         public void OnPointerUp(PointerEventData eventData) {
-            Debug.Log( "up" );
             isDown = false;
             onPointerUp?.Invoke();
         }

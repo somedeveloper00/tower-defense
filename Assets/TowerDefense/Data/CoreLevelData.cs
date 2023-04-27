@@ -12,7 +12,7 @@ namespace TowerDefense.Data {
     public class CoreLevelData : ScriptableObject, ITransportable {
         [Dropdown( nameof(_all_envs) )] public string env;
         public string title;
-        public int id;
+        public string id;
         public List<string> arguments = new();
         public List<EnemySpawner.SpawningMethod> spawnings = new();
 

@@ -5,8 +5,11 @@ using System.Threading.Tasks;
 using AnimFlex.Core.Proxy;
 using AnimFlex.Tweening;
 using DialogueSystem;
+using GameAnalyticsSDK;
+using GameAnalyticsSDK.Events;
 using TowerDefense.Background;
 using TowerDefense.Background.Loading;
+using TowerDefense.Bridges.Analytics;
 using TowerDefense.Core.Enemies;
 using TowerDefense.Core.Defenders;
 using TowerDefense.Core.EnemySpawn;
@@ -65,6 +68,8 @@ namespace TowerDefense.Core {
             CoreGameEvents.Current.OnEnemySpawnerInitialize += OnSpawnerInitialize;
             CoreGameEvents.Current.onSessionCoinModified?.Invoke();
             CoreGameEvents.Current.onLifeModified?.Invoke();
+            
+            GameAnalytics.NewProgressionEvent( GAProgressionStatus.Start, _levelData.id );
         }
 
         void OnDestroy() {
@@ -181,8 +186,12 @@ namespace TowerDefense.Core {
                             + (ulong)winData.stars * _levelData.EvaluateBonusCoinForStar( winData.stars );
             Debug.Log( $"Won Game!: {winData.ToJson()}" );
 
-            CoreGameEvents.Current.onWin?.Invoke( winData );
+
+            GameAnalytics.NewResourceEvent( GAResourceFlowType.Source, GameAnalyticsHelper.Currency_Coin, winData.coins,
+                GameAnalyticsHelper.ItemType_GameWin, "GameWin" );
+            GameAnalytics.NewProgressionEvent( GAProgressionStatus.Complete, _levelData.id );
             
+            CoreGameEvents.Current.onWin?.Invoke( winData );
 
             // handle data modification
             var level = PlayerGlobals.Current.GetOrCreateLevelProg( _levelData.id );
@@ -217,6 +226,10 @@ namespace TowerDefense.Core {
             loseData.coins = (ulong)( _coinsReceivedFromEnemiesKilled * _levelData.coinMultiplier );
             Debug.Log( $"Won Game!: {loseData.ToJson()}" );
             CoreGameEvents.Current.onLose?.Invoke(loseData);
+
+            GameAnalytics.NewResourceEvent( GAResourceFlowType.Sink, GameAnalyticsHelper.Currency_Coin,
+                sessionPack.coins, GameAnalyticsHelper.ItemType_GameLose, "GameLose" );
+            GameAnalytics.NewProgressionEvent( GAProgressionStatus.Fail, _levelData.id );
             
             // handle data modification
             var level = PlayerGlobals.Current.GetOrCreateLevelProg( _levelData.id );

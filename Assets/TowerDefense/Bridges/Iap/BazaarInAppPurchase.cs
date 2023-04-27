@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using Bazaar.Data;
 using Bazaar.Poolakey;
 using Bazaar.Poolakey.Data;
+using GameAnalyticsSDK;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RTLTMPro;
+using TowerDefense.Bridges.Analytics;
 using TowerDefense.Transport;
 using UnityEngine;
 
