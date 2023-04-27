@@ -1005,7 +1005,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2133689945598431035}
   - component: {fileID: 7802701403061802801}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: illegalGround
   m_TagString: illegalGround
   m_Icon: {fileID: 0}

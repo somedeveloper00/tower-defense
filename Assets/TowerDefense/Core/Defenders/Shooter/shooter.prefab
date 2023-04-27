@@ -149,7 +149,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6276796798884986733}
   - component: {fileID: 2013568167678834388}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: illegalGround
   m_TagString: illegalGround
   m_Icon: {fileID: 0}
