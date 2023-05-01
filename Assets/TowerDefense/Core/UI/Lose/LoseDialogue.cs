@@ -1,4 +1,5 @@
-﻿using AnimFlex.Sequencer.UserEnd;
+﻿using System.Threading.Tasks;
+using AnimFlex.Sequencer.UserEnd;
 using DialogueSystem;
 using RTLTMPro;
 using TowerDefense.Bridges.Ad;
@@ -15,7 +16,6 @@ namespace TowerDefense.Core.UI.Lose {
         
         [GroupNext("ref")]
         [SerializeField] RTLTextMeshPro coinAmountTxt;
-        [SerializeField] SequenceAnim inSequence, outSequence;
         [SerializeField] Button retryBtn, returnBtn;
         
 
@@ -56,10 +56,10 @@ namespace TowerDefense.Core.UI.Lose {
             }
         }
         
-        void onReturnBtnClick() {
+        async void onReturnBtnClick() {
+            await Task.Delay( 1000 );
             canvasRaycaster.enabled = false;
             CoreGameManager.Current.BackToLobby();
-            outSequence.PlaySequence();
         }
     }
 }

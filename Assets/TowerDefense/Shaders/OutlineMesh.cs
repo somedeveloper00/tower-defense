@@ -47,7 +47,7 @@ namespace TowerDefense.Shaders {
             else {
                 if (!sourceMeshFilter) return;
                 if (!sharedMesh) {
-                    sharedMesh = Instantiate( sourceMeshFilter.mesh );
+                    sharedMesh = Instantiate( sourceMeshFilter.sharedMesh );
                     meshFilter.sharedMesh = sharedMesh;
                     InflateMesh( sharedMesh );
                 }

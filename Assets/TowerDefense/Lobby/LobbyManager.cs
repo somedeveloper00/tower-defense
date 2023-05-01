@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Threading.Tasks;
+using AnimFlex;
 using AnimFlex.Sequencer.UserEnd;
+using AnimFlex.Tweening;
 using DialogueSystem;
 using GameAnalyticsSDK;
 using TowerDefense.Background;
@@ -30,15 +32,20 @@ namespace TowerDefense.Lobby {
         public static LobbyManager Current;
         void OnEnable() => Current = this;
 
-        [GroupNext( "ref" )] [SerializeField] GraphicRaycaster raycaster;
+        [GroupNext( "ref" )] 
+        [SerializeField] GraphicRaycaster raycaster;
         [SerializeField] RectTransform parentCanvasForDialogues;
         [SerializeField] SequenceAnim inSequence;
         [SerializeField] Button playBtn;
         [SerializeField] Button exitBtn;
         [SerializeField] Button shopBtn;
         [SerializeField] Button settingsBtn;
+        public AudioSource backgroundMusicSource;
 
         void Start() {
+            // fade in background music
+            backgroundMusicSource.AnimAudioVolumeTo( 1 );
+            
             playBtn.onClick.AddListener( onPlayBtnClick );
             exitBtn.onClick.AddListener( onExitBtnClick );
             shopBtn.onClick.AddListener( onShopBtnClick );
@@ -110,6 +117,10 @@ namespace TowerDefense.Lobby {
                 LoadingScreenManager.Current.state = LoadingScreenManager.State.GoingToCore;
                 yield return null;
 
+                // fade out background music
+                var t = backgroundMusicSource.AnimAudioVolumeTo( 0, duration: 1 );
+                while (t.IsActive()) yield return new WaitForSecondsRealtime( 1 );
+                
                 yield return SceneManager.UnloadSceneAsync( gameObject.scene );
                 yield return null;
 

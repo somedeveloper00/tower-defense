@@ -1,147 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2118779200
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2118779201}
-  - component: {fileID: 2118779202}
-  m_Layer: 5
-  m_Name: outSeq
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
---- !u!224 &2118779201
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2118779200}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5641910109787283992}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2118779202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2118779200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 047e8afad3c64e64b1323784efd490e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playOnEnable: 0
-  useProxyAsCore: 1
-  useDefaultCoreProxy: 1
-  defaultCoreProxy: AnimFlex.Core.Proxy.AnimFlexCoreProxyUnscaled
-  coreProxy: {fileID: 0}
-  resetOnPlay: 1
-  activateNextClipsASAP: 1
-  sequence:
-    activateNextClipsASAP: 1
-    nodes:
-    - name: main
-      delay: 0
-      clip:
-        rid: 5878960743082623183
-    - name: main
-      delay: 0
-      clip:
-        rid: 5878960743082623184
-  references:
-    version: 2
-    RefIds:
-    - rid: 5878960743082623183
-      type: {class: CTweenerLocalPosition, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
-      data:
-        playNextOnStart: 1
-        tweenerGenerator:
-          customCurve:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          useCurve: 0
-          useQuaternion: 0
-          relative: 1
-          useTargetTransform: 0
-          from: 0
-          ease: 25
-          duration: 0.5
-          delay: 0.5
-          pingPong: 0
-          loops: 0
-          loopDelay: 0
-          onStart:
-            m_PersistentCalls:
-              m_Calls: []
-          onUpdate:
-            m_PersistentCalls:
-              m_Calls: []
-          onComplete:
-            m_PersistentCalls:
-              m_Calls: []
-          onKill:
-            m_PersistentCalls:
-              m_Calls: []
-          fromObject: {fileID: 5641910109787283992}
-          target: {x: 0, y: 1500, z: 0}
-    - rid: 5878960743082623184
-      type: {class: CTweenerFadeCanvasGroup, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
-      data:
-        playNextOnStart: 0
-        tweenerGenerator:
-          customCurve:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          useCurve: 0
-          useQuaternion: 0
-          relative: 0
-          useTargetTransform: 0
-          from: 0
-          ease: 0
-          duration: 0.4
-          delay: 0.6
-          pingPong: 0
-          loops: 0
-          loopDelay: 0
-          onStart:
-            m_PersistentCalls:
-              m_Calls: []
-          onUpdate:
-            m_PersistentCalls:
-              m_Calls: []
-          onComplete:
-            m_PersistentCalls:
-              m_Calls: []
-          onKill:
-            m_PersistentCalls:
-              m_Calls: []
-          fromObject: {fileID: 5641910109787284006}
-          target: 0
 --- !u!1 &5641910108651740611
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,7 +392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047e8afad3c64e64b1323784efd490e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playOnEnable: 0
+  playOnEnable: 1
   useProxyAsCore: 1
   useDefaultCoreProxy: 1
   defaultCoreProxy: AnimFlex.Core.Proxy.AnimFlexCoreProxyUnscaled
@@ -544,6 +402,10 @@ MonoBehaviour:
   sequence:
     activateNextClipsASAP: 1
     nodes:
+    - name: 
+      delay: 0
+      clip:
+        rid: 1318341967637643267
     - name: main alpha
       delay: 0
       clip:
@@ -607,6 +469,12 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 1318341967637643267
+      type: {class: PlayClipOneShot, ns: AnimFlex.Essentials.Clips.Audio, asm: Assembly-CSharp-firstpass}
+      data:
+        audioSource: {fileID: 8112376347745817595}
+        audioClip: {fileID: 8300000, guid: c5d3eca6d96b85f47afc740c7f04a473, type: 3}
+        volume: 1
     - rid: 1861648313085854042
       type: {class: CSetPropertyValueFloat, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
       data:
@@ -1535,7 +1403,6 @@ RectTransform:
   - {fileID: 5641910110565560462}
   - {fileID: 5641910110242250076}
   - {fileID: 5641910109529247378}
-  - {fileID: 2118779201}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1710,8 +1577,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87a04c78e71042a7a6a8fc4b03b3602f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inSequence: {fileID: 5641910109529247389}
-  outSequence: {fileID: 2118779202}
   starObjects:
   - {fileID: 5641910109364730475}
   - {fileID: 5641910110565560463}

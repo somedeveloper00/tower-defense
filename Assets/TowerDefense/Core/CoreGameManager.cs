@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AnimFlex;
 using AnimFlex.Core.Proxy;
 using AnimFlex.Tweening;
 using DialogueSystem;
 using GameAnalyticsSDK;
-using GameAnalyticsSDK.Events;
 using TowerDefense.Background;
 using TowerDefense.Background.Loading;
 using TowerDefense.Bridges.Analytics;
@@ -34,6 +34,7 @@ namespace TowerDefense.Core {
         public RoadManager roadManager;
         public int life = 20;
         public float gameTime = 0;
+        public AudioSource backgroundMusicSource;
         
         [SerializeField] float winDialogueDelay = 1;
         [SerializeField] float loseDialogueDelay = 1;
@@ -57,6 +58,7 @@ namespace TowerDefense.Core {
         }
         
         void Start() {
+            fadeInMusic();
             gameTime = 0;
             _gameActive = true;
             CoreGameEvents.Current.OnGameStart?.Invoke( this );
@@ -68,8 +70,13 @@ namespace TowerDefense.Core {
             CoreGameEvents.Current.OnEnemySpawnerInitialize += OnSpawnerInitialize;
             CoreGameEvents.Current.onSessionCoinModified?.Invoke();
             CoreGameEvents.Current.onLifeModified?.Invoke();
-            
-            GameAnalytics.NewProgressionEvent( GAProgressionStatus.Start, _levelData.id );
+
+            try {
+                GameAnalytics.NewProgressionEvent( GAProgressionStatus.Start, _levelData.id );
+            }
+            catch {
+                // ignored
+            }
         }
 
         void OnDestroy() {
@@ -122,8 +129,8 @@ namespace TowerDefense.Core {
                 LoadingScreenManager.Current.EndLoadingScreen();
             }
         }
-        
-        
+
+
         void OnCoreStarterFinished(CoreLevelData coreLevelData, CoreSessionPack sessionPack) {
             _levelData = Instantiate( coreLevelData );
             this.sessionPack = sessionPack;
@@ -161,6 +168,10 @@ namespace TowerDefense.Core {
             if (checkForWin()) Win();
         }
 
+        void fadeInMusic() => backgroundMusicSource.AnimAudioVolumeTo( 1 );
+
+        void fadeOutMusic() => backgroundMusicSource.AnimAudioVolumeTo( 0, proxy: AnimFlexCoreProxyUnscaled.Default );
+
         bool checkForLose() {
             if (life <= 0 && _gameActive) {
                 _gameActive = false;
@@ -178,6 +189,8 @@ namespace TowerDefense.Core {
         }
 
         async void Win() {
+            fadeOutMusic();
+            
             // making data for win
             var winData = new WinData();
             winData.time = gameTime;
@@ -219,7 +232,8 @@ namespace TowerDefense.Core {
         }
 
         async void Lose() {
-
+            fadeOutMusic();
+            
             // making data for lose 
             var loseData = new LoseData();
             loseData.time = gameTime;

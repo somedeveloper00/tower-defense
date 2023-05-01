@@ -1,4 +1,4 @@
-﻿using AnimFlex.Sequencer.UserEnd;
+﻿using System.Threading.Tasks;
 using DialogueSystem;
 using TriInspector;
 using UnityEngine;
@@ -10,7 +10,6 @@ namespace TowerDefense.Core.UI.Win {
         public WinData winData;
 
         [GroupNext( "ref" )]
-        [SerializeField] SequenceAnim inSequence, outSequence;
         [SerializeField] GameObject[] starObjects;
         [SerializeField] Button returnButton;
 
@@ -21,10 +20,10 @@ namespace TowerDefense.Core.UI.Win {
                 starObjects[i].SetActive( i < winData.stars );
             }
             returnButton.onClick.AddListener( onLobbyBtnClick );
-            inSequence.PlaySequence();
         }
 
-        void onLobbyBtnClick() {
+        async void onLobbyBtnClick() {
+            await Task.Delay( 1000 );
             canvasRaycaster.enabled = false;
             CoreGameManager.Current.BackToLobby();
             Close();

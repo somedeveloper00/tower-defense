@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using AnimFlex.Sequencer.UserEnd;
 using TriInspector;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ namespace TowerDefense.Core.Defenders {
     [DeclareFoldoutGroup("anim", Title = "Animations")]
     public class MonkeyDefender : Defender {
         [SerializeField] Animator animator;
+        [SerializeField] SequenceAnim onShootSeq;
 
         [GroupNext( "anim" )] 
         [SerializeField, Range(0, 1)] float animCrossfade = 0.1f;
@@ -33,6 +35,7 @@ namespace TowerDefense.Core.Defenders {
             animator.SetFloat( animAttackSpeedName, animAttackSpeedValue );
             animator.CrossFade( animAttack, animCrossfade );
             yield return new WaitForSeconds( animAttackDamageTime );
+            onShootSeq.PlaySequence();
             applyAttack();
         }
     }

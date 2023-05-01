@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json.Linq;
+using TowerDefense.Core.Audio;
 using TriInspector;
 using UnityEngine;
 using TowerDefense.Core.Road;
@@ -12,6 +12,9 @@ namespace TowerDefense.Core.Enemies {
         public float speed;
         public float rotationSpeed = 1;
         public uint coinReward = 1;
+
+        public AudioClip onReachEndClip;
+        public float onReachEndVolume = 1;
 
         public event Action<Damage> onTakeDamage;
         public event Action<float> onLifeChanged;
@@ -70,6 +73,7 @@ namespace TowerDefense.Core.Enemies {
                     currentRoadPiece = currentRoadPiece.next;
                     if ( currentRoadPiece.next == null ) {
                         CoreGameEvents.Current.OnEnemyReachEnd?.Invoke( this );
+                        CoreAudioSource.Current.audioSource.PlayOneShot( onReachEndClip, onReachEndVolume );
                         return;
                     }
                 }

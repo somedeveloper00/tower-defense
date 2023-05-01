@@ -157,6 +157,10 @@ MonoBehaviour:
   speed: 1
   rotationSpeed: 0
   coinReward: 1
+  onReachEndClip: {fileID: 8300000, guid: aaa2e9f7d57ae1940a2496efe1d818f3, type: 3}
+  onReachEndVolume: 1
+  onDestroyAudio: {fileID: 8300000, guid: d7b12642f5e415a499af1e116ddd142a, type: 3}
+  onDestroyAudioVolume: 1
 --- !u!114 &5293114509120559451
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using AnimFlex.Sequencer.UserEnd;
 using TriInspector;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ namespace TowerDefense.Core.Defenders {
         [SerializeField] float rotationSpeed = 20;
         [SerializeField] Transform shootEffectSpawnPoint;
         [SerializeField] GameObject shootEffect;
+        [SerializeField] SequenceAnim onShootSeq;
         
         [GroupNext( "anim" )] 
         [SerializeField, Range(0, 1)] float animCrossfade = 0.1f;
@@ -31,6 +33,7 @@ namespace TowerDefense.Core.Defenders {
             animator.CrossFade( animAttack, animCrossfade );
             yield return new WaitForSeconds( animAttackDamageTime / animAttackSpeedValue );
             Instantiate( shootEffect, shootEffectSpawnPoint );
+            onShootSeq.PlaySequence();
             applyAttack();
         }
 

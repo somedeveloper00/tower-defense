@@ -248,8 +248,8 @@ PlayerSettings:
   AndroidTargetDevices: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: '{inproject}: saeed.keystore'
-  AndroidKeyaliasName: td-park
+  AndroidKeystoreName: '{inproject}: Esbi.keystore'
+  AndroidKeyaliasName: esbi
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
   AndroidIsGame: 1

@@ -1,3 +1,13 @@
-﻿fileFormatVersion: 2
+fileFormatVersion: 2
 guid: 1c1af2d12ae34024915a67fcc762f38c
-timeCreated: 1676979221
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - roadManager: {instanceID: 0}
+  - onReachEndClip: {fileID: 8300000, guid: aaa2e9f7d57ae1940a2496efe1d818f3, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
