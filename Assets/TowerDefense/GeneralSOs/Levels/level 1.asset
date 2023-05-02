@@ -22,11 +22,11 @@ MonoBehaviour:
       spawns:
       - name: balloon-simple
         count: 15
-        timeIntervals: 1
+        timeIntervals: 3
         argv: []
   starTime: 2c010000c800000064000000
   coinMultiplier: 1
-  coinBonusForStars: 6400000000000000c8000000000000002c01000000000000
+  coinBonusForStars: 320000000000000050000000000000006400000000000000
   recomendedCoins: 40
   references:
     version: 2
