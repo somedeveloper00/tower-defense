@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91b9bad79ede404b92d88cc8af708d16, type: 3}
+  m_Name: level 10
+  m_EditorClassIdentifier: 
+  env: env1
+  title: "\u0646\u062C\u0627\u062A \u062C\u0646\u06AF\u0644!"
+  id: 101
+  arguments: []
+  spawnings:
+  - onTime:
+    - time: 6
+      spawns:
+      - name: balloon-fast
+        count: 100
+        timeIntervals: 0.3
+        argv: []
+    - time: 15
+      spawns:
+      - name: balloon-fast-hard
+        count: 10
+        timeIntervals: 1
+        argv: []
+    - time: 19
+      spawns:
+      - name: balloon-hard
+        count: 40
+        timeIntervals: 0.7
+        argv: []
+    - time: 25
+      spawns:
+      - name: balloon-fast-hard
+        count: 20
+        timeIntervals: 0.2
+        argv: []
+  lifeRemainForStar:
+  - 1
+  - 0.8
+  - 0.1
+  coinMultiplier: 2
+  coinBonusForStars: 500000000000000096000000000000002c01000000000000
+  recomendedCoins: 100
+  references:
+    version: 2
+    RefIds: []

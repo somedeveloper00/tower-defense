@@ -7,6 +7,7 @@ namespace TowerDefense.Core.Starter {
     /// </summary>
     [Serializable]
     public class CoreSessionPack {
+        public int life = 20;
         public ulong coins;
         public List<string> defenders = new();
     }

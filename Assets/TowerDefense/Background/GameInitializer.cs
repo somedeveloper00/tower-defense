@@ -14,7 +14,8 @@ using UnityEngine.SceneManagement;
 namespace TowerDefense.Background {
     public class GameInitializer : MonoBehaviour {
         
-        public static Action<SecureDatabase> onSecureDataLoad;
+        public static Action<SecureDatabase> afterSecureDataLoad;
+        public static Action<SecureDatabase> beforeSecureDataSave;
         public List<OnInitTask> onInitTasks = new List<OnInitTask>();
 
         public class OnInitTask {
@@ -34,6 +35,15 @@ namespace TowerDefense.Background {
             
             LoadingScreenManager.Current.StartLoadingScreen();
             LoadingScreenManager.Current.state = LoadingScreenManager.State.StartingGame;
+
+            // load data
+            new SecureDatabase( "s.dat" );
+            SecureDatabase.Current.Load();
+            afterSecureDataLoad?.Invoke( SecureDatabase.Current );
+            
+            // save data right after loading for flushing save file
+            beforeSecureDataSave?.Invoke( SecureDatabase.Current );
+            SecureDatabase.Current.Save();
             
             // load ad
             if (Application.isEditor) new EditorAdManager();
@@ -49,9 +59,6 @@ namespace TowerDefense.Background {
             // load analytics
             GameAnalytics.Initialize();
 
-            // load data
-            onSecureDataLoad?.Invoke( SecureDatabase.Current );
-            
             // do after load tasks
             onInitTasks.Sort( (t1, t2) => t1.order.CompareTo( t2.order ) );
             for (int i = 0; i < onInitTasks.Count; i++) {

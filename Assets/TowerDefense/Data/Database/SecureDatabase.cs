@@ -12,7 +12,10 @@ namespace TowerDefense.Data.Database {
     public class SecureDatabase : Database {
 
         string path;
-        public SecureDatabase(string filepath) => path = Path.Combine( Application.persistentDataPath, filepath );
+        public SecureDatabase(string filepath) {
+            path = Path.Combine( Application.persistentDataPath, filepath );
+            Current = this;
+        }
 
 #if UNITY_EDITOR
         [MenuItem("Files/Open Secure Database File")]
@@ -22,15 +25,15 @@ namespace TowerDefense.Data.Database {
 #endif
 
         public static SecureDatabase Current;
-#if UNITY_EDITOR
-        [InitializeOnLoadMethod]
-#endif
-        [RuntimeInitializeOnLoadMethod( RuntimeInitializeLoadType.BeforeSplashScreen )]
-        static void start() {
-            Current = new SecureDatabase("s.dat");
-            Current.Load();
-            Debug.Log( $"secure data loaded." );
-        }
+// #if UNITY_EDITOR
+//         [InitializeOnLoadMethod]
+// #endif
+        // [RuntimeInitializeOnLoadMethod( RuntimeInitializeLoadType.BeforeSplashScreen )]
+        // static void start() {
+        //     Current = new SecureDatabase("s.dat");
+        //     Current.Load();
+        //     Debug.Log( $"secure data loaded." );
+        // }
 
         
         JObject data;
@@ -41,12 +44,14 @@ namespace TowerDefense.Data.Database {
             if (File.Exists( path )) {
                 var fileData = decryptAndGetData( path );
                 try {
-                    data = JsonConvert.DeserializeObject<JObject>( fileData );
+                    var d = JsonConvert.DeserializeObject<JObject>( fileData );
+                    if (d != null) data = d;
                 }
                 catch (Exception e) {
                     Debug.LogException( e );
                 }
             }
+            Debug.Log( $"secure data loaded: {path}" );
         }
 
         public override void Save() {

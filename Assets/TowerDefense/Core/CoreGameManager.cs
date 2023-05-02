@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -134,6 +135,7 @@ namespace TowerDefense.Core {
         void OnCoreStarterFinished(CoreLevelData coreLevelData, CoreSessionPack sessionPack) {
             _levelData = Instantiate( coreLevelData );
             this.sessionPack = sessionPack;
+            life = sessionPack.life;
         }
 
         void OnSpawnerInitialize(EnemySpawner spawner) {
@@ -194,15 +196,20 @@ namespace TowerDefense.Core {
             // making data for win
             var winData = new WinData();
             winData.time = gameTime;
-            winData.stars = _levelData.EvaluateStar( gameTime );
+            winData.stars = _levelData.EvaluateStar( gameTime, sessionPack.life, life );
             winData.coins = (ulong)( _coinsReceivedFromEnemiesKilled * _levelData.coinMultiplier )
                             + (ulong)winData.stars * _levelData.EvaluateBonusCoinForStar( winData.stars );
             Debug.Log( $"Won Game!: {winData.ToJson()}" );
 
 
-            GameAnalytics.NewResourceEvent( GAResourceFlowType.Source, GameAnalyticsHelper.Currency_Coin, winData.coins,
-                GameAnalyticsHelper.ItemType_GameWin, "GameWin" );
-            GameAnalytics.NewProgressionEvent( GAProgressionStatus.Complete, _levelData.id );
+            try {
+                GameAnalytics.NewResourceEvent( GAResourceFlowType.Source, GameAnalyticsHelper.Currency_Coin, winData.coins,
+                    GameAnalyticsHelper.ItemType_GameWin, "GameWin" );
+                GameAnalytics.NewProgressionEvent( GAProgressionStatus.Complete, _levelData.id );
+            }
+            catch (Exception e) {
+                Debug.LogException( e );
+            }
             
             CoreGameEvents.Current.onWin?.Invoke( winData );
 
@@ -217,7 +224,7 @@ namespace TowerDefense.Core {
                 nextLevel.status |= LevelProgress.LevelStatus.Unlocked; 
             }
             PlayerGlobals.Current.ecoProg.coins += winData.coins;
-            PlayerGlobals.Current.Save( SecureDatabase.Current );
+            PlayerGlobals.Current.SetData( SecureDatabase.Current );
             
             // slow down time
             _slowDownTweener = Tweener.Generate( () => Time.timeScale, value => Time.timeScale = value, 0f,
@@ -241,16 +248,20 @@ namespace TowerDefense.Core {
             Debug.Log( $"Won Game!: {loseData.ToJson()}" );
             CoreGameEvents.Current.onLose?.Invoke(loseData);
 
-            GameAnalytics.NewResourceEvent( GAResourceFlowType.Sink, GameAnalyticsHelper.Currency_Coin,
-                sessionPack.coins, GameAnalyticsHelper.ItemType_GameLose, "GameLose" );
-            GameAnalytics.NewProgressionEvent( GAProgressionStatus.Fail, _levelData.id );
-            
+            try {
+                GameAnalytics.NewResourceEvent( GAResourceFlowType.Sink, GameAnalyticsHelper.Currency_Coin,
+                    sessionPack.coins, GameAnalyticsHelper.ItemType_GameLose, "GameLose" );
+                GameAnalytics.NewProgressionEvent( GAProgressionStatus.Fail, _levelData.id );
+            } catch (Exception e) {
+                Debug.LogException( e );
+            }
+
             // handle data modification
             var level = PlayerGlobals.Current.GetOrCreateLevelProg( _levelData.id );
             level.playCount++;
             level.coinsReceived += loseData.coins;
             PlayerGlobals.Current.ecoProg.coins += loseData.coins;
-            PlayerGlobals.Current.Save( SecureDatabase.Current );
+            PlayerGlobals.Current.SetData( SecureDatabase.Current );
             
             // slow down time
             _slowDownTweener = Tweener.Generate( () => Time.timeScale, value => Time.timeScale = value, 0f, loseDialogueDelay,

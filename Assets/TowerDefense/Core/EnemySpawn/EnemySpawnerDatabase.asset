@@ -22,3 +22,6 @@ MonoBehaviour:
   - name: balloon-hard
     prefab: {fileID: 4620684104319207334, guid: f00463482a85eeb4bbe2d5580390e88b, type: 3}
     worth: 11
+  - name: balloon-fast-hard
+    prefab: {fileID: 2280263769983416167, guid: 1aece9ae394e97c4b87268cf8ce2d896, type: 3}
+    worth: 16

@@ -1,9 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.IO;
 using TowerDefense.Background;
-using TowerDefense.Core.Starter;
 using TowerDefense.Data.Database;
 using TowerDefense.Data.Progress;
+using TriInspector;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace TowerDefense.Data {
     [CreateAssetMenu( fileName = "PlayerGlobals", menuName = "TD/Player Globals", order = 0 )]
@@ -12,7 +16,8 @@ namespace TowerDefense.Data {
         public static PlayerGlobals Current;
         void OnEnable() {
             Current = this;
-            GameInitializer.onSecureDataLoad += Load;
+            GameInitializer.afterSecureDataLoad += LoadData;
+            GameInitializer.beforeSecureDataSave += SetData;
         }
 
         /// <summary>
@@ -24,29 +29,47 @@ namespace TowerDefense.Data {
         public EcoProgress ecoProg;
         public DefendersProgress defendersProg = new ();
         public LevelProgress levelProg = new ();
+        
+
+        [Button("Get Levels Automatically")]
+        void edit_getLevelsFromFolder() {
+            levelsData.coreLevels.Clear();
+            foreach (var file in Directory.GetFiles( "Assets/TowerDefense/GeneralSOs/Levels/" )) {
+                if (file.EndsWith( ".asset" ))
+                    levelsData.coreLevels.Add( AssetDatabase.LoadAssetAtPath<CoreLevelData>( file ) );
+            }
+
+            levelsData.coreLevels.Sort( (l1, l2) => int.Parse( l1.id ).CompareTo( int.Parse( l2.id ) ) );
+        }
+        
 
 
-        public void Load(SecureDatabase secureDatabase) {
-            if (secureDatabase.TryGetValue<DefendersProgress>( "defprog", out var defendersProg ))
-                this.defendersProg = defendersProg;
-            if (secureDatabase.TryGetValue<LevelProgress>( "lvlprog", out var levelProg ))
-                this.levelProg = levelProg;
-            if (secureDatabase.TryGetValue<EcoProgress>( "ecoprog", out var ecoProg ))
-                this.ecoProg = ecoProg;
+        public void LoadData(SecureDatabase secureDatabase) {
+            this.defendersProg = secureDatabase.TryGetValue<DefendersProgress>( "defprog", out var defendersProg )
+                ? defendersProg
+                : new DefendersProgress();
+            this.levelProg = secureDatabase.TryGetValue<LevelProgress>( "lvlprog", out var levelProg )
+                ? levelProg
+                : new LevelProgress();
+            this.ecoProg = secureDatabase.TryGetValue<EcoProgress>( "ecoprog", out var ecoProg )
+                ? ecoProg
+                : new EcoProgress();
+
+            if (this.ecoProg.coins < 20) {
+                this.ecoProg.coins = 20;
+            }
 
             // making sure level 1 is always unlocked
             GetOrCreateLevelProg( levelsData.coreLevels[0].id ).status |= LevelProgress.LevelStatus.Unlocked;
-            
+
             Debug.Log( $"player global data loaded" );
         }
 
-        public void Save(SecureDatabase secureDatabase) {
+        public void SetData(SecureDatabase secureDatabase) {
             secureDatabase.Set( "defprog", defendersProg );
             secureDatabase.Set( "lvlprog", levelProg );
             secureDatabase.Set( "ecoprog", ecoProg );
-            
-            secureDatabase.Save();
-            Debug.Log( $"player global data saved" );
+            Debug.Log( $"player global data set" );
         }
 
         public bool TryGetLevelData(string id, out CoreLevelData level) {

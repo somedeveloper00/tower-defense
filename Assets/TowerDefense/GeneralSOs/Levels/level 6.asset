@@ -10,26 +10,33 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91b9bad79ede404b92d88cc8af708d16, type: 3}
-  m_Name: level 1
+  m_Name: level 6
   m_EditorClassIdentifier: 
   env: env1
-  title: "\u0645\u0631\u062D\u0644\u0647 \u06F1"
-  id: 11
+  title: "\u0645\u0631\u062D\u0644\u0647 \u06F6"
+  id: 61
   arguments: []
   spawnings:
   - onTime:
     - time: 0
       spawns:
       - name: balloon-simple
-        count: 15
-        timeIntervals: 3
+        count: 20
+        timeIntervals: 0.3
+        argv: []
+  - onTime:
+    - time: 30
+      spawns:
+      - name: balloon-fast
+        count: 20
+        timeIntervals: 0.2
         argv: []
   lifeRemainForStar:
   - 1
-  - 0.5
+  - 0.8
   - 0.1
   coinMultiplier: 1
-  coinBonusForStars: 320000000000000050000000000000006400000000000000
+  coinBonusForStars: 32000000000000005000000000000000c800000000000000
   recomendedCoins: 40
   references:
     version: 2

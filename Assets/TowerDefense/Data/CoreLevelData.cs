@@ -17,9 +17,10 @@ namespace TowerDefense.Data {
         public List<EnemySpawner.SpawningMethod> spawnings = new();
 
         /// <summary>
-        /// time limit for each star
+        /// life percentage for each star
         /// </summary>
-        public int[] starTime = new int[3];
+        [Range(0, 1)]
+        public float[] lifeRemainForStar = new float[3];
 
         public float coinMultiplier = 1;
 
@@ -33,7 +34,7 @@ namespace TowerDefense.Data {
         
 
         void OnValidate() {
-            if (starTime.Length != 3) Array.Resize( ref starTime, 3 );
+            if (lifeRemainForStar.Length != 3) Array.Resize( ref lifeRemainForStar, 3 );
             if (coinBonusForStars.Length != 3) Array.Resize( ref coinBonusForStars, 3 );
         }
 
@@ -52,9 +53,10 @@ namespace TowerDefense.Data {
 
 #region Helpers
 
-        public int EvaluateStar(float time) {
-            for (int i = starTime.Length - 1; i >= 0; i--)
-                if (time < starTime[i]) return i + 1;
+        public int EvaluateStar(float time, int startingLife, int endingLife) {
+            var t = (float)startingLife / endingLife;
+            for (int i = lifeRemainForStar.Length - 1; i >= 0; i--)
+                if (t > lifeRemainForStar[i]) return i + 1;
             return 0;
         }
 

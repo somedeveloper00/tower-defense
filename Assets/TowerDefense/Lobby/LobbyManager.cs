@@ -106,6 +106,7 @@ namespace TowerDefense.Lobby {
             }
 
             PlayerGlobals.Current.ecoProg.coins -= sessionPack.coins;
+            if (PlayerGlobals.Current.ecoProg.coins < 20) PlayerGlobals.Current.ecoProg.coins = 20;
             
             GameAnalytics.NewResourceEvent( GAResourceFlowType.Sink, GameAnalyticsHelper.Currency_Coin,
                 sessionPack.coins, GameAnalyticsHelper.ItemType_GameStart, "GameStart" );

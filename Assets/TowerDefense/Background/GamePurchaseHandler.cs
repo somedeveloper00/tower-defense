@@ -8,6 +8,7 @@ using TowerDefense.Bridges.Analytics;
 using TowerDefense.Bridges.Iap;
 using TowerDefense.Common;
 using TowerDefense.Data;
+using TowerDefense.Data.Database;
 using UnityEngine;
 
 namespace TowerDefense.Background {
@@ -86,7 +87,9 @@ namespace TowerDefense.Background {
             }
             // SUCCESS
             PlayerGlobals.Current.ecoProg.coins += product.rewardCoins;
-            
+            PlayerGlobals.Current.SetData( SecureDatabase.Current );
+            SecureDatabase.Current.Save();
+
             GameAnalytics.NewResourceEvent( GAResourceFlowType.Source, GameAnalyticsHelper.Currency_Coin,
                 product.rewardCoins, GameAnalyticsHelper.ItemType_IAP, "InAppPurchase" );
             

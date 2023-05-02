@@ -15,32 +15,23 @@ MonoBehaviour:
   levelsData:
     coreLevels:
     - {fileID: 11400000, guid: 4431fc5307db0224ea69d20b03b71b26, type: 2}
-    - {fileID: 11400000, guid: 0e17d27ff12c11545b14fe163b20d947, type: 2}
-    - {fileID: 11400000, guid: ea72b93161314ce468b259cfd4ac0bcf, type: 2}
-    - {fileID: 11400000, guid: 55e014981ae16184686d2bef70020e6c, type: 2}
+    - {fileID: 11400000, guid: 8029c50c4378f2045816e1b08a9637bc, type: 2}
+    - {fileID: 11400000, guid: 3c459601d7479d54bab426823b49d5e5, type: 2}
+    - {fileID: 11400000, guid: 049d7d83fd90a474c9a663b0af4512e9, type: 2}
+    - {fileID: 11400000, guid: cc872efd9fc742944969d46f15dc28fc, type: 2}
+    - {fileID: 11400000, guid: 5d2872b064def1248bffbd88ba7493cc, type: 2}
+    - {fileID: 11400000, guid: d735828b8fcdd1241aefc86ebc0b113e, type: 2}
+    - {fileID: 11400000, guid: 7af3a9b9c823c9d4d9e59bec7a4e1c42, type: 2}
+    - {fileID: 11400000, guid: 65ce2afe074e5f24fa37c44517106cee, type: 2}
+    - {fileID: 11400000, guid: 7015e7f4d006ed747a32ff2a5096972c, type: 2}
   ecoProg:
-    coins: 200
+    coins: 0
   defendersProg:
     defenders: []
   levelProg:
     levels:
     - id: 11
-      status: 6
-      stars: 3
-      playCount: 0
-      coinsReceived: 0
-    - id: 12
       status: 2
       stars: 0
       playCount: 0
       coinsReceived: 0
-    - id: 13
-      status: 0
-      stars: 0
-      playCount: 0
-      coinsReceived: 0
-    - id: 14
-      status: 2
-      stars: 0
-      playCount: 3
-      coinsReceived: 7
