@@ -4,6 +4,7 @@ using RTLTMPro;
 using TowerDefense.Core.DefenderSpawn;
 using TriInspector;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace TowerDefense.Core.UI {
     public class CoreUI : MonoBehaviour {
@@ -38,7 +39,7 @@ namespace TowerDefense.Core.UI {
                 var active = defenders.Contains( element.selectionName );
                 element.SetActive( active );
                 if (active) {
-                    element.UpdateInteracableState();
+                    element.UpdateCostAndInteractable();
                     element.OnSpawnRequest += onDefenderSpawnClick;
                 }
             }

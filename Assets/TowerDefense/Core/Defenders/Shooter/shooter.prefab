@@ -610,10 +610,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eac43ad0b41540b38257f3c058217f64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnStats: {fileID: 11400000, guid: 5eb4be005f730e44a8a17f5f81bfe2a2, type: 2}
   attackRange: 8.12
   attackPower: 7
   attackReloadTime: 1
-  cost: 7
   icon: {fileID: 2800000, guid: aa621385e905b7e4c95ffc8ffa6f7403, type: 3}
   inClip: {fileID: 8300000, guid: a42a873c8360a04449cb426d043daf2e, type: 3}
   inClipVolume: 0.6

@@ -9,7 +9,9 @@ using TowerDefense.Data;
 using UnityEngine;
 
 namespace TowerDefense.Core {
-    [CreateAssetMenu( fileName = "CoreGameEvents", menuName = "Core/Game Events", order = 0 )]
+    /// <summary>
+    /// singleton class that holds all core game events
+    /// </summary>
     public class CoreGameEvents : ScriptableObject {
         public Action<CoreGameManager> OnGameStart;
         public StartupFinished OnStartupFinished;
@@ -27,7 +29,12 @@ namespace TowerDefense.Core {
 
         public static CoreGameEvents Current;
 
-        void OnEnable() => Current = this;
+#if UNITY_EDITOR
+        [UnityEditor.InitializeOnLoadMethod]
+#else
+        [RuntimeInitializeOnLoadMethod( RuntimeInitializeLoadType.BeforeSceneLoad )]
+#endif
+        static void initialize() => Current = CreateInstance<CoreGameEvents>();
 
         
         public delegate void StartupFinished(CoreLevelData levelData, CoreSessionPack sessionPack);

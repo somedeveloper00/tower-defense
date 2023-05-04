@@ -24,27 +24,28 @@ namespace TowerDefense.Core.UI {
         [SerializeField] Button btn;
         [SerializeField] Image icon;
 
-        ulong cost;
+        DefenderSpawnStats _spawnStats;
 
         public void Start() {
             var defender = DefenderDatabase.Current.GetDefenderMainPrefab( selectionName );
-            cost = defender.cost;
-            coinTxt.text = defender.cost.ToString("#,0");
+            _spawnStats = defender.spawnStats;
             titleTxt.text = defender.name;
             icon.sprite = Sprite.Create( defender.icon, new Rect(0, 0, defender.icon.width, defender.icon.height), Vector2.zero );
             btn.onClick.AddListener( () => OnSpawnRequest?.Invoke( this ) );
-            CoreGameEvents.Current.onSessionCoinModified += UpdateInteracableState;
+            CoreGameEvents.Current.onSessionCoinModified += UpdateCostAndInteractable;
+            CoreGameEvents.Current.OnDefenderSpawn += onDefenderSpawn;
         }
 
         void OnDestroy() {
-            CoreGameEvents.Current.onSessionCoinModified -= UpdateInteracableState;
+            CoreGameEvents.Current.onSessionCoinModified -= UpdateCostAndInteractable;
+            CoreGameEvents.Current.OnDefenderSpawn -= onDefenderSpawn;
         }
 
-        /// <summary>
-        ///  update clickable state
-        /// </summary>
-        public void UpdateInteracableState() {
-            container.interactable = cost <= CoreGameManager.Current.sessionPack.coins;
+        void onDefenderSpawn(Defender _) => UpdateCostAndInteractable(); 
+        
+        public void UpdateCostAndInteractable() {
+            coinTxt.text = _spawnStats.GetCurrentCost().ToString("#,0");
+            container.interactable = _spawnStats.GetCurrentCost() <= CoreGameManager.Current.sessionPack.coins;
         }
 
         /// <summary>

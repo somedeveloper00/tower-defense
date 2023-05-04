@@ -8,7 +8,7 @@ using TriInspector;
 using UnityEngine;
 
 namespace TowerDefense.Data {
-    [CreateAssetMenu( fileName = "Level", menuName = "Core/Level", order = 0 )]
+    [CreateAssetMenu( fileName = "Level", menuName = "TD/Core/Level", order = 0 )]
     public class CoreLevelData : ScriptableObject, ITransportable {
         [Dropdown( nameof(_all_envs) )] public string env;
         public string title;

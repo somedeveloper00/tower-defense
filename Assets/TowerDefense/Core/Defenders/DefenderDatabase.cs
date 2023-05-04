@@ -5,7 +5,7 @@ using TriInspector;
 using UnityEngine;
 
 namespace TowerDefense.Core.Defenders {
-    [CreateAssetMenu( fileName = "DefenderDatabase", menuName = "Core/Defender Database", order = 0 )]
+    [CreateAssetMenu( fileName = "DefenderDatabase", menuName = "TD/Core/Defender Database", order = 0 )]
     public class DefenderDatabase : ScriptableObject {
 
         [SerializeField] List<DefenderItem> defenderItems;

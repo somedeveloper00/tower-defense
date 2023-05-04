@@ -5,7 +5,7 @@ using TowerDefense.Core.Enemies;
 using UnityEngine;
 
 namespace TowerDefense.Core.EnemySpawn {
-    [CreateAssetMenu( fileName = "EnemySpawnerDatabasse", menuName = "Core/Enemy Spawner Database", order = 0 )]
+    [CreateAssetMenu( fileName = "EnemySpawnerDatabasse", menuName = "TD/Core/Enemy Spawner Database", order = 0 )]
     public class EnemyDatabase : ScriptableObject {
 
         public static EnemyDatabase Current;

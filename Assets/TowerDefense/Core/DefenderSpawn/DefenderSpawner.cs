@@ -62,13 +62,15 @@ namespace TowerDefense.Core.DefenderSpawn {
         }
 
         public void SpawnDefender(Defender prefab, Vector3 position) {
-            if (CoreGameManager.Current.sessionPack.coins < prefab.cost) {
+            var cost = prefab.spawnStats.GetCurrentCost();
+            if (CoreGameManager.Current.sessionPack.coins < cost) {
                 throw new Exception( "coins is not sufficent" );
             }
-            Debug.Log( $"{CoreGameManager.Current.sessionPack.coins} === {prefab.cost}" );
-            CoreGameManager.Current.sessionPack.coins -= prefab.cost;
+            Debug.Log( $"{CoreGameManager.Current.sessionPack.coins} === {cost}" );
+            CoreGameManager.Current.sessionPack.coins -= cost;
             CoreGameEvents.Current.onSessionCoinModified?.Invoke();
             var defender = Instantiate( prefab, position, Quaternion.identity, transform );
+            prefab.spawnStats.IncreaseCost();
             CoreGameEvents.Current.OnDefenderSpawn?.Invoke( defender );
             Debug.Log( $"spawned {defender}" );
         }

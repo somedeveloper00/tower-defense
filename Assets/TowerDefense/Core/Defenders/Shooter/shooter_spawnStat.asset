@@ -9,6 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a981c8f4d794d83aed7f29416f2bbde, type: 3}
-  m_Name: CoreGameEvents
+  m_Script: {fileID: 11500000, guid: 75c4e8e1913c4ec099780639e2408b7a, type: 3}
+  m_Name: shooter_spawnStat
   m_EditorClassIdentifier: 
+  initialCost: 7
+  costIncrement: 2

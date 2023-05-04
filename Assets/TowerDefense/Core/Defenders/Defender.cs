@@ -4,6 +4,7 @@ using System.Collections;
 using JetBrains.Annotations;
 using TowerDefense.Core.Audio;
 using TowerDefense.Core.Enemies;
+using TriInspector;
 using UnityEngine;
 
 #if UNITY_EDITOR
@@ -13,10 +14,11 @@ using UnityEditor;
 namespace TowerDefense.Core.Defenders {
     public abstract class Defender : MonoBehaviour {
 
+        [InlineEditor]
+        public DefenderSpawnStats spawnStats;
         public float attackRange;
         public float attackPower;
         public float attackReloadTime;
-        public ulong cost;
         public Texture2D icon;
         
         public AudioClip inClip;
@@ -26,9 +28,7 @@ namespace TowerDefense.Core.Defenders {
         protected Enemy focusedenemy;
         protected float timeSinceLastAttack;
 
-        void Start() {
-            CoreAudioSource.Current.audioSource.PlayOneShot( inClip, inClipVolume );
-        }
+        void Start() => CoreAudioSource.Current.audioSource.PlayOneShot( inClip, inClipVolume );
 
 #if UNITY_EDITOR
         protected virtual void OnDrawGizmosSelected() {
