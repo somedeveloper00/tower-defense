@@ -1,8 +1,9 @@
 ﻿using RTLTMPro;
+using TowerDefense.UI;
 using UnityEngine;
 
 namespace TowerDefense.Core.UI {
-    public class TimeFastForwardToggleButton : CoreDelayedButton {
+    public class TimeFastForwardToggleButton : DelayedButton {
         [SerializeField] float fastForwardSpeed = 2f;
         [SerializeField] RTLTextMeshPro text;
         [SerializeField] string fastForwardText = ">>";

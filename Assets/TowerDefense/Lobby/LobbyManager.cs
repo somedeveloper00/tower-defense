@@ -3,7 +3,6 @@ using System.Collections;
 using System.Threading.Tasks;
 using AnimFlex;
 using AnimFlex.Sequencer.UserEnd;
-using AnimFlex.Tweening;
 using DialogueSystem;
 using GameAnalyticsSDK;
 using TowerDefense.Background;
@@ -40,6 +39,7 @@ namespace TowerDefense.Lobby {
         [SerializeField] Button exitBtn;
         [SerializeField] Button shopBtn;
         [SerializeField] Button settingsBtn;
+        public AudioSource generalAudioSource;
         public AudioSource backgroundMusicSource;
 
         void Start() {

@@ -2,10 +2,11 @@
 using AnimFlex;
 using AnimFlex.Sequencer.UserEnd;
 using AnimFlex.Tweening;
+using TowerDefense.UI;
 using UnityEngine;
 
 namespace TowerDefense.Core.UI {
-    public class ToggleMuteButton : CoreDelayedButton {
+    public class ToggleMuteButton : DelayedButton {
         
         [SerializeField] AudioSource musicAudioSource;
         [SerializeField] float volumeChangeDuration = 0.5f;
@@ -32,9 +33,12 @@ namespace TowerDefense.Core.UI {
         }
 
         protected override void OnClick() {
-            if (_tweener is not null && _tweener.IsActive()) _tweener.Kill( false, false );
+            if (_tweener is not null && _tweener.IsActive()) _tweener.Kill( true, false );
             if (_muted) _tweener = musicAudioSource.AnimAudioVolumeTo( _vol, duration: volumeChangeDuration );
-            else _tweener = musicAudioSource.AnimAudioVolumeTo( 0, duration: volumeChangeDuration );
+            else {
+                _vol = musicAudioSource.volume;
+                _tweener = musicAudioSource.AnimAudioVolumeTo( 0, duration: volumeChangeDuration );
+            }
             _muted = !_muted;
         }
     }

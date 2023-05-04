@@ -1,8 +1,9 @@
 ﻿using AnimFlex.Sequencer.UserEnd;
+using TowerDefense.UI;
 using UnityEngine;
 
 namespace TowerDefense.Core.UI {
-    public class ToggleHidePanel : CoreDelayedButton {
+    public class ToggleHidePanel : DelayedButton {
 
         [SerializeField] SequenceAnim hideSeq, showSeq;
         
@@ -18,11 +19,11 @@ namespace TowerDefense.Core.UI {
 
             void onSeqComplete() {
                 _lock--;
-                button.enabled = _lock == 0;
+                enabled = _lock == 0;
             }
 
             void onSeqPlay() {
-                button.enabled = false;
+                enabled = false;
                 _lock++;
             }
         }

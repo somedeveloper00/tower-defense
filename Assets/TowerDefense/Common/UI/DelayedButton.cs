@@ -2,29 +2,38 @@
 using AnimFlex.Core.Proxy;
 using AnimFlex.Tweening;
 using TowerDefense.Core.Audio;
+using TowerDefense.Lobby;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace TowerDefense.Core.UI {
-    [RequireComponent(typeof(Button))]
-    public abstract class CoreDelayedButton : MonoBehaviour {
+namespace TowerDefense.UI {
+    public abstract class DelayedButton : Button {
         public AudioClip clip;
         public float volume = 0.8f;
         public bool useDefaultAnim = true;
         public int delayAfterAnim = 10;
         
-        protected Button button { get; private set; }
-
-        protected virtual void Start() {
-            button = GetComponent<Button>();
-            button.onClick.AddListener( onClick );
+        protected override void Start() {
+            base.Start();
+            onClick.AddListener( _onClick );
         }
 
-        async void onClick() {
-            button.enabled = false;
+        async void _onClick() {
+            enabled = false;
             bool finished = false;
 
-            CoreAudioSource.Current.audioSource.PlayOneShot( clip, volume );
+            if (CoreAudioSource.Current) {
+                CoreAudioSource.Current.audioSource.PlayOneShot( clip, volume );
+            } else if (LobbyManager.Current) {
+                LobbyManager.Current.generalAudioSource.PlayOneShot( clip, volume );
+            }
+            else {
+                var source = GetComponentInParent<AudioSource>();
+                if (source) {
+                    source.PlayOneShot( clip, volume );
+                }
+            }
+
             if (useDefaultAnim) {
                 transform.localScale = Vector3.one;
                 transform.AnimScaleTo( Vector3.one * 0.7f, proxy: AnimFlexCoreProxyUnscaled.Default )
@@ -38,7 +47,7 @@ namespace TowerDefense.Core.UI {
             await Task.Delay( 200 + delayAfterAnim );
             
             
-            button.enabled = true;
+            enabled = true;
             
             OnClick();
         }
