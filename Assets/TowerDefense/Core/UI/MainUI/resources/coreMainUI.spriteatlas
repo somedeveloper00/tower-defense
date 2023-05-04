@@ -61,6 +61,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: b48bdaaec6b2b474b9058bea3f019dcf, type: 3}
   - {fileID: 21300000, guid: b6161abe5f67e074482e084f59518191, type: 3}
   - {fileID: 21300000, guid: c8684d1f9f2daa746a3a5f5f7fe7fd0e, type: 3}
+  - {fileID: 21300000, guid: 037d454f912466b43bccbef84f9741b7, type: 3}
   - {fileID: 21300000, guid: 0e38768f86c4faf448a6b33e81c6fa21, type: 3}
   - {fileID: 21300000, guid: 33d75f8f6f17e0742abed49bc99589f2, type: 3}
   m_PackedSpriteNamesToIndex:
@@ -75,6 +76,7 @@ SpriteAtlas:
   - char_frame
   - selection_hide_arrow
   - confirm_ok
+  - music-icon
   - hp_bck
   - coins_bck
   m_RenderDataMap: {}

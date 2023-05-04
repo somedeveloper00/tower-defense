@@ -20,7 +20,7 @@ namespace TowerDefense.Data.Database {
 #if UNITY_EDITOR
         [MenuItem("Files/Open Secure Database File")]
         static void openPathInExplorer() {
-            Process.Start( Current.path );
+            Process.Start( Path.Combine( Application.persistentDataPath, "s.dat" ) );
         }
 #endif
 
