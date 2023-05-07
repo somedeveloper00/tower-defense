@@ -39,7 +39,6 @@ namespace TowerDefense.Core.UI {
                 var active = defenders.Contains( element.selectionName );
                 element.SetActive( active );
                 if (active) {
-                    element.UpdateCostAndInteractable();
                     element.OnSpawnRequest += onDefenderSpawnClick;
                 }
             }
@@ -58,6 +57,7 @@ namespace TowerDefense.Core.UI {
         }
 
         async void onDefenderSpawnClick(DefenderSelectionElement element) {
+            Debug.Log( $"spawn request for {element.selectionName}" );
             selectionCanvasGroup.interactable = false;
             await DefenderSpawner.Current.SpawnUsingSelector( element.selectionName );
             selectionCanvasGroup.interactable = true;

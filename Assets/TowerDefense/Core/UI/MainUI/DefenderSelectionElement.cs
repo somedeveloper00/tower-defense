@@ -31,9 +31,13 @@ namespace TowerDefense.Core.UI {
             _spawnStats = defender.spawnStats;
             titleTxt.text = defender.name;
             icon.sprite = Sprite.Create( defender.icon, new Rect(0, 0, defender.icon.width, defender.icon.height), Vector2.zero );
-            btn.onClick.AddListener( () => OnSpawnRequest?.Invoke( this ) );
+            btn.onClick.AddListener( () => {
+                if (OnSpawnRequest != null) OnSpawnRequest.Invoke( this );
+                else Debug.LogWarning( $"OnSpawnRequest was null!" );
+            } );
             CoreGameEvents.Current.onSessionCoinModified += UpdateCostAndInteractable;
             CoreGameEvents.Current.OnDefenderSpawn += onDefenderSpawn;
+            UpdateCostAndInteractable();
         }
 
         void OnDestroy() {
