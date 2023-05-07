@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using TowerDefense.Background;
 using TowerDefense.Data.Database;
 using TowerDefense.Data.Progress;
@@ -29,8 +28,9 @@ namespace TowerDefense.Data {
         public EcoProgress ecoProg;
         public DefendersProgress defendersProg = new ();
         public LevelProgress levelProg = new ();
-        
 
+
+#if UNITY_EDITOR
         [Button("Get Levels Automatically")]
         void edit_getLevelsFromFolder() {
             levelsData.coreLevels.Clear();
@@ -41,6 +41,7 @@ namespace TowerDefense.Data {
 
             levelsData.coreLevels.Sort( (l1, l2) => int.Parse( l1.id ).CompareTo( int.Parse( l2.id ) ) );
         }
+#endif
         
 
 

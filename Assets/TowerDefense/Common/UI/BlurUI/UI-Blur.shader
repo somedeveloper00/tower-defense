@@ -56,7 +56,7 @@ Shader "UI/Blurred Background" {
             #pragma multi_compile_local _ UNITY_UI_CLIP_RECT
             #pragma multi_compile_local _ UNITY_UI_ALPHACLIP
 
-            #define QUALITY 6
+            #define QUALITY 1
 
             struct appdata_t {
                 float4 vertex   : POSITION;
@@ -90,6 +90,10 @@ Shader "UI/Blurred Background" {
                 OUT.vertex = UnityObjectToClipPos(OUT.worldPosition);
                 OUT.screenPos = ComputeScreenPos(OUT.vertex);
                 OUT.texcoord = TRANSFORM_TEX(v.texcoord, _MainTex);
+            #if UNITY_UV_STARTS_AT_TOP
+                OUT.texcoord.y = 1 - OUT.texcoord.y;
+                OUT.screenPos.y = 1 - OUT.screenPos.y;
+            #endif
                 OUT.color = v.color * _Color;
                 return OUT;
             }
@@ -100,8 +104,8 @@ Shader "UI/Blurred Background" {
 
                 // box blur on _UI_Blur_GrabPass texture, given the QUALITY (with for loop)
                 half power = ((tex2D(_MainTex, IN.texcoord) + _TextureSampleAdd) * IN.color).a;
-                float2 pivot_uv = float2(IN.screenPos.x, 1-IN.screenPos.y);
-                float2 offset = power * _Blur / 40 / QUALITY;
+                float2 pivot_uv = float2(IN.screenPos.x, IN.screenPos.y);
+                float2 offset = power * _Blur / 200 / QUALITY;
                 float totalInfluence = 0;
                 for (int x = -QUALITY; x <= QUALITY; ++x) {
                     for (int y = -QUALITY; y <= QUALITY; ++y) {
@@ -117,9 +121,9 @@ Shader "UI/Blurred Background" {
                 
                 
 
-                #ifdef UNITY_UI_CLIP_RECT
-                color.a *= UnityGet2DClipping(IN.worldPosition.xy, _ClipRect);
-                #endif
+                // #ifdef UNITY_UI_CLIP_RECT
+                // color.a *= UnityGet2DClipping(IN.worldPosition.xy, _ClipRect);
+                // #endif
 
                 #ifdef UNITY_UI_ALPHACLIP
                 clip (color.a - 0.001);

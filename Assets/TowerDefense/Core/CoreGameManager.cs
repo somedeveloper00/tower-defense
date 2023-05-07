@@ -104,6 +104,7 @@ namespace TowerDefense.Core {
         }
 
         public void RestartGame() {
+            SecureDatabase.Current.Save();
             BackgroundRunner.Current.StartCoroutine( coroutine( _levelData ) );
 
             IEnumerator coroutine(CoreLevelData coreStarter) {
@@ -120,6 +121,7 @@ namespace TowerDefense.Core {
         }
 
         public void BackToLobby() {
+            SecureDatabase.Current.Save();
             BackgroundRunner.Current.StartCoroutine( enumerator() );
 
             IEnumerator enumerator() {

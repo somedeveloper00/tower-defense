@@ -16,19 +16,19 @@ namespace TowerDefense.Data.Database {
 
         public bool TryGetInt(string key, out int result) {
             var r = TryGetValue( key, out IntTransport intTrans );
-            result = intTrans.value;
+            result = r ? intTrans.value : 0;
             return r;
         }
 
         public bool TryGetFloat(string key, out float result) {
-            var r = TryGetValue( key, out FloatTransport intTrans );
-            result = intTrans.value;
+            var r = TryGetValue( key, out FloatTransport floatTrans );
+            result = r ? floatTrans.value : 0;
             return r;
         }
 
         public bool TryGetString(string key, out string result) {
-            var r = TryGetValue( key, out StringTransport intTrans );
-            result = intTrans.value;
+            var r = TryGetValue( key, out StringTransport strTrans );
+            result = r ? strTrans.value : string.Empty;
             return r;
         }
         

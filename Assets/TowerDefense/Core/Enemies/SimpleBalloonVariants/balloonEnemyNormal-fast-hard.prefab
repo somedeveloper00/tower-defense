@@ -64,6 +64,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1681292620186485121, guid: 5bb5bcddc4b4bf840bad828fed5924f8, type: 3}
+      propertyPath: coinReward
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1681292620186485121, guid: 5bb5bcddc4b4bf840bad828fed5924f8, type: 3}
       propertyPath: startingLife
       value: 40
       objectReference: {fileID: 0}

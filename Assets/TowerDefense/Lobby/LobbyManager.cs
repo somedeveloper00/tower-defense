@@ -13,9 +13,11 @@ using TowerDefense.Common;
 using TowerDefense.Core.Starter;
 using TowerDefense.Data;
 using TowerDefense.Lobby.LevelChoosing;
+using TowerDefense.Music;
 using TriInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -40,12 +42,9 @@ namespace TowerDefense.Lobby {
         [SerializeField] Button shopBtn;
         [SerializeField] Button settingsBtn;
         public AudioSource generalAudioSource;
-        public AudioSource backgroundMusicSource;
+        public MusicPlayer backgroundMusic;
 
         void Start() {
-            // fade in background music
-            backgroundMusicSource.AnimAudioVolumeTo( 1 );
-            
             playBtn.onClick.AddListener( onPlayBtnClick );
             exitBtn.onClick.AddListener( onExitBtnClick );
             shopBtn.onClick.AddListener( onShopBtnClick );
@@ -119,8 +118,8 @@ namespace TowerDefense.Lobby {
                 yield return null;
 
                 // fade out background music
-                var t = backgroundMusicSource.AnimAudioVolumeTo( 0, duration: 1 );
-                while (t.IsActive()) yield return new WaitForSecondsRealtime( 1 );
+                backgroundMusic.Mute();
+                yield return new WaitForTask( backgroundMusic.AwaitFade() );
                 
                 yield return SceneManager.UnloadSceneAsync( gameObject.scene );
                 yield return null;

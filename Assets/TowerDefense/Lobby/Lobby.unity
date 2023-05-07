@@ -306,7 +306,7 @@ MonoBehaviour:
   shopBtn: {fileID: 319976852}
   settingsBtn: {fileID: 1038319995}
   generalAudioSource: {fileID: 50481354}
-  backgroundMusicSource: {fileID: 406590087}
+  backgroundMusic: {fileID: 406590089}
 --- !u!82 &50481354
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1640,6 +1640,7 @@ GameObject:
   m_Component:
   - component: {fileID: 406590088}
   - component: {fileID: 406590087}
+  - component: {fileID: 406590089}
   m_Layer: 0
   m_Name: backgroundMusic
   m_TagString: Untagged
@@ -1758,6 +1759,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &406590089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406590086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7fe2d057db4408aa490661c08e15f5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volume: 1
+  fadeDuration: 1
+  SaveMuteState: 1
+  prefMuteKey: lobb-mute
 --- !u!1 &452411806
 GameObject:
   m_ObjectHideFlags: 0
@@ -3583,8 +3600,7 @@ MonoBehaviour:
   volume: 0.8
   useDefaultAnim: 1
   delayAfterAnim: 10
-  musicAudioSource: {fileID: 406590087}
-  volumeChangeDuration: 0.5
+  player: {fileID: 406590089}
   muteSeq: {fileID: 1030936900}
   unmuteSeq: {fileID: 580868701}
 --- !u!1 &1572722276

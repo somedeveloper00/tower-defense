@@ -380,8 +380,7 @@ MonoBehaviour:
   volume: 0.8
   useDefaultAnim: 1
   delayAfterAnim: 10
-  musicAudioSource: {fileID: 2067865801}
-  volumeChangeDuration: 0.5
+  player: {fileID: 2067865802}
   muteSeq: {fileID: 433779675}
   unmuteSeq: {fileID: 1505004336}
 --- !u!1001 &30588177
@@ -24680,8 +24679,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2067865800}
   - component: {fileID: 2067865801}
+  - component: {fileID: 2067865802}
   m_Layer: 0
-  m_Name: backgroundMusicSource
+  m_Name: Music
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24798,6 +24798,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2067865802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2067865799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7fe2d057db4408aa490661c08e15f5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volume: 1
+  fadeDuration: 1
+  SaveMuteState: 1
+  prefMuteKey: core-mute
 --- !u!1001 &2068745440
 PrefabInstance:
   m_ObjectHideFlags: 0
