@@ -16,13 +16,13 @@ namespace TowerDefense.Background {
         
         public static Action<SecureDatabase> afterSecureDataLoad;
         public static Action<SecureDatabase> beforeSecureDataSave;
-        public List<OnInitTask> onInitTasks = new List<OnInitTask>();
+        public static List<OnInitTask> onInitTasks = new List<OnInitTask>();
 
         public class OnInitTask {
             public int order;
-            public Task task;
+            public Func<Task> task;
 
-            public OnInitTask(int order, Task task) {
+            public OnInitTask(int order, Func<Task> task) {
                 this.order = order;
                 this.task = task;
             }
@@ -62,7 +62,8 @@ namespace TowerDefense.Background {
             // do after load tasks
             onInitTasks.Sort( (t1, t2) => t1.order.CompareTo( t2.order ) );
             for (int i = 0; i < onInitTasks.Count; i++) {
-                yield return new WaitForTask( onInitTasks[i].task );
+                Debug.Log( $"init task started ({onInitTasks[i].order}) [{onInitTasks[i].task}]" );
+                yield return new WaitForTask( onInitTasks[i].task?.Invoke() );
             }
 
             // load lobby

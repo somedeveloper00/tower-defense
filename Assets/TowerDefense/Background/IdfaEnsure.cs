@@ -12,7 +12,7 @@ namespace TowerDefense.Background {
         [SerializeField] string okTxt;
 
         void Start() {
-            GameInitializer.Current.onInitTasks.Add( new GameInitializer.OnInitTask( 10, EnsureIDFA()) );
+            GameInitializer.onInitTasks.Add( new GameInitializer.OnInitTask( 10, EnsureIDFA) );
         }
 
         public async Task EnsureIDFA() {

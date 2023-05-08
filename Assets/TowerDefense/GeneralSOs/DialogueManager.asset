@@ -18,15 +18,25 @@ MonoBehaviour:
   - prefab: {fileID: 5641910109787284005, guid: d91fb887af67ee14fbb88310a3d706d2, type: 3}
     maxInstances: 1
     maximumReachedBehaviour: 0
+    fallbackScale: {x: 1920, y: 1080}
+    fallbackPixelPerUnit: 1
   - prefab: {fileID: 8279316130912892596, guid: 1d729690ab594fc45b95882c61052750, type: 3}
     maxInstances: 1
     maximumReachedBehaviour: 0
+    fallbackScale: {x: 1920, y: 1080}
+    fallbackPixelPerUnit: 1
   - prefab: {fileID: 1106742564565935017, guid: a1f8f4919863b2b4ab8d662f0e8cda33, type: 3}
     maxInstances: 1
     maximumReachedBehaviour: 0
+    fallbackScale: {x: 1920, y: 1080}
+    fallbackPixelPerUnit: 1
   - prefab: {fileID: 7526248553148290010, guid: 8a7c841e8da7a5f4daaa87f88999954c, type: 3}
     maxInstances: -1
     maximumReachedBehaviour: 1
+    fallbackScale: {x: 1920, y: 1080}
+    fallbackPixelPerUnit: 1
   - prefab: {fileID: 5171690360209535707, guid: d0028dd97bc2a704585e43f406805002, type: 3}
     maxInstances: 1
     maximumReachedBehaviour: 1
+    fallbackScale: {x: 1920, y: 1080}
+    fallbackPixelPerUnit: 1

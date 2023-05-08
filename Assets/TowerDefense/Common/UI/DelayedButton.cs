@@ -12,10 +12,12 @@ namespace TowerDefense.UI {
         public float volume = 0.8f;
         public bool useDefaultAnim = true;
         public int delayAfterAnim = 10;
+
+        public ButtonClickedEvent onClick { get; private set; } = new ButtonClickedEvent();
         
         protected override void Start() {
             base.Start();
-            onClick.AddListener( _onClick );
+            base.onClick.AddListener( _onClick );
         }
 
         async void _onClick() {
@@ -50,6 +52,7 @@ namespace TowerDefense.UI {
             enabled = true;
             
             OnClick();
+            onClick?.Invoke();
         }
 
         /// <summary> executes at the same time with the default animation </summary>
