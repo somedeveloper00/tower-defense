@@ -37,14 +37,10 @@ namespace TowerDefense.Background.Loading {
 
         public void StartLoadingScreen() {
             if (t >= 0 || _currentUi != null) return;
-            Debug.Log( $"loading started" );
             _currentUi = Instantiate( prefab, parentCanavs );
             _currentUi.canvas.gameObject.SetActive( true );
             _currentUi.inSequence.PlaySequence();
             t = 0;
-
-
-            Debug.Log( $"loading finished starting" );
         }
 
         public bool IsON() => t >= 0 || _currentUi != null; 

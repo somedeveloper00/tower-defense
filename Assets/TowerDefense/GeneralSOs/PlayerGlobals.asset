@@ -25,13 +25,58 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 65ce2afe074e5f24fa37c44517106cee, type: 2}
     - {fileID: 11400000, guid: 7015e7f4d006ed747a32ff2a5096972c, type: 2}
   ecoProg:
-    coins: 0
+    coins: 20
   defendersProg:
     defenders: []
   levelProg:
     levels:
     - id: 11
+      status: 6
+      stars: 3
+      playCount: 1
+      coinsReceived: 705
+    - id: 21
+      status: 6
+      stars: 3
+      playCount: 1
+      coinsReceived: 782
+    - id: 31
+      status: 6
+      stars: 3
+      playCount: 1
+      coinsReceived: 889
+    - id: 41
+      status: 6
+      stars: 3
+      playCount: 3
+      coinsReceived: 2880
+    - id: 51
       status: 2
+      stars: 0
+      playCount: 0
+      coinsReceived: 0
+    - id: 61
+      status: 0
+      stars: 0
+      playCount: 0
+      coinsReceived: 0
+    - id: 71
+      status: 0
+      stars: 0
+      playCount: 0
+      coinsReceived: 0
+    - id: 81
+      status: 0
+      stars: 0
+      playCount: 0
+      coinsReceived: 0
+    - id: 91
+      status: 0
+      stars: 0
+      playCount: 0
+      coinsReceived: 0
+    - id: 101
+      status: 0
       stars: 0
       playCount: 0
       coinsReceived: 0

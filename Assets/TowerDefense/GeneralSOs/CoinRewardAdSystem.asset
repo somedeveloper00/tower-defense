@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   adDelay: 1
   adReward: 100
+  tooLowThreshold: 20
+  tooLowIncrease: 20
+  tooLowCoindIncreaseDelay: 0.08

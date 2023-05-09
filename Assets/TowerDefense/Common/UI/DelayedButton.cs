@@ -14,6 +14,8 @@ namespace TowerDefense.UI {
         public int delayAfterAnim = 10;
 
         public ButtonClickedEvent onClick { get; private set; } = new ButtonClickedEvent();
+
+        bool _busy = false;
         
         protected override void Start() {
             base.Start();
@@ -21,6 +23,9 @@ namespace TowerDefense.UI {
         }
 
         async void _onClick() {
+            if (_busy) return;
+            _busy = true;
+            
             enabled = false;
             bool finished = false;
 
@@ -53,6 +58,7 @@ namespace TowerDefense.UI {
             
             OnClick();
             onClick?.Invoke();
+            _busy = false;
         }
 
         /// <summary> executes at the same time with the default animation </summary>

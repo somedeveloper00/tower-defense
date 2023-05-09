@@ -14,9 +14,12 @@ namespace TowerDefense.Lobby.LevelChoosing {
         [SerializeField] RTLTextMeshPro title;
         [SerializeField] List<ulong> possibleSessionCoins = new();
         [SerializeField] List<string> possibleSessionCoinsTxt = new();
-        [SerializeField, TextArea] string coinChooseMessageTitleText;
+        [SerializeField] string coinChooseMessageTitleText;
         [SerializeField, TextArea] string coinChooseMessageBodyText;
         [SerializeField] MessageDialogue.IconType coinChooseMessageIcon;
+        [SerializeField] string notEnoughCoinsTitleText;
+        [SerializeField, TextArea] string notEnoughCoinsBodyText;
+        [SerializeField] MessageDialogue.IconType notEnoughCoinsIcon;
 
         [NonSerialized] public CoreLevelData coreLevelData;
         [NonSerialized] public LevelProgress.Level levelProgress;
@@ -31,16 +34,27 @@ namespace TowerDefense.Lobby.LevelChoosing {
             var dialogue = DialogueManager.Current.GetOrCreate<MessageDialogue>();
 
             // get possible coin packs
+            int count = 0;
             for (int i = 0; i < possibleSessionCoins.Count; i++) {
                 if (PlayerGlobals.Current.ecoProg.coins >= possibleSessionCoins[i]) {
                     dialogue.AddButton( possibleSessionCoinsTxt[i], "ok" );
+                    count++;
                 }
             }
 
+            if (count == 0) {
+                dialogue.SetTitleText( notEnoughCoinsTitleText );
+                dialogue.SetBodyText( notEnoughCoinsBodyText );
+                dialogue.SetIcon( notEnoughCoinsIcon );
+                dialogue.AddOkButton();
+                await dialogue.AwaitClose();
+                return;
+            }
             dialogue.SetTitleText( coinChooseMessageTitleText );
             dialogue.SetBodyText( coinChooseMessageBodyText );
             dialogue.SetIcon( coinChooseMessageIcon );
             await dialogue.AwaitClose();
+
 
             var ind = possibleSessionCoinsTxt.IndexOf( dialogue.result );
             if (ind != -1) {

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AnimFlex.Sequencer.UserEnd;
 using DialogueSystem;
 using RTLTMPro;
+using TowerDefense.UI;
 using TriInspector;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,8 +22,8 @@ namespace TowerDefense.Common {
         [SerializeField] GameObject closeLayout;
         [SerializeField] GameObject iconLayout;
         [SerializeField] Image iconImage;
-        [SerializeField] Button closeBtn;
-        [SerializeField] Button outsideBtn;
+        [SerializeField] DelayedButton closeBtn;
+        [SerializeField] DelayedButton outsideBtn;
         [SerializeField] RTLTextMeshPro bodyTxt;
         [SerializeField] GameObject bodyTxtLayout;
         [SerializeField] RTLTextMeshPro titleTxt;
@@ -152,6 +153,7 @@ namespace TowerDefense.Common {
 
 
         public async Task Close(bool noAnim = false) {
+            canvasRaycaster.enabled = false;
             await Task.Delay( (int)(exitDelay * 1000) );
             if (noAnim) {
                 if (inSequence.sequence.IsPlaying())
@@ -162,7 +164,8 @@ namespace TowerDefense.Common {
                 while (!_opened) await Task.Yield();
                 canvasRaycaster.enabled = false;
                 outSequence.PlaySequence();
-                outSequence.sequence.onComplete += base.Close;
+                await outSequence.AwaitComplete();
+                base.Close();
             }
             await AwaitClose();
         }

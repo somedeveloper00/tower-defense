@@ -114,13 +114,29 @@ namespace TowerDefense.Background {
         
         static async void timeJumpCheck_forever() {
             do {
+#if UNITY_EDITOR
+                if (Application.isPlaying) {
+                    await PerformTimeJumpCheck();
+                }
+                else {
+                    await Task.Delay( 200 ); // waiting for possibility of entering playmode
+                }
+#else
                 await PerformTimeJumpCheck();
+#endif
+
             } while (true);
         }
 
         static async void syncTimeFromInterner_forever() {
             do {
+#if UNITY_EDITOR
+                if (Application.isPlaying) {
+                    await PerformTimeSyncFromInternet();
+                }
+#else
                 await PerformTimeSyncFromInternet();
+#endif
                 await Task.Delay( UPDATE_FROM_INTERNET_LOOP_DELAY );
             } while (true);
         }

@@ -56,10 +56,6 @@ namespace TowerDefense.Data {
                 ? ecoProg
                 : new EcoProgress();
 
-            if (this.ecoProg.coins < 20) {
-                this.ecoProg.coins = 20;
-            }
-
             // making sure level 1 is always unlocked
             GetOrCreateLevelProg( levelsData.coreLevels[0].id ).status |= LevelProgress.LevelStatus.Unlocked;
 

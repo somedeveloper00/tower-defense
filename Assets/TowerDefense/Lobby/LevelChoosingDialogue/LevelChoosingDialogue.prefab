@@ -791,8 +791,7 @@ GameObject:
   - component: {fileID: 1106742564704947972}
   - component: {fileID: 1106742564704947969}
   - component: {fileID: 1106742564704947974}
-  - component: {fileID: 1106742564704947975}
-  - component: {fileID: 6278216090556419511}
+  - component: {fileID: 5607104374542743508}
   - component: {fileID: 1106742564704947968}
   m_Layer: 0
   m_Name: levelView
@@ -860,7 +859,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1106742564704947975
+--- !u!114 &5607104374542743508
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -869,7 +868,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1106742564704947973}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: d8af190e76eb40869fd8e515cc0f62dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -903,54 +902,11 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1106742564704947974}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6278216090556419511}
-        m_TargetAssemblyTypeName: AnimFlex.Sequencer.UserEnd.SequenceAnim, AnimFlex
-        m_MethodName: PlaySequence
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &6278216090556419511
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1106742564704947973}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 047e8afad3c64e64b1323784efd490e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playOnEnable: 0
-  useProxyAsCore: 0
-  useDefaultCoreProxy: 0
-  defaultCoreProxy: 
-  coreProxy: {fileID: 0}
-  resetOnPlay: 1
-  activateNextClipsASAP: 1
-  sequence:
-    activateNextClipsASAP: 1
-    nodes:
-    - name: Node 1
-      delay: 0
-      clip:
-        rid: 1861648539527413828
-  references:
-    version: 2
-    RefIds:
-    - rid: 1861648539527413828
-      type: {class: PlayClipOneShot, ns: AnimFlex.Essentials.Clips.Audio, asm: Assembly-CSharp-firstpass}
-      data:
-        audioSource: {fileID: 2185914257399204576}
-        audioClip: {fileID: 8300000, guid: 0e0a0b6eec2897f4289084a2d75a5c09, type: 3}
-        volume: 0.8
+      m_Calls: []
+  clip: {fileID: 8300000, guid: 0e0a0b6eec2897f4289084a2d75a5c09, type: 3}
+  volume: 0.8
+  useDefaultAnim: 1
+  delayAfterAnim: 10
 --- !u!114 &1106742564704947968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -963,7 +919,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27b38194e3e34c01924e24e9578f9805, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playBtn: {fileID: 1106742564704947975}
+  playBtn: {fileID: 5607104374542743508}
   title: {fileID: 1106742564461132412}
   possibleSessionCoins: 14000000000000002800000000000000500000000000000096000000000000002c010000000000005802000000000000
   possibleSessionCoinsTxt:
@@ -983,6 +939,12 @@ MonoBehaviour:
     \u06A9\u0647 \u0627\u0632 \u0633\u06A9\u0647 \u0647\u0627\u062A \u0647\u0645\u06CC\u0646\u0642\u062F\u0631
     \u06A9\u0645 \u0645\u06CC\u0634\u0647! "
   coinChooseMessageIcon: 2
+  notEnoughCoinsTitleText: "\u0633\u06A9\u0647 \u0647\u0627 \u06A9\u0645\u0647"
+  notEnoughCoinsBodyText: "\u0645\u062A\u0627\u0633\u0641\u0627\u0646\u0647 \u0633\u06A9\u0647
+    \u0647\u0627\u06CC \u0634\u0645\u0627 \u06A9\u0645\u062A\u0631 \u0627\u0632 \u0645\u0642\u062F\u0627\u0631\u06CC\u0647
+    \u06A9\u0647 \u0628\u0634\u0647 \u0628\u0627\u0632\u06CC \u0631\u0648 \u0634\u0631\u0648\u0639
+    \u06A9\u0646\u06CC..."
+  notEnoughCoinsIcon: 1
 --- !u!1 &1106742565077877705
 GameObject:
   m_ObjectHideFlags: 0
