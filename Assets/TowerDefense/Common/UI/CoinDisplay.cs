@@ -43,12 +43,12 @@ namespace TowerDefense.UI {
                 var t = CoinRewardAdSystem.Current.GetRemainingTimeForNextAd();
                 adRemainingTimeTxt.text = adRemainingTimeFormat
                     .Replace( "{0}", t.Hours.ToString() )
-                    .Replace( "{1}", t.Minutes.ToString() )
-                    .Replace( "{2}", t.Seconds.ToString() );
+                    .Replace( "{1}", t.Minutes.ToString("00") )
+                    .Replace( "{2}", t.Seconds.ToString("00") );
             }
 
             if (adUpdatingContainer) {
-                adUpdatingContainer.SetActive( CoinRewardAdSystem.Current.IsLoading );
+                adUpdatingContainer.SetActive( CoinRewardAdSystem.Current.IsSomethingWrong() );
             }
         }
 

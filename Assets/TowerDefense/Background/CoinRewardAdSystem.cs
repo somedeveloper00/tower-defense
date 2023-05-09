@@ -18,12 +18,8 @@ namespace TowerDefense.Background {
             Current = this;
             GameInitializer.onInitTasks.Add( new GameInitializer.OnInitTask( 10, () => {
                 load();
-                BackgroundRunner.Current.StartCoroutine( syncTimingThroughoutTheGameRoutine() );
                 return Task.CompletedTask;
             } ) );
-        #pragma warning disable CS4014
-            timeJumpCheck();
-        #pragma warning restore CS4014
         }
 
         [PropertyTooltip("In Hours")]
@@ -32,16 +28,19 @@ namespace TowerDefense.Background {
 
         const string adId = "64590a1922a1ba63a8a62b16";
 
-        
         DateTime _lastAdTime;
-        float _timeDifference = 0;
-        
-        public bool IsLoading { get; private set; }
+
+        public bool IsSomethingWrong() => SecureDateTime.IsLoading;
+
+        public bool CanWatchAd() {
+            if (IsSomethingWrong()) return false;
+            return (SecureDateTime.GetSecureUtcDateTime() - _lastAdTime).TotalHours >= adDelay;
+        }
 
         public TimeSpan GetRemainingTimeForNextAd() {
-            if (IsLoading)
+            if (IsSomethingWrong())
                 return new((int)( adDelay / 24 ), (int)( adDelay % 24 ), (int)( 60 * ( adDelay % 1 ) ));
-            return _lastAdTime.AddHours( adDelay ) - DateTime.UtcNow.AddSeconds( _timeDifference );
+            return _lastAdTime.AddHours( adDelay ) - SecureDateTime.GetSecureUtcDateTime();
         }
 
         public async Task WatchAd() {
@@ -62,7 +61,8 @@ namespace TowerDefense.Background {
                 return;
             } else if (r == AdManager.RewardAdResult.Success) {
                 await msg.Close();
-                _lastAdTime = DateTime.UtcNow.AddSeconds( _timeDifference );
+                await SecureDateTime.PerformTimeSyncFromInternet();
+                _lastAdTime = SecureDateTime.GetSecureUtcDateTime();
                 save();
                 PlayerGlobals.Current.ecoProg.coins += adReward;
                 PlayerGlobals.Current.SetData( SecureDatabase.Current );
@@ -72,50 +72,6 @@ namespace TowerDefense.Background {
             
         }
 
-        public bool CanWatchAd() {
-            if (IsLoading) return false;
-            return (DateTime.UtcNow.AddSeconds( _timeDifference ) - _lastAdTime).TotalHours >= adDelay;
-        }
-        
-
-        IEnumerator syncTimingThroughoutTheGameRoutine() {
-            do {
-                yield return new WaitForSecondsRealtime( 3 );
-                yield return new WaitForTask( updateFromInternet() );
-            } while (true);
-        }
-
-        async Task timeJumpCheck() {
-            do {
-                DateTime d1 = new(DateTime.UtcNow.Ticks); // get a copy of utc now
-                await Task.Delay( 100 );
-                if (( DateTime.UtcNow - d1 ).TotalSeconds > 0.6f || ( DateTime.UtcNow - d1 ).TotalSeconds < 0) {
-                    IsLoading = true;
-                    Debug.Log( "possible cheat detected" );
-                }
-
-                if (!this) return;
-            } while (true);
-        }
-
-        async Task updateFromInternet() {
-            try {
-                // get time from time.nist.gov
-                var client = new System.Net.Sockets.TcpClient( "time.nist.gov", 13 );
-                var stream = client.GetStream();
-                var reader = new System.IO.StreamReader( stream );
-                var response = await reader.ReadToEndAsync();
-                var utcTimeString = response.Substring( 7, 17 );
-                var correctTime = DateTime.ParseExact( utcTimeString, "yy-MM-dd HH:mm:ss", null );
-                _timeDifference = (float) (correctTime - DateTime.UtcNow).TotalSeconds;
-                IsLoading = false;
-                Debug.Log( $"time synced. diff: {_timeDifference}. utc: {DateTime.UtcNow.AddSeconds( _timeDifference ):T}" );
-            }
-            catch (Exception e) {
-                Debug.LogError( e );
-                IsLoading = true;
-            }
-        }
 
         void load() {
             if (SecureDatabase.Current.TryGetString( "coin-last-watch", out var tick )) {
