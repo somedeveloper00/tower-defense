@@ -42,7 +42,7 @@ namespace TowerDefense.Music {
                 setMuteState( result == 1, false, false );
             }
             else {
-                setMuteState( false, false, true );
+                setMuteState( false, true, true );
             }
             onLoaded?.Invoke();
         }

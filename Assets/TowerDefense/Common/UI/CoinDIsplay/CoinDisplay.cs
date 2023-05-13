@@ -1,14 +1,18 @@
 ﻿using System.Collections;
-using AnimFlex.Sequencer.UserEnd;
+using AnimFlex.Sequencer;
 using RTLTMPro;
 using TowerDefense.Background;
 using TowerDefense.Data;
 using TriInspector;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace TowerDefense.UI {
     public class CoinDisplay : MonoBehaviour {
-        [SerializeField] RTLTextMeshPro coinTxt;
+
+        public Image coinIcon;
+        public RTLTextMeshPro coinTxt;
+        
         [SerializeField] RTLTextMeshPro adRemainingTimeTxt;
         [SerializeField] RTLTextMeshPro coinBelowThresholdRemainingTimeTxt;
         [SerializeField] DelayedButton adBtn;
@@ -24,7 +28,7 @@ namespace TowerDefense.UI {
         
         void Start() {
             adBtn.onClick.AddListener( onAdClick );
-            CoinIncreaseSystem.Current.onCoinBelowThresholdTimerEnded += onCoinBelowThresholdTimerEnded;
+            CoinIncreaseHelpSystem.Current.onCoinBelowThresholdTimerEnded += onCoinBelowThresholdTimerEnded;
             StartCoroutine( routine() );
             
             IEnumerator routine() {
@@ -36,7 +40,7 @@ namespace TowerDefense.UI {
         }
 
         void OnDestroy() {
-            CoinIncreaseSystem.Current.onCoinBelowThresholdTimerEnded -= onCoinBelowThresholdTimerEnded;
+            CoinIncreaseHelpSystem.Current.onCoinBelowThresholdTimerEnded -= onCoinBelowThresholdTimerEnded;
         }
 
         async void onCoinBelowThresholdTimerEnded() {
@@ -52,20 +56,19 @@ namespace TowerDefense.UI {
                 coinTxt.text = PlayerGlobals.Current.ecoProg.coins.ToString( "#,0" ).En2PerNum();
             
             // update ad stuff
-            var canWatch = CoinIncreaseSystem.Current.CanWatchAd();
+            var canWatch = CoinIncreaseHelpSystem.Current.CanWatchAd();
             if (adReadyContainer)
                 adReadyContainer.SetActive( canWatch );
             if (adNotReadyContainer)
                 adNotReadyContainer.SetActive( !canWatch );
             if (adRemainingTimeTxt) {
-                var t = CoinIncreaseSystem.Current.GetRemainingTimeForNextAd();
-                adRemainingTimeTxt.text = adRemainingTimeFormat
-                    .Replace( "{0}", t.Hours.ToString() )
-                    .Replace( "{1}", t.Minutes.ToString("00") )
-                    .Replace( "{2}", t.Seconds.ToString("00") );
+                var t = CoinIncreaseHelpSystem.Current.GetRemainingTimeForNextAd();
+                adRemainingTimeTxt.text = string.Format( 
+                    adRemainingTimeFormat, 
+                    t.Hours, t.Minutes.ToString( "00" ), t.Seconds.ToString( "00" ) );
             }
 
-            var isCoinBelowThreshold = CoinIncreaseSystem.Current.IsCoinBelowThreshold();
+            var isCoinBelowThreshold = CoinIncreaseHelpSystem.Current.IsCoinBelowThreshold();
             
             if (coinBelowThresholdContainer) {
                 coinBelowThresholdContainer.SetActive( isCoinBelowThreshold );
@@ -73,21 +76,21 @@ namespace TowerDefense.UI {
             
             if (coinBelowThresholdRemainingTimeTxt) {
                 if (isCoinBelowThreshold) {
-                    var t = CoinIncreaseSystem.Current.GetRemainingTimeForNextCoinIncrease();
-                    coinBelowThresholdRemainingTimeTxt.text = coinBelowThresholdRemainingTimeFormat
-                        .Replace( "{0}", t.Minutes.ToString("00") )
-                        .Replace( "{1}", t.Seconds.ToString("00") );
+                    var t = CoinIncreaseHelpSystem.Current.GetRemainingTimeForNextCoinIncrease();
+                    coinBelowThresholdRemainingTimeTxt.text = string.Format( 
+                        coinBelowThresholdRemainingTimeFormat,
+                        t.Minutes.ToString( "00" ), t.Seconds.ToString( "00" ) );
                 }
             }
 
             if (adUpdatingContainer) {
-                adUpdatingContainer.SetActive( CoinIncreaseSystem.Current.IsSomethingWrong() );
+                adUpdatingContainer.SetActive( CoinIncreaseHelpSystem.Current.IsSomethingWrong() );
             }
         }
 
         void onAdClick() {
         #pragma warning disable CS4014
-            CoinIncreaseSystem.Current.WatchAd();
+            CoinIncreaseHelpSystem.Current.WatchAd();
         #pragma warning restore CS4014
         }
     }

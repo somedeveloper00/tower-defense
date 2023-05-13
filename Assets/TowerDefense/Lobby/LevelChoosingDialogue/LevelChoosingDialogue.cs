@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using AnimFlex.Sequencer.UserEnd;
+using AnimFlex.Sequencer;
 using DialogueSystem;
 using TowerDefense.Data;
 using UnityEngine;

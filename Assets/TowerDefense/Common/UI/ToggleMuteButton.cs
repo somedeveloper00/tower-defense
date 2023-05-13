@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using AnimFlex.Sequencer.UserEnd;
+using AnimFlex.Sequencer;
 using TowerDefense.Music;
 using UnityEngine;
 

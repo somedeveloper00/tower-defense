@@ -23,6 +23,7 @@ using TowerDefense.Core.UI.Win;
 using TowerDefense.Data;
 using TowerDefense.Data.Database;
 using TowerDefense.Data.Progress;
+using TowerDefense.Music;
 using TriInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -35,7 +36,7 @@ namespace TowerDefense.Core {
         public RoadManager roadManager;
         public int life = 20;
         public float gameTime = 0;
-        public AudioSource backgroundMusicSource;
+        public MusicPlayer backgroundMusic;
         
         [SerializeField] float winDialogueDelay = 1;
         [SerializeField] float loseDialogueDelay = 1;
@@ -59,7 +60,6 @@ namespace TowerDefense.Core {
         }
         
         void Start() {
-            fadeInMusic();
             gameTime = 0;
             _gameActive = true;
             CoreGameEvents.Current.OnGameStart?.Invoke( this );
@@ -172,10 +172,6 @@ namespace TowerDefense.Core {
             if (checkForWin()) Win();
         }
 
-        void fadeInMusic() => backgroundMusicSource.AnimAudioVolumeTo( 1 );
-
-        void fadeOutMusic() => backgroundMusicSource.AnimAudioVolumeTo( 0, proxy: AnimFlexCoreProxyUnscaled.Default );
-
         bool checkForLose() {
             if (life <= 0 && _gameActive) {
                 _gameActive = false;
@@ -193,7 +189,7 @@ namespace TowerDefense.Core {
         }
 
         async void Win() {
-            fadeOutMusic();
+            backgroundMusic.Mute();
             
             // making data for win
             var winData = new WinData();
@@ -241,7 +237,7 @@ namespace TowerDefense.Core {
         }
 
         async void Lose() {
-            fadeOutMusic();
+            backgroundMusic.Mute();
             
             // making data for lose 
             var loseData = new LoseData();

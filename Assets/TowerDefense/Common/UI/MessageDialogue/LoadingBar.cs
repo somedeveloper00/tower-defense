@@ -1,5 +1,5 @@
 ﻿using System;
-using AnimFlex.Sequencer.UserEnd;
+using AnimFlex.Sequencer;
 using AnimFlex.Tweening;
 using TriInspector;
 using UnityEngine;

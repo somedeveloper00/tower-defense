@@ -11,11 +11,11 @@ using UnityEngine;
 
 namespace TowerDefense.Background {
     [CreateAssetMenu( menuName = "TD/Coin Increase System" )]
-    public class CoinIncreaseSystem : ScriptableObject {
+    public class CoinIncreaseHelpSystem : ScriptableObject {
 
         const string adId = "64590a1922a1ba63a8a62b16";
         
-        public static CoinIncreaseSystem Current;
+        public static CoinIncreaseHelpSystem Current;
         void OnEnable() {
             Current = this;
             GameInitializer.afterSecureDataLoad += (_) => {
@@ -76,11 +76,9 @@ namespace TowerDefense.Background {
             if (r == AdManager.RewardAdResult.Fail) {
                 msg.UsePresetForAdFailed();
                 await msg.AwaitClose();
-                return;
             } else if (r == AdManager.RewardAdResult.CancelByUser) {
                 msg.UsePresetForAdCancelledByUser();
                 await msg.AwaitClose();
-                return;
             } else if (r == AdManager.RewardAdResult.Success) {
                 await msg.Close();
                 await SecureDateTime.PerformTimeSyncFromInternet();

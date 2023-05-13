@@ -260,7 +260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047e8afad3c64e64b1323784efd490e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playOnEnable: 0
+  playOnStart: 0
   useProxyAsCore: 0
   useDefaultCoreProxy: 0
   defaultCoreProxy: 
@@ -273,16 +273,16 @@ MonoBehaviour:
     - name: shoot
       delay: 0
       clip:
-        rid: 1318341967637643265
+        rid: 1318342235045233512
   references:
     version: 2
     RefIds:
-    - rid: 1318341967637643265
-      type: {class: PlayClipOneShot, ns: AnimFlex.Essentials.Clips.Audio, asm: Assembly-CSharp-firstpass}
+    - rid: 1318342235045233512
+      type: {class: PlayClipOneShot, ns: AnimFlex, asm: Assembly-CSharp-firstpass}
       data:
         audioSource: {fileID: 7751408979485440477}
         audioClip: {fileID: 8300000, guid: 8171c9d200afad7439c5becc65e9fadc, type: 3}
-        volume: 0.7
+        volume: 0.55
 --- !u!1 &1144485512807377000
 GameObject:
   m_ObjectHideFlags: 0

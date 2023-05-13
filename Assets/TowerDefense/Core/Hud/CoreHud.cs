@@ -1,18 +1,20 @@
 ﻿using System;
+using TowerDefense.UI;
 using UnityEngine;
 
 namespace TowerDefense.Core.Hud {
     public class CoreHud : MonoBehaviour {
-        public static CoreHud Instance;
+        public static CoreHud Current;
 
+        public CoinDisplay coinDisplay;
         Camera _cam;
 
         protected void OnEnable() {
-            if ( Instance != null ) {
+            if ( Current != null ) {
                 Debug.LogError( $"Already another instance. Destroying new one." );
-                Destroy( Instance.gameObject );
+                Destroy( Current.gameObject );
             }
-            Instance = this;
+            Current = this;
         }
 
         public Vector3 GetViewportPos(Vector3 worldPos) {

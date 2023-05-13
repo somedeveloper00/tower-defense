@@ -14,7 +14,7 @@ namespace TowerDefense.Core.Hud {
 
         void Start() {
             // put under core game's hud
-            uiItem.SetParent( CoreHud.Instance.transform, false );
+            uiItem.SetParent( CoreHud.Current.transform, false );
             foreach (var go in deleteAfterReparent) Destroy( go );
         }
 
@@ -24,7 +24,7 @@ namespace TowerDefense.Core.Hud {
 
         void updateHudPos() {
             var p = (Vector2)Camera.main.WorldToViewportPoint( hudTargetTransform.position );
-            var size = ((RectTransform)CoreHud.Instance.transform).sizeDelta;
+            var size = ((RectTransform)CoreHud.Current.transform).sizeDelta;
             p.x = (p.x - 0.5f) * size.x;
             p.y = (p.y - 0.5f) * size.y;
             uiItem.anchoredPosition = p + offset;

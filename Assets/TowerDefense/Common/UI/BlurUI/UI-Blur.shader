@@ -82,6 +82,12 @@ Shader "UI/Blurred Background" {
             float4 _MainTex_ST;
             float _Blur;
 
+            float UnityGet2DClipping (in float2 position, in float4 clipRect)
+            {
+                float2 inside = step(clipRect.xy, position.xy) * step(position.xy, clipRect.zw);
+                return inside.x * inside.y;
+            }
+
             v2f vert(appdata_t v) {
                 v2f OUT;
                 UNITY_SETUP_INSTANCE_ID(v);

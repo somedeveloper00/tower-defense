@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections;
-using AnimFlex.Sequencer.UserEnd;
+using AnimFlex.Sequencer;
 using TriInspector;
 using UnityEngine;
 

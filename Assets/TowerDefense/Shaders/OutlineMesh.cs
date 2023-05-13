@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using AnimFlex.Core.Proxy;
 using AnimFlex.Sequencer.Clips;
 using AnimFlex.Tweening;
@@ -67,6 +68,8 @@ namespace TowerDefense.Shaders {
         }
 
         // animflex tweener clip
+        [DisplayName("OutlineMesh Length")]
+        [Category("TD/OutlineMesh Length")]
         [Serializable]
         public class OutlineMeshLengthClip : CTweener<TweenerGeneratorOutlineMeshLength> {
 #if UNITY_EDITOR // for previewing in editor

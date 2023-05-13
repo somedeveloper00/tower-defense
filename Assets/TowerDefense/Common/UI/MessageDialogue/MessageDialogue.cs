@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AnimFlex.Sequencer.UserEnd;
+using AnimFlex.Sequencer;
 using DialogueSystem;
 using RTLTMPro;
 using TowerDefense.UI;

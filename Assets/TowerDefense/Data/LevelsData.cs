@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using TowerDefense.Core.Starter;
 using TowerDefense.Transport;
+using TriInspector;
 
 namespace TowerDefense.Data {
     [Serializable]

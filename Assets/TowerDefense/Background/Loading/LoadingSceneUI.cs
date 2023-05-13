@@ -1,4 +1,4 @@
-﻿using AnimFlex.Sequencer.UserEnd;
+﻿using AnimFlex.Sequencer;
 using DialogueSystem;
 using UnityEngine;
 

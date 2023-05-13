@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Threading.Tasks;
 using AnimFlex;
-using AnimFlex.Sequencer.UserEnd;
+using AnimFlex.Sequencer;
 using DialogueSystem;
 using GameAnalyticsSDK;
 using TowerDefense.Background;
@@ -14,6 +14,7 @@ using TowerDefense.Core.Starter;
 using TowerDefense.Data;
 using TowerDefense.Lobby.LevelChoosing;
 using TowerDefense.Music;
+using TowerDefense.UI;
 using TriInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -41,6 +42,8 @@ namespace TowerDefense.Lobby {
         [SerializeField] Button exitBtn;
         [SerializeField] Button shopBtn;
         [SerializeField] Button settingsBtn;
+
+        public CoinDisplay coinDisplay;
         public AudioSource generalAudioSource;
         public MusicPlayer backgroundMusic;
 
@@ -51,7 +54,6 @@ namespace TowerDefense.Lobby {
             settingsBtn.onClick.AddListener( onSettingsBtnClick );
             inSequence.sequence.onComplete += () => {
                 raycaster.enabled = true;
-                Debug.Log( $"in seq finished" );
             };
             raycaster.enabled = false;
 

@@ -37,7 +37,7 @@ namespace TowerDefense.Core.DefenderSpawn {
             void OnSpawnPositionSelectorOnOnSettle(Vector3 pos) {
                 lastPos = pos;
                 // show confirmation dialogue
-                var pos2D = CoreHud.Instance.GetViewportPos( pos );
+                var pos2D = CoreHud.Current.GetViewportPos( pos );
                 confirmDialogue.transform.localPosition = pos2D;
                 confirmDialogue.Show();
             }

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using AnimFlex.Sequencer.UserEnd;
+using AnimFlex.Sequencer;
 using DialogueSystem;
 using UnityEngine;
 using UnityEngine.UI;
