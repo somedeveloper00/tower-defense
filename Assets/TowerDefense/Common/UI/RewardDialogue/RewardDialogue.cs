@@ -22,8 +22,6 @@ namespace TowerDefense.UI.RewardDialogue {
         [Title( "References" )] 
         [SerializeField] SequenceAnim inSeq;
         [SerializeField] SequenceAnim outSeq;
-        [SerializeField] SequencerBinding outSeqBind;
-        [SerializeField] SequencerBinding coinFxSeqBind;
         [SerializeField] DelayedButton bckBtn;
         [SerializeField] RTLTextMeshPro rewardCoinAmountTxt;
 
@@ -32,12 +30,13 @@ namespace TowerDefense.UI.RewardDialogue {
         [SerializeField] string sparkleClipName;
 
         [Title( "Out Seq Anim Params" )] 
-        [SerializeField] string coinDisplayTransformBinderName;
-        [SerializeField] string coinDisplayGameObjectBinderName;
-        [SerializeField] string coinDisplayParentTransformBinderName;
+        [SerializeField] SequenceBinder_Transform outSeqCoinDisplayTransformBind;
+        [SerializeField] SequenceBinder_Transform outSeqCoinDisplayParentBind;
+        [SerializeField] SequenceBinder_GameObject outSeqCoinDisplayGameObjectBind;
+        
         
         [Title("Coin Fx Seq Anim Params")]
-        [SerializeField] string coinIconTransformBinderName;
+        [SerializeField] SequenceBinder_Transform coinSeqCoinIconTransformBind;
         
         [Title("Out Seq Text Anim Params")]
         [SerializeField] float coinTransferStartTime;
@@ -73,10 +72,14 @@ namespace TowerDefense.UI.RewardDialogue {
             var coinDisplay = findCoinDisplay();
             var coinDisplayParent = coinDisplay.transform.parent;
             var coinDisplayCoinIcon = coinDisplay.coinIcon;
-            outSeqBind.Assign( coinDisplayTransformBinderName, coinDisplay.transform );
-            outSeqBind.Assign( coinDisplayGameObjectBinderName, coinDisplay.gameObject );
-            outSeqBind.Assign( coinDisplayParentTransformBinderName, coinDisplayParent );
-            coinFxSeqBind.Assign( coinIconTransformBinderName, coinDisplayCoinIcon.transform );
+            outSeqCoinDisplayTransformBind.value = coinDisplay.transform;
+            outSeqCoinDisplayTransformBind.Bind();
+            outSeqCoinDisplayGameObjectBind.value = coinDisplay.gameObject;
+            outSeqCoinDisplayGameObjectBind.Bind();
+            outSeqCoinDisplayParentBind.value = coinDisplayParent;
+            outSeqCoinDisplayParentBind.Bind();
+            coinSeqCoinIconTransformBind.value = coinDisplayCoinIcon.transform;
+            coinSeqCoinIconTransformBind.Bind();
             
             outSeq.PlaySequence();
             outSeq.sequence.onComplete += () => Debug.Log( "outseq completed" );
