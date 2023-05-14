@@ -713,7 +713,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047e8afad3c64e64b1323784efd490e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playOnEnable: 0
+  playOnStart: 0
   useProxyAsCore: 1
   useDefaultCoreProxy: 1
   defaultCoreProxy: AnimFlex.Core.Proxy.AnimFlexCoreProxyUnscaled
@@ -1842,7 +1842,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047e8afad3c64e64b1323784efd490e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playOnEnable: 0
+  playOnStart: 0
   useProxyAsCore: 1
   useDefaultCoreProxy: 0
   defaultCoreProxy: AnimFlex.Core.Proxy.AnimFlexCoreProxyUnscaled
@@ -3472,8 +3472,7 @@ GameObject:
   - component: {fileID: 5171690359714845248}
   - component: {fileID: 5171690359714845260}
   - component: {fileID: 5171690359714845261}
-  - component: {fileID: 5171690359714845250}
-  - component: {fileID: 8135270134725412540}
+  - component: {fileID: 6410124013589291143}
   m_Layer: 0
   m_Name: backbtn
   m_TagString: Untagged
@@ -3540,7 +3539,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5171690359714845250
+--- !u!114 &6410124013589291143
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3549,7 +3548,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5171690359714845249}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: d8af190e76eb40869fd8e515cc0f62dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -3583,54 +3582,11 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5171690359714845261}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8135270134725412540}
-        m_TargetAssemblyTypeName: AnimFlex.Sequencer.UserEnd.SequenceAnim, AnimFlex
-        m_MethodName: PlaySequence
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &8135270134725412540
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5171690359714845249}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 047e8afad3c64e64b1323784efd490e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playOnEnable: 0
-  useProxyAsCore: 0
-  useDefaultCoreProxy: 0
-  defaultCoreProxy: 
-  coreProxy: {fileID: 0}
-  resetOnPlay: 1
-  activateNextClipsASAP: 1
-  sequence:
-    activateNextClipsASAP: 1
-    nodes:
-    - name: Node 1
-      delay: 0
-      clip:
-        rid: 1861648539527413828
-  references:
-    version: 2
-    RefIds:
-    - rid: 1861648539527413828
-      type: {class: PlayClipOneShot, ns: AnimFlex.Essentials.Clips.Audio, asm: Assembly-CSharp-firstpass}
-      data:
-        audioSource: {fileID: 2838865202550900874}
-        audioClip: {fileID: 8300000, guid: becb173bd7ddfef47afabdb0e47ec64c, type: 3}
-        volume: 0.8
+      m_Calls: []
+  clip: {fileID: 8300000, guid: becb173bd7ddfef47afabdb0e47ec64c, type: 3}
+  volume: 0.8
+  useDefaultAnim: 1
+  delayAfterAnim: 10
 --- !u!1 &5171690359819017869
 GameObject:
   m_ObjectHideFlags: 0
@@ -4109,7 +4065,7 @@ MonoBehaviour:
     viewType: 2
   inSeq: {fileID: 1400921348}
   outSeq: {fileID: 410334845}
-  closeBtn: {fileID: 5171690359714845250}
+  closeBtn: {fileID: 6410124013589291143}
 --- !u!1 &5171690360697028894
 GameObject:
   m_ObjectHideFlags: 0
@@ -4970,7 +4926,8 @@ PrefabInstance:
       propertyPath: productInfo.sku
       value: medium_coin
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4622396324478388432, guid: c8c7b3391888c9f4d9ce221bbd36a5d9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c8c7b3391888c9f4d9ce221bbd36a5d9, type: 3}
 --- !u!114 &2321203143487519554 stripped
 MonoBehaviour:
@@ -5141,7 +5098,8 @@ PrefabInstance:
       propertyPath: productInfo.rewardCoins
       value: 123456
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4622396324478388432, guid: c8c7b3391888c9f4d9ce221bbd36a5d9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c8c7b3391888c9f4d9ce221bbd36a5d9, type: 3}
 --- !u!114 &3095206197832593208 stripped
 MonoBehaviour:
@@ -5166,18 +5124,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2649693121150238906}
     m_Modifications:
-    - target: {fileID: 508809034428422137, guid: c8c7b3391888c9f4d9ce221bbd36a5d9, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 508809034428422137, guid: c8c7b3391888c9f4d9ce221bbd36a5d9, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 508809034428422137, guid: c8c7b3391888c9f4d9ce221bbd36a5d9, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 1098090823723866940, guid: c8c7b3391888c9f4d9ce221bbd36a5d9, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -5265,10 +5211,6 @@ PrefabInstance:
     - target: {fileID: 1170213005222585972, guid: c8c7b3391888c9f4d9ce221bbd36a5d9, type: 3}
       propertyPath: m_Name
       value: product_small
-      objectReference: {fileID: 0}
-    - target: {fileID: 1170213005222585972, guid: c8c7b3391888c9f4d9ce221bbd36a5d9, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8c7b3391888c9f4d9ce221bbd36a5d9, type: 3}

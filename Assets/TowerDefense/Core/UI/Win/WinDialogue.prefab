@@ -392,7 +392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047e8afad3c64e64b1323784efd490e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playOnEnable: 1
+  playOnStart: 1
   useProxyAsCore: 1
   useDefaultCoreProxy: 1
   defaultCoreProxy: AnimFlex.Core.Proxy.AnimFlexCoreProxyUnscaled
@@ -405,7 +405,7 @@ MonoBehaviour:
     - name: 
       delay: 0
       clip:
-        rid: 1318341967637643267
+        rid: 1318342252507955200
     - name: main alpha
       delay: 0
       clip:
@@ -469,8 +469,8 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 1318341967637643267
-      type: {class: PlayClipOneShot, ns: AnimFlex.Essentials.Clips.Audio, asm: Assembly-CSharp-firstpass}
+    - rid: 1318342252507955200
+      type: {class: PlayClipOneShot, ns: AnimFlex, asm: Assembly-CSharp-firstpass}
       data:
         audioSource: {fileID: 8112376347745817595}
         audioClip: {fileID: 8300000, guid: c5d3eca6d96b85f47afc740c7f04a473, type: 3}
@@ -1581,7 +1581,7 @@ MonoBehaviour:
   - {fileID: 5641910109364730475}
   - {fileID: 5641910110565560463}
   - {fileID: 5641910110242250077}
-  returnButton: {fileID: 5641910110189285406}
+  returnButton: {fileID: 9133123117053678851}
 --- !u!1 &5641910110040047461
 GameObject:
   m_ObjectHideFlags: 0
@@ -1669,8 +1669,7 @@ GameObject:
   - component: {fileID: 5641910110189285407}
   - component: {fileID: 5641910110189285400}
   - component: {fileID: 5641910110189285401}
-  - component: {fileID: 5641910110189285406}
-  - component: {fileID: 6772338793661250060}
+  - component: {fileID: 9133123117053678851}
   m_Layer: 5
   m_Name: returnBtn
   m_TagString: Untagged
@@ -1737,7 +1736,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5641910110189285406
+--- !u!114 &9133123117053678851
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1746,7 +1745,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5641910110189285404}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: d8af190e76eb40869fd8e515cc0f62dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -1780,94 +1779,11 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5641910110189285401}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6772338793661250060}
-        m_TargetAssemblyTypeName: AnimFlex.Sequencer.UserEnd.SequenceAnim, AnimFlex
-        m_MethodName: PlaySequence
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
---- !u!114 &6772338793661250060
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5641910110189285404}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 047e8afad3c64e64b1323784efd490e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playOnEnable: 0
-  useProxyAsCore: 1
-  useDefaultCoreProxy: 1
-  defaultCoreProxy: AnimFlex.Core.Proxy.AnimFlexCoreProxyUnscaled
-  coreProxy: {fileID: 0}
-  resetOnPlay: 1
-  activateNextClipsASAP: 1
-  sequence:
-    activateNextClipsASAP: 1
-    nodes:
-    - name: Node 1
-      delay: 0
-      clip:
-        rid: 1861648539527413828
-    - name: Node 1
-      delay: 0
-      clip:
-        rid: 1861648539527413840
-  references:
-    version: 2
-    RefIds:
-    - rid: 1861648539527413828
-      type: {class: PlayClipOneShot, ns: AnimFlex.Essentials.Clips.Audio, asm: Assembly-CSharp-firstpass}
-      data:
-        audioSource: {fileID: 8112376347745817595}
-        audioClip: {fileID: 8300000, guid: 99fd3a75678da894e9332cc39e383ec6, type: 3}
-        volume: 0.8
-    - rid: 1861648539527413840
-      type: {class: CTweenerScale, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
-      data:
-        playNextOnStart: 0
-        tweenerGenerator:
-          customCurve:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          useCurve: 0
-          useQuaternion: 0
-          relative: 1
-          useTargetTransform: 0
-          from: 0
-          ease: 6
-          duration: 0.2
-          delay: 0
-          pingPong: 0
-          loops: 0
-          loopDelay: 0
-          onStart:
-            m_PersistentCalls:
-              m_Calls: []
-          onUpdate:
-            m_PersistentCalls:
-              m_Calls: []
-          onComplete:
-            m_PersistentCalls:
-              m_Calls: []
-          onKill:
-            m_PersistentCalls:
-              m_Calls: []
-          fromObject: {fileID: 5641910110189285407}
-          target: {x: 1.1, y: 1.1, z: 1}
+      m_Calls: []
+  clip: {fileID: 8300000, guid: 99fd3a75678da894e9332cc39e383ec6, type: 3}
+  volume: 0.8
+  useDefaultAnim: 1
+  delayAfterAnim: 10
 --- !u!1 &5641910110210345706
 GameObject:
   m_ObjectHideFlags: 0

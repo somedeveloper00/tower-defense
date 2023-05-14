@@ -305,9 +305,9 @@ MonoBehaviour:
   inSequence: {fileID: 130184984}
   playBtn: {fileID: 1372271026}
   exitBtn: {fileID: 1572722278}
-  shopBtn: {fileID: 319976852}
+  shopBtn: {fileID: 319976855}
   settingsBtn: {fileID: 1038319995}
-  coinDisplay: {fileID: 0}
+  coinDisplay: {fileID: 6524540782528187125}
   generalAudioSource: {fileID: 50481354}
   backgroundMusic: {fileID: 406590089}
 --- !u!82 &50481354
@@ -1640,7 +1640,6 @@ GameObject:
   - component: {fileID: 319976851}
   - component: {fileID: 319976854}
   - component: {fileID: 319976853}
-  - component: {fileID: 319976852}
   - component: {fileID: 319976855}
   m_Layer: 5
   m_Name: shopBtn
@@ -1670,62 +1669,6 @@ RectTransform:
   m_AnchoredPosition: {x: 522, y: -101}
   m_SizeDelta: {x: 340.2466, y: 147.0557}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &319976852
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 319976850}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 319976853}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 319976855}
-        m_TargetAssemblyTypeName: AnimFlex.Sequencer.UserEnd.SequenceAnim, AnimFlex
-        m_MethodName: PlaySequence
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &319976853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1773,62 +1716,45 @@ MonoBehaviour:
   m_GameObject: {fileID: 319976850}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 047e8afad3c64e64b1323784efd490e3, type: 3}
+  m_Script: {fileID: 11500000, guid: d8af190e76eb40869fd8e515cc0f62dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playOnStart: 0
-  useProxyAsCore: 0
-  useDefaultCoreProxy: 0
-  defaultCoreProxy: 
-  coreProxy: {fileID: 0}
-  resetOnPlay: 1
-  activateNextClipsASAP: 1
-  sequence:
-    activateNextClipsASAP: 1
-    nodes:
-    - name: self
-      delay: 0
-      clip:
-        rid: 1861648539527413842
-  references:
-    version: 2
-    RefIds:
-    - rid: 1861648539527413842
-      type: {class: CTweenerScale, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
-      data:
-        playNextOnStart: 0
-        tweenerGenerator:
-          customCurve:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          useCurve: 0
-          useQuaternion: 0
-          relative: 0
-          useTargetTransform: 0
-          from: 0
-          ease: 25
-          duration: 0.3
-          delay: 0
-          pingPong: 1
-          loops: 0
-          loopDelay: 0
-          onStart:
-            m_PersistentCalls:
-              m_Calls: []
-          onUpdate:
-            m_PersistentCalls:
-              m_Calls: []
-          onComplete:
-            m_PersistentCalls:
-              m_Calls: []
-          onKill:
-            m_PersistentCalls:
-              m_Calls: []
-          fromObject: {fileID: 319976851}
-          target: {x: 0.8, y: 0.8, z: 1}
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 319976853}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+  clip: {fileID: 8300000, guid: 0e0a0b6eec2897f4289084a2d75a5c09, type: 3}
+  volume: 0.8
+  useDefaultAnim: 1
+  delayAfterAnim: 10
 --- !u!1 &406590086
 GameObject:
   m_ObjectHideFlags: 0
@@ -4226,3 +4152,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6524540782453372270, guid: 5d8aceb5cafb2c34b8426cf262716a97, type: 3}
   m_PrefabInstance: {fileID: 6524540782528187122}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6524540782528187125 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6524540781308314459, guid: 5d8aceb5cafb2c34b8426cf262716a97, type: 3}
+  m_PrefabInstance: {fileID: 6524540782528187122}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6524540782528187123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60b650fd18f245f9982a93ac70676920, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

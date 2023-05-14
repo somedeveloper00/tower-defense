@@ -86,17 +86,15 @@ GameObject:
   m_Component:
   - component: {fileID: 1098090823723866940}
   - component: {fileID: 7152767136988099795}
-  - component: {fileID: 508809034428422137}
-  - component: {fileID: 4622396324478388432}
-  - component: {fileID: 4699594806347150991}
   - component: {fileID: 7327202165982204721}
+  - component: {fileID: 1642185474876766147}
   m_Layer: 5
   m_Name: ShopItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1098090823723866940
 RectTransform:
   m_ObjectHideFlags: 0
@@ -130,7 +128,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1170213005222585972}
   m_CullTransparentMesh: 1
---- !u!114 &508809034428422137
+--- !u!114 &7327202165982204721
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -139,7 +137,36 @@ MonoBehaviour:
   m_GameObject: {fileID: 1170213005222585972}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 83fcfc3a12594661ad5f8379610ab904, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  productInfo:
+    sku: small_coin
+    title: "\u0628\u0633\u062A\u0647 \u0628\u0632\u0631\u06AF \u0633\u06A9\u0647"
+    description: "\u062F\u06CC\u06AF\u0647 \u062A\u0627 \u06CC\u06A9 \u0645\u062F\u062A
+      \u0637\u0648\u0644\u0627\u0646\u06CC \u0646\u06AF\u0631\u0627\u0646 \u06A9\u0645
+      \u0627\u0648\u0645\u062F\u0646 \u0633\u06A9\u0647 \u0647\u0627 \u0646\u0628\u0627\u0634!!!"
+    price: 23456789
+    rewardCoins: 12345
+    viewType: 2
+    isAvailable: 1
+  titleTxt: {fileID: 5290807923059103124}
+  descriptionTxt: {fileID: 7327202165630253707}
+  costTxt: {fileID: 4185185930561512893}
+  skuTxt: {fileID: 7327202165477655940}
+  rewardCoinTxt: {fileID: 1482148482842662494}
+  purchaseBtn: {fileID: 1642185474876766147}
+  costFormat: "$VAL \u062A\u0648\u0645\u0627\u0646"
+--- !u!114 &1642185474876766147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170213005222585972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8af190e76eb40869fd8e515cc0f62dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -170,170 +197,14 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 1658975051347586254}
+  m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &4622396324478388432
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1170213005222585972}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 047e8afad3c64e64b1323784efd490e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playOnEnable: 0
-  useProxyAsCore: 0
-  useDefaultCoreProxy: 0
-  defaultCoreProxy: 
-  coreProxy: {fileID: 0}
-  resetOnPlay: 1
-  activateNextClipsASAP: 1
-  sequence:
-    activateNextClipsASAP: 1
-    nodes:
-    - name: Node 1
-      delay: 0
-      clip:
-        rid: 1861648539527413828
-  references:
-    version: 2
-    RefIds:
-    - rid: 1861648539527413828
-      type: {class: PlayClipOneShot, ns: AnimFlex.Essentials.Clips.Audio, asm: Assembly-CSharp-firstpass}
-      data:
-        audioSource: {fileID: 4699594806347150991}
-        audioClip: {fileID: 8300000, guid: b9f58874c27c0d94bb61d7676037e9de, type: 3}
-        volume: 0.9
---- !u!82 &4699594806347150991
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1170213005222585972}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 1
-  BypassListenerEffects: 1
-  BypassReverbZones: 1
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!114 &7327202165982204721
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1170213005222585972}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83fcfc3a12594661ad5f8379610ab904, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productInfo:
-    sku: small_coin
-    title: "\u0628\u0633\u062A\u0647 \u0628\u0632\u0631\u06AF \u0633\u06A9\u0647"
-    description: "\u062F\u06CC\u06AF\u0647 \u062A\u0627 \u06CC\u06A9 \u0645\u062F\u062A
-      \u0637\u0648\u0644\u0627\u0646\u06CC \u0646\u06AF\u0631\u0627\u0646 \u06A9\u0645
-      \u0627\u0648\u0645\u062F\u0646 \u0633\u06A9\u0647 \u0647\u0627 \u0646\u0628\u0627\u0634!!!"
-    price: 23456789
-    rewardCoins: 12345
-    viewType: 2
-    isAvailable: 1
-  titleTxt: {fileID: 5290807923059103124}
-  descriptionTxt: {fileID: 7327202165630253707}
-  costTxt: {fileID: 4185185930561512893}
-  skuTxt: {fileID: 7327202165477655940}
-  rewardCoinTxt: {fileID: 1482148482842662494}
-  purchaseBtn: {fileID: 508809034428422137}
-  costFormat: "$VAL \u062A\u0648\u0645\u0627\u0646"
+  clip: {fileID: 8300000, guid: 70a43d5aca985a34a9058201140da118, type: 3}
+  volume: 0.8
+  useDefaultAnim: 1
+  delayAfterAnim: 10
 --- !u!1 &1446614421804331258
 GameObject:
   m_ObjectHideFlags: 0

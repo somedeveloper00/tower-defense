@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047e8afad3c64e64b1323784efd490e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playOnEnable: 0
+  playOnStart: 0
   useProxyAsCore: 1
   useDefaultCoreProxy: 1
   defaultCoreProxy: AnimFlex.Core.Proxy.AnimFlexCoreProxyUnscaled
@@ -682,7 +682,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelStartButtonInstance: {fileID: 1106742564704947968}
   backgroundBtn: {fileID: 6199545490687270413}
-  backBtn: {fileID: 1106742565077877706}
+  backBtn: {fileID: 8952170175686614644}
   outSeq: {fileID: 700201836}
 --- !u!82 &2185914257399204576
 AudioSource:
@@ -956,8 +956,7 @@ GameObject:
   - component: {fileID: 1106742565077877704}
   - component: {fileID: 1106742565077877700}
   - component: {fileID: 1106742565077877701}
-  - component: {fileID: 1106742565077877706}
-  - component: {fileID: 7960050407649149929}
+  - component: {fileID: 8952170175686614644}
   m_Layer: 0
   m_Name: backbtn
   m_TagString: Untagged
@@ -1024,7 +1023,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1106742565077877706
+--- !u!114 &8952170175686614644
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1033,7 +1032,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1106742565077877705}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: d8af190e76eb40869fd8e515cc0f62dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -1067,54 +1066,11 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1106742565077877701}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7960050407649149929}
-        m_TargetAssemblyTypeName: AnimFlex.Sequencer.UserEnd.SequenceAnim, AnimFlex
-        m_MethodName: PlaySequence
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &7960050407649149929
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1106742565077877705}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 047e8afad3c64e64b1323784efd490e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playOnEnable: 0
-  useProxyAsCore: 0
-  useDefaultCoreProxy: 0
-  defaultCoreProxy: 
-  coreProxy: {fileID: 0}
-  resetOnPlay: 1
-  activateNextClipsASAP: 1
-  sequence:
-    activateNextClipsASAP: 1
-    nodes:
-    - name: Node 1
-      delay: 0
-      clip:
-        rid: 1861648539527413828
-  references:
-    version: 2
-    RefIds:
-    - rid: 1861648539527413828
-      type: {class: PlayClipOneShot, ns: AnimFlex.Essentials.Clips.Audio, asm: Assembly-CSharp-firstpass}
-      data:
-        audioSource: {fileID: 2185914257399204576}
-        audioClip: {fileID: 8300000, guid: becb173bd7ddfef47afabdb0e47ec64c, type: 3}
-        volume: 0.8
+      m_Calls: []
+  clip: {fileID: 8300000, guid: becb173bd7ddfef47afabdb0e47ec64c, type: 3}
+  volume: 0.8
+  useDefaultAnim: 1
+  delayAfterAnim: 10
 --- !u!1 &1106742565257377903
 GameObject:
   m_ObjectHideFlags: 0
@@ -1164,7 +1120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047e8afad3c64e64b1323784efd490e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playOnEnable: 1
+  playOnStart: 1
   useProxyAsCore: 1
   useDefaultCoreProxy: 1
   defaultCoreProxy: AnimFlex.Core.Proxy.AnimFlexCoreProxyUnscaled
