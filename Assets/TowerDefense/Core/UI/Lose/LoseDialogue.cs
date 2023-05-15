@@ -10,6 +10,8 @@ using UnityEngine.UI;
 namespace TowerDefense.Core.UI.Lose {
     [DeclareFoldoutGroup("ref", Title = "References", Expanded = true)]
     public class LoseDialogue : Dialogue {
+        
+        const string RETRY_AD_Id = "643006352eeae447e5ae5bd3";
 
         public LoseData loseData;
         
@@ -36,7 +38,7 @@ namespace TowerDefense.Core.UI.Lose {
             canvasRaycaster.enabled = false;
             var loading = DialogueManager.Current.GetOrCreate<MessageDialogue>( transform.parent );
             loading.UsePresetForLoadingAd();
-            var result = await AdManager.Current.ShowFullScreenRewardVideoAd( "643006352eeae447e5ae5bd3" );
+            var result = await AdManager.Current.ShowFullScreenRewardVideoAd( RETRY_AD_Id );
             await loading.Close();
             
             if (result == AdManager.RewardAdResult.Success) {

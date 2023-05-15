@@ -9,6 +9,7 @@ using TowerDefense.Bridges.Iap;
 using TowerDefense.Common;
 using TowerDefense.Data;
 using TowerDefense.Data.Database;
+using TowerDefense.UI.RewardDialogue;
 using UnityEngine;
 
 namespace TowerDefense.Background {
@@ -86,14 +87,16 @@ namespace TowerDefense.Background {
                 }
             }
             // SUCCESS
-            PlayerGlobals.Current.ecoProg.coins += product.rewardCoins;
-            PlayerGlobals.Current.SetData( SecureDatabase.Current );
-            SecureDatabase.Current.Save();
-
-            GameAnalytics.NewResourceEvent( GAResourceFlowType.Source, GameAnalyticsHelper.Currency_Coin,
-                product.rewardCoins, GameAnalyticsHelper.ItemType_IAP, "InAppPurchase" );
-            
             await loading.Close();
+            var rd = DialogueManager.Current.GetOrCreate<RewardDialogue>();
+            rd.coins = product.rewardCoins;
+            rd.itemType = GameAnalyticsHelper.ItemType.ItemType_IAP;
+            rd.showSparkles = true;
+            rd.showCoinShower = true;
+            rd.detail = product.sku;
+            rd.setDataAndSave = true;
+            await rd.AwaitClose();
+
             return true;
         }
     }

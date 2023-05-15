@@ -3,9 +3,11 @@ using System.Collections;
 using System.Threading.Tasks;
 using DialogueSystem;
 using TowerDefense.Bridges.Ad;
+using TowerDefense.Bridges.Analytics;
 using TowerDefense.Common;
 using TowerDefense.Data;
 using TowerDefense.Data.Database;
+using TowerDefense.UI.RewardDialogue;
 using TriInspector;
 using UnityEngine;
 
@@ -50,7 +52,7 @@ namespace TowerDefense.Background {
             return _lastTooLowIncreaseTime.AddHours( tooLowCoindIncreaseDelay ) - SecureDateTime.GetSecureUtcDateTime();
         }
 
-        public bool IsCoinBelowThreshold() => PlayerGlobals.Current.ecoProg.coins < (ulong)tooLowThreshold;
+        public bool IsCoinBelowThreshold() => PlayerGlobals.Current.ecoProg.Coins < (ulong)tooLowThreshold;
 
         public bool IsSomethingWrong() => SecureDateTime.IsLoading;
         
@@ -83,10 +85,16 @@ namespace TowerDefense.Background {
                 await msg.Close();
                 await SecureDateTime.PerformTimeSyncFromInternet();
                 _lastAdTime = SecureDateTime.GetSecureUtcDateTime();
+                
+                // give reward
                 setData();
-                PlayerGlobals.Current.ecoProg.coins += adReward;
-                PlayerGlobals.Current.SetData( SecureDatabase.Current );
-                SecureDatabase.Current.Save();
+                var rd = DialogueManager.Current.GetOrCreate<RewardDialogue>();
+                rd.showCoinShower = false;
+                rd.showSparkles = false;
+                rd.coins = adReward;
+                rd.setDataAndSave = true;
+                rd.detail = "HelpAd";
+                await rd.AwaitClose();
                 Debug.Log( $"recieved ad coin rewards" );
             }
             
@@ -94,7 +102,7 @@ namespace TowerDefense.Background {
 
 
         void onCoinChanged(ulong coinsBefore) {
-            if (coinsBefore > (ulong)tooLowIncrease && PlayerGlobals.Current.ecoProg.coins < (ulong)tooLowThreshold) {
+            if (coinsBefore > (ulong)tooLowIncrease && PlayerGlobals.Current.ecoProg.Coins < (ulong)tooLowThreshold) {
                 _lastTooLowIncreaseTime = SecureDateTime.GetSecureUtcDateTime();
                 setData();
                 SecureDatabase.Current.Save();
@@ -111,7 +119,7 @@ namespace TowerDefense.Background {
 
         void addBelowThresholdCoin() {
             Debug.Log( $"coin below threshold timer ended. giving coins..." );
-            PlayerGlobals.Current.ecoProg.coins += (ulong)tooLowIncrease;
+            PlayerGlobals.Current.ecoProg.AddToCoin( GameAnalyticsHelper.ItemType.ItemType_Ad, "HelpAd", (ulong)tooLowIncrease );
             PlayerGlobals.Current.SetData( SecureDatabase.Current );
             _lastTooLowIncreaseTime = SecureDateTime.GetSecureUtcDateTime();
             setData();

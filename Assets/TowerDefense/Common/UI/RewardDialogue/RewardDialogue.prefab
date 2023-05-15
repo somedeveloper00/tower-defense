@@ -5825,6 +5825,7 @@ MonoBehaviour:
   volume: 0.8
   useDefaultAnim: 1
   delayAfterAnim: 10
+  onClipSeq: {fileID: 0}
 --- !u!1 &277290149454518074
 GameObject:
   m_ObjectHideFlags: 0
@@ -5947,6 +5948,9 @@ MonoBehaviour:
   coins: 100
   showCoinShower: 1
   showSparkles: 1
+  setDataAndSave: 1
+  itemType: 4
+  detail: reward
   inSeq: {fileID: 4902057703101406840}
   outSeq: {fileID: 1091074163}
   bckBtn: {fileID: 7758500139705991001}

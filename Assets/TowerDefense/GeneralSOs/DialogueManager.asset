@@ -40,3 +40,8 @@ MonoBehaviour:
     maximumReachedBehaviour: 1
     fallbackScale: {x: 1920, y: 1080}
     fallbackPixelPerUnit: 1
+  - prefab: {fileID: 9149062445047869057, guid: 1115d72b2291d8146a3d786ad09dfe80, type: 3}
+    maxInstances: 1
+    maximumReachedBehaviour: 1
+    fallbackScale: {x: 1920, y: 1080}
+    fallbackPixelPerUnit: 1

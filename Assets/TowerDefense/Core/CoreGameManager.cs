@@ -201,8 +201,6 @@ namespace TowerDefense.Core {
 
 
             try {
-                GameAnalytics.NewResourceEvent( GAResourceFlowType.Source, GameAnalyticsHelper.Currency_Coin, winData.coins,
-                    GameAnalyticsHelper.ItemType_GameWin, "GameWin" );
                 GameAnalytics.NewProgressionEvent( GAProgressionStatus.Complete, _levelData.id );
             }
             catch (Exception e) {
@@ -221,7 +219,9 @@ namespace TowerDefense.Core {
             if (PlayerGlobals.Current.TryGetNextLevelProg( level.id, out var nextLevel )) {
                 nextLevel.status |= LevelProgress.LevelStatus.Unlocked; 
             }
-            PlayerGlobals.Current.ecoProg.coins += winData.coins;
+
+            PlayerGlobals.Current.ecoProg.AddToCoin( GameAnalyticsHelper.ItemType.ItemType_GameWin,
+                "Level" + _levelData.id, winData.coins );
             PlayerGlobals.Current.SetData( SecureDatabase.Current );
             
             // slow down time
@@ -247,8 +247,6 @@ namespace TowerDefense.Core {
             CoreGameEvents.Current.onLose?.Invoke(loseData);
 
             try {
-                GameAnalytics.NewResourceEvent( GAResourceFlowType.Sink, GameAnalyticsHelper.Currency_Coin,
-                    sessionPack.coins, GameAnalyticsHelper.ItemType_GameLose, "GameLose" );
                 GameAnalytics.NewProgressionEvent( GAProgressionStatus.Fail, _levelData.id );
             } catch (Exception e) {
                 Debug.LogException( e );
@@ -258,7 +256,8 @@ namespace TowerDefense.Core {
             var level = PlayerGlobals.Current.GetOrCreateLevelProg( _levelData.id );
             level.playCount++;
             level.coinsReceived += loseData.coins;
-            PlayerGlobals.Current.ecoProg.coins += loseData.coins;
+            PlayerGlobals.Current.ecoProg.AddToCoin( GameAnalyticsHelper.ItemType.ItemType_GameLose,
+                "Level" + level.id, loseData.coins );
             PlayerGlobals.Current.SetData( SecureDatabase.Current );
             
             // slow down time

@@ -18,7 +18,6 @@ using TowerDefense.UI;
 using TriInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -38,10 +37,10 @@ namespace TowerDefense.Lobby {
         [SerializeField] GraphicRaycaster raycaster;
         [SerializeField] RectTransform parentCanvasForDialogues;
         [SerializeField] SequenceAnim inSequence;
-        [SerializeField] Button playBtn;
-        [SerializeField] Button exitBtn;
-        [SerializeField] Button shopBtn;
-        [SerializeField] Button settingsBtn;
+        [SerializeField] DelayedButton playBtn;
+        [SerializeField] DelayedButton exitBtn;
+        [SerializeField] DelayedButton shopBtn;
+        [SerializeField] DelayedButton settingsBtn;
 
         public CoinDisplay coinDisplay;
         public AudioSource generalAudioSource;
@@ -102,16 +101,13 @@ namespace TowerDefense.Lobby {
 
         public void StartGame(CoreLevelData levelDataObject, CoreSessionPack sessionPack) {
 
-            if (PlayerGlobals.Current.ecoProg.coins < sessionPack.coins) {
+            if (PlayerGlobals.Current.ecoProg.Coins < sessionPack.coins) {
                 throw new Exception( "not enough coins" );
             }
 
-            PlayerGlobals.Current.ecoProg.coins -= sessionPack.coins;
-            if (PlayerGlobals.Current.ecoProg.coins < 20) PlayerGlobals.Current.ecoProg.coins = 20;
+            PlayerGlobals.Current.ecoProg.AddToCoin( GameAnalyticsHelper.ItemType.ItemType_GameStart,
+                "Level" + levelDataObject.id, sessionPack.coins );
             
-            GameAnalytics.NewResourceEvent( GAResourceFlowType.Sink, GameAnalyticsHelper.Currency_Coin,
-                sessionPack.coins, GameAnalyticsHelper.ItemType_GameStart, "GameStart" );
-
             BackgroundRunner.Current.StartCoroutine( start() );
 
             IEnumerator start() {

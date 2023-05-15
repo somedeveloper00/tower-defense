@@ -13,7 +13,7 @@ namespace TowerDefense.UI {
         public bool useDefaultAnim = true;
         public int delayAfterAnim = 10;
 
-        public ButtonClickedEvent onClick { get; private set; } = new ButtonClickedEvent();
+        public new ButtonClickedEvent onClick { get; private set; } = new ButtonClickedEvent();
 
         bool _busy = false;
         

@@ -36,7 +36,7 @@ namespace TowerDefense.Lobby.LevelChoosing {
             // get possible coin packs
             int count = 0;
             for (int i = 0; i < possibleSessionCoins.Count; i++) {
-                if (PlayerGlobals.Current.ecoProg.coins >= possibleSessionCoins[i]) {
+                if (PlayerGlobals.Current.ecoProg.Coins >= possibleSessionCoins[i]) {
                     dialogue.AddButton( possibleSessionCoinsTxt[i], "ok" );
                     count++;
                 }

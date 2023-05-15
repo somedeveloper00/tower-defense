@@ -1,5 +1,7 @@
 ﻿using System;
+using GameAnalyticsSDK;
 using Newtonsoft.Json;
+using TowerDefense.Bridges.Analytics;
 using TowerDefense.Transport;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -13,15 +15,21 @@ namespace TowerDefense.Data.Progress {
         [SerializeField] ulong _coins = 40;
 
         [JsonIgnore]
-        public ulong coins {
-            get => _coins;
-            set {
-                var tmp = _coins;
-                _coins = value;
-                onCoinsChanged?.Invoke( tmp );
-            }
+        public ulong Coins => _coins;
+
+        /// <summary>
+        /// could be positive or negative
+        /// </summary>
+        public void AddToCoin(GameAnalyticsHelper.ItemType itemType, string details, ulong value) {
+            var tmp = _coins;
+            _coins = value;
+            try {
+                GameAnalytics.NewResourceEvent( _coins > tmp ? GAResourceFlowType.Source : GAResourceFlowType.Sink,
+                    "coin", value - tmp, itemType.ToAnalyticString(), details );
+            } catch  { }
+            onCoinsChanged?.Invoke( tmp );
         }
-        
+
         public delegate void CoinChanged(ulong coinBefore);
         public event CoinChanged onCoinsChanged;
         

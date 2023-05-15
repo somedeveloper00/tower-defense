@@ -6,6 +6,7 @@ using AnimFlex.Tweening;
 using DialogueSystem;
 using RTLTMPro;
 using TowerDefense.Background;
+using TowerDefense.Bridges.Analytics;
 using TowerDefense.Core.Hud;
 using TowerDefense.Data;
 using TowerDefense.Data.Database;
@@ -18,7 +19,10 @@ namespace TowerDefense.UI.RewardDialogue {
         public ulong coins;
         public bool showCoinShower;
         public bool showSparkles;
-
+        public bool setDataAndSave = true;
+        public GameAnalyticsHelper.ItemType itemType = GameAnalyticsHelper.ItemType.ItemType_GameStart;
+        public string detail = "reward";
+        
         [Title( "References" )] 
         [SerializeField] SequenceAnim inSeq;
         [SerializeField] SequenceAnim outSeq;
@@ -86,14 +90,14 @@ namespace TowerDefense.UI.RewardDialogue {
             
             // play text coin transfer
             yield return new WaitForSecondsRealtime( coinTransferStartTime );
-            ulong c1 = PlayerGlobals.Current.ecoProg.coins;
+            ulong c1 = PlayerGlobals.Current.ecoProg.Coins;
             var t1 = Tweener.Generate(
                     () => c1,
                     (v) => {
                         c1 = v;
                         coinDisplay.coinTxt.text = c1.ToString( "#,0" ).En2PerNum();
                     },
-                    endValue: PlayerGlobals.Current.ecoProg.coins + coins,
+                    endValue: PlayerGlobals.Current.ecoProg.Coins + coins,
                     proxy: AnimFlexCoreProxyUnscaled.Default )
                 .SetDuration( coinTransferDuration )
                 .SetEase( coinTransferEase )
@@ -117,14 +121,15 @@ namespace TowerDefense.UI.RewardDialogue {
             // yield return new WaitForTask( t2.AwaitComplete() );
             
             Debug.Log( $"reward anims ended" );
-            
-            // set and save data
-            PlayerGlobals.Current.ecoProg.coins += coins;
-            PlayerGlobals.Current.SetData( SecureDatabase.Current );
-            SecureDatabase.Current.Save();
+
+            if (setDataAndSave) {
+                // set and save data
+                PlayerGlobals.Current.ecoProg.AddToCoin( itemType, detail, PlayerGlobals.Current.ecoProg.Coins  );
+                PlayerGlobals.Current.SetData( SecureDatabase.Current );
+                SecureDatabase.Current.Save();
+            }
             
             Close();
-
         }
 
         CoinDisplay findCoinDisplay() {

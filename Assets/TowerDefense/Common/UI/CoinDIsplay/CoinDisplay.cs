@@ -53,7 +53,7 @@ namespace TowerDefense.UI {
 
         void updateView() {
             if (coinTxt)
-                coinTxt.text = PlayerGlobals.Current.ecoProg.coins.ToString( "#,0" ).En2PerNum();
+                coinTxt.text = PlayerGlobals.Current.ecoProg.Coins.ToString( "#,0" ).En2PerNum();
             
             // update ad stuff
             var canWatch = CoinIncreaseHelpSystem.Current.CanWatchAd();
