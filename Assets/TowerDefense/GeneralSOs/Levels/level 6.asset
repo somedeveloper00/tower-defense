@@ -36,7 +36,7 @@ MonoBehaviour:
   - 0.8
   - 0.1
   coinMultiplier: 1
-  coinBonusForStars: 32000000000000005000000000000000c800000000000000
+  coinBonusForStars: 0a0000000000000032000000000000006400000000000000
   recomendedCoins: 40
   references:
     version: 2

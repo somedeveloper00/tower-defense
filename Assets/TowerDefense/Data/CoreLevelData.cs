@@ -60,7 +60,7 @@ namespace TowerDefense.Data {
             return 0;
         }
 
-        public long EvaluateBonusCoinForStar(int star) => coinBonusForStars[star];
+        public long EvaluateBonusCoinForStar(int star) => star > 0 ? coinBonusForStars[star - 1] : 0;
 
 #endregion
     }
