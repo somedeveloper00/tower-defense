@@ -5,20 +5,26 @@ using TowerDefense.Data;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace TowerDefense.Lobby.LevelChoosing {
+namespace TowerDefense.Lobby {
     public class LevelChoosingDialogue : Dialogue {
         [SerializeField] LevelStartButton levelStartButtonInstance;
         [SerializeField] Button backgroundBtn;
         [SerializeField] Button backBtn;
-        [SerializeField] SequenceAnim outSeq;
+        [SerializeField] SequenceAnim inSeq, outSeq;
 
         List<LevelStartButton> _levelViews = new();
 
-        protected override void Start() {
+        protected override async void Start() {
             base.Start();
             setupLevelViews();
             backBtn.onClick.AddListener( CloseWithAnim );
             backgroundBtn.onClick.AddListener( CloseWithAnim );
+            
+            canvasRaycaster.enabled = false;
+            Debug.Log( $"{Time.frameCount} reqed" );
+            inSeq.PlaySequence();
+            await inSeq.AwaitComplete();
+            canvasRaycaster.enabled = true;
         }
 
         void CloseWithAnim() {

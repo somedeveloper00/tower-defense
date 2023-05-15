@@ -12,7 +12,7 @@ using TowerDefense.Bridges.Analytics;
 using TowerDefense.Common;
 using TowerDefense.Core.Starter;
 using TowerDefense.Data;
-using TowerDefense.Lobby.LevelChoosing;
+using TowerDefense.Lobby;
 using TowerDefense.Music;
 using TowerDefense.UI;
 using TriInspector;

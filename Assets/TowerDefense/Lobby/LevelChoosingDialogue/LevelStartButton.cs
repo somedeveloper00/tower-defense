@@ -8,7 +8,7 @@ using TowerDefense.Data.Progress;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace TowerDefense.Lobby.LevelChoosing {
+namespace TowerDefense.Lobby {
     public class LevelStartButton : MonoBehaviour {
         [SerializeField] Button playBtn;
         [SerializeField] RTLTextMeshPro title;

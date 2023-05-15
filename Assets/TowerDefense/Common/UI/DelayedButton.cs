@@ -51,7 +51,7 @@ namespace TowerDefense.UI {
             }
             await PlayCustomAnim();
 
-            await Task.Delay( 200 + delayAfterAnim );
+            await Task.Delay( ( useDefaultAnim ? 200 : 0 ) + delayAfterAnim );
             
             
             enabled = true;

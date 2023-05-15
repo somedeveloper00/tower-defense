@@ -660,6 +660,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playOnStart: 0
+  dontWaitInQueuToPlay: 1
   useProxyAsCore: 1
   useDefaultCoreProxy: 1
   defaultCoreProxy: AnimFlex.Core.Proxy.AnimFlexCoreProxyUnscaled
@@ -1908,6 +1909,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playOnStart: 0
+  dontWaitInQueuToPlay: 1
   useProxyAsCore: 1
   useDefaultCoreProxy: 1
   defaultCoreProxy: AnimFlex.Core.Proxy.AnimFlexCoreProxyUnscaled
@@ -2106,6 +2108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playOnStart: 0
+  dontWaitInQueuToPlay: 1
   useProxyAsCore: 1
   useDefaultCoreProxy: 1
   defaultCoreProxy: AnimFlex.Core.Proxy.AnimFlexCoreProxyUnscaled
@@ -2540,6 +2543,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playOnStart: 0
+  dontWaitInQueuToPlay: 1
   useProxyAsCore: 1
   useDefaultCoreProxy: 1
   defaultCoreProxy: AnimFlex.Core.Proxy.AnimFlexCoreProxyUnscaled
@@ -2851,7 +2855,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  clip: {fileID: 0}
+  clip: {fileID: 8300000, guid: 99fd3a75678da894e9332cc39e383ec6, type: 3}
   volume: 0.8
   useDefaultAnim: 1
   delayAfterAnim: 10
@@ -3215,6 +3219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playOnStart: 0
+  dontWaitInQueuToPlay: 1
   useProxyAsCore: 1
   useDefaultCoreProxy: 1
   defaultCoreProxy: AnimFlex.Core.Proxy.AnimFlexCoreProxyUnscaled
@@ -3227,7 +3232,7 @@ MonoBehaviour:
     - name: disable clicks
       delay: 0
       clip:
-        rid: 1318342275770351617
+        rid: 1318342275770351796
     - name: 
       delay: 0
       clip:
@@ -3236,10 +3241,10 @@ MonoBehaviour:
       delay: 0
       clip:
         rid: 1318342275770351616
-    - name: reenable clicks
+    - name: enable clicks
       delay: 0
       clip:
-        rid: 1318342275770351618
+        rid: 1318342275770351857
   references:
     version: 2
     RefIds:
@@ -3279,18 +3284,16 @@ MonoBehaviour:
               m_Calls: []
           fromObject: {fileID: 1372271025}
           target: {x: 1, y: 1, z: 1}
-    - rid: 1318342275770351617
-      type: {class: CSetPropertyValueBool, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
+    - rid: 1318342275770351796
+      type: {class: ComponentSetActive, ns: AnimFlex, asm: Assembly-CSharp-firstpass}
       data:
         component: {fileID: 50481349}
-        propertyName: enabled
-        value: 0
-    - rid: 1318342275770351618
-      type: {class: CSetPropertyValueBool, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
+        active: 0
+    - rid: 1318342275770351857
+      type: {class: ComponentSetActive, ns: AnimFlex, asm: Assembly-CSharp-firstpass}
       data:
         component: {fileID: 50481349}
-        propertyName: enabled
-        value: 1
+        active: 1
     - rid: 1861648539527413841
       type: {class: CTweenerScale, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
       data:
@@ -3371,10 +3374,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  clip: {fileID: 0}
+  clip: {fileID: 8300000, guid: 99fd3a75678da894e9332cc39e383ec6, type: 3}
   volume: 0.8
   useDefaultAnim: 0
-  delayAfterAnim: 10
+  delayAfterAnim: 0
   onClipSeq: {fileID: 1372271029}
 --- !u!1 &1384773697
 GameObject:
@@ -3426,6 +3429,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playOnStart: 0
+  dontWaitInQueuToPlay: 1
   useProxyAsCore: 1
   useDefaultCoreProxy: 1
   defaultCoreProxy: AnimFlex.Core.Proxy.AnimFlexCoreProxyUnscaled
@@ -3707,7 +3711,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  clip: {fileID: 0}
+  clip: {fileID: 8300000, guid: 99fd3a75678da894e9332cc39e383ec6, type: 3}
   volume: 0.8
   useDefaultAnim: 1
   delayAfterAnim: 10

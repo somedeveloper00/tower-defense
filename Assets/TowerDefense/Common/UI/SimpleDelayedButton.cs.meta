@@ -1,3 +1,14 @@
-﻿fileFormatVersion: 2
+fileFormatVersion: 2
 guid: d8af190e76eb40869fd8e515cc0f62dd
-timeCreated: 1683557240
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - m_TargetGraphic: {instanceID: 0}
+  - clip: {fileID: 8300000, guid: 99fd3a75678da894e9332cc39e383ec6, type: 3}
+  - onClipSeq: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -5,12 +5,11 @@ namespace TowerDefense.UI {
     public class SimpleDelayedButton : DelayedButton {
         public SequenceAnim onClipSeq;
 
-        protected override Task PlayCustomAnim() {
+        protected override async Task PlayCustomAnim() {
             if (onClipSeq) {
                 onClipSeq.PlaySequence();
-                return onClipSeq.AwaitComplete();
+                await onClipSeq.AwaitComplete();
             }
-            return Task.CompletedTask;
         }
 
         protected override void OnClick() { }
