@@ -106,7 +106,7 @@ namespace TowerDefense.Lobby {
             }
 
             PlayerGlobals.Current.ecoProg.AddToCoin( GameAnalyticsHelper.ItemType.ItemType_GameStart,
-                "Level" + levelDataObject.id, sessionPack.coins );
+                "Level" + levelDataObject.id, -sessionPack.coins );
             
             BackgroundRunner.Current.StartCoroutine( start() );
 

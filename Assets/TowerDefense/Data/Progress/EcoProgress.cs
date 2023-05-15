@@ -12,25 +12,27 @@ namespace TowerDefense.Data.Progress {
 
         [FormerlySerializedAs("coins")]
         [JsonProperty("coins")]
-        [SerializeField] ulong _coins = 40;
+        [SerializeField] long _coins = 40;
 
         [JsonIgnore]
-        public ulong Coins => _coins;
+        public long Coins => _coins;
 
         /// <summary>
         /// could be positive or negative
         /// </summary>
-        public void AddToCoin(GameAnalyticsHelper.ItemType itemType, string details, ulong value) {
-            var tmp = _coins;
-            _coins = value;
+        public void AddToCoin(GameAnalyticsHelper.ItemType itemType, string details, long value) {
             try {
-                GameAnalytics.NewResourceEvent( _coins > tmp ? GAResourceFlowType.Source : GAResourceFlowType.Sink,
-                    "coin", value - tmp, itemType.ToAnalyticString(), details );
+                GameAnalytics.NewResourceEvent( value > 0 ? GAResourceFlowType.Source : GAResourceFlowType.Sink,
+                    "coin", value, itemType.ToAnalyticString(), details );
             } catch  { }
-            onCoinsChanged?.Invoke( tmp );
+
+            _coins += value;
+            if (_coins < 0) _coins = 0;
+            Debug.Log( $"Coin increased by {value}, type: {itemType}" );
+            onCoinsChanged?.Invoke( _coins );
         }
 
-        public delegate void CoinChanged(ulong coinBefore);
+        public delegate void CoinChanged(long coinBefore);
         public event CoinChanged onCoinsChanged;
         
         public string ToJson() => JsonConvert.SerializeObject( this );

@@ -12,7 +12,7 @@ namespace TowerDefense.Lobby {
     public class LevelStartButton : MonoBehaviour {
         [SerializeField] Button playBtn;
         [SerializeField] RTLTextMeshPro title;
-        [SerializeField] List<ulong> possibleSessionCoins = new();
+        [SerializeField] List<long> possibleSessionCoins = new();
         [SerializeField] List<string> possibleSessionCoinsTxt = new();
         [SerializeField] string coinChooseMessageTitleText;
         [SerializeField, TextArea] string coinChooseMessageBodyText;
@@ -58,7 +58,7 @@ namespace TowerDefense.Lobby {
 
             var ind = possibleSessionCoinsTxt.IndexOf( dialogue.result );
             if (ind != -1) {
-                ulong coins = possibleSessionCoins[ind];
+                var coins = possibleSessionCoins[ind];
                 LobbyManager.Current.StartGame( coreLevelData, new() {
                     coins = coins,
                     defenders = new List<string>() { "monkey", "shooter" }

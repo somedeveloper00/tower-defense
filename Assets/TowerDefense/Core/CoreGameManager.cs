@@ -195,8 +195,8 @@ namespace TowerDefense.Core {
             var winData = new WinData();
             winData.time = gameTime;
             winData.stars = _levelData.EvaluateStar( gameTime, sessionPack.life, life );
-            winData.coins = (ulong)( _coinsReceivedFromEnemiesKilled * _levelData.coinMultiplier )
-                            + (ulong)winData.stars * _levelData.EvaluateBonusCoinForStar( winData.stars );
+            winData.coins = (long)( _coinsReceivedFromEnemiesKilled * _levelData.coinMultiplier )
+                            + _levelData.EvaluateBonusCoinForStar( winData.stars );
             Debug.Log( $"Won Game!: {winData.ToJson()}" );
 
 
@@ -242,7 +242,7 @@ namespace TowerDefense.Core {
             // making data for lose 
             var loseData = new LoseData();
             loseData.time = gameTime;
-            loseData.coins = (ulong)( _coinsReceivedFromEnemiesKilled * _levelData.coinMultiplier );
+            loseData.coins = (long)( _coinsReceivedFromEnemiesKilled * _levelData.coinMultiplier );
             Debug.Log( $"Won Game!: {loseData.ToJson()}" );
             CoreGameEvents.Current.onLose?.Invoke(loseData);
 

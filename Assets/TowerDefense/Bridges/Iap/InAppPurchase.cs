@@ -30,8 +30,8 @@ namespace TowerDefense.Bridges.Iap {
         public class PurchasableInfo {
             public string sku;
             public string title, description;
-            public ulong price;
-            public ulong rewardCoins;
+            public long price;
+            public long rewardCoins;
             public ViewType viewType;
             public bool isAvailable = true;
 

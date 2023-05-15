@@ -15,7 +15,7 @@ namespace TowerDefense.Data.Progress {
             public LevelStatus status;
             public int stars = 0;
             [JsonProperty( "plays" )] public int playCount = 0;
-            [JsonProperty( "coins" )] public ulong coinsReceived = 0;
+            [JsonProperty( "coins" )] public long coinsReceived = 0;
         }
 
         public string ToJson() => JsonConvert.SerializeObject( this );

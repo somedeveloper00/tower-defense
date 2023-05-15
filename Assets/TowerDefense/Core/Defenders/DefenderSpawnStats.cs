@@ -5,7 +5,7 @@ using UnityEngine;
 namespace TowerDefense.Core.Defenders {
     [CreateAssetMenu( fileName = "DefenderSpawnStats", menuName = "TD/Core/Defender Spawn Stats", order = 0 )]
     public class DefenderSpawnStats : ScriptableObject {
-        public ulong initialCost;
+        public long initialCost;
         public int costIncrement;
 
         int _spawned = 0;
@@ -14,8 +14,8 @@ namespace TowerDefense.Core.Defenders {
 
         public void IncreaseCost() => _spawned++;
 
-        public ulong GetCurrentCost() {
-            return initialCost + (ulong) _spawned * (ulong) costIncrement;
+        public long GetCurrentCost() {
+            return initialCost + _spawned * costIncrement;
         }
 
         void OnEnable() {

@@ -27,7 +27,7 @@ namespace TowerDefense.Data {
         /// <summary>
         /// the bonus coin per star
         /// </summary>
-        public ulong[] coinBonusForStars;
+        public long[] coinBonusForStars;
 
         [Tooltip("The recommended amount of coins for this level")]
         public uint recomendedCoins = 100;
@@ -60,11 +60,7 @@ namespace TowerDefense.Data {
             return 0;
         }
 
-        public ulong EvaluateBonusCoinForStar(int star) {
-            ulong r = 0;
-            for (int i = 0; i < star; i++) r += coinBonusForStars[i];
-            return r;
-        }
+        public long EvaluateBonusCoinForStar(int star) => coinBonusForStars[star];
 
 #endregion
     }

@@ -87,7 +87,7 @@ namespace TowerDefense.Bridges.Iap {
                     return new PurchasableInfo() {
                         sku = data.sku,
                         title = data.title,
-                        price = ulong.Parse( data.price.Per2EnNum( false ) ),
+                        price = long.Parse( data.price.Per2EnNum( false ) ),
                         isAvailable = data.isAvailable,
                         description = parsedDesc.desc,
                         rewardCoins = parsedDesc.coins,
@@ -312,7 +312,7 @@ namespace TowerDefense.Bridges.Iap {
         public class BazaarDescriptionData : ITransportable {
             [TextArea]
             public string desc;
-            public ulong coins;
+            public long coins;
 
             // [JsonProperty( "coins" )]
             // string fixed_coins {

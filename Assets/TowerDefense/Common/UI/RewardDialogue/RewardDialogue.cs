@@ -16,7 +16,7 @@ using UnityEngine;
 
 namespace TowerDefense.UI.RewardDialogue {
     public class RewardDialogue : Dialogue {
-        public ulong coins;
+        public long coins;
         public bool showCoinShower;
         public bool showSparkles;
         public bool setDataAndSave = true;
@@ -90,7 +90,7 @@ namespace TowerDefense.UI.RewardDialogue {
             
             // play text coin transfer
             yield return new WaitForSecondsRealtime( coinTransferStartTime );
-            ulong c1 = PlayerGlobals.Current.ecoProg.Coins;
+            var c1 = PlayerGlobals.Current.ecoProg.Coins;
             var t1 = Tweener.Generate(
                     () => c1,
                     (v) => {
@@ -103,7 +103,7 @@ namespace TowerDefense.UI.RewardDialogue {
                 .SetEase( coinTransferEase )
                 .AddOnComplete( () => Debug.Log( "t1 completed" ) );
             
-            ulong c2 = coins;
+            var c2 = coins;
             var t2 = Tweener.Generate(
                     () => c2,
                     (v) => {

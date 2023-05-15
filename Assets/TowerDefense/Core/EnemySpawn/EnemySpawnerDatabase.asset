@@ -15,13 +15,13 @@ MonoBehaviour:
   enemySpawnTypes:
   - name: balloon-simple
     prefab: {fileID: 1681292620186485121, guid: 5bb5bcddc4b4bf840bad828fed5924f8, type: 3}
-    worth: 10
+    worth: 1
   - name: balloon-fast
     prefab: {fileID: 2920957584703805738, guid: 38958115aa57ebe4c89d8a46fe5bed93, type: 3}
-    worth: 11
+    worth: 2
   - name: balloon-hard
     prefab: {fileID: 4620684104319207334, guid: f00463482a85eeb4bbe2d5580390e88b, type: 3}
-    worth: 11
+    worth: 2
   - name: balloon-fast-hard
     prefab: {fileID: 2280263769983416167, guid: 1aece9ae394e97c4b87268cf8ce2d896, type: 3}
-    worth: 16
+    worth: 3
