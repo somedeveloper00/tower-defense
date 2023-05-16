@@ -10,6 +10,7 @@ using UnityEngine.UI;
 
 namespace TowerDefense.Lobby {
     public class LevelStartButton : MonoBehaviour {
+        [SerializeField] Image mainImg;
         [SerializeField] Button playBtn;
         [SerializeField] RTLTextMeshPro title;
         [SerializeField] List<long> possibleSessionCoins = new();
@@ -28,6 +29,7 @@ namespace TowerDefense.Lobby {
             playBtn.onClick.AddListener( onPlayButtonClick );
             playBtn.interactable = levelProgress.status.HasFlag( LevelProgress.LevelStatus.Unlocked );
             title.text = coreLevelData.title;
+            mainImg.color = coreLevelData.btnCol;
         }
 
         async void onPlayButtonClick() {

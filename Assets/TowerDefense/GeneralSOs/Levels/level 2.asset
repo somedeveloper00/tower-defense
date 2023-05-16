@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91b9bad79ede404b92d88cc8af708d16, type: 3}
   m_Name: level 2
   m_EditorClassIdentifier: 
+  btnCol: {r: 0.09700396, g: 0.773, b: 0.07578431, a: 1}
   env: env1
   title: "\u0645\u0631\u062D\u0644\u0647 \u06F2"
   id: 21
@@ -35,7 +36,7 @@ MonoBehaviour:
   - 0.8
   - 0.1
   coinMultiplier: 1
-  coinBonusForStars: 0a0000000000000014000000000000002800000000000000
+  coinBonusForStars: 05000000000000000a000000000000001400000000000000
   recomendedCoins: 20
   references:
     version: 2

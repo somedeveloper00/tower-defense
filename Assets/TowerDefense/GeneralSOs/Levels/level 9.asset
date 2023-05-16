@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91b9bad79ede404b92d88cc8af708d16, type: 3}
   m_Name: level 9
   m_EditorClassIdentifier: 
+  btnCol: {r: 0.09700396, g: 0.773, b: 0.07578431, a: 1}
   env: env1
   title: "\u0645\u0631\u062D\u0644\u0647 \u06F9"
   id: 91
@@ -24,7 +25,6 @@ MonoBehaviour:
         count: 80
         timeIntervals: 0.8
         argv: []
-  - onTime:
     - time: 20
       spawns:
       - name: balloon-simple
@@ -37,7 +37,6 @@ MonoBehaviour:
   - 0.1
   coinMultiplier: 1
   coinBonusForStars: 0a0000000000000032000000000000009600000000000000
-  recomendedCoins: 60
   references:
     version: 2
     RefIds: []

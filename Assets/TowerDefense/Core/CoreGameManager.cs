@@ -24,6 +24,7 @@ using TowerDefense.Data;
 using TowerDefense.Data.Database;
 using TowerDefense.Data.Progress;
 using TowerDefense.Music;
+using TowerDefense.Transport;
 using TriInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -51,6 +52,8 @@ namespace TowerDefense.Core {
         bool _gameActive = false;
         ulong _coinsReceivedFromEnemiesKilled = 0;
         Tweener _slowDownTweener = null;
+
+        (CoreSessionPack, CoreLevelData) _startingData;
         
 
 
@@ -105,16 +108,15 @@ namespace TowerDefense.Core {
 
         public void RestartGame() {
             SecureDatabase.Current.Save();
-            BackgroundRunner.Current.StartCoroutine( coroutine( _levelData ) );
+            BackgroundRunner.Current.StartCoroutine( coroutine() );
 
-            IEnumerator coroutine(CoreLevelData coreStarter) {
+            IEnumerator coroutine() {
                 LoadingScreenManager.Current.StartLoadingScreen();
                 LoadingScreenManager.Current.state = LoadingScreenManager.State.RestartingCore;
-                
                 yield return null;
                 yield return SceneManager.UnloadSceneAsync( gameObject.scene );
                 bool canContinue = false;
-                BackgroundRunner.Current.StartCoroutine( CoreStartup.StartCore( _levelData, sessionPack, () => canContinue = true ) );
+                BackgroundRunner.Current.StartCoroutine( CoreStartup.StartCore( _startingData.Item2, _startingData.Item1, () => canContinue = true ) );
                 yield return new WaitUntil( () => canContinue );
                 LoadingScreenManager.Current.EndLoadingScreen();
             }
@@ -135,6 +137,7 @@ namespace TowerDefense.Core {
 
 
         void OnCoreStarterFinished(CoreLevelData coreLevelData, CoreSessionPack sessionPack) {
+            _startingData = (sessionPack.Cloned(), coreLevelData.ClonedSO());
             _levelData = Instantiate( coreLevelData );
             this.sessionPack = sessionPack;
             life = sessionPack.life;

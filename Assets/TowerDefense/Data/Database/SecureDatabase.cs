@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using Newtonsoft.Json;
@@ -22,34 +23,27 @@ namespace TowerDefense.Data.Database {
         static void openPathInExplorer() {
             Process.Start( Path.Combine( Application.persistentDataPath, "s.dat" ) );
         }
+        [MenuItem("Files/Delete Secure Database File")]
+        static void delete() {
+            File.Delete( Path.Combine( Application.persistentDataPath, "s.dat" ) );
+        }
+        [MenuItem("Files/Delete Secure Database File", true)]
+        static bool delete_validation() {
+            return File.Exists( Path.Combine( Application.persistentDataPath, "s.dat" ) );
+        }
 #endif
 
         public static SecureDatabase Current;
-// #if UNITY_EDITOR
-//         [InitializeOnLoadMethod]
-// #endif
-        // [RuntimeInitializeOnLoadMethod( RuntimeInitializeLoadType.BeforeSplashScreen )]
-        // static void start() {
-        //     Current = new SecureDatabase("s.dat");
-        //     Current.Load();
-        //     Debug.Log( $"secure data loaded." );
-        // }
 
         
-        JObject data;
+        Dictionary<string,string> data;
 
 
         public override void Load() {
-            data = new JObject();
+            data = new ();
             if (File.Exists( path )) {
                 var fileData = decryptAndGetData( path );
-                try {
-                    var d = JsonConvert.DeserializeObject<JObject>( fileData );
-                    if (d != null) data = d;
-                }
-                catch (Exception e) {
-                    Debug.LogException( e );
-                }
+                JsonConvert.PopulateObject( fileData, data );
             }
             Debug.Log( $"secure data loaded: {path}" );
         }
@@ -62,37 +56,23 @@ namespace TowerDefense.Data.Database {
             encryptAndSaveData( txt, path );
         }
 
-        public override bool KeyExists(string key) => data.GetValue( key ) != null;
+        public override bool KeyExists(string key) => data.ContainsKey( key );
 
-        public override T GetValue<T>(string key) {
-            var field = data.GetValue( key );
-            if (field != null) {
-                return field.ToObject<T>();
-            }
-
-            throw new Exception( "key not found: " + key );
-        }
-
-        public override bool TryGetValue<T>(string key, out T result) {
+        public override bool GetValue(string key, ITransportable result) {
             if (data.TryGetValue(key, out var token)) {
-                try {
-                    result = token.ToObject<T>();
-                    return true;
-                } catch { }
+                result.FromJson( token );
+                return true;
             }
-            result = default;
             return false;
         }
 
-        public override void Set(string key, ITransportable obj) {
-            data[key] = JsonConvert.DeserializeObject<JObject>( obj.ToJson() );
-        }
+        public override void Set(string key, ITransportable obj) => data[key] = obj.ToJson();
 
         public override void Delete(string key) => data.Remove( key );
 
         public override void DeleteAll() {
             File.Delete( path );
-            data = new JObject();
+            data = new();
         }
 
 

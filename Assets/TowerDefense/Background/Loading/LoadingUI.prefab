@@ -962,7 +962,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047e8afad3c64e64b1323784efd490e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playOnEnable: 0
+  playOnStart: 0
+  dontWaitInQueuToPlay: 1
   useProxyAsCore: 0
   useDefaultCoreProxy: 0
   defaultCoreProxy: 
@@ -1934,7 +1935,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047e8afad3c64e64b1323784efd490e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playOnEnable: 0
+  playOnStart: 0
+  dontWaitInQueuToPlay: 1
   useProxyAsCore: 0
   useDefaultCoreProxy: 0
   defaultCoreProxy: 
@@ -1956,7 +1958,7 @@ MonoBehaviour:
       delay: 0
       clip:
         rid: 1861648063371411723
-    - name: all down
+    - name: all away
       delay: 0
       clip:
         rid: 1861648063371411725
@@ -2105,16 +2107,18 @@ MonoBehaviour:
           onKill:
             m_PersistentCalls:
               m_Calls: []
-          multiDelay: 0.01
+          multiDelay: 0.02
           reverseOrder: 0
           selections:
           - transform: {fileID: 6965427605622524759}
             type: 2
           - transform: {fileID: 6965427606033984184}
             type: 2
-          - transform: {fileID: 6965427605304900373}
-            type: 2
-          target: {x: 0, y: 1000, z: 0}
+          - transform: {fileID: 6965427605622524759}
+            type: 3
+          - transform: {fileID: 6965427606033984184}
+            type: 3
+          target: {x: 0, y: 600, z: 0}
 --- !u!1 &6965427606128579675
 GameObject:
   m_ObjectHideFlags: 0
@@ -2268,7 +2272,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047e8afad3c64e64b1323784efd490e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playOnEnable: 1
+  playOnStart: 1
+  dontWaitInQueuToPlay: 1
   useProxyAsCore: 0
   useDefaultCoreProxy: 0
   defaultCoreProxy: 

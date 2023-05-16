@@ -18,6 +18,7 @@ namespace TowerDefense
             var builder = new StringBuilder( perNum );
             char lastChar = ' ';
             for (int i = 0; i < builder.Length; i++) {
+                bool removed = false;
                 switch (builder[i]) {
                     case '۰' or '0': builder[i] = '0'; break;
                     case '۱' or '1': builder[i] = '1'; break;
@@ -33,21 +34,24 @@ namespace TowerDefense
                     // accept one comma in a row
                     case ',' when keepCommas && lastChar != ',': break;
                     
-                    default: builder.Remove( i--, 1 ); break;
+                    default: 
+                        builder.Remove( i--, 1 );
+                        removed = true; break;
                 }
-                lastChar = builder[i];
+                if (!removed) lastChar = builder[i];
             }
 
             return builder.Length == 0 ? "0" : builder.ToString();
         }
 
         /// <summary>
-        ///  1,2344 => ۱,۲۳۴۴
+        ///  abc1,2344 => ۱,۲۳۴۴
         /// </summary>
         public static string En2PerNum(this string enNum, bool keepCommas = true) {
             var builder = new StringBuilder( enNum );
             char lastChar = ' ';
             for (int i = 0; i < builder.Length; i++) {
+                bool removed = false;
                 switch (builder[i]) {
                     case '۰' or '0': builder[i] = '۰'; break;
                     case '۱' or '1': builder[i] = '۱'; break;
@@ -63,9 +67,11 @@ namespace TowerDefense
                     // accept one comma in a row
                     case ',' when keepCommas && lastChar != ',': break;
                     
-                    default: builder.Remove( i--, 1 ); break;
+                    default: 
+                        builder.Remove( i--, 1 );
+                        removed = true; break;
                 }
-                lastChar = builder[i];
+                if (!removed) lastChar = builder[i];
             }
 
             return builder.Length == 0 ? "۰" : builder.ToString();

@@ -69,7 +69,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1681292620186485121, guid: 5bb5bcddc4b4bf840bad828fed5924f8, type: 3}
       propertyPath: startingLife
-      value: 40
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 1681292620186485123, guid: 5bb5bcddc4b4bf840bad828fed5924f8, type: 3}
       propertyPath: m_Name

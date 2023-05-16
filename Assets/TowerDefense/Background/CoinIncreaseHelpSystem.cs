@@ -128,11 +128,11 @@ namespace TowerDefense.Background {
         }
 
         void loadData() {
-            _lastAdTime = SecureDatabase.Current.TryGetString( "coin-last-watch", out var tick )
-                ? new DateTime( long.Parse( tick ) )
+            _lastAdTime = SecureDatabase.Current.GetString( "coin-last-watch", out var ticks )
+                ? new DateTime( long.Parse( ticks ) )
                 : DateTime.UtcNow;
-            _lastTooLowIncreaseTime = SecureDatabase.Current.TryGetString( "low-coin-start", out tick )
-                ? new DateTime( long.Parse( tick ) )
+            _lastTooLowIncreaseTime = SecureDatabase.Current.GetString( "low-coin-start", out ticks )
+                ? new DateTime( long.Parse( ticks ) )
                 : DateTime.UtcNow;
 
             // check if it's time to give below-threshold-coin reward (user might have left session & came back after 

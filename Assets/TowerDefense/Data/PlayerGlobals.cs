@@ -46,15 +46,12 @@ namespace TowerDefense.Data {
 
 
         public void LoadData(SecureDatabase secureDatabase) {
-            this.defendersProg = secureDatabase.TryGetValue<DefendersProgress>( "defprog", out var defendersProg )
-                ? defendersProg
-                : new DefendersProgress();
-            this.levelProg = secureDatabase.TryGetValue<LevelProgress>( "lvlprog", out var levelProg )
-                ? levelProg
-                : new LevelProgress();
-            this.ecoProg = secureDatabase.TryGetValue<EcoProgress>( "ecoprog", out var ecoProg )
-                ? ecoProg
-                : new EcoProgress();
+            defendersProg = new();
+            secureDatabase.GetValue( "defprog", defendersProg );
+            levelProg = new();
+            secureDatabase.GetValue( "lvlprog", levelProg );
+            ecoProg = new();
+            secureDatabase.GetValue( "ecoprog", ecoProg );
 
             // making sure level 1 is always unlocked
             GetOrCreateLevelProg( levelsData.coreLevels[0].id ).status |= LevelProgress.LevelStatus.Unlocked;

@@ -38,7 +38,7 @@ namespace TowerDefense.Music {
         }
 
         void loadState() {
-            if (PreferencesDatabase.Current.TryGetInt( prefMuteKey, out var result )) {
+            if (PreferencesDatabase.Current.GetInt( prefMuteKey, out var result )) {
                 setMuteState( result == 1, false, false );
             }
             else {

@@ -8,38 +8,37 @@ namespace TowerDefense.Data.Database {
         public abstract void Save();
         public abstract bool KeyExists(string key);
         
-        public abstract bool TryGetValue<T>(string key, out T result) where T : ITransportable, new();
-        public abstract T GetValue<T>(string key) where T : ITransportable, new();
+        public abstract bool GetValue(string key, ITransportable target);
         public abstract void Set(string key, ITransportable obj);
         public abstract void Delete(string key);
         public abstract void DeleteAll();
 
-        public bool TryGetInt(string key, out int result) {
-            var r = TryGetValue( key, out IntTransport intTrans );
-            result = r ? intTrans.value : 0;
-            return r;
-        }
-
-        public bool TryGetFloat(string key, out float result) {
-            var r = TryGetValue( key, out FloatTransport floatTrans );
-            result = r ? floatTrans.value : 0;
-            return r;
-        }
-
-        public bool TryGetString(string key, out string result) {
-            var r = TryGetValue( key, out StringTransport strTrans );
-            result = r ? strTrans.value : string.Empty;
-            return r;
-        }
-        
 
         public void Set(string key, int obj) => Set( key, new IntTransport() { value = obj } );
         public void Set(string key, float obj) => Set( key, new FloatTransport() { value = obj } );
         public void Set(string key, string obj) => Set( key, new StringTransport() { value = obj } );
 
-        public int GetInt(string key) => GetValue<IntTransport>( key ).value;
-        public float GetFloat(string key) => GetValue<FloatTransport>( key ).value;
-        public string GetString(string key) => GetValue<StringTransport>( key ).value;
+        public bool GetInt(string key, out int result) {
+            var r = new IntTransport();
+            var b = GetValue( key, r );
+            result = r.value;
+            return b;
+        }
+
+        public bool GetFloat(string key, out float result) {
+            var r = new FloatTransport();
+            var b = GetValue( key, r );
+            result = r.value;
+            return b;
+        }
+
+        public bool GetString(string key, out string result) {
+            var r = new StringTransport();
+            var b = GetValue( key, r );
+            result = r.value;
+            return b;
+        }
+        
         
 
 
