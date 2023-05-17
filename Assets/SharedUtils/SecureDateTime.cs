@@ -73,11 +73,9 @@ namespace SomeDeveloper {
 
                 bool done = false;
                 
-                log( $"outside: {Thread.CurrentThread.Name}" );
                 // run on background thread. apparently ReadToEndAsync blocks main thread lol
             #pragma warning disable CS4014
                 Task.Run( async () => {
-                    log( $"inside: {Thread.CurrentThread.Name}" );
                     // get time from time.nist.gov
                     using var client = new TcpClient( "time.nist.gov", 13 );
                     using var reader = new System.IO.StreamReader( client.GetStream() );

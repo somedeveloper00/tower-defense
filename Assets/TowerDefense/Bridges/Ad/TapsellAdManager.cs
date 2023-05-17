@@ -309,15 +309,15 @@ namespace TowerDefense.Bridges.Ad {
             
             TapsellPlus.ShowRewardedVideoAd( responseId,
                 onAdOpened: _ => {
-                    Debug.Log( $"tapsel rewarder ad opened: {result}" );   
+                    Debug.Log( $"tapsel rewarder ad opened." );   
                     GameAnalytics.NewAdEvent( GAAdAction.Show, GAAdType.RewardedVideo, AD_SDK_NAME, adId );
                 },
                 onAdClosed: _ => {
-                    Debug.Log( $"tapsel rewarded ad closed: {result}" );   
                     canPass = true;
                     // user could close the ad after success
                     if (result != RewardAdResult.Success)
                         result = RewardAdResult.CancelByUser; 
+                    Debug.Log( $"tapsel rewarded ad closed: {result}" );   
                 },
                 onShowError: (errorModel) => {
                     Debug.LogError( $"ad failed: {errorModel.errorMessage}" );
@@ -325,9 +325,9 @@ namespace TowerDefense.Bridges.Ad {
                     result = RewardAdResult.Fail;
                 },
                 onAdRewarded: _ => {
-                    Debug.Log( $"tapsel rewarded ad successful: {result}" );   
-                    canPass = true;
                     result = RewardAdResult.Success;
+                    canPass = true;
+                    Debug.Log( $"tapsel rewarded ad successful: {result}" );   
                     GameAnalytics.NewAdEvent( GAAdAction.RewardReceived, GAAdType.RewardedVideo, AD_SDK_NAME, adId );
                 });
             while (!canPass) await Task.Yield();

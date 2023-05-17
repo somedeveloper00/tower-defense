@@ -64,7 +64,7 @@ namespace TowerDefense.Data {
 #region Helpers
 
         public int EvaluateStar(float time, int startingLife, int endingLife) {
-            var t = (float)startingLife / endingLife;
+            var t = (float)endingLife / startingLife;
             for (int i = lifeRemainForStar.Length - 1; i >= 0; i--)
                 if (t > lifeRemainForStar[i]) return i + 1;
             return 0;
