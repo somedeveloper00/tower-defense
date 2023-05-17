@@ -32,7 +32,7 @@ namespace TowerDefense.Core {
 #if UNITY_EDITOR
         [UnityEditor.InitializeOnLoadMethod]
 #else
-        [RuntimeInitializeOnLoadMethod( RuntimeInitializeLoadType.BeforeSceneLoad )]
+        [RuntimeInitializeOnLoadMethod( RuntimeInitializeLoadType.BeforeSplashScreen )]
 #endif
         static void initialize() => Current = CreateInstance<CoreGameEvents>();
 

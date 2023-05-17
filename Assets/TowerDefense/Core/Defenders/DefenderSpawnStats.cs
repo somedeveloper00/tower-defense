@@ -1,4 +1,5 @@
-﻿using TowerDefense.Core.UI.Lose;
+﻿using System;
+using TowerDefense.Core.UI.Lose;
 using TowerDefense.Core.UI.Win;
 using UnityEngine;
 
@@ -8,23 +9,23 @@ namespace TowerDefense.Core.Defenders {
         public long initialCost;
         public int costIncrement;
 
-        int _spawned = 0;
+        [NonSerialized] int _spawned;
         
-        public void ResetCosts() => _spawned = 0;
+        public void ResetCosts() {
+            Debug.Log( $"costs reset for {name}" );
+            _spawned = 0;
+        }
 
         public void IncreaseCost() => _spawned++;
-
-        public long GetCurrentCost() {
-            return initialCost + _spawned * costIncrement;
-        }
+        public long GetCurrentCost() => initialCost + _spawned * costIncrement;
 
         void OnEnable() {
             CoreGameEvents.Current.onLose += onLose;
             CoreGameEvents.Current.onWin += onWin;
             CoreGameEvents.Current.OnGameStart += onStart;
         }
-
-        void OnDestroy() {
+        
+        void OnDisable() {
             CoreGameEvents.Current.onLose -= onLose;
             CoreGameEvents.Current.onWin -= onWin;
             CoreGameEvents.Current.OnGameStart -= onStart;

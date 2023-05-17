@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using TowerDefense.Core.Defenders;
+using UnityEngine;
 
-namespace TowerDefense.Common {
-    public class ObjectReferenceHolder : MonoBehaviour {
-        [SerializeField] Object[] objects;
+namespace TowerDefense {
+    sealed class ObjectReferenceHolder : MonoBehaviour {
+        [SerializeField] ScriptableObject[] objects;
     }
 }

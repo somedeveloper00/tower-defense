@@ -16,6 +16,8 @@ MonoBehaviour:
   - name: monkey
     mainPrefab: {fileID: 5942010116493321449, guid: 0d813d59bd5ff0f458e23debf753ef16, type: 3}
     placeholderPrefab: {fileID: 3450021843338259581, guid: 374831fdb7c6cd54893bfd2170999c7c, type: 3}
+    spawnStats: {fileID: 11400000, guid: 7f4984a5c942dae47b99d99565e41272, type: 2}
   - name: shooter
     mainPrefab: {fileID: 1481124291, guid: 778106f86dfd2ae4b93251c032be4e7b, type: 3}
     placeholderPrefab: {fileID: 3364010333416982397, guid: 3180a87fd8bc2304c8d06fe5cf0790aa, type: 3}
+    spawnStats: {fileID: 11400000, guid: 5eb4be005f730e44a8a17f5f81bfe2a2, type: 2}

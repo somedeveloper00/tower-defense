@@ -14,8 +14,6 @@ using UnityEditor;
 namespace TowerDefense.Core.Defenders {
     public abstract class Defender : MonoBehaviour {
 
-        [InlineEditor]
-        public DefenderSpawnStats spawnStats;
         public float attackRange;
         public float attackPower;
         public float attackReloadTime;

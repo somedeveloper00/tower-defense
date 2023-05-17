@@ -21,7 +21,6 @@ namespace TowerDefense.Lobby {
             backgroundBtn.onClick.AddListener( CloseWithAnim );
             
             canvasRaycaster.enabled = false;
-            Debug.Log( $"{Time.frameCount} reqed" );
             inSeq.PlaySequence();
             await inSeq.AwaitComplete();
             canvasRaycaster.enabled = true;
@@ -37,11 +36,11 @@ namespace TowerDefense.Lobby {
             foreach (var levelView in _levelViews)
                 Destroy( levelView.gameObject );
             var levelDatas = PlayerGlobals.Current.levelsData.coreLevels;
-            for (var i = 0; i < levelDatas.Count; i++) {
+            foreach (var level in levelDatas) {
                 var lvlView = Instantiate( levelStartButtonInstance, levelStartButtonInstance.transform.parent );
                 lvlView.gameObject.SetActive( true );
-                lvlView.coreLevelData = levelDatas[i];
-                lvlView.levelProgress = PlayerGlobals.Current.GetOrCreateLevelProg( levelDatas[i].id );
+                lvlView.coreLevelData = level;
+                lvlView.levelProgress = PlayerGlobals.Current.GetOrCreateLevelProg( level.id );
                 _levelViews.Add( lvlView );
             }
         }

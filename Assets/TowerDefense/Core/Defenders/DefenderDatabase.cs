@@ -16,6 +16,7 @@ namespace TowerDefense.Core.Defenders {
 
         public Defender GetDefenderMainPrefab(string name) => defenderItems.Find( d => d.name == name ).mainPrefab;
         public GameObject GetDefenderPlaceholderPrefab(string name) => defenderItems.Find( d => d.name == name ).placeholderPrefab;
+        public DefenderSpawnStats GetDefenderSpawnStats(string name) => defenderItems.Find( d => d.name == name ).spawnStats;
 
         void OnEnable() => Current = this;
 
@@ -26,6 +27,7 @@ namespace TowerDefense.Core.Defenders {
             public string name;
             public Defender mainPrefab;
             public GameObject placeholderPrefab;
+            [InlineEditor] public DefenderSpawnStats spawnStats;
         }
     }
 }

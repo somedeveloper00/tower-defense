@@ -28,7 +28,7 @@ namespace TowerDefense.Core.UI {
 
         public void Start() {
             var defender = DefenderDatabase.Current.GetDefenderMainPrefab( selectionName );
-            _spawnStats = defender.spawnStats;
+            _spawnStats = DefenderDatabase.Current.GetDefenderSpawnStats( selectionName );
             titleTxt.text = defender.name;
             icon.sprite = Sprite.Create( defender.icon, new Rect(0, 0, defender.icon.width, defender.icon.height), Vector2.zero );
             btn.onClick.AddListener( () => {
