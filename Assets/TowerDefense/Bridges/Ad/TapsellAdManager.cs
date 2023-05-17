@@ -72,7 +72,7 @@ namespace TowerDefense.Bridges.Ad {
                     responseId = model.responseId;
                     canPass = true;
                 },
-                onRequestError: error => {
+                onRequestError: _ => {
                     canPass = true;
                 } );
             while (!canPass) await Task.Yield();
@@ -100,11 +100,11 @@ namespace TowerDefense.Bridges.Ad {
             success = false;
             
             TapsellPlus.ShowInterstitialAd( responseId,
-                onAdOpened: model => {
+                onAdOpened: _ => {
                     Debug.Log( $"fullscreen tapsell ad opened: {responseId}" );
                     GameAnalytics.NewAdEvent( GAAdAction.Show, GAAdType.Interstitial, AD_SDK_NAME, adId );
                 },
-                onAdClosed: model => {
+                onAdClosed: _ => {
                     Debug.Log( $"fullscreen tapsell ad closed: {responseId}" );
                     canPass = true;
                     success = true;
@@ -144,7 +144,7 @@ namespace TowerDefense.Bridges.Ad {
                     responseId = model.responseId;
                     canPass = true;
                 },
-                onRequestError: error => {
+                onRequestError: _ => {
                     canPass = true;
                 } );
             while (!canPass) await Task.Yield();
@@ -172,11 +172,11 @@ namespace TowerDefense.Bridges.Ad {
             success = false;
             
             TapsellPlus.ShowInterstitialAd( responseId,
-                onAdOpened: model => {
+                onAdOpened: _ => {
                     Debug.Log( $"fullscreen tapsell ad opened: {responseId}" );
                     GameAnalytics.NewAdEvent( GAAdAction.Show, GAAdType.Video, AD_SDK_NAME, adId );
                 },
-                onAdClosed: model => {
+                onAdClosed: _ => {
                     Debug.Log( $"fullscreen tapsell ad closed: {responseId}" );
                     canPass = true;
                     success = true;
@@ -238,7 +238,7 @@ namespace TowerDefense.Bridges.Ad {
             // show ad
             canPass = false;
             TapsellPlus.ShowStandardBannerAd( responseId, TapsellPlusSDK.Gravity.Bottom, TapsellPlusSDK.Gravity.Bottom,
-                onAdOpened: model => {
+                onAdOpened: _ => {
                     canPass = true;
                     GameAnalytics.NewAdEvent( GAAdAction.Show, GAAdType.Banner, AD_SDK_NAME, adId );
                     try {
@@ -308,21 +308,23 @@ namespace TowerDefense.Bridges.Ad {
             canPass = false;
             
             TapsellPlus.ShowRewardedVideoAd( responseId,
-                onAdOpened: model => {
+                onAdOpened: _ => {
                     Debug.Log( $"tapsel rewarder ad opened: {result}" );   
                     GameAnalytics.NewAdEvent( GAAdAction.Show, GAAdType.RewardedVideo, AD_SDK_NAME, adId );
                 },
-                onAdClosed: model => {
+                onAdClosed: _ => {
                     Debug.Log( $"tapsel rewarded ad closed: {result}" );   
                     canPass = true;
-                    result = RewardAdResult.CancelByUser;
+                    // user could close the ad after success
+                    if (result != RewardAdResult.Success)
+                        result = RewardAdResult.CancelByUser; 
                 },
                 onShowError: (errorModel) => {
                     Debug.LogError( $"ad failed: {errorModel.errorMessage}" );
                     canPass = true;
                     result = RewardAdResult.Fail;
                 },
-                onAdRewarded: model => {
+                onAdRewarded: _ => {
                     Debug.Log( $"tapsel rewarded ad successful: {result}" );   
                     canPass = true;
                     result = RewardAdResult.Success;

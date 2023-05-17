@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Globalization;
+using System.Net.Sockets;
+using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
-namespace TowerDefense.Background {
+namespace SomeDeveloper {
     /// <summary>
     /// Syncs time from internet and prevents time jump cheat. It automatically initializes itself and runs forever.
     /// you can tweak the settings in the code or by using the hooks.
@@ -67,12 +69,25 @@ namespace TowerDefense.Background {
 #if UNITY_EDITOR
                 if (!Application.isPlaying) return;
 #endif
-                // get time from time.nist.gov
-                var client = new System.Net.Sockets.TcpClient( "time.nist.gov", 13 );
-                var stream = client.GetStream();
-                var reader = new System.IO.StreamReader( stream );
-                var response = await reader.ReadToEndAsync();
+                string response = string.Empty;
+
+                bool done = false;
                 
+                log( $"outside: {Thread.CurrentThread.Name}" );
+                // run on background thread. apparently ReadToEndAsync blocks main thread lol
+            #pragma warning disable CS4014
+                Task.Run( async () => {
+                    log( $"inside: {Thread.CurrentThread.Name}" );
+                    // get time from time.nist.gov
+                    using var client = new TcpClient( "time.nist.gov", 13 );
+                    using var reader = new System.IO.StreamReader( client.GetStream() );
+                    response = await reader.ReadToEndAsync();
+                    done = true;
+                } );
+            #pragma warning restore CS4014
+                
+                while (!done) await Task.Yield();
+
                 // check if it's a ok response
                 if (response.StartsWith( "Access d" ) || response.Length < 25) {
                     OnFaiilToSyncFromInternet?.Invoke();
