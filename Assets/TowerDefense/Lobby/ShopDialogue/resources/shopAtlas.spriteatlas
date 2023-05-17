@@ -6,7 +6,7 @@ SpriteAtlas:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: loseAtlas
+  m_Name: shopAtlas
   m_EditorData:
     serializedVersion: 2
     textureSettings:
@@ -38,27 +38,36 @@ SpriteAtlas:
       padding: 4
       blockOffset: 1
       allowAlphaSplitting: 0
-      enableRotation: 1
-      enableTightPacking: 1
+      enableRotation: 0
+      enableTightPacking: 0
       enableAlphaDilation: 0
     secondaryTextureSettings: {}
     variantMultiplier: 1
     packables:
-    - {fileID: 102900000, guid: 590997ddf11697d4aba1fad0efd4da06, type: 3}
+    - {fileID: 2800000, guid: e6e7fd48741bfd04f82bc7d7b02b31ae, type: 3}
+    - {fileID: 2800000, guid: 20c4f77420d7cc14dabc4605a8a900e4, type: 3}
+    - {fileID: 2800000, guid: de235f5e5913abd47b7674d287e45dd0, type: 3}
+    - {fileID: 2800000, guid: 5a940a1503ec5994ea2cda27196ce7e5, type: 3}
+    - {fileID: 2800000, guid: 297bde9d265ef8c4589b65634ec7d6cb, type: 3}
+    - {fileID: 2800000, guid: cff678a3acf7eff4ebf4e4cc19c24b04, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
-  - {fileID: 21300000, guid: 53dfba45c0b77be4881bbfaa478ea953, type: 3}
-  - {fileID: 21300000, guid: 139a698643f15e242b2c0d3a1449e268, type: 3}
-  - {fileID: 21300000, guid: b8015d7a85a6f6e40b4b3043d19e2eda, type: 3}
-  - {fileID: 21300000, guid: 3957dd9bce4296e45ac487a64236c165, type: 3}
+  - {fileID: 21300000, guid: cff678a3acf7eff4ebf4e4cc19c24b04, type: 3}
+  - {fileID: 21300000, guid: 20c4f77420d7cc14dabc4605a8a900e4, type: 3}
+  - {fileID: 21300000, guid: 5a940a1503ec5994ea2cda27196ce7e5, type: 3}
+  - {fileID: 21300000, guid: e6e7fd48741bfd04f82bc7d7b02b31ae, type: 3}
+  - {fileID: 21300000, guid: 297bde9d265ef8c4589b65634ec7d6cb, type: 3}
+  - {fileID: 21300000, guid: de235f5e5913abd47b7674d287e45dd0, type: 3}
   m_PackedSpriteNamesToIndex:
-  - red-col
-  - panel
-  - retry
-  - home
+  - product-big
+  - container
+  - shopkeeper
+  - product-small
+  - icon-coin
+  - product-norm
   m_RenderDataMap: {}
-  m_Tag: loseAtlas
+  m_Tag: shopAtlas
   m_IsVariant: 0

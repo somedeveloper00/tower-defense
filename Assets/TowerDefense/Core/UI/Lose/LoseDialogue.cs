@@ -1,8 +1,12 @@
 ﻿using System.Threading.Tasks;
+using AnimFlex.Sequencer;
 using DialogueSystem;
 using RTLTMPro;
 using TowerDefense.Bridges.Ad;
 using TowerDefense.Common;
+using TowerDefense.Core.Hud;
+using TowerDefense.UI;
+using TowerDefense.UI.RewardDialogue;
 using TriInspector;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,22 +18,39 @@ namespace TowerDefense.Core.UI.Lose {
         const string RETRY_AD_Id = "643006352eeae447e5ae5bd3";
 
         public LoseData loseData;
-        
-        [GroupNext("ref")]
+
+        [GroupNext( "ref" )] 
+        [SerializeField] SequenceAnim inSeq;
         [SerializeField] RTLTextMeshPro coinAmountTxt;
         [SerializeField] Button retryBtn, returnBtn;
+        [SerializeField] CoinDisplay coinDisplay;
         
 
-        protected override void OnEnable() {
-            base.OnEnable();
+        protected override async void Start() {
+            base.Start();
+            canvasRaycaster.enabled = false;
+            
             retryBtn.onClick.AddListener( onRetryBtnClick );
             returnBtn.onClick.AddListener( onReturnBtnClick );
-        }
-
-        protected override void Start() {
-            base.Start();
-            // inSequence.PlaySequence();
             coinAmountTxt.text = loseData.coins.ToString( "#,0" );
+            coinDisplay.fakeOffset = -loseData.coins;
+            
+            inSeq.PlaySequence();
+            await inSeq.AwaitComplete();
+
+            if (loseData.coins > 0) {
+                var d = DialogueManager.Current.GetOrCreate<RewardDialogue>( parent: this );
+                d.useCustomCoinDisplayTarget = true;
+                d.coinDisplayTarget = coinDisplay;
+                d.setDataAndSave = false;
+                d.showCoinShower = false;
+                d.showSparkles = false;
+                d.coins = loseData.coins;
+                d.waitForUserConfirmation = false;
+                await d.AwaitClose();
+            }
+            
+            canvasRaycaster.enabled = true;
         }
         
         

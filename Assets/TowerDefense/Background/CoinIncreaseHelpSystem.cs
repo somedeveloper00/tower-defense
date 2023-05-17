@@ -8,6 +8,8 @@ using TowerDefense.Bridges.Analytics;
 using TowerDefense.Common;
 using TowerDefense.Data;
 using TowerDefense.Data.Database;
+using TowerDefense.Lobby;
+using TowerDefense.UI;
 using TowerDefense.UI.RewardDialogue;
 using TriInspector;
 using UnityEngine;
@@ -68,7 +70,7 @@ namespace TowerDefense.Background {
             return _lastAdTime.AddHours( adDelay ) - SecureDateTime.GetSecureUtcDateTime();
         }
 
-        public async Task WatchAd() {
+        public async Task WatchAd(CoinDisplay coinDisplay) {
             if (!CanWatchAd()) return;
             
             var msg = DialogueManager.Current.GetOrCreate<MessageDialogue>();
@@ -90,6 +92,8 @@ namespace TowerDefense.Background {
                 // give reward
                 setData();
                 var rd = DialogueManager.Current.GetOrCreate<RewardDialogue>();
+                rd.useCustomCoinDisplayTarget = true;
+                rd.coinDisplayTarget = coinDisplay;
                 rd.showCoinShower = false;
                 rd.showSparkles = false;
                 rd.coins = adReward;

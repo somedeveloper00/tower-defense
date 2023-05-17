@@ -7,27 +7,32 @@ using DialogueSystem;
 using RTLTMPro;
 using TowerDefense.Background;
 using TowerDefense.Bridges.Analytics;
-using TowerDefense.Core.Hud;
 using TowerDefense.Data;
 using TowerDefense.Data.Database;
-using TowerDefense.Lobby;
 using TriInspector;
 using UnityEngine;
 
 namespace TowerDefense.UI.RewardDialogue {
     public class RewardDialogue : Dialogue {
+        
+        [Title("Parameters")]
         public long coins;
-        public bool showCoinShower;
-        public bool showSparkles;
+        public bool showCoinShower = false;
+        public bool showSparkles = false;
         public bool setDataAndSave = true;
+        public bool waitForUserConfirmation = true;
+        public bool useCustomCoinDisplayTarget;
+        public CoinDisplay coinDisplayTarget;
         public GameAnalyticsHelper.ItemType itemType = GameAnalyticsHelper.ItemType.ItemType_GameStart;
         public string detail = "reward";
-        
-        [Title( "References" )] 
+
+        [Title( "References" )]
         [SerializeField] SequenceAnim inSeq;
         [SerializeField] SequenceAnim outSeq;
         [SerializeField] DelayedButton bckBtn;
         [SerializeField] RTLTextMeshPro rewardCoinAmountTxt;
+        [SerializeField] GameObject userConfirmContainer;
+        [SerializeField] CoinDisplay defaultCoinDisplayTarget;
 
         [Title("In Seq Anim Params")]
         [SerializeField] string coinShowerClipName;
@@ -50,6 +55,13 @@ namespace TowerDefense.UI.RewardDialogue {
 
         protected override void Start() {
             base.Start();
+            
+            // for particle system
+            if (UiCamera.Current && UiCamera.Current.Camera) {
+                canvas.worldCamera = UiCamera.Current.Camera;
+                canvas.planeDistance = UiCamera.Current.Camera.nearClipPlane // on top of most things
+                                       + 5; // give room for particles 
+            }
 
             rewardCoinAmountTxt.text = coins.ToString( "#,0" ).En2PerNum();
             StartCoroutine( processRoutine() );
@@ -61,19 +73,27 @@ namespace TowerDefense.UI.RewardDialogue {
             canvasRaycaster.enabled = false;
             if (!showCoinShower) inSeq.sequence.RemoveClipNode( inSeq.sequence.GetClipNode( coinShowerClipName ) );
             if (!showSparkles) inSeq.sequence.RemoveClipNode( inSeq.sequence.GetClipNode( sparkleClipName ) );
+            if (useCustomCoinDisplayTarget) defaultCoinDisplayTarget.gameObject.SetActive( false );
+            else coinDisplayTarget = defaultCoinDisplayTarget;
+            userConfirmContainer.SetActive( waitForUserConfirmation );
             inSeq.PlaySequence();
             yield return new WaitForTask( inSeq.AwaitComplete() );
             Debug.Log( $"inseq finished" );
 
             // wait for confirmation
-            canvasRaycaster.enabled = true;
-            bool confirm = false;
-            bckBtn.onClick.AddListener( () => confirm = true );
-            while (!confirm) yield return new WaitForSecondsRealtime( 0.1f );
+            if (waitForUserConfirmation) {
+                canvasRaycaster.enabled = true;
+                bool confirm = false;
+                bckBtn.onClick.AddListener( () => confirm = true );
+                while (!confirm) yield return new WaitForSecondsRealtime( 0.1f );
+            }
+            else {
+                yield return new WaitForSecondsRealtime( 1 );
+            }
             
             // play out-seq
             canvasRaycaster.enabled = false;
-            var coinDisplay = findCoinDisplay();
+            var coinDisplay = coinDisplayTarget;
             var coinDisplayParent = coinDisplay.transform.parent;
             var coinDisplayCoinIcon = coinDisplay.coinIcon;
             outSeqCoinDisplayTransformBind.value = coinDisplay.transform;
@@ -130,22 +150,6 @@ namespace TowerDefense.UI.RewardDialogue {
             }
             
             Close();
-        }
-
-        CoinDisplay findCoinDisplay() {
-            if (LobbyManager.Current) {
-                if (LobbyManager.Current.coinDisplay) return LobbyManager.Current.coinDisplay;
-                var cd = LobbyManager.Current.GetComponentInChildren<CoinDisplay>();
-                if (cd) return cd;
-            }
-
-            if (CoreHud.Current) {
-                if (CoreHud.Current.coinDisplay) return CoreHud.Current.coinDisplay;
-                var cd = CoreHud.Current.GetComponentInChildren<CoinDisplay>();
-                if (cd) return cd;
-            }
-
-            return FindObjectOfType<CoinDisplay>();
         }
     }
 }

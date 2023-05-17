@@ -36,7 +36,7 @@ namespace TowerDefense.Data.Database {
         public static SecureDatabase Current;
 
         
-        Dictionary<string,string> data;
+        Dictionary<string,string> data = new ();
 
 
         public override void Load() {

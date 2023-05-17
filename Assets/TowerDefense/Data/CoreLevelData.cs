@@ -11,11 +11,14 @@ using UnityEngine;
 namespace TowerDefense.Data {
     [CreateAssetMenu( fileName = "Level", menuName = "TD/Core/Level", order = 0 )]
     public class CoreLevelData : ScriptableObject, ITransportable {
+        
         [InfoBox("$info")]
         [JsonConverter(typeof(ColorConverter))]
         public Color btnCol;
+        
         [Dropdown( nameof(_all_envs) )] 
         public string env;
+        
         public string title;
         public string id;
         public List<string> arguments = new();
@@ -51,7 +54,8 @@ namespace TowerDefense.Data {
         string[] _all_envs => SceneDatabase.Instance.GetAllNames();
 
         public string ToJson() => JsonConvert.SerializeObject( new {
-            title, id, env, arguments, spawnings,
+            title, id, env, arguments, spawnings, lifeRemainForStar, 
+            coinBonusForStars, coinMultiplier,
             btnCol = "#" + ColorUtility.ToHtmlStringRGB( btnCol ),
         } );
 

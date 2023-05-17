@@ -4908,7 +4908,7 @@ RectTransform:
   m_Children:
   - {fileID: 756734068}
   m_Father: {fileID: 277290149454517385}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4966,6 +4966,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playOnStart: 1
+  dontWaitInQueueToPlay: 1
   useProxyAsCore: 1
   useDefaultCoreProxy: 1
   defaultCoreProxy: AnimFlex.Core.Proxy.AnimFlexCoreProxyUnscaled
@@ -4979,10 +4980,6 @@ MonoBehaviour:
       delay: 0
       clip:
         rid: 1318342235045233501
-    - name: 
-      delay: 0
-      clip:
-        rid: 1318342235045233502
     - name: go to coin
       delay: 0
       clip:
@@ -5026,8 +5023,8 @@ MonoBehaviour:
           relative: 1
           useTargetTransform: 0
           from: 0
-          ease: 2
-          duration: 0.3
+          ease: 26
+          duration: 0.7
           delay: 0
           pingPong: 0
           loops: 0
@@ -5046,42 +5043,6 @@ MonoBehaviour:
               m_Calls: []
           fromObject: {fileID: 978565333}
           target: {x: 0, y: 200, z: 0}
-    - rid: 1318342235045233502
-      type: {class: CTweenerLocalPosition, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
-      data:
-        playNextOnStart: 0
-        tweenerGenerator:
-          customCurve:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          useCurve: 0
-          useQuaternion: 0
-          relative: 1
-          useTargetTransform: 0
-          from: 0
-          ease: 3
-          duration: 0.6
-          delay: 0.05
-          pingPong: 0
-          loops: 0
-          loopDelay: 0
-          onStart:
-            m_PersistentCalls:
-              m_Calls: []
-          onUpdate:
-            m_PersistentCalls:
-              m_Calls: []
-          onComplete:
-            m_PersistentCalls:
-              m_Calls: []
-          onKill:
-            m_PersistentCalls:
-              m_Calls: []
-          fromObject: {fileID: 978565333}
-          target: {x: 0, y: -50, z: 0}
     - rid: 1318342235045233503
       type: {class: CTweenerTransform, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
       data:
@@ -5100,7 +5061,7 @@ MonoBehaviour:
           from: 0
           ease: 10
           duration: 0.3
-          delay: 0
+          delay: 0.4
           pingPong: 0
           loops: 0
           loopDelay: 0
@@ -5117,7 +5078,7 @@ MonoBehaviour:
             m_PersistentCalls:
               m_Calls: []
           fromObject: {fileID: 978565333}
-          target: {fileID: 0}
+          target: {fileID: 6524540780745624429}
           position: 1
           rotation: 0
           scale: 0
@@ -5155,7 +5116,7 @@ MonoBehaviour:
           onKill:
             m_PersistentCalls:
               m_Calls: []
-          fromObject: {fileID: 0}
+          fromObject: {fileID: 6524540780745624429}
           target: {x: 1.3, y: 1.3, z: 1}
     - rid: 1318342235045233506
       type: {class: CTweenerScale, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
@@ -5191,7 +5152,7 @@ MonoBehaviour:
           onKill:
             m_PersistentCalls:
               m_Calls: []
-          fromObject: {fileID: 0}
+          fromObject: {fileID: 6524540780745624429}
           target: {x: 1, y: 1, z: 1}
     - rid: 1318342235045233508
       type: {class: ComponentDestroy, ns: AnimFlex, asm: Assembly-CSharp-firstpass}
@@ -5235,7 +5196,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 277290149454517385}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5255,6 +5216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playOnStart: 0
+  dontWaitInQueueToPlay: 1
   useProxyAsCore: 1
   useDefaultCoreProxy: 1
   defaultCoreProxy: AnimFlex.Core.Proxy.AnimFlexCoreProxyUnscaled
@@ -5348,7 +5310,7 @@ MonoBehaviour:
             m_RotationOrder: 4
           useCurve: 0
           useQuaternion: 0
-          relative: 0
+          relative: 1
           useTargetTransform: 0
           from: 0
           ease: 16
@@ -5369,8 +5331,8 @@ MonoBehaviour:
           onKill:
             m_PersistentCalls:
               m_Calls: []
-          fromObject: {fileID: 0}
-          target: {x: 0, y: 0, z: 1}
+          fromObject: {fileID: 6524540781739687255}
+          target: {x: 0.1, y: 0.1, z: 1}
     - rid: 1318342187178262837
       type: {class: CTweenerScale, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
       data:
@@ -5384,7 +5346,7 @@ MonoBehaviour:
             m_RotationOrder: 4
           useCurve: 0
           useQuaternion: 0
-          relative: 0
+          relative: 1
           useTargetTransform: 0
           from: 0
           ease: 26
@@ -5405,8 +5367,8 @@ MonoBehaviour:
           onKill:
             m_PersistentCalls:
               m_Calls: []
-          fromObject: {fileID: 0}
-          target: {x: 1, y: 1, z: 1}
+          fromObject: {fileID: 6524540781739687255}
+          target: {x: 10, y: 10, z: 1}
     - rid: 1318342187178263034
       type: {class: CFor, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
       data:
@@ -5612,7 +5574,7 @@ MonoBehaviour:
             m_RotationOrder: 4
           useCurve: 0
           useQuaternion: 0
-          relative: 0
+          relative: 1
           useTargetTransform: 0
           from: 0
           ease: 0
@@ -5633,8 +5595,8 @@ MonoBehaviour:
           onKill:
             m_PersistentCalls:
               m_Calls: []
-          fromObject: {fileID: 0}
-          target: {x: 0, y: 0, z: 0}
+          fromObject: {fileID: 6524540781739687255}
+          target: {x: 0.1, y: 0.1, z: 1}
     - rid: 1318342187178263220
       type: {class: CTweenerScale, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
       data:
@@ -5648,7 +5610,7 @@ MonoBehaviour:
             m_RotationOrder: 4
           useCurve: 0
           useQuaternion: 0
-          relative: 0
+          relative: 1
           useTargetTransform: 0
           from: 0
           ease: 26
@@ -5669,13 +5631,13 @@ MonoBehaviour:
           onKill:
             m_PersistentCalls:
               m_Calls: []
-          fromObject: {fileID: 0}
-          target: {x: 1, y: 1, z: 1}
+          fromObject: {fileID: 6524540781739687255}
+          target: {x: 10, y: 10, z: 1}
     - rid: 1318342235045233479
       type: {class: GameObjectReParent, ns: AnimFlex, asm: Assembly-CSharp-firstpass}
       data:
-        gameObject: {fileID: 0}
-        newParent: {fileID: 0}
+        gameObject: {fileID: 6524540781739687252}
+        newParent: {fileID: 3551320244005583407}
         worldPositionStays: 1
     - rid: 1318342235045233494
       type: {class: GameObjectInstantiate_Par, ns: AnimFlex, asm: Assembly-CSharp-firstpass}
@@ -5690,7 +5652,7 @@ MonoBehaviour:
     - rid: 1318342235045233497
       type: {class: GameObjectReParent, ns: AnimFlex, asm: Assembly-CSharp-firstpass}
       data:
-        gameObject: {fileID: 0}
+        gameObject: {fileID: 6524540781739687252}
         newParent: {fileID: 277290149454517385}
         worldPositionStays: 1
     - rid: 1318342235045233514
@@ -5732,7 +5694,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 277290149454517385}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -5859,6 +5821,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3551320244005583407}
   - {fileID: 277290149454517391}
   - {fileID: 9020391445850882398}
   - {fileID: 9020391445781937240}
@@ -5949,12 +5912,17 @@ MonoBehaviour:
   showCoinShower: 1
   showSparkles: 1
   setDataAndSave: 1
+  waitForUserConfirmation: 1
+  useCustomCoinDisplayTarget: 0
+  coinDisplayTarget: {fileID: 0}
   itemType: 4
   detail: reward
   inSeq: {fileID: 4902057703101406840}
   outSeq: {fileID: 1091074163}
   bckBtn: {fileID: 7758500139705991001}
   rewardCoinAmountTxt: {fileID: 9020391445217426701}
+  userConfirmContainer: {fileID: 9020391445309045901}
+  defaultCoinDisplayTarget: {fileID: 6524540781739687256}
   coinShowerClipName: coin shower fx
   sparkleClipName: sparkle fx
   outSeqCoinDisplayTransformBind:
@@ -5986,16 +5954,53 @@ MonoBehaviour:
   coinSeqCoinIconTransformBind:
     sequenceAnim: {fileID: 978565336}
     selections:
-    - clipIndex: 2
+    - clipIndex: 1
       fieldName: target
-    - clipIndex: 5
+    - clipIndex: 4
       fieldName: fromObject
-    - clipIndex: 6
+    - clipIndex: 5
       fieldName: fromObject
     value: {fileID: 0}
   coinTransferStartTime: 2
   coinTransferDuration: 0.4
   coinTransferEase: 3
+--- !u!1 &3181385325369410100
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3551320244005583407}
+  m_Layer: 5
+  m_Name: behind
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3551320244005583407
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3181385325369410100}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6524540781739687255}
+  m_Father: {fileID: 277290149454517385}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &9020391444387908824
 GameObject:
   m_ObjectHideFlags: 0
@@ -6173,7 +6178,7 @@ RectTransform:
   - {fileID: 9020391445531028184}
   - {fileID: 9020391445217426698}
   m_Father: {fileID: 277290149454517385}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -11132,7 +11137,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 277290149454517385}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -11152,6 +11157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playOnStart: 0
+  dontWaitInQueueToPlay: 1
   useProxyAsCore: 1
   useDefaultCoreProxy: 1
   defaultCoreProxy: AnimFlex.Core.Proxy.AnimFlexCoreProxyUnscaled
@@ -11177,6 +11183,10 @@ MonoBehaviour:
       delay: 0
       clip:
         rid: 1318342235045233285
+    - name: coindisp
+      delay: 0
+      clip:
+        rid: 1318342328827773299
     - name: main
       delay: 0
       clip:
@@ -11372,6 +11382,42 @@ MonoBehaviour:
         particleSystem: {fileID: 9020391445850882384}
         playWithChildren: 1
         waitTillFinish: 1
+    - rid: 1318342328827773299
+      type: {class: CTweenerLocalPosition, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
+      data:
+        playNextOnStart: 1
+        tweenerGenerator:
+          customCurve:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+          useCurve: 0
+          useQuaternion: 0
+          relative: 1
+          useTargetTransform: 0
+          from: 1
+          ease: 8
+          duration: 0.5
+          delay: 0
+          pingPong: 0
+          loops: 0
+          loopDelay: 0
+          onStart:
+            m_PersistentCalls:
+              m_Calls: []
+          onUpdate:
+            m_PersistentCalls:
+              m_Calls: []
+          onComplete:
+            m_PersistentCalls:
+              m_Calls: []
+          onKill:
+            m_PersistentCalls:
+              m_Calls: []
+          fromObject: {fileID: 6524540781739687255}
+          target: {x: 0, y: 400, z: 0}
 --- !u!1 &9020391444704017263
 GameObject:
   m_ObjectHideFlags: 0
@@ -26197,8 +26243,8 @@ ParticleSystem:
         m_RotationOrder: 4
     startSpeed:
       serializedVersion: 2
-      minMaxState: 3
-      scalar: 1
+      minMaxState: 0
+      scalar: 0
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -30994,7 +31040,7 @@ GameObject:
   - component: {fileID: 9020391445309045903}
   - component: {fileID: 9020391445309045889}
   m_Layer: 5
-  m_Name: shadow
+  m_Name: confirm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31014,7 +31060,7 @@ RectTransform:
   m_Children:
   - {fileID: 9020391444387908827}
   m_Father: {fileID: 277290149454517385}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -40950,7 +40996,7 @@ RectTransform:
   m_Children:
   - {fileID: 9020391445146882280}
   m_Father: {fileID: 277290149454517385}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -41092,8 +41138,8 @@ ParticleSystem:
         m_RotationOrder: 4
     startSpeed:
       serializedVersion: 2
-      minMaxState: 3
-      scalar: 1
+      minMaxState: 0
+      scalar: 0
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -45773,7 +45819,7 @@ RectTransform:
   - {fileID: 9020391444720386526}
   - {fileID: 9020391445488357494}
   m_Father: {fileID: 277290149454517385}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -50626,3 +50672,126 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!1001 &1783250435
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 3551320244005583407}
+    m_Modifications:
+    - target: {fileID: 6524540781308314452, guid: 5d8aceb5cafb2c34b8426cf262716a97, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6524540781308314452, guid: 5d8aceb5cafb2c34b8426cf262716a97, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6524540781308314452, guid: 5d8aceb5cafb2c34b8426cf262716a97, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6524540781308314452, guid: 5d8aceb5cafb2c34b8426cf262716a97, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6524540781308314452, guid: 5d8aceb5cafb2c34b8426cf262716a97, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6524540781308314452, guid: 5d8aceb5cafb2c34b8426cf262716a97, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6524540781308314452, guid: 5d8aceb5cafb2c34b8426cf262716a97, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6524540781308314452, guid: 5d8aceb5cafb2c34b8426cf262716a97, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 564.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6524540781308314452, guid: 5d8aceb5cafb2c34b8426cf262716a97, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 341.7871
+      objectReference: {fileID: 0}
+    - target: {fileID: 6524540781308314452, guid: 5d8aceb5cafb2c34b8426cf262716a97, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6524540781308314452, guid: 5d8aceb5cafb2c34b8426cf262716a97, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6524540781308314452, guid: 5d8aceb5cafb2c34b8426cf262716a97, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6524540781308314452, guid: 5d8aceb5cafb2c34b8426cf262716a97, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6524540781308314452, guid: 5d8aceb5cafb2c34b8426cf262716a97, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6524540781308314452, guid: 5d8aceb5cafb2c34b8426cf262716a97, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6524540781308314452, guid: 5d8aceb5cafb2c34b8426cf262716a97, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6524540781308314452, guid: 5d8aceb5cafb2c34b8426cf262716a97, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -370
+      objectReference: {fileID: 0}
+    - target: {fileID: 6524540781308314452, guid: 5d8aceb5cafb2c34b8426cf262716a97, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -146.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 6524540781308314452, guid: 5d8aceb5cafb2c34b8426cf262716a97, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6524540781308314452, guid: 5d8aceb5cafb2c34b8426cf262716a97, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6524540781308314452, guid: 5d8aceb5cafb2c34b8426cf262716a97, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6524540781308314455, guid: 5d8aceb5cafb2c34b8426cf262716a97, type: 3}
+      propertyPath: m_Name
+      value: coinDisplay
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5d8aceb5cafb2c34b8426cf262716a97, type: 3}
+--- !u!224 &6524540780745624429 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6524540782453372270, guid: 5d8aceb5cafb2c34b8426cf262716a97, type: 3}
+  m_PrefabInstance: {fileID: 1783250435}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6524540781739687252 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6524540781308314455, guid: 5d8aceb5cafb2c34b8426cf262716a97, type: 3}
+  m_PrefabInstance: {fileID: 1783250435}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &6524540781739687255 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6524540781308314452, guid: 5d8aceb5cafb2c34b8426cf262716a97, type: 3}
+  m_PrefabInstance: {fileID: 1783250435}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6524540781739687256 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6524540781308314459, guid: 5d8aceb5cafb2c34b8426cf262716a97, type: 3}
+  m_PrefabInstance: {fileID: 1783250435}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6524540781739687252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60b650fd18f245f9982a93ac70676920, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

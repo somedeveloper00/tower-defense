@@ -23,9 +23,9 @@ SpriteAtlas:
     platformSettings:
     - serializedVersion: 3
       m_BuildTarget: Android
-      m_MaxTextureSize: 1024
+      m_MaxTextureSize: 2048
       m_ResizeAlgorithm: 0
-      m_TextureFormat: 50
+      m_TextureFormat: 51
       m_TextureCompression: 1
       m_CompressionQuality: 50
       m_CrunchedCompression: 1
@@ -56,16 +56,18 @@ SpriteAtlas:
     secondaryTextureSettings: {}
     variantMultiplier: 1
     packables:
+    - {fileID: 2800000, guid: b10050d8b2a8f7144b6e3521fedfdea4, type: 3}
+    - {fileID: 2800000, guid: 9e58313a30853a84ba6903f46fb21a7a, type: 3}
+    - {fileID: 2800000, guid: b28806638e657a5468422d1cf8c005d3, type: 3}
+    - {fileID: 2800000, guid: 2d8b1f85c3f22ef4089b1f6ea348d5c3, type: 3}
+    - {fileID: 2800000, guid: 39262ab679a769843a398d4936e33cc9, type: 3}
+    - {fileID: 2800000, guid: 91159bea2e5399d44a4037bff39389bc, type: 3}
+    - {fileID: 2800000, guid: 9e77eb2f675c3fb4fb7b01d082484251, type: 3}
+    - {fileID: 2800000, guid: 4a22908ded5c14f4cb260b900f6ed234, type: 3}
+    - {fileID: 2800000, guid: 06251ede09391594fa97cac128c8bf1f, type: 3}
     - {fileID: 2800000, guid: 820e9800642f7b64dafdfe4e4fa461de, type: 3}
     - {fileID: 2800000, guid: a18d1bacccfe05c429d1eacd217e559c, type: 3}
     - {fileID: 2800000, guid: 1562afaee301f66428b20a40a6f78c64, type: 3}
-    - {fileID: 2800000, guid: b28806638e657a5468422d1cf8c005d3, type: 3}
-    - {fileID: 2800000, guid: 9e58313a30853a84ba6903f46fb21a7a, type: 3}
-    - {fileID: 2800000, guid: b10050d8b2a8f7144b6e3521fedfdea4, type: 3}
-    - {fileID: 2800000, guid: 2d8b1f85c3f22ef4089b1f6ea348d5c3, type: 3}
-    - {fileID: 2800000, guid: 39262ab679a769843a398d4936e33cc9, type: 3}
-    - {fileID: 2800000, guid: 4a22908ded5c14f4cb260b900f6ed234, type: 3}
-    - {fileID: 2800000, guid: 91159bea2e5399d44a4037bff39389bc, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -81,6 +83,8 @@ SpriteAtlas:
   - {fileID: 21300000, guid: a18d1bacccfe05c429d1eacd217e559c, type: 3}
   - {fileID: 21300000, guid: 4a22908ded5c14f4cb260b900f6ed234, type: 3}
   - {fileID: 21300000, guid: 1562afaee301f66428b20a40a6f78c64, type: 3}
+  - {fileID: 21300000, guid: 06251ede09391594fa97cac128c8bf1f, type: 3}
+  - {fileID: 21300000, guid: 9e77eb2f675c3fb4fb7b01d082484251, type: 3}
   m_PackedSpriteNamesToIndex:
   - exit
   - shop
@@ -92,6 +96,8 @@ SpriteAtlas:
   - leaves
   - coin-panel
   - settings
+  - coin-plus-icon
+  - coin-panel-2
   m_RenderDataMap: {}
   m_Tag: mainMenuAtlas
   m_IsVariant: 0

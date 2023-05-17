@@ -10,6 +10,7 @@ using UnityEngine.UI;
 namespace TowerDefense.UI {
     public class CoinDisplay : MonoBehaviour {
 
+        public long fakeOffset = 0;
         public Image coinIcon;
         public RTLTextMeshPro coinTxt;
         
@@ -53,7 +54,7 @@ namespace TowerDefense.UI {
 
         void updateView() {
             if (coinTxt)
-                coinTxt.text = PlayerGlobals.Current.ecoProg.Coins.ToString( "#,0" ).En2PerNum();
+                coinTxt.text = (fakeOffset + PlayerGlobals.Current.ecoProg.Coins).ToString( "#,0" ).En2PerNum();
             
             // update ad stuff
             var canWatch = CoinIncreaseHelpSystem.Current.CanWatchAd();
@@ -90,7 +91,7 @@ namespace TowerDefense.UI {
 
         void onAdClick() {
         #pragma warning disable CS4014
-            CoinIncreaseHelpSystem.Current.WatchAd();
+            CoinIncreaseHelpSystem.Current.WatchAd( this );
         #pragma warning restore CS4014
         }
     }

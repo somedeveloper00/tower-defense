@@ -1,12 +1,9 @@
-﻿using System;
-using TowerDefense.UI;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace TowerDefense.Core.Hud {
     public class CoreHud : MonoBehaviour {
         public static CoreHud Current;
 
-        public CoinDisplay coinDisplay;
         Camera _cam;
 
         protected void OnEnable() {
