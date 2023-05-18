@@ -522,7 +522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99ec88a1e433400f9a14b73678b7f71a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fullKey: placeholder_times
+  fullKey: placeholder_count
 --- !u!1 &3749234482822845517
 GameObject:
   m_ObjectHideFlags: 0

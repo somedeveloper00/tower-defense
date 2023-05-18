@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Linq;
 using TowerDefense.Background;
 using TowerDefense.Data.Database;
 using TowerDefense.Data.Progress;
@@ -93,6 +95,17 @@ namespace TowerDefense.Data {
             return lvl;
         }
 
+        public string GetLastLevelId() {
+            for (int i = levelsData.coreLevels.Count - 1; i >= 0; i--) {
+                if (GetOrCreateLevelProg( levelsData.coreLevels[i].id ).status
+                    .HasFlagFast( LevelProgress.LevelStatus.Unlocked )) 
+                {
+                    return levelsData.coreLevels[i].id;
+                }
+            }
+
+            return levelsData.coreLevels[0].id;
+        }
         public bool TryGetNextLevelProg(string id, out LevelProgress.Level level) {
             for (int i = 0; i < levelsData.coreLevels.Count; i++) {
                 if (levelsData.coreLevels[i].id == id) {

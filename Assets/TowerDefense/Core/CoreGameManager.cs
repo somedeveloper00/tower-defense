@@ -221,6 +221,7 @@ namespace TowerDefense.Core {
             level.stars = winData.stars;
             level.coinsReceived += winData.coins;
             level.playCount++;
+            level.winCount++;
             // check if there's next level, if so unlock it 
             if (PlayerGlobals.Current.TryGetNextLevelProg( level.id, out var nextLevel )) {
                 nextLevel.status |= LevelProgress.LevelStatus.Unlocked; 

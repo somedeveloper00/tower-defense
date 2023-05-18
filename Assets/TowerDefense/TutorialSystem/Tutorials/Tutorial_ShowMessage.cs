@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using DialogueSystem;
 using RTLTMPro;
-using TowerDefense.Common;
 using TowerDefense.UI;
 using TriInspector;
 using UnityEngine;
@@ -65,6 +64,7 @@ namespace TowerDefense.TutorialSystem.Tutorials {
             public MessageDialogue.IconType iconType;
             
 #if UNITY_EDITOR
+            [Button] void oneLinerMessage() => message = message.Replace( " \n", " " ).Replace( "\n", " " );
             string message_info => toEditorPer( message );
             string title_info => toEditorPer( title );
             string confirm_info => toEditorPer( confirmTxt );

@@ -66,7 +66,6 @@ namespace TowerDefense.UI {
 
         protected override void Start() {
             base.Start();
-            // canvasGroup.alpha = 0; // for inSeq anim
             outsideBtn.onClick.AddListener( () => {
                 result = "cancel";
                 Close();

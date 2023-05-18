@@ -737,7 +737,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99ec88a1e433400f9a14b73678b7f71a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fullKey: shooter_spawn_times
+  fullKey: shooter_spawn_count
 --- !u!1 &4598498274441315318
 GameObject:
   m_ObjectHideFlags: 0

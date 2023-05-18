@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 785a210939fc44c58279d9845dadb8aa, type: 3}
-  m_Name: env1FirstTime
+  m_Script: {fileID: 11500000, guid: db507ed4ef064e00a53e0608e11c9972, type: 3}
+  m_Name: lose3TimesInRow
   m_EditorClassIdentifier: 
-  key: scene_visit_env1
-  is: 0
-  value: 1
+  count: 3
+  conditionStatement: 0

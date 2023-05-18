@@ -15,6 +15,7 @@ namespace TowerDefense.Data.Progress {
             public LevelStatus status;
             public int stars = 0;
             [JsonProperty( "plays" )] public int playCount = 0;
+            [JsonProperty( "wins" )] public int winCount = 0;
             [JsonProperty( "coins" )] public long coinsReceived = 0;
         }
 
@@ -25,6 +26,12 @@ namespace TowerDefense.Data.Progress {
         public enum LevelStatus {
             Unlocked = 1 << 1,
             Finished = 1 << 2,
+        }
+    }
+
+    public static class LevelStatusExtensions {
+        public static bool HasFlagFast(this LevelProgress.LevelStatus value, LevelProgress.LevelStatus flag) {
+            return (value & flag) != 0;
         }
     }
 }
