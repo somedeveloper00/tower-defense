@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 using AnimFlex.Sequencer;
 using DialogueSystem;
 using RTLTMPro;
-using TowerDefense.UI;
 using TriInspector;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace TowerDefense.Common {
+namespace TowerDefense.UI {
     [DeclareFoldoutGroup("ref", Title = "References", Expanded = true)]
     public class MessageDialogue : Dialogue {
         
@@ -80,7 +79,7 @@ namespace TowerDefense.Common {
             inSequence.sequence.onComplete += () => _opened = true;
         }
 
-        #region Options
+#region Options
 
         public void SetLoadingLayoutActive(bool active) => loadingLayout.SetActive( active );
         
@@ -125,10 +124,12 @@ namespace TowerDefense.Common {
             var btn = Instantiate( buttonTypes.Find( b => b.name == buttonType ), buttonsLayout );
             btn.gameObject.SetActive( true );
             btn.text.text = buttonText;
-            btn.button.onClick.AddListener( async () => {
+            btn.button.onClick.AddListener( () => {
                 canvasRaycaster.enabled = false;
                 result = buttonText;
+            #pragma warning disable CS4014
                 Close();
+            #pragma warning restore CS4014
             } );
         }
 

@@ -1,9 +1,8 @@
-﻿using System;
-using RTLTMPro;
+﻿using RTLTMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace TowerDefense.Common {
+namespace TowerDefense.UI {
     class TextButton : MonoBehaviour {
         public new string name;
         public Button button;

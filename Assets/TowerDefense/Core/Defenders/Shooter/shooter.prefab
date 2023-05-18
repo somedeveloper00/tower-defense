@@ -261,6 +261,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playOnStart: 0
+  dontWaitInQueueToPlay: 1
   useProxyAsCore: 0
   useDefaultCoreProxy: 0
   defaultCoreProxy: 
@@ -574,6 +575,7 @@ GameObject:
   - component: {fileID: 4569676113313174839}
   - component: {fileID: 1481124291}
   - component: {fileID: 7751408979485440477}
+  - component: {fileID: 6997766750371290591}
   m_Layer: 0
   m_Name: shooter
   m_TagString: Untagged
@@ -610,7 +612,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eac43ad0b41540b38257f3c058217f64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnStats: {fileID: 11400000, guid: 5eb4be005f730e44a8a17f5f81bfe2a2, type: 2}
   attackRange: 8.12
   attackPower: 7
   attackReloadTime: 1
@@ -724,6 +725,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6997766750371290591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4569676113313174836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99ec88a1e433400f9a14b73678b7f71a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fullKey: shooter_spawn_times
 --- !u!1 &4598498274441315318
 GameObject:
   m_ObjectHideFlags: 0

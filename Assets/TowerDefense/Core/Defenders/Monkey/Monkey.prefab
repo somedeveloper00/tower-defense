@@ -787,6 +787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playOnStart: 0
+  dontWaitInQueueToPlay: 1
   useProxyAsCore: 0
   useDefaultCoreProxy: 0
   defaultCoreProxy: 
@@ -1016,6 +1017,7 @@ GameObject:
   - component: {fileID: 5942010116493321450}
   - component: {fileID: 5942010116493321449}
   - component: {fileID: 363576169402858340}
+  - component: {fileID: 507276491996915745}
   m_Layer: 0
   m_Name: Monkey
   m_TagString: Untagged
@@ -1052,7 +1054,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b132abbd7e4644b3ac6dbae493e9d475, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnStats: {fileID: 11400000, guid: 7f4984a5c942dae47b99d99565e41272, type: 2}
   attackRange: 1.3
   attackPower: 10
   attackReloadTime: 0.7
@@ -1163,6 +1164,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &507276491996915745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5942010116493321451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99ec88a1e433400f9a14b73678b7f71a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fullKey: monkey_spawn_times
 --- !u!1 &5947935280653237401
 GameObject:
   m_ObjectHideFlags: 0

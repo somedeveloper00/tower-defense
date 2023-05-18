@@ -14,7 +14,7 @@ namespace TowerDefense
         /// <summary>
         /// ۱,۲۳۴۴ => 1,2344
         /// </summary>
-        public static string Per2EnNum(this string perNum, bool keepCommas = true) {
+        public static string Per2EnNum(this string perNum, bool keepCommas = true, bool keepExtraChars = false) {
             var builder = new StringBuilder( perNum );
             char lastChar = ' ';
             for (int i = 0; i < builder.Length; i++) {
@@ -35,7 +35,7 @@ namespace TowerDefense
                     case ',' when keepCommas && lastChar != ',': break;
                     
                     default: 
-                        builder.Remove( i--, 1 );
+                        if (!keepExtraChars) builder.Remove( i--, 1 );
                         removed = true; break;
                 }
                 if (!removed) lastChar = builder[i];

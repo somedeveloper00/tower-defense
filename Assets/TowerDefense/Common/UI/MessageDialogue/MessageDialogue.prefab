@@ -859,11 +859,11 @@ MonoBehaviour:
   sequence:
     activateNextClipsASAP: 1
     nodes:
-    - name: bck
+    - name: hide
       delay: 0
       clip:
         rid: 1861648332609814617
-    - name: Node 4
+    - name: 
       delay: 0
       clip:
         rid: 1861648517077401755

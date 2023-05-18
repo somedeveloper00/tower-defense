@@ -320,6 +320,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3364010333416982398}
   - component: {fileID: 6632699877159408720}
+  - component: {fileID: -3091858820299861012}
   m_Layer: 0
   m_Name: shooterPlaceholder
   m_TagString: Untagged
@@ -357,9 +358,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047e8afad3c64e64b1323784efd490e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playOnEnable: 1
+  playOnStart: 1
+  dontWaitInQueueToPlay: 1
+  useProxyAsCore: 0
+  useDefaultCoreProxy: 0
+  defaultCoreProxy: 
+  coreProxy: {fileID: 0}
   resetOnPlay: 1
+  activateNextClipsASAP: 1
   sequence:
+    activateNextClipsASAP: 1
     nodes:
     - name: rot inner
       delay: 0
@@ -502,6 +510,19 @@ MonoBehaviour:
               m_Calls: []
           fromObject: {fileID: 8260526366908924036}
           target: {x: 0, y: 360, z: 0}
+--- !u!114 &-3091858820299861012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3364010333416982397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99ec88a1e433400f9a14b73678b7f71a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fullKey: placeholder_times
 --- !u!1 &3749234482822845517
 GameObject:
   m_ObjectHideFlags: 0

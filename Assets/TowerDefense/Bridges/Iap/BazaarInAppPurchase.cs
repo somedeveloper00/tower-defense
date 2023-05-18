@@ -37,7 +37,7 @@ namespace TowerDefense.Bridges.Iap {
 
             var result = await payment.Connect();
 
-            Debug.Log( $"msg: {result.message}, {result.data} , {result.stackTrace}" );
+            logSensitive( $"msg: {result.message}, {result.data} , {result.stackTrace}" );
             Debug.Log( JsonConvert.SerializeObject( result ) );
 
             if (result.status != Status.Success) {
@@ -68,7 +68,7 @@ namespace TowerDefense.Bridges.Iap {
             var result = await payment.GetSkuDetails( productId, SKUDetails.Type.inApp );
             if (result.status != Status.Success) {
                 if (tryCount < RETRY_COUNT) {
-                    Debug.Log( $"failed getting info for sku: {productId}. trying again ({tryCount})" );
+                    logSensitive( $"failed getting info for sku: {productId}. trying again ({tryCount})" );
                     await Task.Delay( 1000 );
                     goto retry;
                 }
@@ -307,19 +307,17 @@ namespace TowerDefense.Bridges.Iap {
             return Result.Success;
         }
 
+        void logSensitive(string message) {
+#if !HIDE_SENSITIVE
+            Debug.Log( message );
+#endif
+        }
        
         [Serializable]
         public class BazaarDescriptionData : ITransportable {
             [TextArea]
             public string desc;
             public long coins;
-
-            // [JsonProperty( "coins" )]
-            // string fixed_coins {
-            //     get => coins.ToString();
-            //     set => coins = ulong.Parse( Per2EnNum( value ) );
-            // }
-
             public PurchasableInfo.ViewType view;
         }
     }

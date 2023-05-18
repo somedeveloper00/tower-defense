@@ -160,6 +160,7 @@ namespace TowerDefense.Core {
         }
 
         void OnEnemyDestroy(Enemy enemy) {
+            if (!_gameActive) return;
             _coinsReceivedFromEnemiesKilled += enemy.coinReward;
             Destroy( enemy.gameObject );
             enemies.Remove( enemy );
@@ -167,9 +168,11 @@ namespace TowerDefense.Core {
         }
 
         void OnEnemyReachEnd(Enemy enemy) {
+            if (!_gameActive) return;
             Destroy( enemy.gameObject );
             enemies.Remove( enemy );
             life -= 1;
+            if (life < 0) life = 0;
             CoreGameEvents.Current.onLifeModified?.Invoke();
             if (checkForLose()) Lose();
             if (checkForWin()) Win();

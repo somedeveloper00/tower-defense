@@ -79,7 +79,14 @@ namespace TowerDefense.Background {
         }
 
         void OnApplicationQuit() {
-            InAppPurchase.Current.Close();
+            try { SecureDatabase.Current.Save(); }
+            catch (Exception e) { Console.WriteLine( e ); }
+            
+            try { PreferencesDatabase.Current.Save(); }
+            catch (Exception e) { Console.WriteLine( e ); }
+            
+            try { InAppPurchase.Current.Close(); }
+            catch (Exception e) { Console.WriteLine( e ); }
         }
         
         

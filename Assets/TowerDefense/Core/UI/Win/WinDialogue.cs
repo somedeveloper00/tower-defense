@@ -1,12 +1,9 @@
 ﻿using System.Threading.Tasks;
 using AnimFlex.Sequencer;
 using DialogueSystem;
-using GoogleMobileAds.Api;
 using TowerDefense.UI;
-using TowerDefense.UI.RewardDialogue;
 using TriInspector;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace TowerDefense.Core.UI.Win {
     [DeclareFoldoutGroup("ref", Title = "References", Expanded = true)]

@@ -3,6 +3,7 @@ using DialogueSystem;
 using TowerDefense.Background.Loading;
 using TowerDefense.Common;
 using TowerDefense.Data.Database;
+using TowerDefense.UI;
 using UnityEngine;
 
 namespace TowerDefense.Background {

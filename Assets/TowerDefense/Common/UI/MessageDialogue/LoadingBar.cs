@@ -1,10 +1,9 @@
-﻿using System;
-using AnimFlex.Sequencer;
+﻿using AnimFlex.Sequencer;
 using AnimFlex.Tweening;
 using TriInspector;
 using UnityEngine;
 
-namespace TowerDefense.Common {
+namespace TowerDefense.UI {
     public class LoadingBar : MonoBehaviour {
         [SerializeField] RectTransform bar;
         [SerializeField] Rect zeroRect, fullRect;

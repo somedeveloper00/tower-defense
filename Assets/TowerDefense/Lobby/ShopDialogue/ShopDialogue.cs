@@ -18,6 +18,8 @@ namespace TowerDefense.Lobby.ShopDialogue {
         [SerializeField] List<PurchasableProductSample> purchasableProductSamples;
         [SerializeField] SequenceAnim inSeq, outSeq;
         [SerializeField] Button closeBtn;
+        [SerializeField] GameObject[] enableOnOpen;
+        [SerializeField] bool forceOpenForDebug = true;
         
         [Serializable]
         class PurchasableProductSample {
@@ -31,37 +33,41 @@ namespace TowerDefense.Lobby.ShopDialogue {
         
         protected override async void Start() {
             base.Start();
-            canvasGroup.alpha = 0;
+            canvas.enabled = false;
             canvasRaycaster.enabled = false;
-            
-            var success = await GamePurchaseHandler.Current.UpdateData();
-            if (!success || GamePurchaseHandler.Current.AvailablePurchsableInfos.Count == 0) {
-                Close();
-                return;
+
+            if (!forceOpenForDebug) {
+                var success = await GamePurchaseHandler.Current.UpdateData();
+                if (!success || GamePurchaseHandler.Current.AvailablePurchsableInfos.Count == 0) {
+                    Close();
+                    return;
+                }
+
+                // just in case if the tasks took too long
+                if (this == null) return;
+
+                var productInfos = GamePurchaseHandler.Current.AvailablePurchsableInfos;
+                for (int i = 0; i < productInfos.Count; i++) {
+                    var purchaseCard = Instantiate(
+                        purchasableProductSamples.Find( p => p.viewType == productInfos[i].viewType ).prefab,
+                        purchasableProductParent );
+                    purchaseCard.productInfo = productInfos[i];
+                    purchaseCard.gameObject.SetActive( true );
+                    purchaseCards.Add( purchaseCard );
+                }
             }
 
-            // SUCCESS
 
-            // just in case if the tasks took too long
-            if (this == null) return;
-
-            var productInfos = GamePurchaseHandler.Current.AvailablePurchsableInfos;
-            for (int i = 0; i < productInfos.Count; i++) {
-                var purchaseCard = Instantiate(
-                    purchasableProductSamples.Find( p => p.viewType == productInfos[i].viewType ).prefab,
-                    purchasableProductParent );
-                purchaseCard.productInfo = productInfos[i];
-                purchaseCard.gameObject.SetActive( true );
-                purchaseCards.Add( purchaseCard );
-            }
-            
             // show dialogue
+            canvas.enabled = true;
             closeBtn.onClick.AddListener( CloseWithAnim );
             inSeq.PlaySequence();
             inSeq.sequence.onComplete += () => {
                 canvasRaycaster.enabled = true;
                 _opened = true;
             };
+            
+            foreach (var obj in enableOnOpen) obj.SetActive( true );
         }
 
         public void CloseWithAnim() {

@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace TowerDefense.Bridges.Ad {
     class TapsellAdManager : AdManager {
-
+        
         const int RETRY_COUNT = 10;
         const string AD_SDK_NAME = "tapsell";
         
@@ -26,7 +26,7 @@ namespace TowerDefense.Bridges.Ad {
             
             TapsellPlus.Initialize( "krhsbokpomptalscqqhqqsfmiohccmqdkhcmbrfmerltfoeanjqbnkrgoetejptjbatomi",
                 adNetworkName => {
-                    Debug.Log( "Tapsell ad Initialized Successfully: " + adNetworkName );
+                    logSensitive( "Tapsell ad Initialized Successfully: " + adNetworkName );
                     canPass = true;
                     result = true;
                 },
@@ -101,11 +101,11 @@ namespace TowerDefense.Bridges.Ad {
             
             TapsellPlus.ShowInterstitialAd( responseId,
                 onAdOpened: _ => {
-                    Debug.Log( $"fullscreen tapsell ad opened: {responseId}" );
+                    logSensitive( $"fullscreen tapsell ad opened: {responseId}" );
                     GameAnalytics.NewAdEvent( GAAdAction.Show, GAAdType.Interstitial, AD_SDK_NAME, adId );
                 },
                 onAdClosed: _ => {
-                    Debug.Log( $"fullscreen tapsell ad closed: {responseId}" );
+                    logSensitive( $"fullscreen tapsell ad closed: {responseId}" );
                     canPass = true;
                     success = true;
                 },
@@ -173,11 +173,11 @@ namespace TowerDefense.Bridges.Ad {
             
             TapsellPlus.ShowInterstitialAd( responseId,
                 onAdOpened: _ => {
-                    Debug.Log( $"fullscreen tapsell ad opened: {responseId}" );
+                    logSensitive( $"fullscreen tapsell ad opened: {responseId}" );
                     GameAnalytics.NewAdEvent( GAAdAction.Show, GAAdType.Video, AD_SDK_NAME, adId );
                 },
                 onAdClosed: _ => {
-                    Debug.Log( $"fullscreen tapsell ad closed: {responseId}" );
+                    logSensitive( $"fullscreen tapsell ad closed: {responseId}" );
                     canPass = true;
                     success = true;
                 },
@@ -243,7 +243,7 @@ namespace TowerDefense.Bridges.Ad {
                     GameAnalytics.NewAdEvent( GAAdAction.Show, GAAdType.Banner, AD_SDK_NAME, adId );
                     try {
                         activeBanners.Add( adId, responseId );
-                        Debug.Log( $"tapsell sided banner ad openned: {responseId}" );
+                        logSensitive( $"tapsell sided banner ad openned: {responseId}" );
                     }
                     catch (Exception e) {
                         Debug.LogError( e );
@@ -263,7 +263,7 @@ namespace TowerDefense.Bridges.Ad {
         public override Task RemoveSidedBannerAd(string adId) {
             if (activeBanners.Remove( adId, out var responseId )) {
                 TapsellPlus.DestroyStandardBannerAd( responseId );
-                Debug.Log( $"tapsell sided ad removed: {responseId}" );
+                logSensitive( $"tapsell sided ad removed: {responseId}" );
             }
 
             return Task.FromResult( 0 );
@@ -278,7 +278,7 @@ namespace TowerDefense.Bridges.Ad {
             TapsellPlus.RequestRewardedVideoAd( adId,
                 (response) => {
                     GameAnalytics.NewAdEvent( GAAdAction.Loaded, GAAdType.RewardedVideo, AD_SDK_NAME, adId );
-                    Debug.Log( $"ad request response: {response.responseId}" );
+                    logSensitive( $"ad request response: {response.responseId}" );
                     responseId = response.responseId;
                     canPass = true;
                 },
@@ -317,7 +317,7 @@ namespace TowerDefense.Bridges.Ad {
                     // user could close the ad after success
                     if (result != RewardAdResult.Success)
                         result = RewardAdResult.CancelByUser; 
-                    Debug.Log( $"tapsel rewarded ad closed: {result}" );   
+                    logSensitive( $"tapsel rewarded ad closed: {result}" );   
                 },
                 onShowError: (errorModel) => {
                     Debug.LogError( $"ad failed: {errorModel.errorMessage}" );
@@ -327,7 +327,7 @@ namespace TowerDefense.Bridges.Ad {
                 onAdRewarded: _ => {
                     result = RewardAdResult.Success;
                     canPass = true;
-                    Debug.Log( $"tapsel rewarded ad successful: {result}" );   
+                    logSensitive( $"tapsel rewarded ad successful: {result}" );   
                     GameAnalytics.NewAdEvent( GAAdAction.RewardReceived, GAAdType.RewardedVideo, AD_SDK_NAME, adId );
                 });
             while (!canPass) await Task.Yield();
@@ -344,6 +344,11 @@ namespace TowerDefense.Bridges.Ad {
             
             return result;
         }
-    
+
+        void logSensitive(string message) {
+#if !HIDE_SENSITIVE
+            Debug.Log( message );
+#endif
+        }
     }
 }

@@ -12,7 +12,7 @@ using TowerDefense.Data.Database;
 using TriInspector;
 using UnityEngine;
 
-namespace TowerDefense.UI.RewardDialogue {
+namespace TowerDefense.UI {
     public class RewardDialogue : Dialogue {
         
         [Title("Parameters")]
@@ -144,7 +144,7 @@ namespace TowerDefense.UI.RewardDialogue {
 
             if (setDataAndSave) {
                 // set and save data
-                PlayerGlobals.Current.ecoProg.AddToCoin( itemType, detail, PlayerGlobals.Current.ecoProg.Coins  );
+                PlayerGlobals.Current.ecoProg.AddToCoin( itemType, detail, coins   );
                 PlayerGlobals.Current.SetData( SecureDatabase.Current );
                 SecureDatabase.Current.Save();
             }

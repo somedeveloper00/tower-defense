@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DialogueSystem;
-using GameAnalyticsSDK;
 using TowerDefense.Bridges.Analytics;
 using TowerDefense.Bridges.Iap;
-using TowerDefense.Common;
-using TowerDefense.Data;
-using TowerDefense.Data.Database;
-using TowerDefense.UI.RewardDialogue;
+using TowerDefense.UI;
 using UnityEngine;
 
 namespace TowerDefense.Background {

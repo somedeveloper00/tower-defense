@@ -1,9 +1,8 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using DialogueSystem;
 using TowerDefense.Bridges.Analytics;
 using TowerDefense.Data.Database;
-using TowerDefense.UI.RewardDialogue;
+using TowerDefense.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TriInspector;
