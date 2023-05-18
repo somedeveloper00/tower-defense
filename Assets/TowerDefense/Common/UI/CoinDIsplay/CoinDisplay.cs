@@ -34,7 +34,7 @@ namespace TowerDefense.UI {
             
             IEnumerator routine() {
                 do {
-                    updateView();
+                    UpdateView();
                     yield return new WaitForSecondsRealtime( 0.25f );
                 } while (true);
             }
@@ -49,12 +49,19 @@ namespace TowerDefense.UI {
                 onCoinBelowThresholdTimerEndedSeq.PlaySequence();
                 await onCoinBelowThresholdTimerEndedSeq.AwaitComplete();
             }
-            updateView();
+            UpdateView();
         }
 
-        void updateView() {
+        public void UpdateView(bool fast = false) {
             if (coinTxt)
                 coinTxt.text = (fakeOffset + PlayerGlobals.Current.ecoProg.Coins).ToString( "#,0" ).En2PerNum();
+
+            if (fast) return;
+            var isCoinBelowThreshold = CoinIncreaseHelpSystem.Current.IsCoinBelowThreshold();
+            
+            if (coinBelowThresholdContainer) {
+                coinBelowThresholdContainer.SetActive( isCoinBelowThreshold );
+            }
             
             // update ad stuff
             var canWatch = CoinIncreaseHelpSystem.Current.CanWatchAd();
@@ -69,11 +76,6 @@ namespace TowerDefense.UI {
                     t.Hours, t.Minutes.ToString( "00" ), t.Seconds.ToString( "00" ) );
             }
 
-            var isCoinBelowThreshold = CoinIncreaseHelpSystem.Current.IsCoinBelowThreshold();
-            
-            if (coinBelowThresholdContainer) {
-                coinBelowThresholdContainer.SetActive( isCoinBelowThreshold );
-            }
             
             if (coinBelowThresholdRemainingTimeTxt) {
                 if (isCoinBelowThreshold) {

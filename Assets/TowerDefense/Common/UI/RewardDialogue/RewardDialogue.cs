@@ -63,19 +63,22 @@ namespace TowerDefense.UI {
                                        + 5; // give room for particles 
             }
 
-            rewardCoinAmountTxt.text = coins.ToString( "#,0" ).En2PerNum();
             StartCoroutine( processRoutine() );
         }
 
         IEnumerator processRoutine() {
 
-            // play in-seq
+            // init
+            rewardCoinAmountTxt.text = coins.ToString( "#,0" ).En2PerNum();
             canvasRaycaster.enabled = false;
             if (!showCoinShower) inSeq.sequence.RemoveClipNode( inSeq.sequence.GetClipNode( coinShowerClipName ) );
             if (!showSparkles) inSeq.sequence.RemoveClipNode( inSeq.sequence.GetClipNode( sparkleClipName ) );
             if (useCustomCoinDisplayTarget) defaultCoinDisplayTarget.gameObject.SetActive( false );
             else coinDisplayTarget = defaultCoinDisplayTarget;
+            coinDisplayTarget.fakeOffset = -coins;
             userConfirmContainer.SetActive( waitForUserConfirmation );
+
+            // play in-seq
             inSeq.PlaySequence();
             yield return new WaitForTask( inSeq.AwaitComplete() );
             Debug.Log( $"inseq finished" );
@@ -93,12 +96,11 @@ namespace TowerDefense.UI {
             
             // play out-seq
             canvasRaycaster.enabled = false;
-            var coinDisplay = coinDisplayTarget;
-            var coinDisplayParent = coinDisplay.transform.parent;
-            var coinDisplayCoinIcon = coinDisplay.coinIcon;
-            outSeqCoinDisplayTransformBind.value = coinDisplay.transform;
+            var coinDisplayParent = coinDisplayTarget.transform.parent;
+            var coinDisplayCoinIcon = coinDisplayTarget.coinIcon;
+            outSeqCoinDisplayTransformBind.value = coinDisplayTarget.transform;
             outSeqCoinDisplayTransformBind.Bind();
-            outSeqCoinDisplayGameObjectBind.value = coinDisplay.gameObject;
+            outSeqCoinDisplayGameObjectBind.value = coinDisplayTarget.gameObject;
             outSeqCoinDisplayGameObjectBind.Bind();
             outSeqCoinDisplayParentBind.value = coinDisplayParent;
             outSeqCoinDisplayParentBind.Bind();
@@ -110,35 +112,34 @@ namespace TowerDefense.UI {
             
             // play text coin transfer
             yield return new WaitForSecondsRealtime( coinTransferStartTime );
-            var c1 = PlayerGlobals.Current.ecoProg.Coins;
-            var t1 = Tweener.Generate(
+            var c1 = coinDisplayTarget.fakeOffset;
+            Tweener.Generate(
                     () => c1,
                     (v) => {
                         c1 = v;
-                        coinDisplay.coinTxt.text = c1.ToString( "#,0" ).En2PerNum();
+                        coinDisplayTarget.fakeOffset = v;
+                        coinDisplayTarget.UpdateView( true );
                     },
-                    endValue: PlayerGlobals.Current.ecoProg.Coins + coins,
+                    endValue: 0,
                     proxy: AnimFlexCoreProxyUnscaled.Default )
                 .SetDuration( coinTransferDuration )
                 .SetEase( coinTransferEase )
                 .AddOnComplete( () => Debug.Log( "t1 completed" ) );
             
             var c2 = coins;
-            var t2 = Tweener.Generate(
+            Tweener.Generate(
                     () => c2,
                     (v) => {
                         c2 = v;
                         rewardCoinAmountTxt.text = c2.ToString( "#,0" ).En2PerNum();
-                    }, 
-                    endValue: 0, 
+                    },
+                    endValue: 0,
                     proxy: AnimFlexCoreProxyUnscaled.Default )
                 .SetDuration( coinTransferDuration )
                 .SetEase( coinTransferEase )
                 .AddOnComplete( () => Debug.Log( "t2 completed" ) );
 
             yield return new WaitForTask( outSeq.AwaitComplete() );
-            // yield return new WaitForTask( t1.AwaitComplete() );
-            // yield return new WaitForTask( t2.AwaitComplete() );
             
             Debug.Log( $"reward anims ended" );
 
