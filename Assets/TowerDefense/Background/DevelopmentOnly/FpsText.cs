@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 namespace TowerDefense.DevelopmentOnly {
     [RequireComponent(typeof(Text))]
+    [ExecuteAlways]
     public class FpsText : MonoBehaviour {
         Text txt;
 
