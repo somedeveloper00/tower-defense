@@ -35,6 +35,11 @@ namespace TowerDefense.Core.UI.Lose {
             inSeq.PlaySequence();
             await inSeq.AwaitComplete();
 
+            await Task.Delay( 200 );
+            
+            // wait till focus is on this dialogue
+            while(!DialogueManager.Current.focusManager.IsDialogueFocused( this )) await Task.Delay( 1000 );
+
             if (loseData.coins > 0) {
                 var d = DialogueManager.Current.GetOrCreate<RewardDialogue>( parent: this );
                 d.useCustomCoinDisplayTarget = true;

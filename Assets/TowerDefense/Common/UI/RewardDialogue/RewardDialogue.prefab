@@ -173,8 +173,8 @@ ParticleSystem:
         m_RotationOrder: 4
     startSpeed:
       serializedVersion: 2
-      minMaxState: 3
-      scalar: 5
+      minMaxState: 0
+      scalar: 0
       minScalar: 2
       maxCurve:
         serializedVersion: 2
@@ -4965,7 +4965,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047e8afad3c64e64b1323784efd490e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playOnStart: 1
+  playOnStart: 0
   dontWaitInQueueToPlay: 1
   useProxyAsCore: 1
   useDefaultCoreProxy: 1
@@ -4976,6 +4976,10 @@ MonoBehaviour:
   sequence:
     activateNextClipsASAP: 1
     nodes:
+    - name: 
+      delay: 0
+      clip:
+        rid: 1318342369839677449
     - name: 
       delay: 0
       clip:
@@ -4992,6 +4996,10 @@ MonoBehaviour:
       delay: 0
       clip:
         rid: 1318342235045233509
+    - name: 
+      delay: 0
+      clip:
+        rid: 1318342369839677443
     - name: coin scale up
       delay: 0
       clip:
@@ -5166,6 +5174,18 @@ MonoBehaviour:
         waitTillFinish: 0
     - rid: 1318342235045233510
       type: {class: CEnd, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
+    - rid: 1318342369839677443
+      type: {class: PlayClipOneShot, ns: AnimFlex, asm: Assembly-CSharp-firstpass}
+      data:
+        audioSource: {fileID: 830397872}
+        audioClip: {fileID: 8300000, guid: b844b7ecec011194cb3ee09e9f51ff1b, type: 3}
+        volume: 1
+    - rid: 1318342369839677449
+      type: {class: PlayClipOneShot, ns: AnimFlex, asm: Assembly-CSharp-firstpass}
+      data:
+        audioSource: {fileID: 830397872}
+        audioClip: {fileID: 8300000, guid: b844b7ecec011194cb3ee09e9f51ff1b, type: 3}
+        volume: 1
 --- !u!1 &1091074161
 GameObject:
   m_ObjectHideFlags: 0
@@ -5238,10 +5258,6 @@ MonoBehaviour:
       delay: 0
       clip:
         rid: 1318342187178262837
-    - name: coinIcon in
-      delay: 0
-      clip:
-        rid: 1318342187178263160
     - name: coins loop
       delay: 0
       clip:
@@ -5266,10 +5282,6 @@ MonoBehaviour:
       delay: 0
       clip:
         rid: 1318342235045233514
-    - name: coinIcon out
-      delay: 0
-      clip:
-        rid: 1318342187178263161
     - name: coindisplay scale in 2
       delay: 0
       clip:
@@ -5372,13 +5384,13 @@ MonoBehaviour:
     - rid: 1318342187178263034
       type: {class: CFor, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
       data:
-        index: 6
+        index: 5
         count: 7
         inbetweenDelay: 0.07
     - rid: 1318342187178263120
       type: {class: CGoto, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
       data:
-        index: 8
+        index: 7
     - rid: 1318342187178263121
       type: {class: CEmpty, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
     - rid: 1318342187178263122
@@ -5489,78 +5501,6 @@ MonoBehaviour:
               m_Calls: []
           fromObject: {fileID: 277290149454517385}
           target: {x: 0.8, y: 0.8, z: 1}
-    - rid: 1318342187178263160
-      type: {class: CTweenerScale, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
-      data:
-        playNextOnStart: 1
-        tweenerGenerator:
-          customCurve:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          useCurve: 0
-          useQuaternion: 0
-          relative: 0
-          useTargetTransform: 0
-          from: 0
-          ease: 20
-          duration: 0.6
-          delay: 0
-          pingPong: 0
-          loops: 0
-          loopDelay: 0
-          onStart:
-            m_PersistentCalls:
-              m_Calls: []
-          onUpdate:
-            m_PersistentCalls:
-              m_Calls: []
-          onComplete:
-            m_PersistentCalls:
-              m_Calls: []
-          onKill:
-            m_PersistentCalls:
-              m_Calls: []
-          fromObject: {fileID: 9020391445531028184}
-          target: {x: 0.5, y: 0.5, z: 1}
-    - rid: 1318342187178263161
-      type: {class: CTweenerScale, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
-      data:
-        playNextOnStart: 0
-        tweenerGenerator:
-          customCurve:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          useCurve: 0
-          useQuaternion: 0
-          relative: 0
-          useTargetTransform: 0
-          from: 0
-          ease: 26
-          duration: 0.4
-          delay: 0
-          pingPong: 0
-          loops: 0
-          loopDelay: 0
-          onStart:
-            m_PersistentCalls:
-              m_Calls: []
-          onUpdate:
-            m_PersistentCalls:
-              m_Calls: []
-          onComplete:
-            m_PersistentCalls:
-              m_Calls: []
-          onKill:
-            m_PersistentCalls:
-              m_Calls: []
-          fromObject: {fileID: 9020391445531028184}
-          target: {x: 1, y: 1, z: 1}
     - rid: 1318342187178263219
       type: {class: CTweenerScale, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
       data:
@@ -5802,6 +5742,7 @@ GameObject:
   - component: {fileID: 277290149454517310}
   - component: {fileID: 277290149454517503}
   - component: {fileID: 9149062445047869057}
+  - component: {fileID: 830397872}
   m_Layer: 5
   m_Name: RewardDialogue
   m_TagString: Untagged
@@ -5932,15 +5873,15 @@ MonoBehaviour:
       fieldName: fromObject
     - clipIndex: 2
       fieldName: fromObject
-    - clipIndex: 11
+    - clipIndex: 9
       fieldName: fromObject
-    - clipIndex: 13
+    - clipIndex: 11
       fieldName: fromObject
     value: {fileID: 0}
   outSeqCoinDisplayParentBind:
     sequenceAnim: {fileID: 1091074163}
     selections:
-    - clipIndex: 12
+    - clipIndex: 10
       fieldName: newParent
     value: {fileID: 0}
   outSeqCoinDisplayGameObjectBind:
@@ -5948,22 +5889,118 @@ MonoBehaviour:
     selections:
     - clipIndex: 1
       fieldName: gameObject
-    - clipIndex: 12
+    - clipIndex: 10
       fieldName: gameObject
     value: {fileID: 0}
   coinSeqCoinIconTransformBind:
     sequenceAnim: {fileID: 978565336}
     selections:
-    - clipIndex: 1
+    - clipIndex: 2
       fieldName: target
-    - clipIndex: 4
+    - clipIndex: 6
       fieldName: fromObject
-    - clipIndex: 5
+    - clipIndex: 7
       fieldName: fromObject
     value: {fileID: 0}
   coinTransferStartTime: 2
   coinTransferDuration: 0.4
   coinTransferEase: 3
+--- !u!82 &830397872
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 277290149454518074}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 1
+  BypassListenerEffects: 1
+  BypassReverbZones: 1
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &3181385325369410100
 GameObject:
   m_ObjectHideFlags: 0
@@ -6096,7 +6133,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
+  m_fontSize: 34.25
   m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -11167,6 +11204,14 @@ MonoBehaviour:
   sequence:
     activateNextClipsASAP: 1
     nodes:
+    - name: 
+      delay: 0
+      clip:
+        rid: 1318342369839677448
+    - name: 
+      delay: 0
+      clip:
+        rid: 1318342369839677457
     - name: hide
       delay: 0
       clip:
@@ -11203,10 +11248,34 @@ MonoBehaviour:
       delay: 0
       clip:
         rid: 1318342235045233478
+    - name: coin sound if
+      delay: 0
+      clip:
+        rid: 1318342369839677461
+    - name: coin audio
+      delay: 0
+      clip:
+        rid: 1318342369839677458
+    - name: 
+      delay: 0.02
+      clip:
+        rid: 1318342369839677459
+    - name: 
+      delay: 0.1
+      clip:
+        rid: 1318342369839677460
+    - name: wait
+      delay: 1
+      clip:
+        rid: 1318342369839677463
     - name: claim panel
       delay: 0
       clip:
         rid: 1318342235045233286
+    - name: 
+      delay: 1
+      clip:
+        rid: 1318342369839677462
   references:
     version: 2
     RefIds:
@@ -11381,7 +11450,7 @@ MonoBehaviour:
       data:
         particleSystem: {fileID: 9020391445850882384}
         playWithChildren: 1
-        waitTillFinish: 1
+        waitTillFinish: 0
     - rid: 1318342328827773299
       type: {class: CTweenerLocalPosition, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
       data:
@@ -11418,6 +11487,48 @@ MonoBehaviour:
               m_Calls: []
           fromObject: {fileID: 6524540781739687255}
           target: {x: 0, y: 400, z: 0}
+    - rid: 1318342369839677448
+      type: {class: PlayClipOneShot, ns: AnimFlex, asm: Assembly-CSharp-firstpass}
+      data:
+        audioSource: {fileID: 830397872}
+        audioClip: {fileID: 8300000, guid: 8fa66a42a306d964bb0f82852b49b220, type: 3}
+        volume: 0.7
+    - rid: 1318342369839677457
+      type: {class: PlayClipOneShot, ns: AnimFlex, asm: Assembly-CSharp-firstpass}
+      data:
+        audioSource: {fileID: 830397872}
+        audioClip: {fileID: 8300000, guid: 570bfbaf4fbbb924aa225557911841fd, type: 3}
+        volume: 1
+    - rid: 1318342369839677458
+      type: {class: PlayClipOneShot, ns: AnimFlex, asm: Assembly-CSharp-firstpass}
+      data:
+        audioSource: {fileID: 830397872}
+        audioClip: {fileID: 8300000, guid: f5baa2f0d7872d44b8dcf978a8c742e7, type: 3}
+        volume: 1
+    - rid: 1318342369839677459
+      type: {class: PlayClipOneShot, ns: AnimFlex, asm: Assembly-CSharp-firstpass}
+      data:
+        audioSource: {fileID: 830397872}
+        audioClip: {fileID: 8300000, guid: d5af3f09ea9b7424cbec0fb4c261002e, type: 3}
+        volume: 1
+    - rid: 1318342369839677460
+      type: {class: PlayClipOneShot, ns: AnimFlex, asm: Assembly-CSharp-firstpass}
+      data:
+        audioSource: {fileID: 830397872}
+        audioClip: {fileID: 8300000, guid: c4d06f837420af44b8de5eabe426429c, type: 3}
+        volume: 1
+    - rid: 1318342369839677461
+      type: {class: CGotoIfPropertyBool, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
+      data:
+        component: {fileID: 9020391445850882384}
+        propertyName: isPlaying
+        indexIf: 12
+        indexElse: 15
+        value: 1
+    - rid: 1318342369839677462
+      type: {class: CEnd, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
+    - rid: 1318342369839677463
+      type: {class: CEmpty, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
 --- !u!1 &9020391444704017263
 GameObject:
   m_ObjectHideFlags: 0

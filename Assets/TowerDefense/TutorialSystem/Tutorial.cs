@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using JetBrains.Annotations;
 using TowerDefense.Data.Database;
+using TriInspector;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -20,7 +22,13 @@ namespace TowerDefense.TutorialSystem {
         
         [SerializeField] string key;
         [SerializeField] UnityEvent executeIfShown;
-        
+
+        [Button]
+        void moveDetailedConds2ContextCond() {
+            contextConditions = new List<TutorialCondition>( detailedConditions );
+            detailedConditions.Clear();
+        }
+
 
         bool _showed = false;
         float _lastContextCheck = -1;
@@ -34,7 +42,7 @@ namespace TowerDefense.TutorialSystem {
                 _showed = val == 1;
         }
 
-        void LateUpdate() {
+        async void LateUpdate() {
             if (_showed) {
                 executeIfShown?.Invoke();
                 enabled = false; // just being sure
@@ -52,14 +60,21 @@ namespace TowerDefense.TutorialSystem {
 
             if (shouldShowTutorial()) {
                 enabled = false; // don't re-check meanwhile
+                // making sure scene is not unloading
+                await Task.Delay( 200 );
+                if ( !this || !shouldShowTutorial()) {
+                    return;
+                }
+                var ts = Time.timeScale;
                 Time.timeScale = 0;
+                Debug.Log( $"showing tutorial: {key}" );
                 ShowTutorial( () => {
-                    Time.timeScale = 1;
+                    Time.timeScale = ts;
                     _showed = true;
                     executeIfShown?.Invoke();
                     save();
                 }, () => {
-                    Time.timeScale = 1;
+                    Time.timeScale = ts;
                     enabled = true;
                     _showed = false;
                     save();

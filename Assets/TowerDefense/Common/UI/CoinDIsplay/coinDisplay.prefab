@@ -189,7 +189,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047e8afad3c64e64b1323784efd490e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playOnEnable: 1
+  playOnStart: 1
+  dontWaitInQueueToPlay: 1
   useProxyAsCore: 1
   useDefaultCoreProxy: 1
   defaultCoreProxy: AnimFlex.Core.Proxy.AnimFlexCoreProxyUnscaled
@@ -393,7 +394,7 @@ MonoBehaviour:
           useQuaternion: 0
           relative: 0
           useTargetTransform: 0
-          from: 0
+          from: 1
           ease: 0
           duration: 0.5
           delay: 0.1
@@ -419,7 +420,7 @@ MonoBehaviour:
             type: 0
           - transform: {fileID: 6524540782026750709}
             type: 1
-          target: {x: 1, y: 1, z: 1}
+          target: {x: 0.9, y: 0.9, z: 1}
     - rid: 1318342141844389930
       type: {class: CEmpty, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
 --- !u!1 &6524540780929958538
@@ -471,7 +472,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047e8afad3c64e64b1323784efd490e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playOnEnable: 0
+  playOnStart: 0
+  dontWaitInQueueToPlay: 1
   useProxyAsCore: 1
   useDefaultCoreProxy: 1
   defaultCoreProxy: AnimFlex.Core.Proxy.AnimFlexCoreProxyUnscaled
@@ -928,6 +930,7 @@ MonoBehaviour:
   volume: 0.8
   useDefaultAnim: 1
   delayAfterAnim: 10
+  onClipSeq: {fileID: 0}
 --- !u!114 &6524540781271725531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -940,7 +943,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047e8afad3c64e64b1323784efd490e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playOnEnable: 1
+  playOnStart: 1
+  dontWaitInQueueToPlay: 1
   useProxyAsCore: 1
   useDefaultCoreProxy: 1
   defaultCoreProxy: AnimFlex.Core.Proxy.AnimFlexCoreProxyUnscaled
@@ -1098,6 +1102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60b650fd18f245f9982a93ac70676920, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fakeOffset: 0
   coinIcon: {fileID: 6524540782453372271}
   coinTxt: {fileID: 6524540781398151641}
   adRemainingTimeTxt: {fileID: 6524540781250329683}
@@ -1809,7 +1814,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047e8afad3c64e64b1323784efd490e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playOnEnable: 1
+  playOnStart: 1
+  dontWaitInQueueToPlay: 1
   useProxyAsCore: 1
   useDefaultCoreProxy: 1
   defaultCoreProxy: AnimFlex.Core.Proxy.AnimFlexCoreProxyUnscaled

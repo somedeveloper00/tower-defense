@@ -94,9 +94,7 @@ namespace TowerDefense.Core {
             if (_slowDownTweener is not null && _slowDownTweener.IsActive()) {
                 _slowDownTweener.Kill( false, false );
             }
-            if (Time.timeScale != 1) {
-                Time.timeScale = 1;
-            }
+            if (Time.timeScale != 1) Time.timeScale = 1;
         }
 
         void Update() {

@@ -18,6 +18,7 @@ namespace TowerDefense.Background {
         const string adId = "64590a1922a1ba63a8a62b16";
         
         public static CoinIncreaseHelpSystem Current;
+        
         void OnEnable() {
             Current = this;
             GameInitializer.afterSecureDataLoad += (_) => {
@@ -27,8 +28,15 @@ namespace TowerDefense.Background {
             GameInitializer.beforeSecureDataSave += (_) => {
                 setData();
             };
-            
-            
+        }
+
+        async Task giveRewardCheckLoop() {
+            do {
+                await Task.Delay( 1000 );
+                if (IsCoinBelowThreshold() && GetRemainingTimeForNextCoinIncrease() < TimeSpan.Zero) {
+                    addBelowThresholdCoin();
+                }
+            } while (this);
         }
 
         [Title("Ad")]
@@ -44,7 +52,6 @@ namespace TowerDefense.Background {
 
         DateTime _lastAdTime;
         DateTime _lastTooLowIncreaseTime;
-        Coroutine _tooLowCoinCoroutine;
         
         public event Action onCoinBelowThresholdTimerEnded;
 
@@ -108,20 +115,12 @@ namespace TowerDefense.Background {
                 _lastTooLowIncreaseTime = SecureDateTime.GetSecureUtcDateTime();
                 setData();
                 SecureDatabase.Current.Save();
-                if (_tooLowCoinCoroutine is not null) 
-                    BackgroundRunner.Current.StopCoroutine( _tooLowCoinCoroutine );
-                _tooLowCoinCoroutine = BackgroundRunner.Current.StartCoroutine( addCoinRoutine() );
-            }
-
-            IEnumerator addCoinRoutine() {
-                yield return new WaitForSecondsRealtime( tooLowCoindIncreaseDelay * 360 ); // hours to seconds
-                addBelowThresholdCoin();
             }
         }
 
         void addBelowThresholdCoin() {
             Debug.Log( $"coin below threshold timer ended. giving coins..." );
-            PlayerGlobals.Current.ecoProg.AddToCoin( GameAnalyticsHelper.ItemType.ItemType_Ad, "HelpAd", tooLowIncrease );
+            PlayerGlobals.Current.ecoProg.AddToCoin( GameAnalyticsHelper.ItemType.ItemType_Help, "Help", tooLowIncrease );
             PlayerGlobals.Current.SetData( SecureDatabase.Current );
             _lastTooLowIncreaseTime = SecureDateTime.GetSecureUtcDateTime();
             setData();

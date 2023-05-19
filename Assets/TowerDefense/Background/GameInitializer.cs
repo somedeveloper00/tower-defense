@@ -33,6 +33,7 @@ namespace TowerDefense.Background {
         
         IEnumerator Start() {
 
+            Time.timeScale = 1;
             Application.targetFrameRate = 60;
             
             LoadingScreenManager.Current.StartLoadingScreen();

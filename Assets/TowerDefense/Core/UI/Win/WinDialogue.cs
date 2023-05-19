@@ -26,6 +26,12 @@ namespace TowerDefense.Core.UI.Win {
             canvasRaycaster.enabled = false;
             inSeq.PlaySequence();
             await inSeq.AwaitComplete();
+            
+            await Task.Delay( 200 );
+            
+            // wait till focus is on this dialogue
+            while(DialogueManager.Current.focusManager.IsDialogueFocused( this )) await Task.Delay( 1000 );
+            
             canvasRaycaster.enabled = true;
         }
 

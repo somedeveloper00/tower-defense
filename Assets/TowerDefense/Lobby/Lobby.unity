@@ -1849,7 +1849,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &482926217
 Transform:
   m_ObjectHideFlags: 0
@@ -1857,12 +1857,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 482926216}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 641763468}
+  m_Father: {fileID: 1050909638}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &482926218
@@ -1877,9 +1877,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 832490ff4240452a8e9fdbfacc22e6a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  contextConditions: []
-  detailedConditions:
+  contextConditions:
   - {fileID: 11400000, guid: be8cc2c364661d94c83501e5d3d06690, type: 2}
+  detailedConditions: []
   contextCheckDelay: 0.5
   key: tut_levelchoosing_10
   executeIfShown:
@@ -1932,7 +1932,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 641763468}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &513571058
 MonoBehaviour:
@@ -1946,9 +1946,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 832490ff4240452a8e9fdbfacc22e6a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  contextConditions: []
-  detailedConditions:
+  contextConditions:
   - {fileID: 11400000, guid: f45c9319f09622c40a9359a464dc1693, type: 2}
+  detailedConditions: []
   contextCheckDelay: 0.5
   key: tut_coinAd
   executeIfShown:
@@ -2458,8 +2458,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1050909638}
-  - {fileID: 482926217}
-  - {fileID: 1635634819}
   - {fileID: 1930697012}
   - {fileID: 513571057}
   m_Father: {fileID: 0}
@@ -2980,7 +2978,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1635634819}
+  - {fileID: 482926217}
   m_Father: {fileID: 641763468}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3002,7 +3002,31 @@ MonoBehaviour:
   key: first-time-lobby
   executeIfShown:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1635634818}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 482926216}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   raycastBlocks:
   - raycaster: {fileID: 50481349}
     afterwards: 1
@@ -4235,7 +4259,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1635634819
 Transform:
   m_ObjectHideFlags: 0
@@ -4243,13 +4267,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1635634818}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 641763468}
-  m_RootOrder: 2
+  m_Father: {fileID: 1050909638}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1635634820
 MonoBehaviour:
@@ -4263,9 +4287,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 832490ff4240452a8e9fdbfacc22e6a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  contextConditions: []
-  detailedConditions:
+  contextConditions:
   - {fileID: 11400000, guid: 737d3fc5d8e011e4ebbdabbb3f6a0fef, type: 2}
+  detailedConditions: []
   contextCheckDelay: 0.5
   key: tut_levelchoosing_2
   executeIfShown:
@@ -4286,11 +4310,6 @@ MonoBehaviour:
       \u0648\u062C\u0648\u062F \u062F\u0627\u0631\u0647. \u062D\u062A\u0645\u0627
       \u0627\u0632 \u0642\u0628\u0644 \u0628\u0627 \u0641\u0631\u0648\u0634\u06AF\u0627\u0647
       \u0622\u0634\u0646\u0627 \u0634\u062F\u06CC."
-    confirmTxt: "\u0628\u0644\u0647!"
-    shouldConfirm: 1
-    iconType: 0
-  - title: "\u062A\u0627\u06CC\u0645\u0631 \u0633\u06A9\u0647"
-    message: "\u0633\u06A9\u0647 "
     confirmTxt: "\u0628\u0644\u0647!"
     shouldConfirm: 1
     iconType: 0
@@ -4437,7 +4456,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 641763468}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1930697013
 MonoBehaviour:
@@ -4451,9 +4470,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 832490ff4240452a8e9fdbfacc22e6a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  contextConditions: []
-  detailedConditions:
+  contextConditions:
   - {fileID: 11400000, guid: f6e794247cf090e41946883d73a79f89, type: 2}
+  detailedConditions: []
   contextCheckDelay: 0.5
   key: tut_cointoolow
   executeIfShown:

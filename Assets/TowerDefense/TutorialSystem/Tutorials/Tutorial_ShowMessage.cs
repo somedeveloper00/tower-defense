@@ -7,7 +7,7 @@ using TriInspector;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace TowerDefense.TutorialSystem.Tutorials {
+namespace TowerDefense.TutorialSystem {
     public class Tutorial_ShowMessage : Tutorial {
         
         [Title("Show Message Params")]

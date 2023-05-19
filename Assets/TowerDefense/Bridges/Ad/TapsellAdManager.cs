@@ -8,7 +8,7 @@ using UnityEngine;
 namespace TowerDefense.Bridges.Ad {
     class TapsellAdManager : AdManager {
         
-        const int RETRY_COUNT = 10;
+        const int RETRY_COUNT = 2;
         const string AD_SDK_NAME = "tapsell";
         
         bool initialized = false;

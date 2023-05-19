@@ -15,7 +15,7 @@ namespace TowerDefense.Bridges.Analytics {
         }
         
         public enum ItemType {
-            Undefined, ItemType_IAP, ItemType_GameWin, ItemType_GameLose, ItemType_GameStart, ItemType_Ad
+            Undefined, ItemType_IAP, ItemType_GameWin, ItemType_GameLose, ItemType_GameStart, ItemType_Ad, ItemType_Help
         }
 
         public static string ToAnalyticString(this ItemType itemType) {
@@ -25,6 +25,7 @@ namespace TowerDefense.Bridges.Analytics {
                 ItemType.ItemType_GameWin => "game-win",
                 ItemType.ItemType_GameLose => "game-lose",
                 ItemType.ItemType_GameStart => "game-start",
+                ItemType.ItemType_Help => "help",
                 ItemType.ItemType_Ad => "ad",
                 _ => throw new ArgumentOutOfRangeException(nameof(itemType), itemType, null)
             };
