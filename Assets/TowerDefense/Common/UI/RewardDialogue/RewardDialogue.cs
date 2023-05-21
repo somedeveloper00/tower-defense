@@ -31,12 +31,10 @@ namespace TowerDefense.UI {
         [SerializeField] SequenceAnim outSeq;
         [SerializeField] DelayedButton bckBtn;
         [SerializeField] RTLTextMeshPro rewardCoinAmountTxt;
+        [SerializeField] GameObject coinShowerContainer;
+        [SerializeField] GameObject sparklesContainer;
         [SerializeField] GameObject userConfirmContainer;
         [SerializeField] CoinDisplay defaultCoinDisplayTarget;
-
-        [Title("In Seq Anim Params")]
-        [SerializeField] string coinShowerClipName;
-        [SerializeField] string sparkleClipName;
 
         [Title( "Out Seq Anim Params" )] 
         [SerializeField] SequenceBinder_Transform outSeqCoinDisplayTransformBind;
@@ -56,6 +54,13 @@ namespace TowerDefense.UI {
         protected override void Start() {
             base.Start();
             
+            if (setDataAndSave) {
+                // set and save data
+                PlayerGlobals.Current.ecoProg.AddToCoin( itemType, detail, coins );
+                PlayerGlobals.Current.SetData( SecureDatabase.Current );
+                SecureDatabase.Current.Save();
+            }
+
             // for particle system
             if (UiCamera.Current && UiCamera.Current.Camera) {
                 canvas.worldCamera = UiCamera.Current.Camera;
@@ -71,8 +76,8 @@ namespace TowerDefense.UI {
             // init
             rewardCoinAmountTxt.text = coins.ToString( "#,0" ).En2PerNum();
             canvasRaycaster.enabled = false;
-            if (!showCoinShower) inSeq.sequence.RemoveClipNode( inSeq.sequence.GetClipNode( coinShowerClipName ) );
-            if (!showSparkles) inSeq.sequence.RemoveClipNode( inSeq.sequence.GetClipNode( sparkleClipName ) );
+            sparklesContainer.SetActive( showSparkles );
+            coinShowerContainer.SetActive( showCoinShower );
             if (useCustomCoinDisplayTarget) defaultCoinDisplayTarget.gameObject.SetActive( false );
             else coinDisplayTarget = defaultCoinDisplayTarget;
             coinDisplayTarget.fakeOffset = -coins;
@@ -143,12 +148,6 @@ namespace TowerDefense.UI {
             
             Debug.Log( $"reward anims ended" );
 
-            if (setDataAndSave) {
-                // set and save data
-                PlayerGlobals.Current.ecoProg.AddToCoin( itemType, detail, coins   );
-                PlayerGlobals.Current.SetData( SecureDatabase.Current );
-                SecureDatabase.Current.Save();
-            }
             
             Close();
         }

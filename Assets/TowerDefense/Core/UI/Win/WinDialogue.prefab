@@ -39360,6 +39360,14 @@ MonoBehaviour:
       delay: 0
       clip:
         rid: 5878960743082623016
+    - name: enable clicks
+      delay: 0
+      clip:
+        rid: 1318342328827772984
+    - name: 
+      delay: 1.5
+      clip:
+        rid: 5878960743082623007
     - name: fx 1
       delay: 1.5
       clip:
@@ -39372,14 +39380,6 @@ MonoBehaviour:
       delay: 0.6
       clip:
         rid: 1318342328827772988
-    - name: enable clicks
-      delay: 0
-      clip:
-        rid: 1318342328827772984
-    - name: 
-      delay: 1.5
-      clip:
-        rid: 5878960743082623007
   references:
     version: 2
     RefIds:

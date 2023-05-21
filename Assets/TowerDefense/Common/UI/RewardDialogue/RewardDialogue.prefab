@@ -26,7 +26,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 756734067}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: -0.00000035762784}
-  m_LocalPosition: {x: 0, y: 0, z: -57}
+  m_LocalPosition: {x: 0, y: 0, z: -15.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -56,7 +56,7 @@ ParticleSystem:
   looping: 0
   prewarm: 0
   playOnAwake: 0
-  useUnscaledTime: 0
+  useUnscaledTime: 1
   autoRandomSeed: 1
   startDelay:
     serializedVersion: 2
@@ -5862,10 +5862,10 @@ MonoBehaviour:
   outSeq: {fileID: 1091074163}
   bckBtn: {fileID: 7758500139705991001}
   rewardCoinAmountTxt: {fileID: 9020391445217426701}
+  coinShowerContainer: {fileID: 9020391445850882399}
+  sparklesContainer: {fileID: 9020391445781937241}
   userConfirmContainer: {fileID: 9020391445309045901}
   defaultCoinDisplayTarget: {fileID: 6524540781739687256}
-  coinShowerClipName: coin shower fx
-  sparkleClipName: sparkle fx
   outSeqCoinDisplayTransformBind:
     sequenceAnim: {fileID: 1091074163}
     selections:
@@ -6133,7 +6133,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 34.25
+  m_fontSize: 45.65
   m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -11251,7 +11251,7 @@ MonoBehaviour:
     - name: coin sound if
       delay: 0
       clip:
-        rid: 1318342369839677461
+        rid: 1318342421230649344
     - name: coin audio
       delay: 0
       clip:
@@ -11517,18 +11517,18 @@ MonoBehaviour:
         audioSource: {fileID: 830397872}
         audioClip: {fileID: 8300000, guid: c4d06f837420af44b8de5eabe426429c, type: 3}
         volume: 1
-    - rid: 1318342369839677461
-      type: {class: CGotoIfPropertyBool, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
-      data:
-        component: {fileID: 9020391445850882384}
-        propertyName: isPlaying
-        indexIf: 12
-        indexElse: 15
-        value: 1
     - rid: 1318342369839677462
       type: {class: CEnd, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
     - rid: 1318342369839677463
       type: {class: CEmpty, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
+    - rid: 1318342421230649344
+      type: {class: CGotoIfBool, ns: AnimFlex.Sequencer.Clips, asm: AnimFlex}
+      data:
+        component: {fileID: 9149062445047869057}
+        fieldName: showCoinShower
+        indexIf: 12
+        indexElse: 16
+        value: 1
 --- !u!1 &9020391444704017263
 GameObject:
   m_ObjectHideFlags: 0

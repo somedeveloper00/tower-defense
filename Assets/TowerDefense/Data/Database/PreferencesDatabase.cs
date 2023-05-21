@@ -1,4 +1,5 @@
-﻿using TowerDefense.Transport;
+﻿using System;
+using TowerDefense.Transport;
 using UnityEditor;
 using UnityEngine;
 
@@ -19,7 +20,13 @@ namespace TowerDefense.Data.Database {
 
         public override bool GetValue(string key, ITransportable result) {
             if (!PlayerPrefs.HasKey( key )) return false;
-            result.FromJson( PlayerPrefs.GetString( key ) );
+            try {
+                result.FromJson( PlayerPrefs.GetString( key ) );
+            }
+            catch (Exception e) {
+                Debug.LogException( e );
+                return false;
+            }
             return true;
         }
 

@@ -60,7 +60,13 @@ namespace TowerDefense.Data.Database {
 
         public override bool GetValue(string key, ITransportable result) {
             if (data.TryGetValue(key, out var token)) {
-                result.FromJson( token );
+                try {
+                    result.FromJson( token );
+                }
+                catch (Exception e) {
+                    Debug.LogException( e );
+                    return false;
+                }
                 return true;
             }
             return false;

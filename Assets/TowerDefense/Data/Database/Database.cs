@@ -7,7 +7,7 @@ namespace TowerDefense.Data.Database {
         public abstract void Load();
         public abstract void Save();
         public abstract bool KeyExists(string key);
-        
+
         public abstract bool GetValue(string key, ITransportable target);
         public abstract void Set(string key, ITransportable obj);
         public abstract void Delete(string key);
@@ -38,18 +38,33 @@ namespace TowerDefense.Data.Database {
             result = r.value;
             return b;
         }
-        
-        
+
+
 
 
         [Serializable]
         abstract class BasicTransform<T> : ITransportable {
             public T value;
-            public string ToJson() => JsonConvert.SerializeObject( this );
-            public void FromJson(string json) => JsonConvert.PopulateObject( json, this );
+            public abstract string ToJson();
+            public abstract void FromJson(string json);
         }
-        [Serializable] class IntTransport : BasicTransform<int> { }
-        [Serializable] class FloatTransport : BasicTransform<float> { }
-        [Serializable] class StringTransport : BasicTransform<string> { }
+
+        [Serializable]
+        class IntTransport : BasicTransform<int> {
+            public override string ToJson() => value.ToString();
+            public override void FromJson(string json) => value = JsonConvert.DeserializeObject<int>( json );
+        }
+
+        [Serializable]
+        class FloatTransport : BasicTransform<float> {
+            public override string ToJson() => value.ToString();
+            public override void FromJson(string json) => value = JsonConvert.DeserializeObject<float>( json );
+        }
+
+        [Serializable]
+        class StringTransport : BasicTransform<string> {
+            public override string ToJson() => value;
+            public override void FromJson(string json) => value = json;
+        }
     }
 }
