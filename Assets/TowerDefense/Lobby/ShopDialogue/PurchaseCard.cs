@@ -1,11 +1,9 @@
-﻿using System.Linq;
-using RTLTMPro;
+﻿using RTLTMPro;
 using TowerDefense.Background;
 using TowerDefense.Bridges.Iap;
-using TowerDefense.Data.Database;
+using TowerDefense.UI;
 using TriInspector;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace TowerDefense.Lobby.ShopDialogue {
     public class PurchaseCard : MonoBehaviour {
@@ -17,7 +15,7 @@ namespace TowerDefense.Lobby.ShopDialogue {
         [SerializeField] RTLTextMeshPro costTxt;
         [SerializeField] RTLTextMeshPro skuTxt;
         [SerializeField] RTLTextMeshPro rewardCoinTxt;
-        [SerializeField] Button purchaseBtn;
+        [SerializeField] DelayedButton purchaseBtn;
         [SerializeField] string costFormat;
         
         void Start() {
